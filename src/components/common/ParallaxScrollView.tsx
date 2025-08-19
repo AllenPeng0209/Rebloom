@@ -1,15 +1,15 @@
 import type { PropsWithChildren, ReactElement } from 'react';
 import { StyleSheet } from 'react-native';
 import Animated, {
-  interpolate,
-  useAnimatedRef,
-  useAnimatedStyle,
-  useScrollViewOffset,
+    interpolate,
+    useAnimatedRef,
+    useAnimatedStyle,
+    useScrollViewOffset,
 } from 'react-native-reanimated';
 
-import { ThemedView } from '@/components/ThemedView';
-import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
+import { ThemedView } from '@/components/common/ThemedView';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useBottomTabOverflow } from '@/ui/TabBarBackground';
 
 const HEADER_HEIGHT = 250;
 

@@ -11,7 +11,7 @@
       "@/lib/*": ["./lib/*"],
       "@/utils/*": ["./lib/utils/*"],
       "@/services/*": ["./lib/services/*"],
-      "@/types/*": ["./lib/types/*"],
+      "@/types": ["./lib/types"],
       "@/contexts/*": ["./src/contexts/*"],
       "@/translations/*": ["./lib/translations/*"],
       "@/ui/*": ["./src/components/ui/*"]

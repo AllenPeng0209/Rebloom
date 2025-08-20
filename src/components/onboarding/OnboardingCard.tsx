@@ -1,12 +1,11 @@
+import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
 import {
-  View,
-  Text,
-  StyleSheet,
   Dimensions,
-  Image,
+  StyleSheet,
+  Text,
+  View
 } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
 
@@ -138,22 +137,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   phoneContainer: {
-    flex: 1,
+    flex: 0.5, // 进一步减少手机容器的占比
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 30, // 增加底部间距确保与文字分离
+    minHeight: 280, // 适当减少最小高度
+    maxHeight: 400, // 添加最大高度限制
   },
   phoneMockup: {
-    width: 280,
-    height: 560,
+    width: 220, // 进一步减小宽度
+    height: 400, // 进一步减小高度
     backgroundColor: '#000000',
-    borderRadius: 40,
-    padding: 4,
+    borderRadius: 28, // 相应调整圆角
+    padding: 3,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 10,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+    elevation: 8,
   },
   notch: {
     width: 120,
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
   phoneContent: {
     flex: 1,
     backgroundColor: '#FF9A56',
-    borderRadius: 36,
+    borderRadius: 25, // 相应调整内容区域圆角
     overflow: 'hidden',
   },
   phoneHeader: {
@@ -297,7 +298,10 @@ const styles = StyleSheet.create({
     bottom: 8,
   },
   contentContainer: {
-    paddingBottom: 40,
+    flex: 0.5, // 给内容区域更多空间，与手机容器平衡
+    paddingBottom: 20,
+    paddingTop: 10, // 添加顶部内边距
+    justifyContent: 'flex-start', // 确保内容从顶部开始排列
   },
   iconContainer: {
     width: 48,

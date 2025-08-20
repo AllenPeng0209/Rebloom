@@ -1,21 +1,20 @@
+import { useLanguage } from '@/contexts/LanguageContext'
 import { Ionicons } from '@expo/vector-icons'
 import { addDays, endOfWeek, format, isSameDay, parseISO, startOfWeek, subDays } from 'date-fns'
 import { enUS, ja, zhCN, zhTW } from 'date-fns/locale'
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useState } from 'react'
 import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 interface CalendarDay {
   date: Date
   mood?: number
   hasConversation?: boolean
-  insights?: number
 }
 
 interface CalendarWidgetProps {
@@ -54,8 +53,7 @@ export const CalendarWidget: React.FC<CalendarWidgetProps> = ({
     weekDays.push({
       date,
       mood: moodEntry?.mood,
-      hasConversation: !!moodEntry,
-      insights: moodEntry ? Math.floor(Math.random() * 3) + 1 : 0 // Mock insights count
+      hasConversation: !!moodEntry
     })
   }
 
@@ -154,14 +152,7 @@ export const CalendarWidget: React.FC<CalendarWidgetProps> = ({
                   </View>
                 )}
 
-                {/* Insights Badge */}
-                {day.insights > 0 && (
-                  <View style={styles.insightsBadge}>
-                    <Text style={styles.insightsBadgeText}>
-                      {day.insights}
-                    </Text>
-                  </View>
-                )}
+
               </TouchableOpacity>
             )
           })}
@@ -287,22 +278,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: '#4A90E2',
   },
-  insightsBadge: {
-    position: 'absolute',
-    top: 4,
-    right: 4,
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: '#FF9500',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  insightsBadgeText: {
-    fontSize: 10,
-    fontWeight: '600',
-    color: '#FFFFFF',
-  },
+
   legend: {
     flexDirection: 'row',
     justifyContent: 'center',

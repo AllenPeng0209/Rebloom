@@ -8,10 +8,10 @@
       "@/components/*": ["./src/components/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/constants/*": ["./lib/constants/*"],
-      "@/lib/*": ["./lib/*"],
+      "@/lib/*": ["./src/lib/*"],
       "@/utils/*": ["./lib/utils/*"],
-      "@/services/*": ["./lib/services/*"],
-      "@/types": ["./lib/types"],
+      "@/services/*": ["./src/services/*"],
+      "@/types": ["./src/types"],
       "@/contexts/*": ["./src/contexts/*"],
       "@/translations/*": ["./lib/translations/*"],
       "@/ui/*": ["./src/components/ui/*"]

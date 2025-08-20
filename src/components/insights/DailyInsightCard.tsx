@@ -1,544 +1,535 @@
-import { Ionicons } from '@expo/vector-icons'
-import { format } from 'date-fns'
-import { enUS, ja, zhCN, zhTW } from 'date-fns/locale'
-import { LinearGradient } from 'expo-linear-gradient'
 import React, { useState } from 'react'
 import {
-    LayoutAnimation,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native'
-import { useLanguage } from '@/contexts/LanguageContext'
-
-interface DailyInsight {
-  id: string
-  date: Date
-  summary: string
-  psychologicalSupport: string
-  recommendation: string
-  moodScore: number
-  conversationCount: number
-  keyTopics: string[]
-  emotionalPattern: string
-  positiveReframe: string
-  actionSuggestion: string
-  conversationAnalysis?: {
-    totalMessages: number
-    emotionalJourney: Array<{ time: string; emotion: string; intensity: number }>
-    breakthroughs: string[]
-    concerningPatterns: string[]
-  }
-}
+import { Colors } from '../../../lib/constants/Colors'
+import { DailySummary } from '../../services/summaryService'
 
 interface DailyInsightCardProps {
-  insight: DailyInsight
-  onExpand?: () => void
+  summary: DailySummary
+  onRefresh?: () => void
 }
 
-export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
-  insight,
-  onExpand
+const { width } = Dimensions.get('window')
+
+export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({ 
+  summary, 
+  onRefresh 
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const { t, language } = useLanguage()
-  
-  const getLocale = () => {
-    switch (language) {
-      case 'zh-TW': return zhTW
-      case 'zh-CN': return zhCN
-      case 'ja': return ja
-      case 'en': return enUS
-      default: return zhTW
+  const [expandedSection, setExpandedSection] = useState<string | null>(null)
+
+  const toggleSection = (section: string) => {
+    setExpandedSection(expandedSection === section ? null : section)
+  }
+
+  const getMoodTrendColor = (trend: string) => {
+    switch (trend) {
+      case 'improving': return '#4CAF50'
+      case 'stable': return '#2196F3'
+      case 'declining': return '#FF9800'
+      case 'mixed': return '#9C27B0'
+      default: return '#757575'
     }
   }
 
-  const getMoodEmoji = (score: number) => {
-    if (score >= 8) return '😊'
-    if (score >= 6) return '🙂'
-    if (score >= 4) return '😐'
-    if (score >= 2) return '😔'
-    return '😢'
+  const getMoodTrendText = (trend: string) => {
+    switch (trend) {
+      case 'improving': return '上升趨勢'
+      case 'stable': return '穩定狀態'
+      case 'declining': return '需要關注'
+      case 'mixed': return '波動變化'
+      default: return '未知'
+    }
   }
 
-  const getMoodColor = (score: number) => {
-    if (score >= 8) return '#4CAF50'
-    if (score >= 6) return '#6BCF7F'
-    if (score >= 4) return '#FFD93D'
-    if (score >= 2) return '#FFB366'
-    return '#FF6B6B'
+  const getUrgencyColor = (level: string) => {
+    switch (level) {
+      case 'high': return '#F44336'
+      case 'medium': return '#FF9800'
+      case 'low': return '#4CAF50'
+      default: return '#757575'
+    }
   }
 
-  const handleToggleExpand = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-    setIsExpanded(!isExpanded)
-    onExpand?.()
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString('zh-TW', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long'
+    })
+  }
+
+  const renderExpandableSection = (
+    title: string,
+    content: string,
+    sectionKey: string,
+    icon?: string
+  ) => {
+    const isExpanded = expandedSection === sectionKey
+    
+    return (
+      <View style={styles.section}>
+        <TouchableOpacity
+          style={styles.sectionHeader}
+          onPress={() => toggleSection(sectionKey)}
+        >
+          <Text style={styles.sectionTitle}>
+            {icon && <Text style={styles.sectionIcon}>{icon} </Text>}
+            {title}
+          </Text>
+          <Text style={styles.expandIcon}>
+            {isExpanded ? '▼' : '▶'}
+          </Text>
+        </TouchableOpacity>
+        
+        {isExpanded && (
+          <View style={styles.sectionContent}>
+            <Text style={styles.contentText}>{content}</Text>
+          </View>
+        )}
+      </View>
+    )
+  }
+
+  const renderArraySection = (
+    title: string,
+    items: string[],
+    sectionKey: string,
+    icon?: string
+  ) => {
+    if (!items || items.length === 0) return null
+    
+    const isExpanded = expandedSection === sectionKey
+    
+    return (
+      <View style={styles.section}>
+        <TouchableOpacity
+          style={styles.sectionHeader}
+          onPress={() => toggleSection(sectionKey)}
+        >
+          <Text style={styles.sectionTitle}>
+            {icon && <Text style={styles.sectionIcon}>{icon} </Text>}
+            {title} ({items.length})
+          </Text>
+          <Text style={styles.expandIcon}>
+            {isExpanded ? '▼' : '▶'}
+          </Text>
+        </TouchableOpacity>
+        
+        {isExpanded && (
+          <View style={styles.sectionContent}>
+            {items.map((item, index) => (
+              <View key={index} style={styles.listItem}>
+                <Text style={styles.listItemText}>• {item}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+      </View>
+    )
   }
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
-        style={styles.gradient}
-      >
-        {/* Header */}
-        <TouchableOpacity 
-          style={styles.header}
-          onPress={handleToggleExpand}
-          activeOpacity={0.8}
-        >
-          <View style={styles.dateSection}>
-            <Text style={styles.dateText}>
-              {format(insight.date, 'EEE, MMM d', { locale: getLocale() })}
-            </Text>
-            <View style={styles.statsContainer}>
-              <View style={styles.statItem}>
-                <Text style={styles.statNumber}>{insight.conversationCount}</Text>
-                <Text style={styles.statLabel}>{t('insight.sessions')}</Text>
-              </View>
-              <View style={[styles.moodIndicator, { backgroundColor: getMoodColor(insight.moodScore) }]}>
-                <Text style={styles.moodEmoji}>{getMoodEmoji(insight.moodScore)}</Text>
-              </View>
-            </View>
-          </View>
-          
-          <Ionicons
-            name={isExpanded ? 'chevron-up' : 'chevron-down'}
-            size={24}
-            color="#4A90E2"
-            style={styles.expandIcon}
-          />
-        </TouchableOpacity>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* 標題和日期 */}
+      <View style={styles.header}>
+        <Text style={styles.title}>每日心理洞察</Text>
+        <Text style={styles.date}>{formatDate(summary.summary_date)}</Text>
+        {onRefresh && (
+          <TouchableOpacity style={styles.refreshButton} onPress={onRefresh}>
+            <Text style={styles.refreshText}>刷新</Text>
+          </TouchableOpacity>
+        )}
+      </View>
 
-        {/* Summary */}
-        <Text style={styles.summary}>{insight.summary}</Text>
-
-        {/* Psychological Support - Heart of the feature */}
-        <View style={styles.supportSection}>
-          <View style={styles.supportHeader}>
-            <Ionicons name="heart" size={16} color="#FF6B6B" />
-            <Text style={styles.supportTitle}>{t('insight.todaysAffirmation')}</Text>
-          </View>
-          <Text style={styles.supportText}>{insight.psychologicalSupport}</Text>
+      {/* 統計概覽 */}
+      <View style={styles.statsContainer}>
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>{summary.conversation_count}</Text>
+          <Text style={styles.statLabel}>對話次數</Text>
         </View>
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>{summary.total_messages}</Text>
+          <Text style={styles.statLabel}>消息總數</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text style={[
+            styles.moodTrendText,
+            { color: getMoodTrendColor(summary.mood_trend) }
+          ]}>
+            {getMoodTrendText(summary.mood_trend)}
+          </Text>
+          <Text style={styles.statLabel}>心情趨勢</Text>
+        </View>
+      </View>
 
-        {/* Key Topics */}
-        <View style={styles.topicsContainer}>
-          {insight.keyTopics.map((topic, index) => (
-            <View key={index} style={styles.topicTag}>
-              <Text style={styles.topicText}>{topic}</Text>
+      {/* 情緒狀態 */}
+      <View style={styles.emotionContainer}>
+        <Text style={styles.sectionTitle}>🎭 主要情緒</Text>
+        <View style={styles.emotionTags}>
+          {summary.dominant_emotions?.map((emotion, index) => (
+            <View key={index} style={styles.emotionTag}>
+              <Text style={styles.emotionText}>{emotion}</Text>
             </View>
           ))}
         </View>
-
-        {/* Recommendation */}
-        <View style={styles.recommendationSection}>
-          <View style={styles.recommendationHeader}>
-            <Ionicons name="bulb" size={16} color="#FFB366" />
-            <Text style={styles.recommendationTitle}>{t('insight.tomorrowsFocus')}</Text>
+        <View style={styles.intensityContainer}>
+          <Text style={styles.intensityLabel}>情緒強度</Text>
+          <View style={styles.intensityBar}>
+            <View 
+              style={[
+                styles.intensityFill,
+                { 
+                  width: `${(summary.emotion_intensity_avg || 0) * 100}%`,
+                  backgroundColor: summary.emotion_intensity_avg > 0.7 ? '#F44336' : 
+                                 summary.emotion_intensity_avg > 0.4 ? '#FF9800' : '#4CAF50'
+                }
+              ]} 
+            />
           </View>
-          <Text style={styles.recommendationText}>{insight.recommendation}</Text>
+          <Text style={styles.intensityValue}>
+            {Math.round((summary.emotion_intensity_avg || 0) * 100)}%
+          </Text>
         </View>
+      </View>
 
-        {/* Expanded Content */}
-        {isExpanded && (
-          <View style={styles.expandedContent}>
-            {/* Emotional Pattern */}
-            <View style={styles.patternSection}>
-              <Text style={styles.sectionTitle}>{t('insight.emotionalJourney')}</Text>
-              <Text style={styles.patternText}>{insight.emotionalPattern}</Text>
-            </View>
-
-            {/* Positive Reframe */}
-            <View style={styles.reframeSection}>
-              <View style={styles.reframeHeader}>
-                <Ionicons name="color-palette" size={16} color="#6BCF7F" />
-                <Text style={styles.reframeTitle}>{t('insight.positiveReframe')}</Text>
-              </View>
-              <Text style={styles.reframeText}>{insight.positiveReframe}</Text>
-            </View>
-
-            {/* Action Suggestion */}
-            <View style={styles.actionSection}>
-              <View style={styles.actionHeader}>
-                <Ionicons name="arrow-forward-circle" size={16} color="#4A90E2" />
-                <Text style={styles.actionTitle}>{t('insight.actionStep')}</Text>
-              </View>
-              <Text style={styles.actionText}>{insight.actionSuggestion}</Text>
-            </View>
-
-            {/* Conversation Analysis */}
-            {insight.conversationAnalysis && (
-              <View style={styles.analysisSection}>
-                <Text style={styles.sectionTitle}>{t('insight.conversationAnalysis')}</Text>
-                
-                <View style={styles.analysisStats}>
-                  <Text style={styles.analysisText}>
-                    {t('insight.messagesShared', { count: insight.conversationAnalysis.totalMessages.toString() })}
-                  </Text>
-                </View>
-
-                {/* Emotional Journey Timeline */}
-                <View style={styles.emotionalTimeline}>
-                  <Text style={styles.timelineTitle}>{t('insight.emotionalFlow')}</Text>
-                  {insight.conversationAnalysis.emotionalJourney.map((point, index) => (
-                    <View key={index} style={styles.timelineItem}>
-                      <Text style={styles.timelineTime}>{point.time}</Text>
-                      <View style={styles.timelineDot} />
-                      <Text style={styles.timelineEmotion}>
-                        {point.emotion} ({point.intensity}/10)
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-
-                {/* Breakthroughs */}
-                {insight.conversationAnalysis.breakthroughs.length > 0 && (
-                  <View style={styles.breakthroughSection}>
-                    <Text style={styles.breakthroughTitle}>{t('insight.breakthroughs')}</Text>
-                    {insight.conversationAnalysis.breakthroughs.map((breakthrough, index) => (
-                      <Text key={index} style={styles.breakthroughText}>
-                        • {breakthrough}
-                      </Text>
-                    ))}
-                  </View>
-                )}
-
-                {/* Concerning Patterns */}
-                {insight.conversationAnalysis.concerningPatterns.length > 0 && (
-                  <View style={styles.concernSection}>
-                    <Text style={styles.concernTitle}>{t('insight.areasToWatch')}</Text>
-                    {insight.conversationAnalysis.concerningPatterns.map((pattern, index) => (
-                      <Text key={index} style={styles.concernText}>
-                        • {pattern}
-                      </Text>
-                    ))}
-                  </View>
-                )}
-              </View>
-            )}
-          </View>
-        )}
-
-        {/* Footer */}
-        <View style={styles.footer}>
-          <TouchableOpacity style={styles.actionButton}>
-            <Ionicons name="bookmark" size={16} color="#4A90E2" />
-            <Text style={styles.actionButtonText}>{t('insight.saveInsight')}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
-            <Ionicons name="share" size={16} color="#4A90E2" />
-            <Text style={styles.actionButtonText}>{t('insight.shareProgress')}</Text>
-          </TouchableOpacity>
+      {/* 緊急程度指示器 */}
+      {summary.urgency_level !== 'low' && (
+        <View style={[
+          styles.urgencyContainer,
+          { backgroundColor: getUrgencyColor(summary.urgency_level) }
+        ]}>
+          <Text style={styles.urgencyText}>
+            ⚠️ 關注程度: {summary.urgency_level === 'high' ? '高' : '中等'}
+          </Text>
         </View>
-      </LinearGradient>
-    </View>
+      )}
+
+      {/* 危機警示 */}
+      {summary.crisis_flags && (
+        <View style={styles.crisisContainer}>
+          <Text style={styles.crisisText}>
+            🚨 檢測到需要特別關注的情況，建議尋求專業協助
+          </Text>
+        </View>
+      )}
+
+      {/* 心理洞察 */}
+      {renderExpandableSection(
+        '心理洞察',
+        summary.psychological_insights,
+        'insights',
+        '🧠'
+      )}
+
+      {/* 個人化建議 */}
+      {renderExpandableSection(
+        '個人化建議',
+        summary.personalized_recommendations,
+        'recommendations',
+        '💡'
+      )}
+
+      {/* 治療觀察 */}
+      {summary.therapeutic_observations && renderExpandableSection(
+        '專業觀察',
+        summary.therapeutic_observations,
+        'therapeutic',
+        '👩‍⚕️'
+      )}
+
+      {/* 行為模式 */}
+      {summary.behavioral_patterns && renderExpandableSection(
+        '行為模式',
+        summary.behavioral_patterns,
+        'patterns',
+        '🔄'
+      )}
+
+      {/* 應對機制 */}
+      {renderArraySection(
+        '應對策略',
+        summary.coping_mechanisms_used || [],
+        'coping',
+        '🛡️'
+      )}
+
+      {/* 建議活動 */}
+      {renderArraySection(
+        '推薦活動',
+        summary.suggested_activities || [],
+        'activities',
+        '🎯'
+      )}
+
+      {/* 正念練習 */}
+      {renderArraySection(
+        '正念練習',
+        summary.mindfulness_exercises || [],
+        'mindfulness',
+        '🧘‍♀️'
+      )}
+
+      {/* 目標和成就 */}
+      {(summary.goals_mentioned?.length > 0 || summary.achievements?.length > 0) && (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>🎯 目標與成就</Text>
+          {renderArraySection('提及的目標', summary.goals_mentioned || [], 'goals')}
+          {renderArraySection('獲得的成就', summary.achievements || [], 'achievements')}
+        </View>
+      )}
+
+      {/* 挑戰 */}
+      {renderArraySection(
+        '面臨的挑戰',
+        summary.challenges || [],
+        'challenges',
+        '⚡'
+      )}
+
+      {/* 風險指標 */}
+      {summary.risk_indicators && summary.risk_indicators.length > 0 && (
+        renderArraySection(
+          '需要關注的方面',
+          summary.risk_indicators,
+          'risks',
+          '⚠️'
+        )
+      )}
+
+      {/* AI 信心分數 */}
+      <View style={styles.footer}>
+        <Text style={styles.confidenceText}>
+          AI 分析信心度: {Math.round((summary.ai_confidence_score || 0) * 100)}%
+        </Text>
+        <Text style={styles.modelText}>
+          模型: {summary.processing_model}
+        </Text>
+      </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 16,
-    borderRadius: 20,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 6,
-  },
-  gradient: {
-    padding: 20,
+    flex: 1,
+    backgroundColor: '#f8f9fa',
+    padding: 16,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+  date: {
+    fontSize: 16,
+    color: '#666',
     marginBottom: 12,
   },
-  dateSection: {
-    flex: 1,
+  refreshButton: {
+    alignSelf: 'flex-start',
+    backgroundColor: Colors.light.tint,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
   },
-  dateText: {
-    fontSize: 18,
+  refreshText: {
+    color: 'white',
+    fontSize: 14,
     fontWeight: '600',
-    color: '#2C2C2E',
-    marginBottom: 4,
   },
   statsContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   statItem: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    marginRight: 12,
+    flex: 1,
+    alignItems: 'center',
   },
   statNumber: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#4A90E2',
-    marginRight: 4,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: Colors.light.tint,
   },
   statLabel: {
     fontSize: 12,
-    color: '#6B6B6B',
+    color: '#666',
+    marginTop: 4,
   },
-  moodIndicator: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  moodEmoji: {
+  moodTrendText: {
     fontSize: 16,
+    fontWeight: '600',
   },
-  expandIcon: {
-    marginLeft: 8,
-  },
-  summary: {
-    fontSize: 15,
-    color: '#2C2C2E',
-    lineHeight: 22,
-    marginBottom: 16,
-    fontWeight: '500',
-  },
-  supportSection: {
-    backgroundColor: 'rgba(255, 107, 107, 0.05)',
+  emotionContainer: {
+    backgroundColor: 'white',
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
-    borderLeftWidth: 4,
-    borderLeftColor: '#FF6B6B',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  supportHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  supportTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#FF6B6B',
-    marginLeft: 6,
-  },
-  supportText: {
-    fontSize: 15,
-    color: '#2C2C2E',
-    lineHeight: 22,
-    fontWeight: '500',
-    fontStyle: 'italic',
-  },
-  topicsContainer: {
+  emotionTags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 16,
+    marginVertical: 12,
   },
-  topicTag: {
-    backgroundColor: 'rgba(74, 144, 226, 0.1)',
-    borderRadius: 16,
+  emotionTag: {
+    backgroundColor: '#e3f2fd',
     paddingHorizontal: 12,
     paddingVertical: 6,
-    marginRight: 8,
-    marginBottom: 4,
+    borderRadius: 16,
+    margin: 4,
   },
-  topicText: {
-    fontSize: 12,
-    color: '#4A90E2',
+  emotionText: {
+    color: '#1976d2',
+    fontSize: 14,
     fontWeight: '500',
   },
-  recommendationSection: {
-    backgroundColor: 'rgba(255, 179, 102, 0.05)',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
-    borderLeftWidth: 4,
-    borderLeftColor: '#FFB366',
+  intensityContainer: {
+    marginTop: 12,
   },
-  recommendationHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  intensityLabel: {
+    fontSize: 14,
+    color: '#666',
     marginBottom: 8,
   },
-  recommendationTitle: {
+  intensityBar: {
+    height: 8,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  intensityFill: {
+    height: '100%',
+    borderRadius: 4,
+  },
+  intensityValue: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 4,
+    textAlign: 'right',
+  },
+  urgencyContainer: {
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  urgencyText: {
+    color: 'white',
     fontSize: 14,
     fontWeight: '600',
-    color: '#FFB366',
-    marginLeft: 6,
+    textAlign: 'center',
   },
-  recommendationText: {
-    fontSize: 14,
-    color: '#2C2C2E',
-    lineHeight: 20,
-  },
-  expandedContent: {
-    marginTop: 8,
-  },
-  patternSection: {
+  crisisContainer: {
+    backgroundColor: '#ffebee',
+    padding: 12,
+    borderRadius: 8,
+    borderLeftWidth: 4,
+    borderLeftColor: '#f44336',
     marginBottom: 16,
+  },
+  crisisText: {
+    color: '#c62828',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  section: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2C2C2E',
-    marginBottom: 8,
-  },
-  patternText: {
-    fontSize: 14,
-    color: '#6B6B6B',
-    lineHeight: 20,
-  },
-  reframeSection: {
-    backgroundColor: 'rgba(107, 207, 127, 0.05)',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
-    borderLeftWidth: 4,
-    borderLeftColor: '#6BCF7F',
-  },
-  reframeHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  reframeTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#6BCF7F',
-    marginLeft: 6,
-  },
-  reframeText: {
-    fontSize: 14,
-    color: '#2C2C2E',
-    lineHeight: 20,
-    fontWeight: '500',
-  },
-  actionSection: {
-    backgroundColor: 'rgba(74, 144, 226, 0.05)',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
-    borderLeftWidth: 4,
-    borderLeftColor: '#4A90E2',
-  },
-  actionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  actionTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#4A90E2',
-    marginLeft: 6,
-  },
-  actionText: {
-    fontSize: 14,
-    color: '#2C2C2E',
-    lineHeight: 20,
-  },
-  analysisSection: {
-    marginTop: 16,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(107, 107, 107, 0.2)',
-  },
-  analysisStats: {
-    marginBottom: 16,
-  },
-  analysisText: {
-    fontSize: 14,
-    color: '#6B6B6B',
-    fontStyle: 'italic',
-  },
-  emotionalTimeline: {
-    marginBottom: 16,
-  },
-  timelineTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#2C2C2E',
-    marginBottom: 8,
-  },
-  timelineItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 6,
-  },
-  timelineTime: {
-    fontSize: 12,
-    color: '#6B6B6B',
-    width: 50,
-  },
-  timelineDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#4A90E2',
-    marginHorizontal: 8,
-  },
-  timelineEmotion: {
-    fontSize: 12,
-    color: '#2C2C2E',
+    color: '#333',
     flex: 1,
   },
-  breakthroughSection: {
-    backgroundColor: 'rgba(255, 215, 0, 0.1)',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 12,
+  sectionIcon: {
+    fontSize: 16,
   },
-  breakthroughTitle: {
+  expandIcon: {
+    fontSize: 12,
+    color: '#666',
+  },
+  sectionContent: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+  },
+  contentText: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#FF9500',
-    marginBottom: 6,
+    color: '#555',
+    lineHeight: 20,
   },
-  breakthroughText: {
-    fontSize: 13,
-    color: '#2C2C2E',
-    lineHeight: 18,
-    marginBottom: 2,
+  listItem: {
+    marginBottom: 8,
   },
-  concernSection: {
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
-    borderRadius: 8,
-    padding: 12,
-  },
-  concernTitle: {
+  listItemText: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#FF6B6B',
-    marginBottom: 6,
-  },
-  concernText: {
-    fontSize: 13,
-    color: '#2C2C2E',
-    lineHeight: 18,
-    marginBottom: 2,
+    color: '#555',
+    lineHeight: 20,
   },
   footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 16,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(107, 107, 107, 0.1)',
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 8,
+    marginBottom: 32,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  actionButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 20,
-    backgroundColor: 'rgba(74, 144, 226, 0.1)',
-  },
-  actionButtonText: {
+  confidenceText: {
     fontSize: 12,
-    color: '#4A90E2',
-    fontWeight: '500',
-    marginLeft: 4,
+    color: '#666',
+    textAlign: 'center',
+  },
+  modelText: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+    marginTop: 4,
   },
 })

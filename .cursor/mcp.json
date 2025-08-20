@@ -9,7 +9,7 @@
         "--features=functions,database,development"
       ],
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "sbp_v0_6a9254227d6c5804542f2b23af132917cb12c9d6"
+        "SUPABASE_ACCESS_TOKEN": "sbp_f9203447ee0eff0f884f2a609c205e3941263aa6"
       }
     }
   }

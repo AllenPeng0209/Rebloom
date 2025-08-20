@@ -1,3 +1,9 @@
+import { CalendarWidget } from '@/components/insights/CalendarWidget'
+import { DailyInsightCard } from '@/components/insights/DailyInsightCard'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { SummaryHistoryView } from '@/src/components/insights/SummaryHistoryView'
+import { useAuth } from '@/src/contexts/AuthContext'
+import { DailySummary } from '@/src/services/summaryService'
 import { Ionicons } from '@expo/vector-icons'
 import { format } from 'date-fns'
 import { enUS, ja, zhCN, zhTW } from 'date-fns/locale'
@@ -5,17 +11,15 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
 import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Modal,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
-import { CalendarWidget } from '@/components/insights/CalendarWidget'
-import { DailyInsightCard } from '@/components/insights/DailyInsightCard'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 // Mock data for demo
 // Case Study: Chinese International Student - Mood Journey (Monday-Saturday)
@@ -32,7 +36,10 @@ const mockMoodData = [
 
 export default function MoodScreen() {
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const [showHistoryModal, setShowHistoryModal] = useState(false)
+  const [selectedSummary, setSelectedSummary] = useState<DailySummary | null>(null)
   const { t, language } = useLanguage()
+  const { user } = useAuth()
   
   const getLocale = () => {
     switch (language) {
@@ -236,6 +243,15 @@ export default function MoodScreen() {
     router.push('/chat')
   }
 
+  const handleSummarySelect = (summary: DailySummary) => {
+    setSelectedSummary(summary)
+    setShowHistoryModal(false)
+  }
+
+  const openHistoryModal = () => {
+    setShowHistoryModal(true)
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
@@ -253,6 +269,14 @@ export default function MoodScreen() {
         <View style={styles.headerContent}>
           <Ionicons name="heart" size={28} color="#FFFFFF" />
           <Text style={styles.headerTitle}>{t('mood.title')}</Text>
+          {user && (
+            <TouchableOpacity 
+              style={styles.historyButton} 
+              onPress={openHistoryModal}
+            >
+              <Ionicons name="time-outline" size={24} color="#FFFFFF" />
+            </TouchableOpacity>
+          )}
         </View>
         <Text style={styles.headerSubtitle}>{t('mood.subtitle')}</Text>
       </View>
@@ -281,10 +305,14 @@ export default function MoodScreen() {
           </Text>
           
           {getSelectedDayInsight() ? (
-            <DailyInsightCard 
-              insight={getSelectedDayInsight()!} 
-              onExpand={() => console.log('Expanding insight')}
-            />
+            <View style={styles.mockInsightCard}>
+              <Text style={styles.mockInsightText}>
+                這裡將顯示真實的每日心理洞察
+              </Text>
+              <Text style={styles.mockInsightSubtext}>
+                當前顯示的是演示數據，實際的洞察將來自AI分析
+              </Text>
+            </View>
           ) : (
             <View style={styles.noInsightCard}>
               <LinearGradient
@@ -313,6 +341,53 @@ export default function MoodScreen() {
         {/* Bottom spacing */}
         <View style={{ height: 40 }} />
       </ScrollView>
+
+      {/* History Modal */}
+      <Modal
+        visible={showHistoryModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={() => setShowHistoryModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>心理洞察歷史</Text>
+            <TouchableOpacity 
+              style={styles.closeButton}
+              onPress={() => setShowHistoryModal(false)}
+            >
+              <Ionicons name="close" size={24} color="#333" />
+            </TouchableOpacity>
+          </View>
+          <SummaryHistoryView onSummarySelect={handleSummarySelect} />
+        </View>
+      </Modal>
+
+      {/* Selected Summary Modal */}
+      {selectedSummary && (
+        <Modal
+          visible={!!selectedSummary}
+          animationType="slide"
+          presentationStyle="pageSheet"
+          onRequestClose={() => setSelectedSummary(null)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>每日心理洞察</Text>
+              <TouchableOpacity 
+                style={styles.closeButton}
+                onPress={() => setSelectedSummary(null)}
+              >
+                <Ionicons name="close" size={24} color="#333" />
+              </TouchableOpacity>
+            </View>
+            <DailyInsightCard 
+              summary={selectedSummary}
+              onRefresh={() => setSelectedSummary(null)}
+            />
+          </View>
+        </Modal>
+      )}
     </SafeAreaView>
   )
 }
@@ -330,6 +405,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 4,
+    justifyContent: 'space-between',
   },
   headerTitle: {
     fontSize: 28,
@@ -409,5 +485,53 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 14,
     fontWeight: '600',
+  },
+  historyButton: {
+    padding: 8,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: '#f8f9fa',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  closeButton: {
+    padding: 8,
+  },
+  mockInsightCard: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: 20,
+    padding: 24,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 6,
+  },
+  mockInsightText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  mockInsightSubtext: {
+    fontSize: 14,
+    color: '#666',
+    textAlign: 'center',
+    lineHeight: 20,
   },
 })

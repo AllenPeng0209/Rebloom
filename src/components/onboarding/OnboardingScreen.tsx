@@ -1,16 +1,16 @@
-import React, { useState, useRef } from 'react'
+import { Ionicons } from '@expo/vector-icons'
+import { LinearGradient } from 'expo-linear-gradient'
+import React, { useRef, useState } from 'react'
 import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
   Dimensions,
   SafeAreaView,
-  TouchableOpacity,
+  ScrollView,
   StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient'
-import { Ionicons } from '@expo/vector-icons'
 import { OnboardingCard } from './OnboardingCard'
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window')
@@ -257,6 +257,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    minHeight: 0, // 确保scrollView不会过度拉伸
   },
   scrollContent: {
     alignItems: 'flex-start',

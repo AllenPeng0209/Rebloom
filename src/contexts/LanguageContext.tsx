@@ -365,6 +365,24 @@ const translations = {
     'caseStudy.saturday.breakthroughs.1': '發展出健康的應對策略和情感調節技巧',
     'caseStudy.saturday.breakthroughs.2': '從受害者心態轉變為積極的自我倡導者',
     
+    // Authentication
+    'auth.signIn': '登入',
+    'auth.signUp': '註冊',
+    'auth.email': '電子郵件',
+    'auth.password': '密碼',
+    'auth.displayName': '顯示名稱',
+    'auth.loading': '載入中...',
+    'auth.error': '錯誤',
+    'auth.success': '成功',
+    'auth.fillAllFields': '請填寫所有欄位',
+    'auth.passwordTooShort': '密碼至少需要6個字元',
+    'auth.checkEmail': '請檢查您的電子郵件以驗證帳戶',
+    'auth.unexpectedError': '發生未預期的錯誤',
+    'auth.alreadyHaveAccount': '已有帳戶？點擊登入',
+    'auth.dontHaveAccount': '沒有帳戶？點擊註冊',
+    'auth.welcome': '歡迎回來！',
+    'auth.welcomeNew': '歡迎加入 Rebloom！',
+    
     // Common
     'common.save': '保存',
     'common.cancel': '取消',
@@ -730,6 +748,24 @@ const translations = {
     'caseStudy.saturday.breakthroughs.1': '发展出健康的应对策略和情感调节技巧',
     'caseStudy.saturday.breakthroughs.2': '从受害者心态转变为积极的自我倡导者',
     
+    // Authentication
+    'auth.signIn': '登录',
+    'auth.signUp': '注册',
+    'auth.email': '电子邮件',
+    'auth.password': '密码',
+    'auth.displayName': '显示名称',
+    'auth.loading': '加载中...',
+    'auth.error': '错误',
+    'auth.success': '成功',
+    'auth.fillAllFields': '请填写所有字段',
+    'auth.passwordTooShort': '密码至少需要6个字符',
+    'auth.checkEmail': '请检查您的电子邮件以验证账户',
+    'auth.unexpectedError': '发生未预期的错误',
+    'auth.alreadyHaveAccount': '已有账户？点击登录',
+    'auth.dontHaveAccount': '没有账户？点击注册',
+    'auth.welcome': '欢迎回来！',
+    'auth.welcomeNew': '欢迎加入 Rebloom！',
+    
     // Common
     'common.save': '保存',
     'common.cancel': '取消',
@@ -981,6 +1017,24 @@ const translations = {
     'insightExample.3.breakthroughs.1': '仕事とセルフケアのバランスを成功的に取った',
     'insightExample.3.breakthroughs.2': '愛する人々と意味のあるつながりを持った',
     
+    // Authentication
+    'auth.signIn': 'サインイン',
+    'auth.signUp': 'サインアップ',
+    'auth.email': 'メールアドレス',
+    'auth.password': 'パスワード',
+    'auth.displayName': '表示名',
+    'auth.loading': '読み込み中...',
+    'auth.error': 'エラー',
+    'auth.success': '成功',
+    'auth.fillAllFields': 'すべてのフィールドを入力してください',
+    'auth.passwordTooShort': 'パスワードは6文字以上である必要があります',
+    'auth.checkEmail': 'アカウント確認のためメールをご確認ください',
+    'auth.unexpectedError': '予期しないエラーが発生しました',
+    'auth.alreadyHaveAccount': 'アカウントをお持ちですか？サインインをクリック',
+    'auth.dontHaveAccount': 'アカウントをお持ちでない場合は？サインアップをクリック',
+    'auth.welcome': 'おかえりなさい！',
+    'auth.welcomeNew': 'Rebloom へようこそ！',
+    
     // Common
     'common.save': '保存',
     'common.cancel': 'キャンセル',
@@ -1231,6 +1285,24 @@ const translations = {
     'insightExample.3.breakthroughs.0': 'Maintained positive mindset despite unexpected challenges',
     'insightExample.3.breakthroughs.1': 'Successfully balanced work and self-care',
     'insightExample.3.breakthroughs.2': 'Expressed gratitude and appreciation to others',
+    
+    // Authentication
+    'auth.signIn': 'Sign In',
+    'auth.signUp': 'Sign Up',
+    'auth.email': 'Email',
+    'auth.password': 'Password',
+    'auth.displayName': 'Display Name',
+    'auth.loading': 'Loading...',
+    'auth.error': 'Error',
+    'auth.success': 'Success',
+    'auth.fillAllFields': 'Please fill all fields',
+    'auth.passwordTooShort': 'Password must be at least 6 characters',
+    'auth.checkEmail': 'Please check your email to verify your account',
+    'auth.unexpectedError': 'An unexpected error occurred',
+    'auth.alreadyHaveAccount': 'Already have an account? Click to sign in',
+    'auth.dontHaveAccount': 'Don\'t have an account? Click to sign up',
+    'auth.welcome': 'Welcome back!',
+    'auth.welcomeNew': 'Welcome to Rebloom!',
     
     // Common
     'common.save': 'Save',

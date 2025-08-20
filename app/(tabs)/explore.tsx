@@ -1,18 +1,23 @@
-import { LinearGradient } from 'expo-linear-gradient'
-import React, { useState } from 'react'
-import {
-    Dimensions,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native'
-import { MoodTrendCard } from '@/components/insights/MoodTrendCard'
-import { WeeklyInsight } from '@/components/insights/WeeklyInsight'
+import CourseCard from '@/components/explore/CourseCard'
 import { useLanguage } from '@/contexts/LanguageContext'
+import type { ExplorePack, ExploreTrack } from '@/services/exploreService'
+import { exploreService } from '@/services/exploreService'
+import { interventionService } from '@/services/interventionService'
+import { Image } from 'expo-image'
+import { LinearGradient } from 'expo-linear-gradient'
+import { Link, useRouter } from 'expo-router'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import {
+  Dimensions,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
 
@@ -67,8 +72,99 @@ const mockInsights: InsightData[] = [
 export default function ExploreScreen() {
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | '3months'>('week')
   const { t } = useLanguage()
+  const router = useRouter()
+
+  const [searchQuery, setSearchQuery] = useState('')
+  const [packs, setPacks] = useState<ExplorePack[]>([])
+  const [tracks, setTracks] = useState<ExploreTrack[]>([])
+  const [loading, setLoading] = useState(false)
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const loadData = async () => {
+    try {
+      setLoading(true)
+      // 先嘗試從 API 獲取，失敗則使用本地數據
+      const apiPacks = await exploreService.getPacksFromApi()
+      if (apiPacks.length > 0) {
+        setPacks(apiPacks)
+      } else {
+        const localPacks = await exploreService.getPacks()
+        setPacks(localPacks)
+      }
+      
+      const tracks = await exploreService.getTracks()
+      setTracks(tracks)
+    } catch (error) {
+      console.warn('Failed to load from API, using local data:', error)
+      const [localPacks, localTracks] = await Promise.all([
+        exploreService.getPacks(),
+        exploreService.getTracks()
+      ])
+      setPacks(localPacks)
+      setTracks(localTracks)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    // 預載入 manifest（使用內建預設或外部檔）
+    interventionService.loadManifest().catch(() => {})
+    // 初次載入 explore 資料
+    loadData()
+    return () => {
+      interventionService.stop()
+    }
+  }, [])
 
   const averageMood = mockMoodData.reduce((sum, day) => sum + day.mood, 0) / mockMoodData.length
+
+  const onRefresh = async () => {
+    if (!searchQuery) {
+      await loadData()
+    } else {
+      setLoading(true)
+      try {
+        // 嘗試從 API 搜索，失敗則使用本地搜索
+        try {
+          const apiResults = await exploreService.searchTracksFromApi(searchQuery)
+          setTracks(apiResults)
+          // 搜索時不更新 packs，保持原有的 packs
+        } catch (error) {
+          console.warn('API search failed, using local search:', error)
+          const { packs: ps, tracks: ts } = await exploreService.search(searchQuery)
+          setPacks(ps)
+          setTracks(ts)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+  }
+
+  const onChangeSearch = (value: string) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(async () => {
+      const q = value.replace(/[^\x00-\x7F]/g, '')
+      setSearchQuery(q)
+      setLoading(true)
+      try {
+        if (!q) {
+          const [p, t] = await Promise.all([exploreService.getPacks(), exploreService.getTracks()])
+          setPacks(p)
+          setTracks(t)
+        } else {
+          const { packs: ps, tracks: ts } = await exploreService.search(q)
+          setPacks(ps)
+          setTracks(ts)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }, 400)
+  }
+
+  const showPacksHeader = useMemo(() => searchQuery.length > 0 && packs.length > 0, [searchQuery, packs])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -84,128 +180,119 @@ export default function ExploreScreen() {
 
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>{t('explore.title')}</Text>
+        <Text style={styles.headerTitle}>探索與行動</Text>
+        <Text style={styles.headerSubtitle}>根據你的模式推薦冥想與放鬆練習</Text>
       </View>
 
       <ScrollView 
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
+        refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} tintColor="#fff" />}
       >
-        {/* Summary Card */}
-        <View style={styles.summaryCard}>
-          <LinearGradient
-            colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
-            style={styles.summaryGradient}
-          >
-            <Text style={styles.summaryTitle}>{t('explore.thisWeek')}</Text>
-            <View style={styles.summaryStats}>
-              <View style={styles.stat}>
-                <Text style={styles.statNumber}>{averageMood.toFixed(1)}</Text>
-                <Text style={styles.statLabel}>{t('explore.averageMood')}</Text>
-              </View>
-              <View style={styles.statDivider} />
-              <View style={styles.stat}>
-                <Text style={styles.statNumber}>{mockMoodData.length}</Text>
-                <Text style={styles.statLabel}>{t('explore.daysTracked')}</Text>
-              </View>
-              <View style={styles.statDivider} />
-              <View style={styles.stat}>
-                <Text style={styles.statNumber}>3</Text>
-                <Text style={styles.statLabel}>{t('explore.insights')}</Text>
-              </View>
+        {/* 今日推薦行動 */}
+        <View>
+          <Text style={styles.sectionTitle}>今日推薦行動</Text>
+          <MasonryPacks packs={packs.slice(0, 2)} />
+        </View>
+
+        {/* Explore Packs / Tracks like Medito */}
+        {searchQuery.length === 0 ? (
+          <View>
+            <Text style={styles.sectionTitle}>推薦主題</Text>
+            <MasonryPacks packs={packs} />
+          </View>
+        ) : (
+          <View>
+            {showPacksHeader && <Text style={styles.sectionTitle}>主題</Text>}
+            {showPacksHeader && <MasonryPacks packs={packs} />}
+            <Text style={[styles.sectionTitle, { marginTop: 16 }]}>單集</Text>
+            <View style={{ gap: 12 }}>
+              {tracks.map((t) => (
+                <TrackRow key={t.id} track={t} />
+              ))}
             </View>
-          </LinearGradient>
-        </View>
-
-        {/* Period Selector */}
-        <View style={styles.periodSelector}>
-          {(['week', 'month', '3months'] as const).map((period) => (
-            <TouchableOpacity
-              key={period}
-              style={[
-                styles.periodButton,
-                selectedPeriod === period && styles.periodButtonActive,
-              ]}
-              onPress={() => setSelectedPeriod(period)}
-            >
-              <Text
-                style={[
-                  styles.periodButtonText,
-                  selectedPeriod === period && styles.periodButtonTextActive,
-                ]}
-              >
-                {period === 'week' ? t('explore.7days') : period === 'month' ? t('explore.30days') : t('explore.3months')}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        {/* Mood Trend Chart */}
-        <MoodTrendCard data={mockMoodData} />
-
-        {/* Progress Insights */}
-        <View style={styles.insightsSection}>
-          <Text style={styles.sectionTitle}>{t('explore.weeklyPatterns')}</Text>
-          {mockInsights.map((insight) => (
-            <WeeklyInsight
-              key={insight.id}
-              insight={{
-                ...insight,
-                title: t(insight.titleKey),
-                description: t(insight.descriptionKey)
-              }}
-              onPress={() => {
-                console.log('Insight pressed:', insight.id)
-              }}
-            />
-          ))}
-        </View>
-
-        {/* Goals Progress */}
-        <View style={styles.goalsSection}>
-          <Text style={styles.sectionTitle}>{t('explore.yourGoals')}</Text>
-          <View style={styles.goalCard}>
-            <LinearGradient
-              colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
-              style={styles.goalGradient}
-            >
-              <View style={styles.goalHeader}>
-                <Text style={styles.goalTitle}>{t('explore.dailyMoodCheckins')}</Text>
-                <Text style={styles.goalProgress}>{t('explore.daysProgress', { current: '7', total: '7' })}</Text>
-              </View>
-              <View style={styles.progressBar}>
-                <View style={[styles.progressFill, { width: '100%' }]} />
-              </View>
-              <Text style={styles.goalDescription}>
-                {t('explore.moodTrackingSuccess')}
-              </Text>
-            </LinearGradient>
           </View>
-
-          <View style={styles.goalCard}>
-            <LinearGradient
-              colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
-              style={styles.goalGradient}
-            >
-              <View style={styles.goalHeader}>
-                <Text style={styles.goalTitle}>{t('explore.mindfulnessPractice')}</Text>
-                <Text style={styles.goalProgress}>{t('explore.daysProgress', { current: '4', total: '7' })}</Text>
-              </View>
-              <View style={styles.progressBar}>
-                <View style={[styles.progressFill, { width: '57%' }]} />
-              </View>
-              <Text style={styles.goalDescription}>
-                {t('explore.mindfulnessProgress')}
-              </Text>
-            </LinearGradient>
-          </View>
-        </View>
-
+        )}
         {/* Bottom spacing */}
         <View style={{ height: 40 }} />
       </ScrollView>
     </SafeAreaView>
+  )
+}
+
+function PackCard({ pack, coverHeight = 120 }: { pack: ExplorePack; coverHeight?: number }) {
+  return (
+    <Link href={{ pathname: '/pack/[id]', params: { id: pack.id } }} asChild>
+      <CourseCard
+        title={pack.title}
+        subtitle={pack.subtitle}
+        coverUrl={pack.coverUrl || '/assets/images/react-logo.png'}
+        coverHeight={coverHeight}
+      />
+    </Link>
+  )
+}
+
+function MasonryPacks({ packs }: { packs: ExplorePack[] }) {
+  const columnGap = 16
+  const colWidth = (SCREEN_WIDTH - 20 * 2 - columnGap) / 2
+
+  type Item = { pack: ExplorePack; height: number }
+  const estimateHeight = (p: ExplorePack): number => {
+    const base = 110
+    const variance = (p.title.length % 3) * 20
+    return base + variance
+  }
+
+  const left: Item[] = []
+  const right: Item[] = []
+  let lh = 0
+  let rh = 0
+  packs.forEach((p) => {
+    const h = estimateHeight(p)
+    if (lh <= rh) {
+      left.push({ pack: p, height: h })
+      lh += h
+    } else {
+      right.push({ pack: p, height: h })
+      rh += h
+    }
+  })
+
+  return (
+    <View style={styles.masonryRow}>
+      <View style={{ width: colWidth }}>
+        {left.map(({ pack, height }) => (
+          <View key={pack.id} style={{ marginBottom: 16 }}>
+            <PackCard pack={pack} coverHeight={height} />
+          </View>
+        ))}
+      </View>
+      <View style={{ width: colWidth, marginLeft: columnGap }}>
+        {right.map(({ pack, height }) => (
+          <View key={pack.id} style={{ marginBottom: 16 }}>
+            <PackCard pack={pack} coverHeight={height} />
+          </View>
+        ))}
+      </View>
+    </View>
+  )
+}
+
+function TrackRow({ track }: { track: ExploreTrack }) {
+  return (
+    <TouchableOpacity style={styles.trackRow} onPress={() => {}}>
+      <Image 
+        source={{ uri: track.coverUrl || 'https://via.placeholder.com/60x60/4CAF50/white?text=M' }} 
+        style={styles.trackCover} 
+        contentFit="cover" 
+      />
+      <View style={{ flex: 1 }}>
+        <Text style={styles.trackTitle} numberOfLines={1}>{track.title}</Text>
+        <Text style={styles.trackSubtitle} numberOfLines={1}>{track.subtitle}</Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 
@@ -216,13 +303,19 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 20,
     paddingTop: 10,
-    paddingBottom: 20,
+    paddingBottom: 12,
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: '700',
+    fontSize: 30,
+    fontWeight: '800',
     color: '#FFFFFF',
   },
+  headerSubtitle: {
+    marginTop: 4,
+    color: 'rgba(255,255,255,0.9)',
+    fontSize: 14,
+  },
+  // 移除搜尋樣式
   scrollView: {
     flex: 1,
   },
@@ -230,6 +323,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
+  masonryRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 8,
+  },
+  packCard: {
+    width: '100%',
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: 14,
+    padding: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  packCover: { width: '100%', borderRadius: 10, marginBottom: 8 },
+  packTitle: { color: '#2C2C2E', fontWeight: '700', fontSize: 16 },
+  packSubtitle: { color: '#6B6B6B', fontSize: 12, marginTop: 2 },
+  trackRow: {
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: 14,
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  trackCover: { width: 64, height: 64, borderRadius: 10, marginRight: 12 },
+  trackTitle: { color: '#2C2C2E', fontWeight: '700', fontSize: 16 },
+  trackSubtitle: { color: '#6B6B6B', fontSize: 12, marginTop: 2 },
   summaryCard: {
     marginBottom: 24,
     borderRadius: 20,
@@ -250,6 +372,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: 'center',
   },
+
   summaryStats: {
     flexDirection: 'row',
     justifyContent: 'space-around',

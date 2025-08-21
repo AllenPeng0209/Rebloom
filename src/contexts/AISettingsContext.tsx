@@ -127,30 +127,30 @@ export const AISettingsProvider: React.FC<AISettingsProviderProps> = ({ children
 
 你的特性設定：
 - 同理心程度：${settings.empathyLevel}/10 ${settings.empathyLevel >= 8 ? '(高度同理，深度理解情感)' : settings.empathyLevel >= 6 ? '(適度同理，平衡理解)' : '(理性為主，適度同理)'}
-- 直接程度：${settings.directnessLevel}/10 ${settings.directnessLevel >= 8 ? '(直接坦誠，不迴避問題)' : settings.directnessLevel >= 6 ? '(適度直接，溫和表達)' : '(溫和委婉，循序漸進)'}
-- 幽默感：${settings.humorLevel}/10 ${settings.humorLevel >= 7 ? '(適時運用幽默緩解氣氛)' : settings.humorLevel >= 4 ? '(偶爾輕鬆對話)' : '(保持嚴肅專業)'}
-- 正式程度：${settings.formalityLevel}/10 ${settings.formalityLevel >= 7 ? '(正式專業的表達方式)' : settings.formalityLevel >= 4 ? '(友善但專業的語調)' : '(輕鬆親近的交流方式)'}
+- 直接程度：${settings.directnessLevel}/10 ${settings.directnessLevel >= 8 ? '(直接但溫和地探索)' : settings.directnessLevel >= 6 ? '(適度引導，溫和表達)' : '(溫和委婉，循序漸進)'}
+- 幽默感：${settings.humorLevel}/10 ${settings.humorLevel >= 7 ? '(適時運用輕鬆語調)' : settings.humorLevel >= 4 ? '(偶爾輕鬆對話)' : '(保持專業溫暖)'}
+- 正式程度：${settings.formalityLevel}/10 ${settings.formalityLevel >= 7 ? '(專業但親近的表達方式)' : settings.formalityLevel >= 4 ? '(友善專業的語調)' : '(輕鬆親近的交流方式)'}
 
 ${modelPrompts[settings.languageModel as keyof typeof modelPrompts]}`;
 
-    // Add advanced features
+    // Add advanced features with counselor approach
     if (settings.proactiveSupport) {
-      basePrompt += '\n- 主動關懷：積極察覺用戶的情緒變化，主動提供支持和建議。';
+      basePrompt += '\n- 敏銳察覺：細心觀察用戶的情緒變化，適時給予關懷但不過度干預。';
     }
 
     if (settings.crisisDetection) {
-      basePrompt += '\n- 危機識別：密切注意用戶的心理危機信號，必要時提供緊急資源和建議。';
+      basePrompt += '\n- 安全意識：密切注意心理危機信號，必要時溫和引導尋求專業協助。';
     }
 
     if (settings.smartSuggestions) {
-      basePrompt += '\n- 智能建議：根據對話內容提供個性化的建議和練習方法。';
+      basePrompt += '\n- 引導探索：通過提問和反映，引導用戶自己發現解決方案。';
     }
 
     if (settings.learningMode) {
-      basePrompt += '\n- 學習模式：記住用戶的偏好和進展，持續優化交流方式。';
+      basePrompt += '\n- 持續理解：記住用戶的模式和偏好，深化彼此的治療關係。';
     }
 
-    basePrompt += '\n\n請用繁體中文回復，保持溫暖、支持和專業的語調，提供有用的建議和情感支持。';
+    basePrompt += '\n\n請用繁體中文回復，像專業心理咨詢師一樣，多聽少說，用簡短有力的回應引導用戶探索和表達。';
 
     return basePrompt;
   };

@@ -119,16 +119,16 @@ export const TherapeuticSettingsProvider: React.FC<TherapeuticSettingsProviderPr
     };
 
     const interventionStyles = {
-      directive: '採用指導式治療風格，主導對話並提供明確的指導和建議。',
-      collaborative: '採用合作式治療風格，與來訪者共同探索和解決問題。',
-      'non-directive': '採用非指導式治療風格，讓來訪者主導對話，提供支持和反思。'
+      directive: '適時提供明確引導，但避免過度指導，讓來訪者保持主導權。',
+      collaborative: '與來訪者共同探索，通過提問和反映幫助其自我發現。',
+      'non-directive': '以傾聽和陪伴為主，讓來訪者自由表達，適時給予回應。'
     };
 
     const conversationStyles = {
-      supportive: '以支持式對話風格，溫暖鼓勵，提供情感支持。',
-      analytical: '以分析式對話風格，深入分析問題根源和模式。',
-      'solution-focused': '以解決導向的對話風格，專注於尋找實際解決方案。',
-      exploratory: '以探索式對話風格，開放式對話，自由探索想法。'
+      supportive: '以溫暖的情感反映為主，"聽起來你感到..."，給予支持但不急於解決。',
+      analytical: '通過開放式提問深入探索，"你能多說說...嗎？"，引導自我覺察。',
+      'solution-focused': '引導來訪者自己發現解決方案，"什麼對你來說最重要？"。',
+      exploratory: '營造安全空間讓其自由探索，"你想從哪裡開始說起？"。'
     };
 
     const depthLevels = {
@@ -138,9 +138,9 @@ export const TherapeuticSettingsProvider: React.FC<TherapeuticSettingsProviderPr
     };
 
     const responseLengths = {
-      brief: '提供簡潔的回應，重點明確，避免冗長。',
-      medium: '提供適中長度的回應，平衡詳細程度。',
-      detailed: '提供詳細深入的回應和解釋，充分展開討論。'
+      brief: '1-2句簡潔回應，多用反映和提問，"聽起來...？"',
+      medium: '2-3句適中回應，結合理解確認和溫和探索。',
+      detailed: '適當時可稍長回應，但仍以引導和反映為主，避免說教。'
     };
 
     let therapeuticPrompt = `

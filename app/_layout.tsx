@@ -5,11 +5,9 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { AISettingsProvider } from '../src/contexts/AISettingsContext';
+import { AppProviders } from '../src/components/providers/AppProviders';
 import { AuthProvider } from '../src/contexts/AuthContext';
 import { LanguageProvider } from '../src/contexts/LanguageContext';
-import { TherapeuticSettingsProvider } from '../src/contexts/TherapeuticSettingsContext';
-import { UnifiedSettingsProvider } from '../src/contexts/UnifiedSettingsContext';
 import { SchedulerService } from '../src/services/schedulerService';
 
 export default function RootLayout() {
@@ -36,20 +34,16 @@ export default function RootLayout() {
   return (
     <LanguageProvider>
       <AuthProvider>
-        <AISettingsProvider>
-          <TherapeuticSettingsProvider>
-            <UnifiedSettingsProvider>
-              <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-                <Stack>
-                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                  <Stack.Screen name="profile" options={{ headerShown: false }} />
-                  <Stack.Screen name="+not-found" />
-                </Stack>
-                <StatusBar style="auto" />
-              </ThemeProvider>
-            </UnifiedSettingsProvider>
-          </TherapeuticSettingsProvider>
-        </AISettingsProvider>
+        <AppProviders>
+          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="profile" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <StatusBar style="auto" />
+          </ThemeProvider>
+        </AppProviders>
       </AuthProvider>
     </LanguageProvider>
   );

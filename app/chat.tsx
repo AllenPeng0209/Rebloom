@@ -1,21 +1,23 @@
 import { ChatScreen } from '@/components/chat/ChatScreen'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { Message } from '@/types'
 import { Ionicons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { router } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import {
-    SafeAreaView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native'
 
 export default function ChatFullScreen() {
   const [messages, setMessages] = useState<Message[]>([])
   const [isTyping, setIsTyping] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     // Initialize with Ash's greeting message
@@ -24,7 +26,7 @@ export default function ChatFullScreen() {
       sessionId: 'demo_session',
       userId: 'ash_ai',
       senderType: 'ai',
-      content: "Hi there! 👋\n\nI'm Ash, your AI companion for mental health support. I'm here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?",
+      content: t('chat.greeting'),
       messageType: 'text',
       sentimentScore: 0.8,
       emotionalTags: ['supportive', 'welcoming'],
@@ -32,7 +34,7 @@ export default function ChatFullScreen() {
       createdAt: new Date()
     }
     setMessages([initialMessage])
-  }, [])
+  }, [t])
 
   const handleSendMessage = async (content: string) => {
     const userMessage: Message = {
@@ -73,11 +75,11 @@ export default function ChatFullScreen() {
 
   const getAshResponse = (userMessage: string): string => {
     const responses = [
-      "I hear you, and I want you to know that your feelings are completely valid. It takes courage to share what's on your mind. Can you tell me more about what's been weighing on you?",
-      "Thank you for opening up to me. I'm here to listen without judgment. What you're experiencing matters, and I want to understand better so I can support you.",
-      "It sounds like you're going through something challenging right now. I'm here with you in this moment. What would feel most helpful for you right now?",
-      "I appreciate you sharing that with me. Your thoughts and feelings are important. Sometimes just having someone listen can make a difference. How are you taking care of yourself today?",
-      "You're not alone in this. What you're feeling is part of being human, and I'm here to support you through it. What's one small thing that usually brings you comfort?"
+      t('chat.response1'),
+      t('chat.response2'),
+      t('chat.response3'),
+      t('chat.response4'),
+      t('chat.response5')
     ]
     return responses[Math.floor(Math.random() * responses.length)]
   }
@@ -110,8 +112,8 @@ export default function ChatFullScreen() {
           </TouchableOpacity>
           
           <View style={styles.headerCenter}>
-            <Text style={styles.headerTitle}>Ash</Text>
-            <Text style={styles.headerSubtitle}>AI-powered mental health support</Text>
+            <Text style={styles.headerTitle}>{t('chat.ashTitle')}</Text>
+            <Text style={styles.headerSubtitle}>{t('chat.ashSubtitle')}</Text>
           </View>
           
           <View style={styles.headerRight}>

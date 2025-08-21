@@ -1,3 +1,4 @@
+import { useLanguage } from '@/contexts/LanguageContext'
 import type { PackDetail } from '@/services/exploreService'
 import { exploreService } from '@/services/exploreService'
 import { interventionService } from '@/services/interventionService'
@@ -10,6 +11,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } fr
 export default function PackDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>()
   const router = useRouter()
+  const { t } = useLanguage()
   const [pack, setPack] = useState<PackDetail | null>(null)
 
   const loadPackDetail = async (packId: string) => {
@@ -40,7 +42,7 @@ export default function PackDetailScreen() {
   if (!pack) {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={{ color: '#333', padding: 20 }}>載入中…</Text>
+        <Text style={{ color: '#333', padding: 20 }}>{t('explore.loading')}</Text>
       </SafeAreaView>
     )
   }
@@ -97,7 +99,7 @@ export default function PackDetailScreen() {
                 <Text style={styles.trackTitle}>{t.title}</Text>
                 {!!t.subtitle && <Text style={styles.trackSubtitle}>{t.subtitle}</Text>}
               </View>
-              <Text style={styles.play}>播放</Text>
+              <Text style={styles.play}>{t('explore.play')}</Text>
             </TouchableOpacity>
           ))}
         </View>

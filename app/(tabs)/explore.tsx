@@ -180,8 +180,8 @@ export default function ExploreScreen() {
 
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>探索與行動</Text>
-        <Text style={styles.headerSubtitle}>根據你的模式推薦冥想與放鬆練習</Text>
+        <Text style={styles.headerTitle}>{t('explore.pageTitle')}</Text>
+        <Text style={styles.headerSubtitle}>{t('explore.pageSubtitle')}</Text>
       </View>
 
       <ScrollView 
@@ -190,23 +190,23 @@ export default function ExploreScreen() {
         contentContainerStyle={styles.scrollContent}
         refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} tintColor="#fff" />}
       >
-        {/* 今日推薦行動 */}
+        {/* Today's Recommended Actions */}
         <View>
-          <Text style={styles.sectionTitle}>今日推薦行動</Text>
+          <Text style={styles.sectionTitle}>{t('explore.todayRecommended')}</Text>
           <MasonryPacks packs={packs.slice(0, 2)} />
         </View>
 
         {/* Explore Packs / Tracks like Medito */}
         {searchQuery.length === 0 ? (
           <View>
-            <Text style={styles.sectionTitle}>推薦主題</Text>
+            <Text style={styles.sectionTitle}>{t('explore.recommendedTopics')}</Text>
             <MasonryPacks packs={packs} />
           </View>
         ) : (
           <View>
-            {showPacksHeader && <Text style={styles.sectionTitle}>主題</Text>}
+            {showPacksHeader && <Text style={styles.sectionTitle}>{t('explore.topics')}</Text>}
             {showPacksHeader && <MasonryPacks packs={packs} />}
-            <Text style={[styles.sectionTitle, { marginTop: 16 }]}>單集</Text>
+            <Text style={[styles.sectionTitle, { marginTop: 16 }]}>{t('explore.episodes')}</Text>
             <View style={{ gap: 12 }}>
               {tracks.map((t) => (
                 <TrackRow key={t.id} track={t} />

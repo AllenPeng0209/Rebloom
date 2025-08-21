@@ -72,7 +72,7 @@ export default function HomeScreen() {
       // Create a new conversation
       const { data: conversation, error } = await ChatService.createConversation(
         user.id,
-        t('home.greeting')
+        t('chat.greeting')
       )
 
       if (error || !conversation) {
@@ -88,7 +88,7 @@ export default function HomeScreen() {
         sessionId: conversation.id,
         userId: user.id,
         senderType: 'ai',
-        content: t('home.greeting'),
+        content: t('chat.greeting'),
         messageType: 'text',
         sentimentScore: 0.8,
         emotionalTags: ['supportive', 'welcoming'],
@@ -102,7 +102,7 @@ export default function HomeScreen() {
       await ChatService.saveMessage(
         conversation.id,
         user.id,
-        t('home.greeting'),
+        t('chat.greeting'),
         'assistant'
       )
     } catch (error) {
@@ -251,11 +251,11 @@ export default function HomeScreen() {
 
   const generateAIResponse = (userInput: string): string => {
     const responses = [
-      t('home.aiResponses.1'),
-      t('home.aiResponses.2'),
-      t('home.aiResponses.3'),
-      t('home.aiResponses.4'),
-      t('home.aiResponses.5'),
+      t('chat.response1'),
+      t('chat.response2'),
+      t('chat.response3'),
+      t('chat.response4'),
+      t('chat.response5'),
     ]
     
     return responses[Math.floor(Math.random() * responses.length)]

@@ -383,6 +383,26 @@ const translations = {
     'auth.welcome': '歡迎回來！',
     'auth.welcomeNew': '歡迎加入 Rebloom！',
     
+    // Explore Screen
+    'explore.pageTitle': '探索與行動',
+    'explore.pageSubtitle': '根據你的模式推薦冥想與放鬆練習',
+    'explore.todayRecommended': '今日推薦行動',
+    'explore.recommendedTopics': '推薦主題',
+    'explore.topics': '主題',
+    'explore.episodes': '單集',
+    'explore.play': '播放',
+    'explore.loading': '載入中…',
+    
+    // Chat Screen
+    'chat.ashTitle': 'Ash',
+    'chat.ashSubtitle': 'AI驱动的心理健康支持',
+    'chat.greeting': 'Hi there! 👋\n\nI\'m Ash, your AI companion for mental health support. I\'m here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?',
+    'chat.response1': 'I hear you, and I want you to know that your feelings are completely valid. It takes courage to share what\'s on your mind. Can you tell me more about what\'s been weighing on you?',
+    'chat.response2': 'Thank you for opening up to me. I\'m here to listen without judgment. What you\'re experiencing matters, and I want to understand better so I can support you.',
+    'chat.response3': 'It sounds like you\'re going through something challenging right now. I\'m here with you in this moment. What would feel most helpful for you right now?',
+    'chat.response4': 'I appreciate you sharing that with me. Your thoughts and feelings are important. Sometimes just having someone listen can make a difference. How are you taking care of yourself today?',
+    'chat.response5': 'You\'re not alone in this. What you\'re feeling is part of being human, and I\'m here to support you through it. What\'s one small thing that usually brings you comfort?',
+
     // Common
     'common.save': '保存',
     'common.cancel': '取消',
@@ -766,6 +786,26 @@ const translations = {
     'auth.welcome': '欢迎回来！',
     'auth.welcomeNew': '欢迎加入 Rebloom！',
     
+    // Explore Screen
+    'explore.pageTitle': '探索与行动',
+    'explore.pageSubtitle': '根据你的模式推荐冥想与放松练习',
+    'explore.todayRecommended': '今日推荐行动',
+    'explore.recommendedTopics': '推荐主题',
+    'explore.topics': '主题',
+    'explore.episodes': '单集',
+    'explore.play': '播放',
+    'explore.loading': '加载中…',
+    
+    // Chat Screen
+    'chat.ashTitle': 'Ash',
+    'chat.ashSubtitle': 'AI驱动的心理健康支持',
+    'chat.greeting': '嗨！👋\n\n我是 Ash，您的AI心理健康伴侣。我在这里倾听、理解，并帮助您处理心中的想法。\n\n您今天感觉如何？',
+    'chat.response1': '我听到了，我希望您知道您的感受完全有效。您能告诉我更多关于您心中想法的事吗？',
+    'chat.response2': '谢谢您与我分享这些。敞开心扉谈论这些感受需要勇气。您经历这种感觉多久了？',
+    'chat.response3': '我在这里倾听并支持您度过这个困难时期。现在什么对您最有帮助？',
+    'chat.response4': '这听起来真的很有挑战性。您并不孤单，很高兴您寻求支持。',
+    'chat.response5': '我很感谢您信任我。让我们一起解决这个问题。您认为现在什么能让您感觉好一点？',
+
     // Common
     'common.save': '保存',
     'common.cancel': '取消',
@@ -1035,6 +1075,26 @@ const translations = {
     'auth.welcome': 'おかえりなさい！',
     'auth.welcomeNew': 'Rebloom へようこそ！',
     
+    // Explore Screen
+    'explore.pageTitle': '探索とアクション',
+    'explore.pageSubtitle': 'あなたのパターンに基づいて瞑想とリラクゼーション練習を推奨',
+    'explore.todayRecommended': '今日の推奨アクション',
+    'explore.recommendedTopics': '推奨トピック',
+    'explore.topics': 'トピック',
+    'explore.episodes': 'エピソード',
+    'explore.play': '再生',
+    'explore.loading': '読み込み中…',
+    
+    // Chat Screen
+    'chat.ashTitle': 'Ash',
+    'chat.ashSubtitle': 'AI駆動のメンタルヘルスサポート',
+    'chat.greeting': 'こんにちは！👋\n\n私はAsh、あなたのAIメンタルヘルスコンパニオンです。お話を聞き、理解し、心の中にあることを整理するお手伝いをします。\n\n今日の気分はいかがですか？',
+    'chat.response1': 'お聞きしました。あなたの感情は完全に正当なものだということを知ってください。心の中にあることについて、もう少し教えていただけますか？',
+    'chat.response2': 'お話しいただき、ありがとうございます。このような感情について心を開くには勇気が必要ですね。この感覚をどのくらい経験されていますか？',
+    'chat.response3': 'この困難な時期を乗り越えるために、お話を聞き、サポートいたします。今、何が一番お役に立てるでしょうか？',
+    'chat.response4': 'それは本当に大変そうですね。あなたは一人ではありません。サポートを求めてくださって嬉しく思います。',
+    'chat.response5': '信頼してお話しいただき、感謝しています。一緒に取り組みましょう。今、少しでも気分が良くなるために何ができると思いますか？',
+
     // Common
     'common.save': '保存',
     'common.cancel': 'キャンセル',
@@ -1304,6 +1364,26 @@ const translations = {
     'auth.welcome': 'Welcome back!',
     'auth.welcomeNew': 'Welcome to Rebloom!',
     
+    // Explore Screen
+    'explore.pageTitle': 'Explore & Action',
+    'explore.pageSubtitle': 'Meditation and relaxation practices recommended based on your patterns',
+    'explore.todayRecommended': 'Today\'s Recommended Actions',
+    'explore.recommendedTopics': 'Recommended Topics',
+    'explore.topics': 'Topics',
+    'explore.episodes': 'Episodes',
+    'explore.play': 'Play',
+    'explore.loading': 'Loading…',
+    
+    // Chat Screen
+    'chat.ashTitle': 'Ash',
+    'chat.ashSubtitle': 'AI-powered mental health support',
+    'chat.greeting': 'Hi there! 👋\n\nI\'m Ash, your AI companion for mental health support. I\'m here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?',
+    'chat.response1': 'I hear you, and I want you to know that your feelings are completely valid. It takes courage to share what\'s on your mind. Can you tell me more about what\'s been weighing on you?',
+    'chat.response2': 'Thank you for opening up to me. I\'m here to listen without judgment. What you\'re experiencing matters, and I want to understand better so I can support you.',
+    'chat.response3': 'It sounds like you\'re going through something challenging right now. I\'m here with you in this moment. What would feel most helpful for you right now?',
+    'chat.response4': 'I appreciate you sharing that with me. Your thoughts and feelings are important. Sometimes just having someone listen can make a difference. How are you taking care of yourself today?',
+    'chat.response5': 'You\'re not alone in this. What you\'re feeling is part of being human, and I\'m here to support you through it. What\'s one small thing that usually brings you comfort?',
+
     // Common
     'common.save': 'Save',
     'common.cancel': 'Cancel',

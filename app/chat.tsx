@@ -1,5 +1,6 @@
 import { ChatScreen } from '@/components/chat/ChatScreen'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useUnifiedSettings } from '@/contexts/UnifiedSettingsContext'
 import { Message } from '@/types'
 import { Ionicons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -18,6 +19,7 @@ export default function ChatFullScreen() {
   const [messages, setMessages] = useState<Message[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const { t } = useLanguage()
+  const { generateUnifiedPrompt } = useUnifiedSettings()
 
   useEffect(() => {
     // Initialize with Ash's greeting message
@@ -74,6 +76,11 @@ export default function ChatFullScreen() {
   }
 
   const getAshResponse = (userMessage: string): string => {
+    // Generate response based on AI settings - this is a demo implementation
+    // In a real app, you would call the Bailian API with the personalized system prompt
+    const unifiedPrompt = generateUnifiedPrompt()
+    console.log('Using unified AI+Therapeutic settings for response:', unifiedPrompt)
+    
     const responses = [
       t('chat.response1'),
       t('chat.response2'),

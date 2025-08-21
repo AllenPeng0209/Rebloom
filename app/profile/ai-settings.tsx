@@ -1,43 +1,17 @@
+import { AISettings, useAISettings } from '@/contexts/AISettingsContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { IconSymbol } from '@/ui/IconSymbol';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
-import { useLanguage } from '@/contexts/LanguageContext';
-
-interface AISettings {
-  personality: string;
-  voiceType: string;
-  empathyLevel: number;
-  directnessLevel: number;
-  humorLevel: number;
-  formalityLevel: number;
-  proactiveSupport: boolean;
-  crisisDetection: boolean;
-  voiceEnabled: boolean;
-  smartSuggestions: boolean;
-  learningMode: boolean;
-  languageModel: string;
-}
+import React, { useEffect, useState } from 'react';
+import { Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 
 export default function AISettingsScreen() {
   const router = useRouter();
   const { t } = useLanguage();
+  const { settings: contextSettings, saveSettings, resetSettings, isLoading } = useAISettings();
   
-  const [settings, setSettings] = useState<AISettings>({
-    personality: 'supportive',
-    voiceType: 'warm',
-    empathyLevel: 8,
-    directnessLevel: 6,
-    humorLevel: 4,
-    formalityLevel: 5,
-    proactiveSupport: true,
-    crisisDetection: true,
-    voiceEnabled: true,
-    smartSuggestions: true,
-    learningMode: true,
-    languageModel: 'advanced'
-  });
+  const [settings, setSettings] = useState<AISettings>(contextSettings);
 
   const personalityOptions = [
     { id: 'supportive', name: '溫暖支持型', description: '像朋友般溫暖，提供情感支持', icon: 'heart' },
@@ -59,9 +33,45 @@ export default function AISettingsScreen() {
     { id: 'empathetic', name: '同理模式', description: '專注情感理解，高度同理心' }
   ];
 
-  const handleSave = () => {
-    console.log('Saving AI settings:', settings);
-    router.back();
+  useEffect(() => {
+    setSettings(contextSettings);
+  }, [contextSettings]);
+
+  const handleSave = async () => {
+    try {
+      await saveSettings(settings);
+      Alert.alert(
+        'AI設定已保存',
+        '你的AI伴侶設定已成功更新，新的對話將使用這些設定。',
+        [{ text: '確定', onPress: () => router.back() }]
+      );
+    } catch (error) {
+      console.error('Error saving AI settings:', error);
+      Alert.alert('保存失敗', '設定保存時發生錯誤，請重試。');
+    }
+  };
+
+  const handleReset = () => {
+    Alert.alert(
+      '重置AI設定',
+      '確定要將所有設定重置為預設值嗎？這將無法復原。',
+      [
+        { text: '取消', style: 'cancel' },
+        { 
+          text: '重置', 
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await resetSettings();
+              Alert.alert('設定已重置', '所有AI設定已重置為預設值。');
+            } catch (error) {
+              console.error('Error resetting settings:', error);
+              Alert.alert('重置失敗', '設定重置時發生錯誤，請重試。');
+            }
+          }
+        }
+      ]
+    );
   };
 
   const renderSlider = (
@@ -80,19 +90,40 @@ export default function AISettingsScreen() {
           <Text style={styles.sliderLabel}>{label}</Text>
           <Text style={styles.sliderValue}>{value}/{max}</Text>
         </View>
-        <View style={styles.sliderTrack}>
-          <LinearGradient
-            colors={['#8B5A8C', '#B5739E']}
-            style={[styles.sliderFill, { width: `${(value / max) * 100}%` }]}
-          />
+        <View style={styles.sliderContainer}>
+          {/* Clickable track */}
           <TouchableOpacity
-            style={[styles.sliderThumb, { left: `${(value / max) * 100 - 2}%` }]}
+            style={styles.sliderTrack}
+            activeOpacity={1}
+            onPress={(event) => {
+              const { locationX } = event.nativeEvent;
+              const trackWidth = 280; // approximate track width
+              const percentage = Math.max(0, Math.min(1, locationX / trackWidth));
+              const newValue = Math.round(min + (max - min) * percentage);
+              onValueChange(newValue);
+            }}
           >
             <LinearGradient
               colors={['#8B5A8C', '#B5739E']}
-              style={styles.sliderThumbGradient}
+              style={[styles.sliderFill, { width: `${((value - min) / (max - min)) * 100}%` }]}
             />
           </TouchableOpacity>
+          
+          {/* Clickable buttons for fine control */}
+          <View style={styles.sliderControls}>
+            <TouchableOpacity
+              style={styles.sliderButton}
+              onPress={() => onValueChange(Math.max(min, value - 1))}
+            >
+              <Text style={styles.sliderButtonText}>-</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sliderButton}
+              onPress={() => onValueChange(Math.min(max, value + 1))}
+            >
+              <Text style={styles.sliderButtonText}>+</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </LinearGradient>
     </View>
@@ -467,7 +498,7 @@ export default function AISettingsScreen() {
 
         {/* Reset Settings */}
         <View style={styles.resetSection}>
-          <TouchableOpacity style={styles.resetButton}>
+          <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
             <LinearGradient
               colors={['rgba(255, 255, 255, 0.2)', 'rgba(255, 255, 255, 0.1)']}
               style={styles.resetGradient}
@@ -617,11 +648,18 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#8B5A8C',
   },
+  sliderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   sliderTrack: {
+    flex: 1,
     height: 8,
     backgroundColor: 'rgba(139, 90, 140, 0.2)',
     borderRadius: 4,
     position: 'relative',
+    marginRight: 16,
   },
   sliderFill: {
     height: 8,
@@ -630,22 +668,24 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
   },
-  sliderThumb: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    position: 'absolute',
-    top: -8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 4,
+  sliderControls: {
+    flexDirection: 'row',
+    gap: 8,
   },
-  sliderThumbGradient: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+  sliderButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(139, 90, 140, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(139, 90, 140, 0.3)',
+  },
+  sliderButtonText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#8B5A8C',
   },
   toggleCard: {
     borderRadius: 20,

@@ -1,49 +1,17 @@
+import { useLanguage } from '@/contexts/LanguageContext';
+import { TherapeuticSettings, useTherapeuticSettings } from '@/contexts/TherapeuticSettingsContext';
 import { IconSymbol } from '@/ui/IconSymbol';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
-import { useLanguage } from '@/contexts/LanguageContext';
-
-interface TherapeuticSettings {
-  primaryApproach: string;
-  secondaryApproaches: string[];
-  sessionLength: string;
-  interventionStyle: string;
-  culturalConsiderations: string[];
-  conversationStyle: string;
-  conversationDepth: string;
-  responseLength: string;
-  traumaInformed: boolean;
-  genderPreference: string;
-  languagePreference: string;
-  religiousConsiderations: boolean;
-  lgbtqAffirming: boolean;
-  crisisProtocol: boolean;
-  therapistReferrals: boolean;
-}
 
 export default function TherapeuticSettingsScreen() {
   const router = useRouter();
   const { t } = useLanguage();
+  const { settings: contextSettings, saveSettings, resetSettings, isLoading } = useTherapeuticSettings();
   
-  const [settings, setSettings] = useState<TherapeuticSettings>({
-    primaryApproach: 'cbt',
-    secondaryApproaches: ['mindfulness'],
-    sessionLength: 'medium',
-    interventionStyle: 'collaborative',
-    culturalConsiderations: ['asian'],
-    conversationStyle: 'supportive',
-    conversationDepth: 'moderate',
-    responseLength: 'medium',
-    traumaInformed: true,
-    genderPreference: 'no-preference',
-    languagePreference: 'zh-TW',
-    religiousConsiderations: false,
-    lgbtqAffirming: true,
-    crisisProtocol: true,
-    therapistReferrals: true
-  });
+  const [settings, setSettings] = useState<TherapeuticSettings>(contextSettings);
 
   const therapeuticApproaches = [
     {
@@ -122,9 +90,45 @@ export default function TherapeuticSettingsScreen() {
     { id: 'detailed', name: '詳細', description: '深入詳細的回應和解釋' }
   ];
 
-  const handleSave = () => {
-    Alert.alert('設置已保存', '您的治療偏好設置已更新');
-    router.back();
+  useEffect(() => {
+    setSettings(contextSettings);
+  }, [contextSettings]);
+
+  const handleSave = async () => {
+    try {
+      await saveSettings(settings);
+      Alert.alert(
+        '治療設置已保存',
+        '您的治療偏好設置已成功更新，AI將根據這些設置調整治療方法。',
+        [{ text: '確定', onPress: () => router.back() }]
+      );
+    } catch (error) {
+      console.error('Error saving therapeutic settings:', error);
+      Alert.alert('保存失敗', '設置保存時發生錯誤，請重試。');
+    }
+  };
+
+  const handleReset = () => {
+    Alert.alert(
+      '重置治療設置',
+      '確定要將所有治療設置重置為推薦值嗎？這將無法復原。',
+      [
+        { text: '取消', style: 'cancel' },
+        { 
+          text: '重置', 
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await resetSettings();
+              Alert.alert('設置已重置', '所有治療設置已重置為推薦值。');
+            } catch (error) {
+              console.error('Error resetting therapeutic settings:', error);
+              Alert.alert('重置失敗', '設置重置時發生錯誤，請重試。');
+            }
+          }
+        }
+      ]
+    );
   };
 
   const toggleSecondaryApproach = (approach: string) => {
@@ -566,7 +570,7 @@ export default function TherapeuticSettingsScreen() {
 
         {/* Reset Settings */}
         <View style={styles.resetSection}>
-          <TouchableOpacity style={styles.resetButton}>
+          <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
             <LinearGradient
               colors={['rgba(255, 255, 255, 0.2)', 'rgba(255, 255, 255, 0.1)']}
               style={styles.resetGradient}

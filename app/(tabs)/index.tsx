@@ -3,6 +3,7 @@ import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useNavigation } from '@/contexts/NavigationContext'
 import { ThemeProvider } from '@/contexts/ThemeContext'
+import { useUnifiedSettings } from '@/contexts/UnifiedSettingsContext'
 import { Message } from '@/types'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { router, useFocusEffect } from 'expo-router'
@@ -27,6 +28,7 @@ export default function HomeScreen() {
   const { hideTabBar, showTabBar } = useNavigation()
   const { t } = useLanguage()
   const { user, loading: authLoading } = useAuth()
+  const { generateUnifiedPrompt } = useUnifiedSettings()
 
   useEffect(() => {
     checkOnboardingStatus()
@@ -163,11 +165,11 @@ export default function HomeScreen() {
 
     // Get AI response from Bailian API
     try {
-      // Prepare conversation history for Bailian API
+      // Prepare conversation history for Bailian API with personalized system prompt
       const conversationHistory: BailianMessage[] = [
         {
           role: 'system',
-          content: '你是 Ash，一个专业的AI心理健康伴侣。你的任务是倾听、理解，并帮助用户处理心理健康问题。请用温暖、支持和专业的语调回应，提供有用的建议和情感支持。请用繁体中文回复。'
+          content: generateUnifiedPrompt()
         },
         // Add recent conversation history (last 10 messages for context)
         ...messages.slice(-10).map(msg => ({

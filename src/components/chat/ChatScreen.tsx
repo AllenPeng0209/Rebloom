@@ -47,12 +47,20 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         messages[index - 1].senderType === message.senderType &&
         new Date(message.createdAt).getTime() - new Date(messages[index - 1].createdAt).getTime() < 60000 // 1 minute
 
+      // Check if this is the last message in a consecutive group
+      const isLastInGroup = 
+        index === messages.length - 1 || // Last message overall
+        (index < messages.length - 1 && (
+          messages[index + 1].senderType !== message.senderType || // Different sender
+          new Date(messages[index + 1].createdAt).getTime() - new Date(message.createdAt).getTime() >= 60000 // Time gap
+        ))
+
       return (
         <MessageBubble
           key={message.id}
           message={message}
           isConsecutive={isConsecutive}
-          showTimestamp={!isConsecutive}
+          showTimestamp={isLastInGroup}
           animateEntry={index === messages.length - 1}
         />
       )

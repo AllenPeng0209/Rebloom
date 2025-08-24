@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native'
 import { Colors } from '../../../lib/constants/Colors'
+import { useLanguage } from '../../contexts/LanguageContext'
 import { DailySummary } from '../../services/summaryService'
 
 interface DailyInsightCardProps {
@@ -22,6 +23,7 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
   onRefresh 
 }) => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
+  const { t } = useLanguage()
 
   const toggleSection = (section: string) => {
     setExpandedSection(expandedSection === section ? null : section)
@@ -39,11 +41,11 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
 
   const getMoodTrendText = (trend: string) => {
     switch (trend) {
-      case 'improving': return '上升趨勢'
-      case 'stable': return '穩定狀態'
-      case 'declining': return '需要關注'
-      case 'mixed': return '波動變化'
-      default: return '未知'
+      case 'improving': return t('insightCard.trend.improving')
+      case 'stable': return t('insightCard.trend.stable')
+      case 'declining': return t('insightCard.trend.declining')
+      case 'mixed': return t('insightCard.trend.mixed')
+      default: return t('insightCard.trend.unknown')
     }
   }
 
@@ -58,7 +60,16 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
-    return date.toLocaleDateString('zh-TW', {
+    const { language } = useLanguage()
+    
+    const localeMap = {
+      'zh-TW': 'zh-TW',
+      'zh-CN': 'zh-CN',
+      'ja': 'ja-JP',
+      'en': 'en-US'
+    }
+    
+    return date.toLocaleDateString(localeMap[language] || 'zh-TW', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -140,11 +151,11 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* 標題和日期 */}
       <View style={styles.header}>
-        <Text style={styles.title}>每日心理洞察</Text>
+        <Text style={styles.title}>{t('insightCard.title')}</Text>
         <Text style={styles.date}>{formatDate(summary.summary_date)}</Text>
         {onRefresh && (
           <TouchableOpacity style={styles.refreshButton} onPress={onRefresh}>
-            <Text style={styles.refreshText}>刷新</Text>
+            <Text style={styles.refreshText}>{t('insightCard.refresh')}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -153,11 +164,11 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
           <Text style={styles.statNumber}>{summary.conversation_count}</Text>
-          <Text style={styles.statLabel}>對話次數</Text>
+          <Text style={styles.statLabel}>{t('insightCard.conversationCount')}</Text>
         </View>
         <View style={styles.statItem}>
           <Text style={styles.statNumber}>{summary.total_messages}</Text>
-          <Text style={styles.statLabel}>消息總數</Text>
+          <Text style={styles.statLabel}>{t('insightCard.messageCount')}</Text>
         </View>
         <View style={styles.statItem}>
           <Text style={[
@@ -166,13 +177,13 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
           ]}>
             {getMoodTrendText(summary.mood_trend)}
           </Text>
-          <Text style={styles.statLabel}>心情趨勢</Text>
+          <Text style={styles.statLabel}>{t('insightCard.moodTrend')}</Text>
         </View>
       </View>
 
       {/* 情緒狀態 */}
       <View style={styles.emotionContainer}>
-        <Text style={styles.sectionTitle}>🎭 主要情緒</Text>
+        <Text style={styles.sectionTitle}>{t('insightCard.mainEmotions')}</Text>
         <View style={styles.emotionTags}>
           {summary.dominant_emotions?.map((emotion, index) => (
             <View key={index} style={styles.emotionTag}>
@@ -181,7 +192,7 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
           ))}
         </View>
         <View style={styles.intensityContainer}>
-          <Text style={styles.intensityLabel}>情緒強度</Text>
+          <Text style={styles.intensityLabel}>{t('insightCard.emotionIntensity')}</Text>
           <View style={styles.intensityBar}>
             <View 
               style={[
@@ -207,7 +218,7 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
           { backgroundColor: getUrgencyColor(summary.urgency_level) }
         ]}>
           <Text style={styles.urgencyText}>
-            ⚠️ 關注程度: {summary.urgency_level === 'high' ? '高' : '中等'}
+            ⚠️ {t('insightCard.attentionLevel')}: {summary.urgency_level === 'high' ? t('insightCard.high') : t('insightCard.medium')}
           </Text>
         </View>
       )}
@@ -215,15 +226,15 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
       {/* 危機警示 */}
       {summary.crisis_flags && (
         <View style={styles.crisisContainer}>
-          <Text style={styles.crisisText}>
-            🚨 檢測到需要特別關注的情況，建議尋求專業協助
-          </Text>
+                  <Text style={styles.crisisText}>
+          {t('insightCard.crisisWarning')}
+        </Text>
         </View>
       )}
 
       {/* 心理洞察 */}
       {renderExpandableSection(
-        '心理洞察',
+        t('insightCard.psychologicalInsights'),
         summary.psychological_insights,
         'insights',
         '🧠'
@@ -231,7 +242,7 @@ export const DailyInsightCard: React.FC<DailyInsightCardProps> = ({
 
       {/* 個人化建議 */}
       {renderExpandableSection(
-        '個人化建議',
+        t('insightCard.personalizedRecommendations'),
         summary.personalized_recommendations,
         'recommendations',
         '💡'

@@ -2,13 +2,13 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { HapticTab } from '@/components/common/HapticTab';
-import { IconSymbol } from '@/ui/IconSymbol';
-import TabBarBackground from '@/ui/TabBarBackground';
+import { Colors } from '@/constants/Colors';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { NavigationProvider, useNavigation } from '@/contexts/NavigationContext';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { IconSymbol } from '@/ui/IconSymbol';
+import TabBarBackground from '@/ui/TabBarBackground';
 
 function TabLayoutContent() {
   const colorScheme = useColorScheme();
@@ -33,8 +33,8 @@ function TabLayoutContent() {
       <Tabs.Screen
         name="index"
         options={{
-          title: t('nav.home'),
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: t('nav.chat'),
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="message.fill" color={color} />,
         }}
       />
       <Tabs.Screen
@@ -44,13 +44,13 @@ function TabLayoutContent() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="heart.fill" color={color} />,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="explore"
         options={{
           title: t('nav.explore'),
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="profile"
         options={{

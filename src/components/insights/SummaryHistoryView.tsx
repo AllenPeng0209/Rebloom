@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import { Colors } from '../../../lib/constants/Colors'
 import { useAuth } from '../../contexts/AuthContext'
+import { useLanguage } from '../../contexts/LanguageContext'
 import { SchedulerService } from '../../services/schedulerService'
 import { DailySummary, SummaryService } from '../../services/summaryService'
 
@@ -25,6 +26,7 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
   const [refreshing, setRefreshing] = useState(false)
   const [generatingToday, setGeneratingToday] = useState(false)
   const { user } = useAuth()
+  const { t } = useLanguage()
 
   useEffect(() => {
     if (user) {
@@ -41,8 +43,8 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
       const recentSummaries = await SummaryService.getRecentSummaries(user.id, 30)
       setSummaries(recentSummaries)
     } catch (error) {
-      console.error('載入歷史總結失敗:', error)
-      Alert.alert('錯誤', '載入歷史總結失敗')
+      console.error(t('summary.loadError'), error)
+      Alert.alert(t('summary.error'), t('summary.loadError'))
     } finally {
       setLoading(false)
     }
@@ -61,11 +63,11 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
         if (conversations.length > 0) {
           // 有對話但沒有總結，提示用戶生成
           Alert.alert(
-            '今日總結',
-            '檢測到您今日有對話記錄，是否要生成今日的心理洞察？',
+            t('summary.todaySummary'),
+            t('summary.detectConversation'),
             [
-              { text: '稍後', style: 'cancel' },
-              { text: '生成', onPress: generateTodaySummary }
+              { text: t('summary.later'), style: 'cancel' },
+              { text: t('summary.generate'), onPress: generateTodaySummary }
             ]
           )
         }
@@ -83,14 +85,14 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
       const success = await SchedulerService.triggerDailySummary(user.id)
       
       if (success) {
-        Alert.alert('成功', '今日心理洞察已生成完成！')
+        Alert.alert(t('summary.success'), t('summary.generated'))
         await loadSummaries() // 重新載入列表
       } else {
-        Alert.alert('失敗', '生成今日總結時發生錯誤，請稍後再試')
+        Alert.alert(t('summary.failed'), t('summary.generateError'))
       }
     } catch (error) {
-      console.error('生成今日總結失敗:', error)
-      Alert.alert('錯誤', '生成總結時發生錯誤')
+      console.error(t('summary.generateFailed'), error)
+      Alert.alert(t('summary.error'), t('summary.generateFailed'))
     } finally {
       setGeneratingToday(false)
     }
@@ -114,11 +116,11 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
 
   const getMoodTrendText = (trend: string) => {
     switch (trend) {
-      case 'improving': return '上升'
-      case 'stable': return '穩定'
-      case 'declining': return '下降'
-      case 'mixed': return '波動'
-      default: return '未知'
+      case 'improving': return t('summary.trend.improving')
+      case 'stable': return t('summary.trend.stable')
+      case 'declining': return t('summary.trend.declining')
+      case 'mixed': return t('summary.trend.mixed')
+      default: return t('summary.trend.unknown')
     }
   }
 
@@ -128,11 +130,18 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
     const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000)
 
     if (date.toDateString() === today.toDateString()) {
-      return '今天'
+      return t('summary.today')
     } else if (date.toDateString() === yesterday.toDateString()) {
-      return '昨天'
+      return t('summary.yesterday')
     } else {
-      return date.toLocaleDateString('zh-TW', {
+      const localeMap = {
+        'zh-TW': 'zh-TW',
+        'zh-CN': 'zh-CN',
+        'ja': 'ja-JP',
+        'en': 'en-US'
+      }
+      
+      return date.toLocaleDateString(localeMap[language] || 'zh-TW', {
         month: 'short',
         day: 'numeric',
         weekday: 'short'
@@ -151,7 +160,7 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
         <View style={styles.cardHeader}>
           <View style={styles.dateContainer}>
             <Text style={styles.dateText}>{formatDate(item.summary_date)}</Text>
-            {isToday && <Text style={styles.todayBadge}>今日</Text>}
+            {isToday && <Text style={styles.todayBadge}>{t('summary.todayBadge')}</Text>}
           </View>
           <View style={[
             styles.moodIndicator,
@@ -170,10 +179,10 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
           
           <View style={styles.statsRow}>
             <Text style={styles.statText}>
-              {item.conversation_count} 次對話
+              {item.conversation_count}{t('summary.conversationCount')}
             </Text>
             <Text style={styles.statText}>
-              {item.total_messages} 條消息
+              {item.total_messages}{t('summary.messageCount')}
             </Text>
             {item.urgency_level !== 'low' && (
               <Text style={[
@@ -182,7 +191,7 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
                   backgroundColor: item.urgency_level === 'high' ? '#F44336' : '#FF9800'
                 }
               ]}>
-                {item.urgency_level === 'high' ? '高關注' : '需關注'}
+                {item.urgency_level === 'high' ? t('summary.highAttention') : t('summary.needsAttention')}
               </Text>
             )}
           </View>
@@ -200,7 +209,7 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
 
         {item.crisis_flags && (
           <View style={styles.crisisFlag}>
-            <Text style={styles.crisisText}>⚠️ 需要關注</Text>
+            <Text style={styles.crisisText}>{t('summary.crisisFlag')}</Text>
           </View>
         )}
       </TouchableOpacity>
@@ -209,9 +218,9 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
 
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
-      <Text style={styles.emptyTitle}>還沒有心理洞察記錄</Text>
+      <Text style={styles.emptyTitle}>{t('summary.emptyTitle')}</Text>
       <Text style={styles.emptySubtitle}>
-        開始與 Ash 對話，系統會在每晚自動為您生成專業的心理分析
+        {t('summary.emptySubtitle')}
       </Text>
       <TouchableOpacity
         style={styles.generateButton}
@@ -219,7 +228,7 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
         disabled={generatingToday}
       >
         <Text style={styles.generateButtonText}>
-          {generatingToday ? '正在生成...' : '立即生成今日總結'}
+          {generatingToday ? t('summary.generating') : t('summary.generateNow')}
         </Text>
       </TouchableOpacity>
     </View>
@@ -227,9 +236,9 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
 
   const renderHeader = () => (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerTitle}>心理洞察歷史</Text>
+      <Text style={styles.headerTitle}>{t('summary.headerTitle')}</Text>
       <Text style={styles.headerSubtitle}>
-        專業心理師級別的每日分析和建議
+        {t('summary.headerSubtitle')}
       </Text>
       
       {summaries.length > 0 && (
@@ -239,7 +248,7 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
           disabled={generatingToday}
         >
           <Text style={styles.generateTodayText}>
-            {generatingToday ? '生成中...' : '生成今日總結'}
+            {generatingToday ? t('summary.generatingNow') : t('summary.generateToday')}
           </Text>
         </TouchableOpacity>
       )}
@@ -249,7 +258,7 @@ export const SummaryHistoryView: React.FC<SummaryHistoryViewProps> = ({
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <Text style={styles.loadingText}>載入中...</Text>
+        <Text style={styles.loadingText}>{t('summary.loading')}</Text>
       </View>
     )
   }

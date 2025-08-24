@@ -1,0 +1,421 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop, 'release/*']
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+  release:
+    types: [published]
+
+env:
+  NODE_VERSION: '18'
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Code Quality and Testing
+  quality:
+    name: Code Quality & Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            node_modules
+            backend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd backend && npm ci
+      
+      - name: Lint frontend
+        run: npm run lint
+      
+      - name: Type check frontend
+        run: npm run type-check
+      
+      - name: Lint backend
+        run: cd backend && npm run lint
+      
+      - name: Type check backend
+        run: cd backend && npm run type-check
+      
+      - name: Run frontend tests
+        run: npm run test:coverage
+        env:
+          CI: true
+      
+      - name: Run backend tests
+        run: cd backend && npm run test:coverage
+        env:
+          CI: true
+      
+      - name: Upload frontend coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          flags: frontend
+          name: frontend-coverage
+      
+      - name: Upload backend coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./backend/coverage/lcov.info
+          flags: backend
+          name: backend-coverage
+
+  # Security Scanning
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd backend && npm ci
+      
+      - name: Run npm audit
+        run: |
+          npm audit --audit-level=high
+          cd backend && npm audit --audit-level=high
+      
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+      
+      - name: Upload Snyk results to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: snyk.sarif
+
+  # Mobile Build (iOS)
+  build-ios:
+    name: Build iOS
+    runs-on: macos-latest
+    timeout-minutes: 30
+    if: github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'build-ios')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Setup Expo CLI
+        run: npm install -g @expo/cli@latest eas-cli@latest
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Setup Expo credentials
+        run: |
+          echo "$EXPO_TOKEN" | npx expo login --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      
+      - name: Build iOS app
+        run: eas build --platform ios --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+  # Mobile Build (Android)
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'build-android')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+      
+      - name: Setup Expo CLI
+        run: npm install -g @expo/cli@latest eas-cli@latest
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Setup Expo credentials
+        run: |
+          echo "$EXPO_TOKEN" | npx expo login --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      
+      - name: Build Android app
+        run: eas build --platform android --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+  # Docker Build and Push
+  docker-build:
+    name: Docker Build & Push
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [quality, security]
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix=sha-{{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
+
+  # Deploy to Staging
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [docker-build]
+    if: github.ref == 'refs/heads/develop'
+    environment:
+      name: staging
+      url: https://staging.rebloom.app
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to staging
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'rebloom-staging'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
+          images: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:develop'
+      
+      - name: Run deployment health check
+        run: |
+          sleep 30
+          curl -f https://staging.rebloom.app/health || exit 1
+
+  # Deploy to Production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [docker-build]
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    environment:
+      name: production
+      url: https://rebloom.app
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to production
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'rebloom-production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_PRODUCTION }}
+          images: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest'
+      
+      - name: Run deployment health check
+        run: |
+          sleep 60
+          curl -f https://rebloom.app/health || exit 1
+      
+      - name: Send deployment notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          channel: '#deployments'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        if: always()
+
+  # Performance Testing
+  performance-test:
+    name: Performance Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [deploy-staging]
+    if: github.ref == 'refs/heads/develop'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Install k6
+        run: |
+          sudo gpg -k
+          sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install k6
+      
+      - name: Run performance tests
+        run: |
+          k6 run tests/performance/load.test.js
+        env:
+          TARGET_URL: https://staging.rebloom.app
+      
+      - name: Upload performance results
+        uses: actions/upload-artifact@v3
+        with:
+          name: performance-results
+          path: performance-results.json
+
+  # HIPAA Compliance Check
+  compliance-check:
+    name: HIPAA Compliance Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [quality]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd backend && npm ci
+      
+      - name: Run HIPAA compliance tests
+        run: |
+          npm run test -- tests/compliance/hipaa.test.ts
+          cd backend && npm run test -- tests/compliance/
+      
+      - name: Generate compliance report
+        run: |
+          echo "HIPAA Compliance Report" > compliance-report.md
+          echo "Generated on: $(date)" >> compliance-report.md
+          echo "All compliance tests passed" >> compliance-report.md
+      
+      - name: Upload compliance report
+        uses: actions/upload-artifact@v3
+        with:
+          name: compliance-report
+          path: compliance-report.md
+
+  # Accessibility Testing
+  accessibility-test:
+    name: Accessibility Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [quality]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run accessibility tests
+        run: npm run test -- tests/frontend/accessibility/
+      
+      - name: Generate accessibility report
+        run: |
+          echo "Accessibility Compliance Report" > accessibility-report.md
+          echo "WCAG 2.1 AA Standards Validated" >> accessibility-report.md
+      
+      - name: Upload accessibility report
+        uses: actions/upload-artifact@v3
+        with:
+          name: accessibility-report
+          path: accessibility-report.md

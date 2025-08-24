@@ -240,7 +240,7 @@ export default function MoodScreen() {
   }
 
   const navigateToChat = () => {
-    router.push('/chat')
+    router.push('/(tabs)')
   }
 
   const handleSummarySelect = (summary: DailySummary) => {
@@ -307,10 +307,10 @@ export default function MoodScreen() {
           {getSelectedDayInsight() ? (
             <View style={styles.mockInsightCard}>
               <Text style={styles.mockInsightText}>
-                這裡將顯示真實的每日心理洞察
+                {t('mood.mockInsightText')}
               </Text>
               <Text style={styles.mockInsightSubtext}>
-                當前顯示的是演示數據，實際的洞察將來自AI分析
+                {t('mood.mockInsightSubtext')}
               </Text>
             </View>
           ) : (
@@ -351,7 +351,7 @@ export default function MoodScreen() {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>心理洞察歷史</Text>
+            <Text style={styles.modalTitle}>{t('mood.insightHistory')}</Text>
             <TouchableOpacity 
               style={styles.closeButton}
               onPress={() => setShowHistoryModal(false)}
@@ -371,21 +371,21 @@ export default function MoodScreen() {
           presentationStyle="pageSheet"
           onRequestClose={() => setSelectedSummary(null)}
         >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>每日心理洞察</Text>
-              <TouchableOpacity 
-                style={styles.closeButton}
-                onPress={() => setSelectedSummary(null)}
-              >
-                <Ionicons name="close" size={24} color="#333" />
-              </TouchableOpacity>
-            </View>
-            <DailyInsightCard 
-              summary={selectedSummary}
-              onRefresh={() => setSelectedSummary(null)}
-            />
+                  <View style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>{t('mood.dailyInsight')}</Text>
+            <TouchableOpacity 
+              style={styles.closeButton}
+              onPress={() => setSelectedSummary(null)}
+            >
+              <Ionicons name="close" size={24} color="#333" />
+            </TouchableOpacity>
           </View>
+          <DailyInsightCard 
+            summary={selectedSummary}
+            onRefresh={() => setSelectedSummary(null)}
+          />
+        </View>
         </Modal>
       )}
     </SafeAreaView>

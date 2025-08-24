@@ -11,7 +11,11 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "This app needs access to the microphone to record voice messages for AI chat."
+        "NSMicrophoneUsageDescription": "This app needs access to the microphone to record voice messages for AI chat.",
+        "NSFaceIDUsageDescription": "This app uses Face ID for secure authentication to protect your mental health data.",
+        "NSUserNotificationsUsageDescription": "This app sends mood reminders and important mental health notifications.",
+        "NSCameraUsageDescription": "This app may use the camera for mood analysis features.",
+        "NSHealthShareUsageDescription": "This app can integrate with Health data to better understand your wellness patterns."
       },
       "bundleIdentifier": "com.allenpeng0209.Rebloom"
     },
@@ -23,8 +27,17 @@
       "edgeToEdgeEnabled": true,
       "permissions": [
         "android.permission.RECORD_AUDIO",
-        "android.permission.MODIFY_AUDIO_SETTINGS"
-      ]
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.VIBRATE",
+        "android.permission.WAKE_LOCK",
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.CAMERA"
+      ],
+      "package": "com.allenpeng0209.Rebloom"
     },
     "web": {
       "bundler": "metro",
@@ -43,10 +56,29 @@
         }
       ],
       "expo-localization",
-      "expo-audio"
+      "expo-audio",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png",
+          "color": "#8B5A8C"
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow Rebloom to use Face ID for secure authentication."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "5ba59cf9-b39e-4955-8e74-0fd272bef7ec"
+      }
     }
   }
 }

@@ -131,7 +131,13 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
       </View>
 
       {/* Chat messages area */}
-      <View style={styles.messagesContainer}>
+      <View style={[
+        styles.messagesContainer,
+        { 
+          bottom: keyboardHeight + inputHeight , // 确保消息区域在输入框之上
+          paddingBottom: keyboardHeight > 0 ? 20 : 0
+        }
+      ]}>
         <ScrollView
           ref={scrollViewRef}
           style={styles.scrollView}
@@ -172,7 +178,7 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
           )}
 
           {/* Bottom spacing for input */}
-          <View style={{ height: inputHeight + 20 }} />
+          <View style={{ height: 20 }} />
         </ScrollView>
       </View>
 
@@ -180,8 +186,8 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
       <View style={[
         styles.inputContainer,
         { 
-          bottom: keyboardHeight,
-          paddingBottom: keyboardHeight > 0 ? 0 : Platform.OS === 'ios' ? 20 : 16
+          bottom: keyboardHeight + 10, // 向上移动10px
+          paddingBottom: keyboardHeight > 0 ? 10 : Platform.OS === 'ios' ? 20 : 16
         }
       ]}>
         <ChatInput
@@ -199,14 +205,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   messagesContainer: {
-    flex: 1,
-    position: 'relative',
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 120 : 100, // 为固定头部留出空间
+    left: 0,
+    right: 0,
   },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
-    paddingTop: Platform.OS === 'ios' ? 120 : 100, // Account for fixed header
+    paddingTop: 20,
     paddingBottom: 20,
   },
   fixedHeader: {

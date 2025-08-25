@@ -4,14 +4,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import {
   Dimensions,
   Keyboard,
-  KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  View,
+  View
 } from 'react-native'
 import { ChatInput } from './ChatInput'
 import { MessageBubble, TypingIndicator } from './MessageBubble'
@@ -34,33 +33,19 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
   const scrollViewRef = useRef<ScrollView>(null)
   const [inputHeight, setInputHeight] = useState(60)
   const [keyboardHeight, setKeyboardHeight] = useState(0)
-  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
 
   useEffect(() => {
-    // Keyboard event listeners
-    const keyboardWillShow = Platform.OS === 'ios' 
-      ? Keyboard.addListener('keyboardWillShow', (e) => {
-          setKeyboardHeight(e.endCoordinates.height)
-          setIsKeyboardVisible(true)
-        })
-      : Keyboard.addListener('keyboardDidShow', (e) => {
-          setKeyboardHeight(e.endCoordinates.height)
-          setIsKeyboardVisible(true)
-        })
+    const keyboardWillShow = Keyboard.addListener('keyboardWillShow', (e) => {
+      setKeyboardHeight(e.endCoordinates.height)
+    })
 
-    const keyboardWillHide = Platform.OS === 'ios'
-      ? Keyboard.addListener('keyboardWillHide', () => {
-          setKeyboardHeight(0)
-          setIsKeyboardVisible(false)
-        })
-      : Keyboard.addListener('keyboardDidHide', () => {
-          setKeyboardHeight(0)
-          setIsKeyboardVisible(false)
-        })
+    const keyboardWillHide = Keyboard.addListener('keyboardWillHide', () => {
+      setKeyboardHeight(0)
+    })
 
     return () => {
-      keyboardWillShow?.remove()
-      keyboardWillHide?.remove()
+      keyboardWillShow.remove()
+      keyboardWillHide.remove()
     }
   }, [])
 
@@ -77,15 +62,6 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
       scrollViewRef.current.scrollToEnd({ animated: true })
     }
   }, [inputHeight])
-
-  useEffect(() => {
-    // Auto-scroll to bottom when keyboard appears
-    if (isKeyboardVisible && scrollViewRef.current) {
-      setTimeout(() => {
-        scrollViewRef.current?.scrollToEnd({ animated: true })
-      }, 100)
-    }
-  }, [isKeyboardVisible])
 
   const renderMessages = () => {
     return messages.map((message, index) => {
@@ -126,72 +102,71 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         style={StyleSheet.absoluteFillObject}
       />
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-        style={styles.keyboardAvoidingView}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 25}
-      >
-        {/* Chat messages area */}
-        <View style={styles.messagesContainer}>
-          <ScrollView
-            ref={scrollViewRef}
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-          >
-            {/* Header with Ash branding */}
-            <View style={styles.header}>
-              <Text style={styles.appTitle}>Ash</Text>
-              <Text style={styles.subtitle}>AI-powered mental health support</Text>
+      {/* Chat messages area */}
+      <View style={[
+        styles.messagesContainer,
+        { 
+          bottom: keyboardHeight + inputHeight + 30, // 增加间距，确保消息区域在输入框之上
+          paddingBottom: keyboardHeight > 0 ? 20 : 0
+        }
+      ]}>
+        <ScrollView
+          ref={scrollViewRef}
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Header with Ash branding */}
+          <View style={styles.header}>
+            <Text style={styles.appTitle}>Ash</Text>
+            <Text style={styles.subtitle}>AI-powered mental health support</Text>
+          </View>
+
+          {/* Welcome message if no messages yet */}
+          {messages.length === 0 && (
+            <View style={styles.welcomeContainer}>
+              <Text style={styles.welcomeTitle}>Hi there! 👋</Text>
+              <Text style={styles.welcomeText}>
+                I'm Ash, your AI companion for mental health support. I'm here to listen, 
+                understand, and help you work through whatever is on your mind.
+              </Text>
+              <Text style={styles.welcomeSubtext}>
+                How are you feeling today?
+              </Text>
             </View>
+          )}
 
-            {/* Welcome message if no messages yet */}
-            {messages.length === 0 && (
-              <View style={styles.welcomeContainer}>
-                <Text style={styles.welcomeTitle}>Hi there! 👋</Text>
-                <Text style={styles.welcomeText}>
-                  I'm Ash, your AI companion for mental health support. I'm here to listen, 
-                  understand, and help you work through whatever is on your mind.
-                </Text>
-                <Text style={styles.welcomeSubtext}>
-                  How are you feeling today?
-                </Text>
-              </View>
-            )}
+          {/* Render messages */}
+          {renderMessages()}
 
-            {/* Render messages */}
-            {renderMessages()}
+          {/* Typing indicator */}
+          {isTyping && (
+            <TypingIndicator 
+              message="Ash is typing..."
+              therapeuticMode={true}
+            />
+          )}
 
-            {/* Typing indicator */}
-            {isTyping && (
-              <TypingIndicator 
-                message="Ash is typing..."
-                therapeuticMode={true}
-              />
-            )}
+          {/* Bottom spacing for input */}
+          <View style={{ height: 20 }} />
+        </ScrollView>
+      </View>
 
-            {/* Dynamic bottom padding based on input height */}
-            <View style={{ height: Math.max(20, inputHeight - 60) }} />
-          </ScrollView>
-        </View>
-
-        {/* Chat input */}
-        <View style={[
-          styles.inputContainer, 
-          { 
-            paddingBottom: isKeyboardVisible 
-              ? 0 
-              : Platform.OS === 'ios' ? 34 : 12 
-          }
-        ]}>
-          <ChatInput
-            onSend={onSendMessage}
-            onHeightChange={setInputHeight}
-            placeholder="Type your message..."
-          />
-        </View>
-      </KeyboardAvoidingView>
+      {/* Chat input */}
+      <View style={[
+        styles.inputContainer, 
+        { 
+          bottom: keyboardHeight + 10, // 向上移动10px
+          paddingBottom: keyboardHeight > 0 ? 10 : Platform.OS === 'ios' ? 34 : 12 
+        }
+      ]}>
+        <ChatInput
+          onSend={onSendMessage}
+          onHeightChange={setInputHeight}
+          placeholder="Type your message..."
+        />
+      </View>
     </SafeAreaView>
   )
 }
@@ -201,11 +176,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FF9A56', // Fallback color
   },
-  keyboardAvoidingView: {
-    flex: 1,
-  },
   messagesContainer: {
-    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
   },
   scrollView: {
     flex: 1,

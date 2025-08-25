@@ -1,22 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { Message } from '@/types'
+import { Ionicons } from '@expo/vector-icons'
+import { LinearGradient } from 'expo-linear-gradient'
+import React, { useEffect, useRef, useState } from 'react'
 import {
-  View,
-  Text,
-  ScrollView,
-  KeyboardAvoidingView,
+  ActivityIndicator,
+  Dimensions,
+  Keyboard,
   Platform,
   SafeAreaView,
-  StyleSheet,
-  Dimensions,
+  ScrollView,
   StatusBar,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  ActivityIndicator,
+  View
 } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient'
-import { Ionicons } from '@expo/vector-icons'
-import { MessageBubble, TypingIndicator } from './MessageBubble'
 import { ChatInput } from './ChatInput'
-import { Message } from '@/types'
+import { MessageBubble, TypingIndicator } from './MessageBubble'
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window')
 
@@ -43,6 +43,22 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
 }) => {
   const scrollViewRef = useRef<ScrollView>(null)
   const [inputHeight, setInputHeight] = useState(60)
+  const [keyboardHeight, setKeyboardHeight] = useState(0)
+
+  useEffect(() => {
+    const keyboardWillShow = Keyboard.addListener('keyboardWillShow', (e) => {
+      setKeyboardHeight(e.endCoordinates.height)
+    })
+
+    const keyboardWillHide = Keyboard.addListener('keyboardWillHide', () => {
+      setKeyboardHeight(0)
+    })
+
+    return () => {
+      keyboardWillShow.remove()
+      keyboardWillHide.remove()
+    }
+  }, [])
 
   useEffect(() => {
     // Auto-scroll to bottom when new messages arrive
@@ -114,75 +130,72 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
         </View>
       </View>
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardAvoidingView}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 25}
-      >
-        {/* Chat messages area */}
-        <View style={styles.messagesContainer}>
-          <ScrollView
-            ref={scrollViewRef}
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-            onScroll={onScroll}
-            scrollEventThrottle={400}
-          >
-            {/* Loading more indicator at the top */}
-            {loadingMore && (
-              <View style={styles.loadingMoreContainer}>
-                <ActivityIndicator size="small" color="#FFFFFF" />
-                <Text style={styles.loadingMoreText}>加載更多消息...</Text>
-              </View>
-            )}
+      {/* Chat messages area */}
+      <View style={styles.messagesContainer}>
+        <ScrollView
+          ref={scrollViewRef}
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          onScroll={onScroll}
+          scrollEventThrottle={400}
+        >
+          {/* Loading more indicator at the top */}
+          {loadingMore && (
+            <View style={styles.loadingMoreContainer}>
+              <ActivityIndicator size="small" color="#FFFFFF" />
+              <Text style={styles.loadingMoreText}>加載更多消息...</Text>
+            </View>
+          )}
 
-            {/* Welcome message if no messages yet */}
-            {messages.length === 0 && (
-              <View style={styles.welcomeContainer}>
-                <Text style={styles.welcomeTitle}>Hi there! 👋</Text>
-                <Text style={styles.welcomeText}>
-                  I'm Ash, your AI companion for mental health support. I'm here to listen, 
-                  understand, and help you work through whatever is on your mind.
-                </Text>
-                <Text style={styles.welcomeSubtext}>
-                  How are you feeling today?
-                </Text>
-              </View>
-            )}
+          {/* Welcome message if no messages yet */}
+          {messages.length === 0 && (
+            <View style={styles.welcomeContainer}>
+              <Text style={styles.welcomeTitle}>Hi there! 👋</Text>
+              <Text style={styles.welcomeText}>
+                I'm Ash, your AI companion for mental health support. I'm here to listen, 
+                understand, and help you work through whatever is on your mind.
+              </Text>
+              <Text style={styles.welcomeSubtext}>
+                How are you feeling today?
+              </Text>
+            </View>
+          )}
 
-            {/* Render messages */}
-            {renderMessages()}
+          {/* Render messages */}
+          {renderMessages()}
 
-            {/* Typing indicator */}
-            {isTyping && (
-              <TypingIndicator />
-            )}
+          {/* Typing indicator */}
+          {isTyping && (
+            <TypingIndicator />
+          )}
 
-            {/* Bottom spacing for input */}
-            <View style={{ height: inputHeight + 20 }} />
-          </ScrollView>
-        </View>
+          {/* Bottom spacing for input */}
+          <View style={{ height: inputHeight + 20 }} />
+        </ScrollView>
+      </View>
 
-        {/* Input area */}
-        <View style={styles.inputContainer}>
-          <ChatInput
-            onSend={onSendMessage}
-            onHeightChange={setInputHeight}
-            placeholder="Type your message..."
-          />
-        </View>
-      </KeyboardAvoidingView>
+      {/* Input area - 直接使用键盘高度调整位置 */}
+      <View style={[
+        styles.inputContainer,
+        { 
+          bottom: keyboardHeight,
+          paddingBottom: keyboardHeight > 0 ? 0 : Platform.OS === 'ios' ? 20 : 16
+        }
+      ]}>
+        <ChatInput
+          onSend={onSendMessage}
+          onHeightChange={setInputHeight}
+          placeholder="Type your message..."
+        />
+      </View>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  keyboardAvoidingView: {
     flex: 1,
   },
   messagesContainer: {
@@ -272,12 +285,11 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     position: 'absolute',
-    bottom: 0,
     left: 0,
     right: 0,
     paddingHorizontal: 16,
-    paddingBottom: Platform.OS === 'ios' ? 20 : 16,
     paddingTop: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
   loadingMoreContainer: {
     flexDirection: 'row',

@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import React, { useEffect, useRef, useState } from 'react'
 import {
   Dimensions,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
@@ -32,6 +33,36 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
 }) => {
   const scrollViewRef = useRef<ScrollView>(null)
   const [inputHeight, setInputHeight] = useState(60)
+  const [keyboardHeight, setKeyboardHeight] = useState(0)
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    // Keyboard event listeners
+    const keyboardWillShow = Platform.OS === 'ios' 
+      ? Keyboard.addListener('keyboardWillShow', (e) => {
+          setKeyboardHeight(e.endCoordinates.height)
+          setIsKeyboardVisible(true)
+        })
+      : Keyboard.addListener('keyboardDidShow', (e) => {
+          setKeyboardHeight(e.endCoordinates.height)
+          setIsKeyboardVisible(true)
+        })
+
+    const keyboardWillHide = Platform.OS === 'ios'
+      ? Keyboard.addListener('keyboardWillHide', () => {
+          setKeyboardHeight(0)
+          setIsKeyboardVisible(false)
+        })
+      : Keyboard.addListener('keyboardDidHide', () => {
+          setKeyboardHeight(0)
+          setIsKeyboardVisible(false)
+        })
+
+    return () => {
+      keyboardWillShow?.remove()
+      keyboardWillHide?.remove()
+    }
+  }, [])
 
   useEffect(() => {
     // Auto-scroll to bottom when new messages arrive
@@ -46,6 +77,15 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
       scrollViewRef.current.scrollToEnd({ animated: true })
     }
   }, [inputHeight])
+
+  useEffect(() => {
+    // Auto-scroll to bottom when keyboard appears
+    if (isKeyboardVisible && scrollViewRef.current) {
+      setTimeout(() => {
+        scrollViewRef.current?.scrollToEnd({ animated: true })
+      }, 100)
+    }
+  }, [isKeyboardVisible])
 
   const renderMessages = () => {
     return messages.map((message, index) => {
@@ -87,7 +127,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
       />
 
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
         style={styles.keyboardAvoidingView}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 25}
       >
@@ -137,7 +177,14 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         </View>
 
         {/* Chat input */}
-        <View style={[styles.inputContainer, { paddingBottom: Math.max(12, inputHeight - 60) }]}>
+        <View style={[
+          styles.inputContainer, 
+          { 
+            paddingBottom: isKeyboardVisible 
+              ? 0 
+              : Platform.OS === 'ios' ? 34 : 12 
+          }
+        ]}>
           <ChatInput
             onSend={onSendMessage}
             onHeightChange={setInputHeight}
@@ -214,9 +261,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    paddingBottom: Platform.OS === 'ios' ? 34 : 12, // Account for home indicator
+    paddingTop: 12,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    backdropFilter: 'blur(10px)',
   },
 })

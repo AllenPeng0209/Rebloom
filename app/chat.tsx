@@ -1,19 +1,9 @@
-import { ChatScreen } from '@/components/chat/ChatScreen'
+import { ChatScreenWithBackButton } from '@/components/chat/ChatScreenWithBackButton'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useUnifiedSettings } from '@/contexts/UnifiedSettingsContext'
 import { Message } from '@/types'
-import { Ionicons } from '@expo/vector-icons'
-import { LinearGradient } from 'expo-linear-gradient'
 import { router } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native'
 import {
   detectEmotion,
   extractKeyTopic,
@@ -162,87 +152,12 @@ export default function ChatFullScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-      
-      {/* Background gradient */}
-      <LinearGradient
-        colors={['#FF9A56', '#FFB280', '#FFC299']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={StyleSheet.absoluteFillObject}
-      />
-
-      {/* Header */}
-      <SafeAreaView>
-        <View style={styles.header}>
-          <TouchableOpacity 
-            style={styles.backButton} 
-            onPress={handleBack}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-          
-          <View style={styles.headerCenter}>
-            <Text style={styles.headerTitle}>{t('chat.ashTitle')}</Text>
-            <Text style={styles.headerSubtitle}>{t('chat.ashSubtitle')}</Text>
-          </View>
-          
-          <View style={styles.headerRight}>
-            {/* Placeholder for potential future actions */}
-          </View>
-        </View>
-      </SafeAreaView>
-
-      {/* Chat Interface */}
-      <ChatScreen
-        messages={messages}
-        onSendMessage={handleSendMessage}
-        isTyping={isTyping}
-        currentSession="demo_session"
-      />
-    </View>
+    <ChatScreenWithBackButton
+      messages={messages}
+      onSendMessage={handleSendMessage}
+      isTyping={isTyping}
+      currentSession="demo_session"
+      onBackPress={handleBack}
+    />
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    paddingTop: 16,
-  },
-  backButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerCenter: {
-    flex: 1,
-    alignItems: 'center',
-    marginHorizontal: 16,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    marginBottom: 2,
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.8)',
-    textAlign: 'center',
-  },
-  headerRight: {
-    width: 44,
-    height: 44,
-  },
-})

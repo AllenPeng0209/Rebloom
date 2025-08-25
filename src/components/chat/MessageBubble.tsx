@@ -115,7 +115,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
 
   const bubbleStyle: ViewStyle = {
     maxWidth: '80%',
-    marginBottom: isConsecutive ? theme.spacing.xs : theme.spacing.sm,
+    marginBottom: theme.spacing.sm,
     alignSelf: isUser ? 'flex-end' : 'flex-start',
     marginLeft: isUser ? theme.spacing.lg : theme.spacing.md,
     marginRight: isUser ? theme.spacing.md : theme.spacing.lg,
@@ -126,9 +126,9 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 20,
-    // Custom border radius for Ash-style bubbles
-    borderTopLeftRadius: isUser ? 20 : (isConsecutive ? 6 : 20),
-    borderTopRightRadius: isUser ? (isConsecutive ? 6 : 20) : 20,
+    // 统一所有消息的圆角样式
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     // Ash-style shadow
@@ -153,21 +153,8 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
     fontSize: theme.typography.sizes.xs,
     fontFamily: theme.typography.fontFamily,
     marginTop: theme.spacing.xs,
+    marginBottom: theme.spacing.xs,
     alignSelf: isUser ? 'flex-end' : 'flex-start',
-  }
-
-  const confidenceIndicatorStyle: ViewStyle = {
-    position: 'absolute',
-    bottom: -2,
-    right: -2,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: message.aiConfidenceScore && message.aiConfidenceScore > 0.8 
-      ? theme.colors.success 
-      : message.aiConfidenceScore && message.aiConfidenceScore > 0.6
-      ? theme.colors.warning
-      : theme.colors.error,
   }
 
   const riskIndicatorStyle: ViewStyle = {
@@ -218,11 +205,6 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
               {message.therapeuticApproach.toUpperCase()}
             </Text>
           </View>
-        )}
-
-        {/* AI confidence indicator */}
-        {isAI && message.aiConfidenceScore && (
-          <View style={confidenceIndicatorStyle} />
         )}
 
         {/* Message type indicator */}

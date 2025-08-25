@@ -210,8 +210,8 @@ export const MemoryProvider: React.FC<MemoryProviderProps> = ({ children, userId
 
   const analyzeEmotionalTone = (content: string): 'positive' | 'negative' | 'neutral' => {
     // 简单的情感分析，实际应用中可以使用更复杂的NLP模型
-    const positiveWords = ['開心', '快樂', '滿意', '感謝', '愛', '喜歡', '好', '棒', '讚'];
-    const negativeWords = ['難過', '憂鬱', '焦慮', '害怕', '生氣', '失望', '痛苦', '壓力'];
+    const positiveWords = ['开心', '快乐', '满意', '感谢', '爱', '喜欢', '好', '棒', '赞'];
+    const negativeWords = ['难过', '抑郁', '焦虑', '害怕', '生气', '失望', '痛苦', '压力'];
 
     const contentLower = content.toLowerCase();
     const positiveCount = positiveWords.filter(word => contentLower.includes(word)).length;
@@ -231,20 +231,20 @@ export const MemoryProvider: React.FC<MemoryProviderProps> = ({ children, userId
     let empathicElements: string[] = [];
 
     if (personalMemories.length > 0) {
-      empathicElements.push(`記得你之前提到的${personalMemories[0].content.substring(0, 20)}...`);
+      empathicElements.push(`记得你之前提到的${personalMemories[0].content.substring(0, 20)}...`);
     }
 
     if (emotionalMemories.length > 0) {
       const recentEmotional = emotionalMemories[0];
       if (recentEmotional.emotionalTone === 'negative') {
-        empathicElements.push('我能感受到你最近經歷的困難');
+        empathicElements.push('我能感受到你最近经历的困难');
       } else if (recentEmotional.emotionalTone === 'positive') {
-        empathicElements.push('很高興看到你的積極變化');
+        empathicElements.push('很高兴看到你的积极变化');
       }
     }
 
     if (therapeuticMemories.length > 0) {
-      empathicElements.push('基於我們之前的討論');
+      empathicElements.push('基于我们之前的讨论');
     }
 
     return empathicElements.join('，');
@@ -259,17 +259,17 @@ export const MemoryProvider: React.FC<MemoryProviderProps> = ({ children, userId
     };
 
     const total = recentMemories.length;
-    if (total === 0) return '還沒有足夠的情緒數據進行分析';
+    if (total === 0) return '还没有足够的情绪数据进行分析';
 
     const positiveRatio = emotionalCounts.positive / total;
     const negativeRatio = emotionalCounts.negative / total;
 
     if (positiveRatio > 0.6) {
-      return '最近你的情緒狀態整體比較積極正面';
+      return '最近你的情绪状态整体比较积极正面';
     } else if (negativeRatio > 0.5) {
-      return '最近你似乎經歷了一些挑戰，情緒波動較大';
+      return '最近你似乎经历了一些挑战，情绪波动较大';
     } else {
-      return '你的情緒狀態相對穩定，有起有落是正常的';
+      return '你的情绪状态相对稳定，有起有落是正常的';
     }
   };
 
@@ -278,7 +278,7 @@ export const MemoryProvider: React.FC<MemoryProviderProps> = ({ children, userId
     const personalMemories = await getMemoriesByCategory('personal');
     
     if (recentMemories.length === 0 && personalMemories.length === 0) {
-      return '你好！很高興與你對話。';
+      return '你好！我是Ash，很高兴与你对话, 今天想聊什么？';
     }
 
     let greeting = '你好！';
@@ -286,20 +286,20 @@ export const MemoryProvider: React.FC<MemoryProviderProps> = ({ children, userId
     if (personalMemories.length > 0) {
       const recentPersonal = personalMemories[0];
       if (recentPersonal.content.includes('工作')) {
-        greeting += '工作怎麼樣？';
+        greeting += '工作怎么样？';
       } else if (recentPersonal.content.includes('家人')) {
-        greeting += '家人都好嗎？';
+        greeting += '家人都好吗？';
       } else {
-        greeting += '最近過得如何？';
+        greeting += '最近过得如何？';
       }
     }
 
     if (recentMemories.length > 0) {
       const lastMemory = recentMemories[0];
       if (lastMemory.emotionalTone === 'negative') {
-        greeting += '希望你今天感覺好一些。';
+        greeting += '希望你今天感觉好一些。';
       } else if (lastMemory.emotionalTone === 'positive') {
-        greeting += '希望你能保持這份好心情。';
+        greeting += '希望你能保持这份好心情。';
       }
     }
 

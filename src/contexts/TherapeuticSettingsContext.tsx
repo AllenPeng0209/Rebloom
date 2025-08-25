@@ -39,7 +39,7 @@ const defaultSettings: TherapeuticSettings = {
   responseLength: 'medium',
   traumaInformed: true,
   genderPreference: 'no-preference',
-  languagePreference: 'zh-TW',
+  languagePreference: 'zh-CN',
   religiousConsiderations: false,
   lgbtqAffirming: true,
   crisisProtocol: true,
@@ -110,41 +110,41 @@ export const TherapeuticSettingsProvider: React.FC<TherapeuticSettingsProviderPr
 
   const generateTherapeuticPrompt = (): string => {
     const approachPrompts = {
-      cbt: '使用認知行為療法(CBT)方法，關注思維模式與行為之間的關係，幫助識別和改變負面思維模式。',
-      dbt: '採用辯證行為療法(DBT)方法，專注於情緒調節、人際關係技能和痛苦耐受能力的培養。',
-      act: '運用接受承諾療法(ACT)方法，強調接受困難情緒，專注於價值觀導向的行動。',
-      humanistic: '採用人本主義療法方法，以人為中心，強調自我實現和個人成長。',
-      psychodynamic: '使用心理動力療法方法，探索無意識過程和早期經歷對當前行為的影響。',
-      mindfulness: '融入正念療法元素，培養當下覺察，減少反芻思維和焦慮。'
+      cbt: '使用认知行为疗法(CBT)方法，关注思维模式与行为之间的关系，帮助识别和改变负面思维模式。',
+      dbt: '采用辩证行为疗法(DBT)方法，专注于情绪调节、人际关系技能和痛苦耐受能力的培养。',
+      act: '运用接受承诺疗法(ACT)方法，强调接受困难情绪，专注于价值观导向的行动。',
+      humanistic: '采用人本主义疗法方法，以人为中心，强调自我实现和个人成长。',
+      psychodynamic: '使用心理动力疗法方法，探索无意识过程和早期经历对当前行为的影响。',
+      mindfulness: '融入正念疗法元素，培养当下觉察，减少反刍思维和焦虑。'
     };
 
     const interventionStyles = {
-      directive: '適時提供明確引導，但避免過度指導，讓來訪者保持主導權。',
-      collaborative: '與來訪者共同探索，通過提問和反映幫助其自我發現。',
-      'non-directive': '以傾聽和陪伴為主，讓來訪者自由表達，適時給予回應。'
+      directive: '适时提供明确引导，但避免过度指导，让来访者保持主导权。',
+      collaborative: '与来访者共同探索，通过提问和反映帮助其自我发现。',
+      'non-directive': '以倾听和陪伴为主，让来访者自由表达，适时给予回应。'
     };
 
     const conversationStyles = {
-      supportive: '以溫暖的情感反映為主，"聽起來你感到..."，給予支持但不急於解決。',
-      analytical: '通過開放式提問深入探索，"你能多說說...嗎？"，引導自我覺察。',
-      'solution-focused': '引導來訪者自己發現解決方案，"什麼對你來說最重要？"。',
-      exploratory: '營造安全空間讓其自由探索，"你想從哪裡開始說起？"。'
+      supportive: '以温暖的情感反映为主，"听起来你感到..."，给予支持但不急于解决。',
+      analytical: '通过开放式提问深入探索，"你能多说说...吗？"，引导自我觉察。',
+      'solution-focused': '引导来访者自己发现解决方案，"什么对你来说最重要？"。',
+      exploratory: '营造安全空间让其自由探索，"你想从哪里开始说起？"。'
     };
 
     const depthLevels = {
-      surface: '保持淺層對話深度，輕鬆對話，避免深入敏感話題。',
-      moderate: '維持中等對話深度，平衡的深度，適度探索內心世界。',
-      deep: '進行深層對話，深入探討核心問題和深層情感。'
+      surface: '保持浅层对话深度，轻松对话，避免深入敏感话题。',
+      moderate: '维持中等对话深度，平衡的深度，适度探索内心世界。',
+      deep: '进行深层对话，深入探讨核心问题和深层情感。'
     };
 
     const responseLengths = {
-      brief: '1-2句簡潔回應，多用反映和提問，"聽起來...？"',
-      medium: '2-3句適中回應，結合理解確認和溫和探索。',
-      detailed: '適當時可稍長回應，但仍以引導和反映為主，避免說教。'
+      brief: '1-2句简洁回应，多用反映和提问，"听起来...？"',
+      medium: '2-3句适中回应，结合理解确认和温和探索。',
+      detailed: '适时可稍长回应，但仍以引导和反映为主，避免说教。'
     };
 
     let therapeuticPrompt = `
-治療方法設定：
+治疗方法设定：
 主要方法：${approachPrompts[settings.primaryApproach as keyof typeof approachPrompts]}`;
 
     if (settings.secondaryApproaches.length > 0) {
@@ -153,26 +153,26 @@ export const TherapeuticSettingsProvider: React.FC<TherapeuticSettingsProviderPr
         .filter(Boolean)
         .join(' ');
       therapeuticPrompt += `
-輔助方法：${secondaryMethods}`;
+辅助方法：${secondaryMethods}`;
     }
 
     therapeuticPrompt += `
 
-治療風格：
+治疗风格：
 ${interventionStyles[settings.interventionStyle as keyof typeof interventionStyles]}
 ${conversationStyles[settings.conversationStyle as keyof typeof conversationStyles]}
 
-對話參數：
+对话参数：
 ${depthLevels[settings.conversationDepth as keyof typeof depthLevels]}
 ${responseLengths[settings.responseLength as keyof typeof responseLengths]}`;
 
     // Add cultural considerations
     if (settings.culturalConsiderations.length > 0) {
       const culturalMap = {
-        asian: '深度理解亞洲文化背景，重視集體主義價值觀和家庭關係的重要性。',
-        western: '融入西方文化理解，強調個人主義和自我表達的價值。',
-        indigenous: '尊重原住民文化傳統，重視傳統智慧和社群連結。',
-        multicultural: '以多元文化視角理解，融合多種文化背景的智慧。'
+        asian: '深度理解亚洲文化背景，重视集体主义价值观和家庭关系的重要性。',
+        western: '融入西方文化理解，强调个人主义和自我表达的价值。',
+        indigenous: '尊重原住民文化传统，重视传统智慧和社区连结。',
+        multicultural: '以多元文化视角理解，融合多种文化背景的智慧。'
       };
       
       const culturalPrompts = settings.culturalConsiderations
@@ -189,21 +189,21 @@ ${culturalPrompts.join(' ')}`;
 
     // Add special considerations
     const specialConsiderations = [];
-    
+
     if (settings.traumaInformed) {
-      specialConsiderations.push('使用創傷知情的治療方法，特別關注安全感、信任建立和創傷敏感性。');
+      specialConsiderations.push('使用创伤知情的治疗方法，特别关注安全感、信任建立和创伤敏感性。');
     }
-    
+
     if (settings.lgbtqAffirming) {
-      specialConsiderations.push('確保治療環境對LGBTQ+群體友善，尊重性別認同和性取向多樣性。');
+      specialConsiderations.push('确保治疗环境对LGBTQ+群体友善，尊重性别认同和性取向多样性。');
     }
-    
+
     if (settings.religiousConsiderations) {
-      specialConsiderations.push('在治療過程中考慮宗教信仰和靈性需求，尊重信仰價值觀。');
+      specialConsiderations.push('在治疗过程中考虑宗教信仰和灵性需求，尊重信仰价值观。');
     }
-    
+
     if (settings.crisisProtocol) {
-      specialConsiderations.push('具備危機識別和介入能力，在檢測到自殺風險或危機時提供適當支持。');
+      specialConsiderations.push('具备危机识别和介入能力，在检测到自杀风险或危机时提供适当支持。');
     }
 
     if (specialConsiderations.length > 0) {

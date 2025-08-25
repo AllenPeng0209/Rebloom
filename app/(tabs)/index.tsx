@@ -9,8 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router, useFocusEffect } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  StyleSheet,
-  View
+    StyleSheet,
+    View
 } from 'react-native';
 import { AuthScreen } from '../../src/components/auth/AuthScreen';
 import { useAuth } from '../../src/contexts/AuthContext';
@@ -18,9 +18,9 @@ import { BailianMessage, sendBailianMessage } from '../../src/lib/bailian';
 import { ChatService } from '../../src/services/chatService';
 import LocalChatStorage from '../../src/services/localChatStorage';
 import {
-  detectEmotion,
-  extractKeyTopic,
-  selectCounselorTechnique
+    detectEmotion,
+    extractKeyTopic,
+    selectCounselorTechnique
 } from '../../src/utils/counselorTechniques';
 // 条件性导入记忆功能
 let useMemory: any;
@@ -179,7 +179,7 @@ export default function HomeScreen() {
     retrieveMemories: () => Promise.resolve([]),
     updateContext: () => {},
     getContext: () => ({ recentTopics: [], emotionalState: 'stable' }),
-    getPersonalizedGreeting: () => Promise.resolve('你好！我是 Ash，很高興見到你。'),
+    getPersonalizedGreeting: () => Promise.resolve('你好！我是 Ash，很高兴见到你。'),
     analyzeEmotionalPattern: () => Promise.resolve('stable')
   }
 
@@ -221,9 +221,9 @@ export default function HomeScreen() {
       // Import SchedulerService dynamically to avoid circular imports
       const { SchedulerService } = await import('../../src/services/schedulerService')
       await SchedulerService.scheduleDailySummary(user.id, '22:00')
-      console.log('每日總結已設置為晚上10點自動執行')
+      console.log('每日总结已设置为晚上10点自动执行')
     } catch (error) {
-      console.error('設置每日總結失敗:', error)
+      console.error('设置每日总结失败:', error)
     }
   }
 
@@ -231,26 +231,26 @@ export default function HomeScreen() {
     if (!user) return
 
     try {
-      // 嘗試獲取之前的會話ID
+      // 尝试获取之前的会话ID
       const previousConversationId = await LocalChatStorage.getCurrentConversation()
-      
+
       if (previousConversationId) {
         setCurrentConversationId(previousConversationId)
-        
-        // 加載之前的消息（使用分頁接口）
+
+        // 加载之前的消息（使用分页接口）
         const result = await LocalChatStorage.loadMessages(previousConversationId, 0)
         if (result.messages.length > 0) {
           setMessages(result.messages)
           setHasMore(result.hasMore)
-          
-          // 更新對話上下文給AI
+
+          // 更新对话上下文给AI
           updateContext({
             sessionId: previousConversationId,
             recentTopics: extractTopicsFromMessages(result.messages.slice(-10))
           })
         }
       } else {
-        // 沒有之前的會話，創建新的
+        // 没有之前的会话，创建新的
         initializeConversation()
       }
       setIsInitialLoad(false)
@@ -322,7 +322,7 @@ export default function HomeScreen() {
 
       setCurrentConversationId(conversation.id)
       
-      // 保存當前會話ID到本地
+      // 保存当前会话ID到本地
       await LocalChatStorage.saveCurrentConversation(conversation.id)
       await LocalChatStorage.createConversation(conversation.id, t('chat.greeting'))
 
@@ -419,12 +419,12 @@ export default function HomeScreen() {
         content,
         'user'
       )
-      
-      // 保存到本地存儲
+
+      // 保存到本地存储
       await LocalChatStorage.saveMessage(userMessage)
     } catch (error) {
       console.error('Error saving user message:', error)
-      // 即使Supabase失敗，也確保保存到本地
+      // 即使Supabase失败，也确保保存到本地
       await LocalChatStorage.saveMessage(userMessage)
     }
 
@@ -432,8 +432,8 @@ export default function HomeScreen() {
     try {
       // 分析消息类型和重要性
       const isPersonalInfo = content.includes('我') || content.includes('家人') || content.includes('工作');
-      const isEmotional = content.includes('感覺') || content.includes('情緒') || content.includes('心情');
-      const isTherapeutic = content.includes('焦慮') || content.includes('憂鬱') || content.includes('壓力');
+      const isEmotional = content.includes('感觉') || content.includes('情绪') || content.includes('心情');
+      const isTherapeutic = content.includes('焦虑') || content.includes('抑郁') || content.includes('压力');
       
       let category: 'personal' | 'emotional' | 'therapeutic' | 'behavioral' = 'behavioral';
       let importance = 5;
@@ -451,7 +451,7 @@ export default function HomeScreen() {
 
       await addMemory(content, category, importance, ['conversation', 'user-input']);
       
-      // 更新最近話題
+      // 更新最近话题
       const topics = content.split(' ').filter(word => word.length > 2).slice(0, 3);
       updateContext({
         recentTopics: topics
@@ -464,8 +464,8 @@ export default function HomeScreen() {
     try {
       // 检索相关记忆
       const relevantMemories = await retrieveMemories(content, 3);
-      
-      // 分析用戶輸入以選擇咨詢師技巧
+
+      // 分析用户输入以选择咨询师技巧
       const detectedEmotion = detectEmotion(content);
       const keyTopic = extractKeyTopic(content);
       const conversationContext = getContext();
@@ -475,25 +475,25 @@ export default function HomeScreen() {
         sessionLength: sessionLength
       });
       
-      // 生成增强的系统提示词，加入咨詢師技巧指導
+      // 生成增强的系统提示词，加入咨询师技巧指导
       let enhancedPrompt = await generateMemoryEnhancedPrompt(content, relevantMemories);
-      
-      // 添加具體的回應技巧指導 (暂时注释掉，太死板)
+
+      // 添加具体的回应技巧指导 (暂时注释掉，太死板)
       /*
-      enhancedPrompt += `\n\n本次回應建議技巧：
-技巧類型：${counselorTechnique.type}
-建議模板：${counselorTechnique.template}
-使用時機：${counselorTechnique.whenToUse}
+      enhancedPrompt += `\n\n本次回应建议技巧：
+技巧类型：${counselorTechnique.type}
+建议模板：${counselorTechnique.template}
+使用时机：${counselorTechnique.whenToUse}
 
-檢測到的情緒：${detectedEmotion || '未明確'}
-關鍵話題：${keyTopic || '待探索'}
+检测到的情绪：${detectedEmotion || '未明确'}
+关键话题：${keyTopic || '待探索'}
 
-請使用這個技巧，保持1-2句話的簡潔回應，重點是引導用戶繼續表達而非給建議。`;
+请使用这个技巧，保持1-2句话的简洁回应，重点是引导用户继续表达而非给建议。`;
       */
-      
+
       // print enhancedPrompt
       console.log('enhancedPrompt', enhancedPrompt)
-      // 從本地獲取更多歷史上下文（最多10條）
+      // 从本地获取更多历史上下文（最多10条）
       const contextMessages = await LocalChatStorage.getContextMessages(currentConversationId, 10);
       
       // Prepare conversation history for Bailian API with memory-enhanced prompt
@@ -524,10 +524,10 @@ export default function HomeScreen() {
       await new Promise(resolve => setTimeout(resolve, thinkingDelay));
 
       const aiResponse = await sendBailianMessage(conversationHistory)
-      
+
       // 决定是否需要多气泡回复（30%概率）
       const shouldUseMultipleBubbles = Math.random() < 0.3;
-      
+
       if (shouldUseMultipleBubbles && aiResponse.length > 10) {
         // 将回复分成多个气泡
         await handleMultipleBubbleResponse(aiResponse, currentConversationId, user.id, setMessages, ChatService, LocalChatStorage);
@@ -550,10 +550,10 @@ export default function HomeScreen() {
 
         setMessages(prev => [...prev, aiMessage])
         
-        // 保存到本地存儲
+        // 保存到本地存储
         await LocalChatStorage.saveMessage(aiMessage)
       }
-      
+
       setIsTyping(false)
       setSessionLength(prev => prev + 1)
 
@@ -571,9 +571,9 @@ export default function HomeScreen() {
 
       // 添加AI回复的重要信息到记忆
       try {
-        if (aiResponse.includes('建議') || aiResponse.includes('練習') || aiResponse.includes('方法')) {
+        if (aiResponse.includes('建议') || aiResponse.includes('练习') || aiResponse.includes('方法')) {
           await addMemory(
-            `AI建議: ${aiResponse.substring(0, 100)}...`, 
+            `AI建议: ${aiResponse.substring(0, 100)}...`, 
             'therapeutic', 
             7, 
             ['ai-advice', 'therapeutic-suggestion']

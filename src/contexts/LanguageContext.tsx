@@ -122,7 +122,7 @@ const translations = {
     'language.saveSuccess': '語言設置已保存',
     
     // Home Screen / Chat
-    'home.greeting': '嗨！👋\n\n我是 Ash，您的AI心理健康伴侶。我在這裡傾聽、理解，並幫助您處理心中的想法。\n\n您今天感覺如何？',
+    'home.greeting': '嗨！👋\n\n我是 Dolphin，您的AI心理健康伴侶。我在這裡傾聽、理解，並幫助您處理心中的想法。\n\n您今天感覺如何？',
     'home.aiResponses.1': '我聽到了，我希望您知道您的感受完全有效。您能告訴我更多關於您心中想法的事嗎？',
     'home.aiResponses.2': '謝謝您與我分享這些。敞開心扉談論這些感受需要勇氣。您經歷這種感覺多久了？',
     'home.aiResponses.3': '我在這裡傾聽並支持您度過這個困難時期。現在什麼對您最有幫助？',
@@ -180,7 +180,7 @@ const translations = {
     'summary.yesterday': '昨天',
     'summary.crisisFlag': '⚠️ 需要關注',
     'summary.emptyTitle': '還沒有心理洞察記錄',
-    'summary.emptySubtitle': '開始與 Ash 對話，系統會在每晚自動為您生成專業的心理分析',
+    'summary.emptySubtitle': '開始與 Dolphin 對話，系統會在每晚自動為您生成專業的心理分析',
     'summary.generating': '正在生成...',
     'summary.generateNow': '立即生成今日總結',
     'summary.headerTitle': '心理洞察歷史',
@@ -454,9 +454,9 @@ const translations = {
     'explore.loading': '載入中…',
     
     // Chat Screen
-    'chat.ashTitle': 'Ash',
+    'chat.ashTitle': 'Dolphin',
     'chat.ashSubtitle': 'AI驱动的心理健康支持',
-    'chat.greeting': 'Hi there! 👋\n\nI\'m Ash, your AI companion for mental health support. I\'m here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?',
+    'chat.greeting': 'Hi there! 👋\n\nI\'m Dolphin, your AI companion for mental health support. I\'m here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?',
     'chat.response1': 'I hear you, and I want you to know that your feelings are completely valid. It takes courage to share what\'s on your mind. Can you tell me more about what\'s been weighing on you?',
     'chat.response2': 'Thank you for opening up to me. I\'m here to listen without judgment. What you\'re experiencing matters, and I want to understand better so I can support you.',
     'chat.response3': 'It sounds like you\'re going through something challenging right now. I\'m here with you in this moment. What would feel most helpful for you right now?',
@@ -585,7 +585,7 @@ const translations = {
     'language.saveSuccess': '语言设置已保存',
     
     // Home Screen / Chat
-    'home.greeting': '嗨！👋\n\n我是 Ash，您的AI心理健康伴侣。我在这里倾听、理解，并帮助您处理心中的想法。\n\n您今天感觉如何？',
+    'home.greeting': '嗨！👋\n\n我是 Dolphin，您的AI心理健康伴侣。我在这里倾听、理解，并帮助您处理心中的想法。\n\n您今天感觉如何？',
     'home.aiResponses.1': '我听到了，我希望您知道您的感受完全有效。您能告诉我更多关于您心中想法的事吗？',
     'home.aiResponses.2': '谢谢您与我分享这些。敞开心扉谈论这些感受需要勇气。您经历这种感觉多久了？',
     'home.aiResponses.3': '我在这里倾听并支持您度过这个困难时期。现在什么对您最有帮助？',
@@ -643,7 +643,7 @@ const translations = {
     'summary.yesterday': '昨天',
     'summary.crisisFlag': '⚠️ 需要关注',
     'summary.emptyTitle': '还没有心理洞察记录',
-    'summary.emptySubtitle': '开始与 Ash 对话，系统会在每晚自动为您生成专业的心理分析',
+    'summary.emptySubtitle': '开始与 Dolphin 对话，系统会在每晚自动为您生成专业的心理分析',
     'summary.generating': '正在生成...',
     'summary.generateNow': '立即生成今日总结',
     'summary.headerTitle': '心理洞察历史',
@@ -917,9 +917,9 @@ const translations = {
     'explore.loading': '加载中…',
     
     // Chat Screen
-    'chat.ashTitle': 'Ash',
+    'chat.ashTitle': 'Dolphin',
     'chat.ashSubtitle': 'AI驱动的心理健康支持',
-    'chat.greeting': '嗨！👋\n\n我是 Ash，您的AI心理健康伴侣。我在这里倾听、理解，并帮助您处理心中的想法。\n\n您今天感觉如何？',
+    'chat.greeting': '嗨！👋\n\n我是 Dolphin，您的AI心理健康伴侣。我在这里倾听、理解，并帮助您处理心中的想法。\n\n您今天感觉如何？',
     'chat.response1': '我听到了，我希望您知道您的感受完全有效。您能告诉我更多关于您心中想法的事吗？',
     'chat.response2': '谢谢您与我分享这些。敞开心扉谈论这些感受需要勇气。您经历这种感觉多久了？',
     'chat.response3': '我在这里倾听并支持您度过这个困难时期。现在什么对您最有帮助？',
@@ -1048,7 +1048,7 @@ const translations = {
     'language.saveSuccess': '言語設定が保存されました',
     
     // Home Screen / Chat
-    'home.greeting': 'こんにちは！👋\n\n私はAsh、あなたのAIメンタルヘルスコンパニオンです。お話を聞き、理解し、心の中にあることを整理するお手伝いをします。\n\n今日の気分はいかがですか？',
+    'home.greeting': 'こんにちは！👋\n\n私はDolphin、あなたのAIメンタルヘルスコンパニオンです。お話を聞き、理解し、心の中にあることを整理するお手伝いをします。\n\n今日の気分はいかがですか？',
     'home.aiResponses.1': 'お聞きしました。あなたの感情は完全に正当なものだということを知ってください。心の中にあることについて、もう少し教えていただけますか？',
     'home.aiResponses.2': 'お話しいただき、ありがとうございます。このような感情について心を開くには勇気が必要ですね。この感覚をどのくらい経験されていますか？',
     'home.aiResponses.3': 'この困難な時期を乗り越えるために、お話を聞き、サポートいたします。今、何が一番お役に立てるでしょうか？',
@@ -1106,7 +1106,7 @@ const translations = {
     'summary.yesterday': '昨日',
     'summary.crisisFlag': '⚠️ 注意が必要',
     'summary.emptyTitle': '心理的インサイト記録がまだありません',
-    'summary.emptySubtitle': 'Ashとの会話を開始すると、システムが毎晩自動的に専門的な心理分析を生成します',
+    'summary.emptySubtitle': 'Dolphinとの会話を開始すると、システムが毎晩自動的に専門的な心理分析を生成します',
     'summary.generating': '生成中...',
     'summary.generateNow': '今すぐ今日のサマリーを生成',
     'summary.headerTitle': '心理的インサイト履歴',
@@ -1266,9 +1266,9 @@ const translations = {
     'explore.loading': '読み込み中…',
     
     // Chat Screen
-    'chat.ashTitle': 'Ash',
+    'chat.ashTitle': 'Dolphin',
     'chat.ashSubtitle': 'AI駆動のメンタルヘルスサポート',
-    'chat.greeting': 'こんにちは！👋\n\n私はAsh、あなたのAIメンタルヘルスコンパニオンです。お話を聞き、理解し、心の中にあることを整理するお手伝いをします。\n\n今日の気分はいかがですか？',
+    'chat.greeting': 'こんにちは！👋\n\n私はDolphin、あなたのAIメンタルヘルスコンパニオンです。お話を聞き、理解し、心の中にあることを整理するお手伝いをします。\n\n今日の気分はいかがですか？',
     'chat.response1': 'お聞きしました。あなたの感情は完全に正当なものだということを知ってください。心の中にあることについて、もう少し教えていただけますか？',
     'chat.response2': 'お話しいただき、ありがとうございます。このような感情について心を開くには勇気が必要ですね。この感覚をどのくらい経験されていますか？',
     'chat.response3': 'この困難な時期を乗り越えるために、お話を聞き、サポートいたします。今、何が一番お役に立てるでしょうか？',
@@ -1397,7 +1397,7 @@ const translations = {
     'language.saveSuccess': 'Language settings saved',
     
     // Home Screen / Chat
-    'home.greeting': 'Hi there! 👋\n\nI\'m Ash, your AI companion for mental health support. I\'m here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?',
+    'home.greeting': 'Hi there! 👋\n\nI\'m Dolphin, your AI companion for mental health support. I\'m here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?',
     'home.aiResponses.1': 'I hear you, and I want you to know that what you\'re feeling is completely valid. Can you tell me more about what\'s been on your mind?',
     'home.aiResponses.2': 'Thank you for sharing that with me. It takes courage to open up about these feelings. How long have you been experiencing this?',
     'home.aiResponses.3': 'I\'m here to listen and support you through this. What would be most helpful for you right now?',
@@ -1455,7 +1455,7 @@ const translations = {
     'summary.yesterday': 'Yesterday',
     'summary.crisisFlag': '⚠️ Needs Attention',
     'summary.emptyTitle': 'No psychological insight records yet',
-    'summary.emptySubtitle': 'Start conversations with Ash, and the system will automatically generate professional psychological analysis every evening',
+    'summary.emptySubtitle': 'Start conversations with Dolphin, and the system will automatically generate professional psychological analysis every evening',
     'summary.generating': 'Generating...',
     'summary.generateNow': 'Generate Today\'s Summary Now',
     'summary.headerTitle': 'Psychological Insight History',
@@ -1615,9 +1615,9 @@ const translations = {
     'explore.loading': 'Loading…',
     
     // Chat Screen
-    'chat.ashTitle': 'Ash',
+    'chat.ashTitle': 'Dolphin',
     'chat.ashSubtitle': 'AI-powered mental health support',
-    'chat.greeting': 'Hi there! 👋\n\nI\'m Ash, your AI companion for mental health support. I\'m here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?',
+    'chat.greeting': 'Hi there! 👋\n\nI\'m Dolphin, your AI companion for mental health support. I\'m here to listen, understand, and help you work through whatever is on your mind.\n\nHow are you feeling today?',
     'chat.response1': 'I hear you, and I want you to know that your feelings are completely valid. It takes courage to share what\'s on your mind. Can you tell me more about what\'s been weighing on you?',
     'chat.response2': 'Thank you for opening up to me. I\'m here to listen without judgment. What you\'re experiencing matters, and I want to understand better so I can support you.',
     'chat.response3': 'It sounds like you\'re going through something challenging right now. I\'m here with you in this moment. What would feel most helpful for you right now?',

@@ -1,10 +1,10 @@
 import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
 import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  View
+    Dimensions,
+    StyleSheet,
+    Text,
+    View
 } from 'react-native'
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
@@ -36,7 +36,7 @@ export const OnboardingCard: React.FC<OnboardingCardProps> = ({
           <View style={styles.phoneContent}>
             {/* Header */}
             <View style={styles.phoneHeader}>
-              <Text style={styles.phoneHeaderText}>Ash</Text>
+              <Text style={styles.phoneHeaderText}>Dolphin</Text>
             </View>
 
             {/* Chat area based on feature */}

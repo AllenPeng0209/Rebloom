@@ -32,7 +32,7 @@ let friendlyError = '开始录制失败';
 
 if (errorMessage.includes('recorder not prepared') || 
     errorMessage.includes('Prepare encountered an error')) {
-  friendlyError = '在Expo Go中录音功能受限，请使用开发构建或真机测试。\n\n您可以继续使用文字输入与Ash对话。';
+  friendlyError = '在Expo Go中录音功能受限，请使用开发构建或真机测试。\n\n您可以继续使用文字输入与Dolphin对话。';
 }
 ```
 

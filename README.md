@@ -4,7 +4,7 @@
 
 > 🤲 Your compassionate AI companion for mental health and personal growth
 
-Rebloom is an AI-powered mental health companion app that provides personalized, accessible, and judgment-free therapeutic support. Built with React Native and Expo, inspired by the success of Ash (Slingshot AI) and designed to democratize mental health care.
+Rebloom is an AI-powered mental health companion app that provides personalized, accessible, and judgment-free therapeutic support. Built with React Native and Expo, inspired by the success of Dolphin (Slingshot AI) and designed to democratize mental health care.
 
 ## 📱 Features
 
@@ -253,7 +253,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💡 About the Project
 
-Rebloom was created with the mission to make mental health support accessible, affordable, and effective for everyone. Drawing inspiration from leading AI therapy platforms like Ash, we've built a comprehensive solution that combines cutting-edge AI technology with evidence-based therapeutic practices.
+Rebloom was created with the mission to make mental health support accessible, affordable, and effective for everyone. Drawing inspiration from leading AI therapy platforms like Dolphin, we've built a comprehensive solution that combines cutting-edge AI technology with evidence-based therapeutic practices.
 
 Our team includes licensed clinical psychologists, AI/ML engineers, UX designers specializing in healthcare, and mental health advocates who ensure every feature serves our users' wellbeing.
 

@@ -3,13 +3,13 @@ import { Message, TherapeuticComponentProps } from '@/types'
 import { format } from 'date-fns'
 import React, { useEffect, useRef } from 'react'
 import {
-  Animated,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextStyle,
-  View,
-  ViewStyle
+    Animated,
+    Pressable,
+    StyleSheet,
+    Text,
+    TextStyle,
+    View,
+    ViewStyle
 } from 'react-native'
 
 interface MessageBubbleProps extends TherapeuticComponentProps {
@@ -70,7 +70,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
       }
     }
 
-    // AI message colors - Ash-style with warm, supportive tones
+    // AI message colors - Dolphin-style with warm, supportive tones
     let colors = {
       background: '#FFFFFF',
       text: '#2C2C2E',
@@ -131,13 +131,13 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    // Ash-style shadow
+    // Dolphin-style shadow
     shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: 8,
     elevation: 3,
-    // Remove border accent for cleaner Ash look
+    // Remove border accent for cleaner Dolphin look
   }
 
   const textStyle: TextStyle = {
@@ -279,13 +279,13 @@ const styles = StyleSheet.create({
   },
 })
 
-// Typing indicator component for AI responses - Ash style
+// Typing indicator component for AI responses - Dolphin style
 export const TypingIndicator: React.FC<{
   therapeuticMode?: boolean
   message?: string
 }> = ({ 
   therapeuticMode = true, 
-  message = 'Ash is typing...' 
+  message = 'Dolphin is typing...' 
 }) => {
   const dot1 = useRef(new Animated.Value(0)).current
   const dot2 = useRef(new Animated.Value(0)).current

@@ -115,7 +115,7 @@ export class VoiceService {
         if (error.message.includes('recorder not prepared') || 
             error.message.includes('Prepare encountered an error')) {
           console.log('检测到Expo Go录音限制，尝试降级处理');
-          throw new Error('在Expo Go中录音功能受限，请使用开发构建或真机测试。\n\n您可以继续使用文字输入与Ash对话。');
+          throw new Error('在Expo Go中录音功能受限，请使用开发构建或真机测试。\n\n您可以继续使用文字输入与Dolphin对话。');
         }
       }
       

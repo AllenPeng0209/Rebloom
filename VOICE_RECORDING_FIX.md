@@ -45,7 +45,7 @@ const { recording } = await Audio.Recording.createAsync({
 // 检测Expo Go环境特定错误
 if (error.message.includes('recorder not prepared') || 
     error.message.includes('Prepare encountered an error')) {
-  throw new Error('在Expo Go中录音功能受限，请使用开发构建或真机测试。\n\n您可以继续使用文字输入与Ash对话。');
+  throw new Error('在Expo Go中录音功能受限，请使用开发构建或真机测试。\n\n您可以继续使用文字输入与Dolphin对话。');
 }
 ```
 

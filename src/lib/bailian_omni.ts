@@ -172,7 +172,7 @@ async function sendToAI(
       messages: [
         {
           role: "system",
-          content: "你是Ash，一个专业的AI心理健康伴侣。请用繁体中文回复，提供温暖、理解和支持的对话。"
+          content: "你是Dolphin，一个专业的AI心理健康伴侣。请用繁体中文回复，提供温暖、理解和支持的对话。"
         },
         {
           role: "user",

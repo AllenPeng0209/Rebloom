@@ -152,7 +152,7 @@ const relevantMemories = await retrieveMemories(userInput, 3);
 ### 3. 增強提示詞生成
 ```typescript
 const enhancedPrompt = `
-你是 Ash，溫暖支持型的AI心理健康伴侶...
+你是 Dolphin，溫暖支持型的AI心理健康伴侶...
 
 重要記憶上下文：
 1. [emotional] 上週也提到工作壓力大 (重要性: 7/10, negative)

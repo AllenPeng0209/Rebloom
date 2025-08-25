@@ -278,7 +278,7 @@ export const MemoryProvider: React.FC<MemoryProviderProps> = ({ children, userId
     const personalMemories = await getMemoriesByCategory('personal');
     
     if (recentMemories.length === 0 && personalMemories.length === 0) {
-      return '你好！我是Ash，很高兴与你对话, 今天想聊什么？';
+      return '你好！我是Dolphin，很高兴与你对话, 今天想聊什么？';
     }
 
     let greeting = '你好！';

@@ -2,14 +2,14 @@ import { Ionicons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useRef, useState } from 'react'
 import {
-  Dimensions,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    Dimensions,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native'
 import { OnboardingCard } from './OnboardingCard'
 
@@ -32,7 +32,7 @@ const onboardingData = [
   {
     id: 'remembers-you',
     title: 'Remembers you',
-    description: 'Ash has a secure memory, so every conversation builds continuous therapeutic.',
+    description: 'Dolphin has a secure memory, so every conversation builds continuous therapeutic.',
     features: [
       'Secure conversation history',
       'Personalized therapeutic approach',
@@ -123,7 +123,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
           />
         </TouchableOpacity>
 
-        <Text style={styles.headerTitle}>Ash</Text>
+        <Text style={styles.headerTitle}>Dolphin</Text>
 
         <TouchableOpacity
           style={styles.skipButton}
@@ -202,7 +202,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
           }}
           activeOpacity={0.7}
         >
-          <Text style={styles.learnMoreText}>Learn more about Ash</Text>
+          <Text style={styles.learnMoreText}>Learn more about Dolphin</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

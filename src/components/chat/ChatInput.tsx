@@ -3,15 +3,15 @@ import * as Haptics from 'expo-haptics'
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import {
-  Alert,
-  Animated,
-  Dimensions,
-  PanResponder,
-  Platform,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View
+    Alert,
+    Animated,
+    Dimensions,
+    PanResponder,
+    Platform,
+    StyleSheet,
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native'
 import { useVoiceRecorder } from '../../hooks/useVoiceRecorder'
 import { speechToText } from '../../lib/bailian_omni'
@@ -158,7 +158,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       
       if (errorMessage.includes('Expo Go')) {
         alertTitle = '开发环境限制'
-        alertMessage = '在Expo Go中录音功能受限，请使用开发构建或真机测试。\n\n您可以继续使用文字输入与Ash对话。'
+        alertMessage = '在Expo Go中录音功能受限，请使用开发构建或真机测试。\n\n您可以继续使用文字输入与Dolphin对话。'
       } else if (errorMessage.includes('permission')) {
         alertTitle = '需要录音权限'
         alertMessage = '请在设置中允许应用使用麦克风权限。'

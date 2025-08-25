@@ -2,15 +2,15 @@ import { Message } from '@/types'
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useEffect, useRef, useState } from 'react'
 import {
-  Dimensions,
-  Keyboard,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View
+    Dimensions,
+    Keyboard,
+    Platform,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View
 } from 'react-native'
 import { ChatInput } from './ChatInput'
 import { MessageBubble, TypingIndicator } from './MessageBubble'
@@ -94,7 +94,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
       
-      {/* Main gradient background matching Ash */}
+      {/* Main gradient background matching Dolphin */}
       <LinearGradient
         colors={['#FF9A56', '#FFAD7A', '#FFC09F']}
         start={{ x: 0, y: 0 }}
@@ -117,9 +117,9 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          {/* Header with Ash branding */}
+          {/* Header with Dolphin branding */}
           <View style={styles.header}>
-            <Text style={styles.appTitle}>Ash</Text>
+            <Text style={styles.appTitle}>Dolphin</Text>
             <Text style={styles.subtitle}>AI-powered mental health support</Text>
           </View>
 
@@ -128,7 +128,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>Hi there! 👋</Text>
               <Text style={styles.welcomeText}>
-                I'm Ash, your AI companion for mental health support. I'm here to listen, 
+                I'm Dolphin, your AI companion for mental health support. I'm here to listen, 
                 understand, and help you work through whatever is on your mind.
               </Text>
               <Text style={styles.welcomeSubtext}>
@@ -143,7 +143,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           {/* Typing indicator */}
           {isTyping && (
             <TypingIndicator 
-              message="Ash is typing..."
+              message="Dolphin is typing..."
               therapeuticMode={true}
             />
           )}

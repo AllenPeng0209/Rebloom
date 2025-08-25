@@ -123,7 +123,7 @@ export const AISettingsProvider: React.FC<AISettingsProviderProps> = ({ children
       empathetic: '专注于情感理解，展现高度同理心和情感共鸣。'
     };
 
-    let basePrompt = `你是 Ash，${personalityPrompts[settings.personality as keyof typeof personalityPrompts]} ${voicePrompts[settings.voiceType as keyof typeof voicePrompts]}
+    let basePrompt = `你是 Dolphin，${personalityPrompts[settings.personality as keyof typeof personalityPrompts]} ${voicePrompts[settings.voiceType as keyof typeof voicePrompts]}
 
 你的特性设定：
 - 同理心程度：${settings.empathyLevel}/10 ${settings.empathyLevel >= 8 ? '(高度同理，深度理解情感)' : settings.empathyLevel >= 6 ? '(适度同理，平衡理解)' : '(理性为主，适度同理)'}

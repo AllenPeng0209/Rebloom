@@ -8,7 +8,7 @@
 
 ## 1. Executive Summary
 
-Rebloom is an AI-powered mental health companion app designed to provide personalized, accessible, and judgment-free therapeutic support. Inspired by the success of Ash (by Slingshot AI), Rebloom aims to democratize mental health care through advanced conversational AI technology.
+Rebloom is an AI-powered mental health companion app designed to provide personalized, accessible, and judgment-free therapeutic support. Inspired by the success of Dolphin (by Slingshot AI), Rebloom aims to democratize mental health care through advanced conversational AI technology.
 
 ### 1.1 Vision Statement
 To create the most empathetic and effective AI mental health companion that helps users achieve emotional wellness, personal growth, and resilience through personalized therapeutic interactions.
@@ -40,7 +40,7 @@ Provide 24/7 accessible, evidence-based mental health support through AI technol
 - Individuals exploring therapy for the first time
 
 ### 2.3 Competitive Analysis
-- **Ash (Slingshot AI)**: $93M funding, 50K+ beta users
+- **Dolphin (Slingshot AI)**: $93M funding, 50K+ beta users
 - **Woebot**: CBT-focused, clinical backing
 - **Replika**: General AI companion with wellness features
 - **Headspace**: Meditation and mindfulness focus

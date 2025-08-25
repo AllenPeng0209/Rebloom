@@ -14,23 +14,23 @@ export default function AISettingsScreen() {
   const [settings, setSettings] = useState<AISettings>(contextSettings);
 
   const personalityOptions = [
-    { id: 'supportive', name: '溫暖支持型', description: '像朋友般溫暖，提供情感支持', icon: 'heart' },
-    { id: 'wise', name: '智慧導師型', description: '像導師般睿智，給予深刻見解', icon: 'brain.head.profile' },
-    { id: 'gentle', name: '溫和陪伴型', description: '像家人般溫柔，耐心傾聽', icon: 'leaf' },
-    { id: 'energetic', name: '活力激勵型', description: '像教練般積極，激發正能量', icon: 'bolt' }
+    { id: 'supportive', name: '温暖支持型', description: '像朋友般温暖，提供情感支持', icon: 'heart' },
+    { id: 'wise', name: '智慧导师型', description: '像导师般睿智，给予深刻见解', icon: 'brain.head.profile' },
+    { id: 'gentle', name: '温和陪伴型', description: '像家人般温柔，耐心倾听', icon: 'leaf' },
+    { id: 'energetic', name: '活力激励型', description: '像教练般积极，激发正能量', icon: 'bolt' }
   ];
 
   const voiceTypes = [
-    { id: 'warm', name: '溫暖親切', description: '溫暖的語調，如摯友般親切' },
-    { id: 'professional', name: '專業穩重', description: '專業的語調，如諮商師般穩重' },
-    { id: 'gentle', name: '溫柔細膩', description: '溫柔的語調，如家人般細膩' },
-    { id: 'encouraging', name: '鼓勵積極', description: '鼓勵的語調，如導師般積極' }
+    { id: 'warm', name: '温暖亲切', description: '温暖的语调，如挚友般亲切' },
+    { id: 'professional', name: '专业稳重', description: '专业的语调，如咨询师般稳重' },
+    { id: 'gentle', name: '温柔细腻', description: '温柔的语调，如家人般细腻' },
+    { id: 'encouraging', name: '鼓励积极', description: '鼓励的语调，如导师般积极' }
   ];
 
   const languageModels = [
-    { id: 'standard', name: '標準模式', description: '平衡的AI能力，適合日常對話' },
-    { id: 'advanced', name: '進階模式', description: '更強的理解力，深度心理分析' },
-    { id: 'empathetic', name: '同理模式', description: '專注情感理解，高度同理心' }
+    { id: 'standard', name: '标准模式', description: '平衡的AI能力，适合日常对话' },
+    { id: 'advanced', name: '进阶模式', description: '更强的理解力，深度心理分析' },
+    { id: 'empathetic', name: '同理模式', description: '专注情感理解，高度同理心' }
   ];
 
   useEffect(() => {
@@ -41,32 +41,32 @@ export default function AISettingsScreen() {
     try {
       await saveSettings(settings);
       Alert.alert(
-        'AI設定已保存',
-        '你的AI伴侶設定已成功更新，新的對話將使用這些設定。',
-        [{ text: '確定', onPress: () => router.back() }]
+        'AI设定已保存',
+        '你的AI伴侣设定已成功更新，新的对话将使用这些设定。',
+        [{ text: '确定', onPress: () => router.back() }]
       );
     } catch (error) {
       console.error('Error saving AI settings:', error);
-      Alert.alert('保存失敗', '設定保存時發生錯誤，請重試。');
+      Alert.alert('保存失败', '设定保存时发生错误，请重试。');
     }
   };
 
   const handleReset = () => {
     Alert.alert(
-      '重置AI設定',
-      '確定要將所有設定重置為預設值嗎？這將無法復原。',
+      '重置AI设定',
+      '确定要将所有设定重置为默认值吗？这将无法复原。',
       [
         { text: '取消', style: 'cancel' },
-        { 
-          text: '重置', 
+        {
+          text: '重置',
           style: 'destructive',
           onPress: async () => {
             try {
               await resetSettings();
-              Alert.alert('設定已重置', '所有AI設定已重置為預設值。');
+              Alert.alert('设定已重置', '所有AI设定已重置为默认值。');
             } catch (error) {
               console.error('Error resetting settings:', error);
-              Alert.alert('重置失敗', '設定重置時發生錯誤，請重試。');
+              Alert.alert('重置失败', '设定重置时发生错误，请重试。');
             }
           }
         }
@@ -190,13 +190,13 @@ export default function AISettingsScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>AI 設定</Text>
+        <Text style={styles.headerTitle}>AI 设定</Text>
         <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}
             style={styles.saveButtonGradient}
           >
-            <Text style={styles.saveText}>{t('common.save')}</Text>
+            <Text style={styles.saveText}>保存</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>
@@ -210,9 +210,9 @@ export default function AISettingsScreen() {
               style={styles.introGradient}
             >
               <IconSymbol name="brain.head.profile" size={32} color="#4A90E2" />
-              <Text style={styles.introTitle}>{t('ai.personalizeTitle')}</Text>
+              <Text style={styles.introTitle}>个性化您的AI伴侣</Text>
               <Text style={styles.introDescription}>
-                {t('ai.personalizeDescription')}
+                根据您的偏好调整AI的个性、语调和能力，让AI更好地理解和支持您。
               </Text>
             </LinearGradient>
           </View>
@@ -220,7 +220,7 @@ export default function AISettingsScreen() {
 
         {/* AI Personality */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{t('ai.personality')}</Text>
+          <Text style={styles.sectionTitle}>AI 个性</Text>
           <View style={styles.personalityGrid}>
             {personalityOptions.map((personality) => (
               <TouchableOpacity
@@ -273,14 +273,14 @@ export default function AISettingsScreen() {
 
         {/* Voice Settings */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{t('ai.voiceSettings')}</Text>
+          <Text style={styles.sectionTitle}>语调设定</Text>
           
           <View style={styles.voiceCard}>
             <LinearGradient
               colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
               style={styles.voiceGradient}
             >
-              <Text style={styles.voiceTitle}>{t('ai.voiceType')}</Text>
+              <Text style={styles.voiceTitle}>语调类型</Text>
               <View style={styles.voiceOptions}>
                 {voiceTypes.map((voice) => (
                   <TouchableOpacity
@@ -320,7 +320,7 @@ export default function AISettingsScreen() {
 
         {/* Personality Sliders */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{t('ai.personalityTraits')}</Text>
+          <Text style={styles.sectionTitle}>个性特质</Text>
           
           <View style={styles.slidersCard}>
             <LinearGradient
@@ -328,25 +328,25 @@ export default function AISettingsScreen() {
               style={styles.slidersGradient}
             >
               {renderSlider(
-                t('ai.empathyLevel'),
+                '同理心程度',
                 settings.empathyLevel,
                 (value) => setSettings(prev => ({ ...prev, empathyLevel: value }))
               )}
 
               {renderSlider(
-                t('ai.directnessLevel'),
+                '直接程度',
                 settings.directnessLevel,
                 (value) => setSettings(prev => ({ ...prev, directnessLevel: value }))
               )}
 
               {renderSlider(
-                t('ai.humorLevel'),
+                '幽默感',
                 settings.humorLevel,
                 (value) => setSettings(prev => ({ ...prev, humorLevel: value }))
               )}
 
               {renderSlider(
-                t('ai.formalityLevel'),
+                '正式程度',
                 settings.formalityLevel,
                 (value) => setSettings(prev => ({ ...prev, formalityLevel: value }))
               )}
@@ -356,14 +356,14 @@ export default function AISettingsScreen() {
 
         {/* AI Model Selection */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{t('ai.modelSettings')}</Text>
+          <Text style={styles.sectionTitle}>AI 模型设定</Text>
           
           <View style={styles.modelCard}>
             <LinearGradient
               colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
               style={styles.modelGradient}
             >
-              <Text style={styles.modelTitle}>{t('ai.languageModel')}</Text>
+              <Text style={styles.modelTitle}>语言模型</Text>
               <View style={styles.modelOptions}>
                 {languageModels.map((model) => (
                   <TouchableOpacity
@@ -403,7 +403,7 @@ export default function AISettingsScreen() {
 
         {/* Advanced Features */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{t('ai.advancedFeatures')}</Text>
+          <Text style={styles.sectionTitle}>高级功能</Text>
           
           <View style={styles.toggleCard}>
             <LinearGradient
@@ -412,9 +412,9 @@ export default function AISettingsScreen() {
             >
               <View style={styles.toggleItem}>
                 <View style={styles.toggleContent}>
-                  <Text style={styles.toggleTitle}>{t('ai.proactiveSupport')}</Text>
+                  <Text style={styles.toggleTitle}>主动支持</Text>
                   <Text style={styles.toggleDescription}>
-                    {t('ai.proactiveSupport.description')}
+                    允许AI主动提供关怀和建议，适时给予情感支持。
                   </Text>
                 </View>
                 <Switch
@@ -429,9 +429,9 @@ export default function AISettingsScreen() {
 
               <View style={styles.toggleItem}>
                 <View style={styles.toggleContent}>
-                  <Text style={styles.toggleTitle}>{t('ai.smartSuggestions')}</Text>
+                  <Text style={styles.toggleTitle}>智能建议</Text>
                   <Text style={styles.toggleDescription}>
-                    {t('ai.smartSuggestions.description')}
+                    启用AI的智能建议功能，通过提问和反映引导用户自我探索。
                   </Text>
                 </View>
                 <Switch
@@ -446,9 +446,9 @@ export default function AISettingsScreen() {
 
               <View style={styles.toggleItem}>
                 <View style={styles.toggleContent}>
-                  <Text style={styles.toggleTitle}>{t('ai.learningMode')}</Text>
+                  <Text style={styles.toggleTitle}>学习模式</Text>
                   <Text style={styles.toggleDescription}>
-                    {t('ai.learningMode.description')}
+                    启用AI的学习模式，记住用户的模式和偏好，提供更个性化的支持。
                   </Text>
                 </View>
                 <Switch
@@ -463,9 +463,9 @@ export default function AISettingsScreen() {
 
               <View style={styles.toggleItem}>
                 <View style={styles.toggleContent}>
-                  <Text style={styles.toggleTitle}>{t('ai.voiceEnabled')}</Text>
+                  <Text style={styles.toggleTitle}>语音功能</Text>
                   <Text style={styles.toggleDescription}>
-                    {t('ai.voiceEnabled.description')}
+                    启用语音交互功能，让AI能够通过语音进行交流。
                   </Text>
                 </View>
                 <Switch
@@ -480,9 +480,9 @@ export default function AISettingsScreen() {
 
               <View style={styles.toggleItem}>
                 <View style={styles.toggleContent}>
-                  <Text style={styles.toggleTitle}>{t('ai.crisisDetection')}</Text>
+                  <Text style={styles.toggleTitle}>危机检测</Text>
                   <Text style={styles.toggleDescription}>
-                    {t('ai.crisisDetection.description')}
+                    启用心理危机检测功能，及时识别风险信号并提供适当支持。
                   </Text>
                 </View>
                 <Switch
@@ -504,7 +504,7 @@ export default function AISettingsScreen() {
               style={styles.resetGradient}
             >
               <IconSymbol name="arrow.clockwise" size={20} color="#FFFFFF" />
-              <Text style={styles.resetText}>重置為默認設置</Text>
+              <Text style={styles.resetText}>重置为默认设定</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>

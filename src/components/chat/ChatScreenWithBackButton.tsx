@@ -3,17 +3,17 @@ import { Ionicons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useEffect, useRef, useState } from 'react'
 import {
-  ActivityIndicator,
-  Dimensions,
-  Keyboard,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
+    ActivityIndicator,
+    Dimensions,
+    Keyboard,
+    Platform,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from 'react-native'
 import { ChatInput } from './ChatInput'
 import { MessageBubble, TypingIndicator } from './MessageBubble'
@@ -98,7 +98,7 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
       
-      {/* Main gradient background matching Ash */}
+      {/* Main gradient background matching Dolphin */}
       <LinearGradient
         colors={['#FF9A56', '#FFAD7A', '#FFC09F']}
         start={{ x: 0, y: 0 }}
@@ -120,7 +120,7 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
           )}
           
           <View style={styles.headerCenter}>
-            <Text style={styles.appTitle}>Ash</Text>
+            <Text style={styles.appTitle}>Dolphin</Text>
             <Text style={styles.subtitle}>AI-powered mental health support</Text>
           </View>
           
@@ -160,7 +160,7 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeTitle}>Hi there! 👋</Text>
               <Text style={styles.welcomeText}>
-                I'm Ash, your AI companion for mental health support. I'm here to listen, 
+                I'm Dolphin, your AI companion for mental health support. I'm here to listen, 
                 understand, and help you work through whatever is on your mind.
               </Text>
               <Text style={styles.welcomeSubtext}>

@@ -5,10 +5,10 @@ import { Message } from '@/types'
 import { router } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import {
-  detectEmotion,
-  extractKeyTopic,
-  generateCounselorResponse,
-  selectCounselorTechnique
+    detectEmotion,
+    extractKeyTopic,
+    generateCounselorResponse,
+    selectCounselorTechnique
 } from '../src/utils/counselorTechniques'
 
 export default function ChatFullScreen() {
@@ -18,7 +18,7 @@ export default function ChatFullScreen() {
   const { generateUnifiedPrompt } = useUnifiedSettings()
 
   useEffect(() => {
-    // Initialize with Ash's greeting message
+    // Initialize with Dolphin's greeting message
     const initialMessage: Message = {
       id: 'initial_greeting',
       sessionId: 'demo_session',
@@ -55,7 +55,7 @@ export default function ChatFullScreen() {
     const thinkingDelay = Math.random() * 1500 + 1500; // 1500-3000ms
     
     setTimeout(async () => {
-      const response = getAshResponse(content);
+      const response = getDolphinResponse(content);
       
       // 30%概率使用多气泡回复
       if (Math.random() < 0.3 && response.length > 10) {
@@ -111,7 +111,7 @@ export default function ChatFullScreen() {
     setIsTyping(false)
   }
 
-  const getAshResponse = (userMessage: string): string => {
+  const getDolphinResponse = (userMessage: string): string => {
     // Generate response based on AI settings and counselor techniques
     const unifiedPrompt = generateUnifiedPrompt()
     console.log('Using unified AI+Therapeutic settings for response:', unifiedPrompt)

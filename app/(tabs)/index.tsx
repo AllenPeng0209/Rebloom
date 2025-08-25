@@ -179,7 +179,7 @@ export default function HomeScreen() {
     retrieveMemories: () => Promise.resolve([]),
     updateContext: () => {},
     getContext: () => ({ recentTopics: [], emotionalState: 'stable' }),
-    getPersonalizedGreeting: () => Promise.resolve('你好！我是 Ash，很高兴见到你。'),
+    getPersonalizedGreeting: () => Promise.resolve('你好！我是 Dolphin，很高兴见到你。'),
     analyzeEmotionalPattern: () => Promise.resolve('stable')
   }
 

@@ -7,7 +7,7 @@ import { useUnifiedSettings } from '@/contexts/UnifiedSettingsContext';
 import { Message } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router, useFocusEffect } from 'expo-router';
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   StyleSheet,
   View

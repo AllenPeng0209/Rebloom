@@ -1,19 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { Message } from '@/types'
+import { LinearGradient } from 'expo-linear-gradient'
+import React, { useEffect, useRef, useState } from 'react'
 import {
-  View,
-  Text,
-  ScrollView,
+  Dimensions,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
-  StyleSheet,
-  Dimensions,
+  ScrollView,
   StatusBar,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient'
-import { MessageBubble, TypingIndicator } from './MessageBubble'
 import { ChatInput } from './ChatInput'
-import { Message } from '@/types'
+import { MessageBubble, TypingIndicator } from './MessageBubble'
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window')
 
@@ -39,6 +39,13 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
       scrollViewRef.current.scrollToEnd({ animated: true })
     }
   }, [messages, isTyping])
+
+  useEffect(() => {
+    // Auto-scroll to bottom when input height changes
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: true })
+    }
+  }, [inputHeight])
 
   const renderMessages = () => {
     return messages.map((message, index) => {
@@ -124,13 +131,13 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
               />
             )}
 
-            {/* Bottom padding for input */}
-            <View style={{ height: 20 }} />
+            {/* Dynamic bottom padding based on input height */}
+            <View style={{ height: Math.max(20, inputHeight - 60) }} />
           </ScrollView>
         </View>
 
         {/* Chat input */}
-        <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, { paddingBottom: Math.max(12, inputHeight - 60) }]}>
           <ChatInput
             onSend={onSendMessage}
             onHeightChange={setInputHeight}

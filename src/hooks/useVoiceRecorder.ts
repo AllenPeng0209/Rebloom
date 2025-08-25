@@ -140,7 +140,7 @@ export function useVoiceRecorder(options: VoiceRecorderOptions = {}) {
       // 重新抛出错误以便上层处理
       throw new Error(friendlyError);
     }
-  }, [recordingState.isRecording, cleanup, audioFormat, bitRate, sampleRate, maxDuration]);
+  }, [recordingState.isRecording, maxDuration]);
 
   // 停止录制
   const stopRecording = useCallback(async (): Promise<string | null> => {
@@ -277,7 +277,7 @@ export function useVoiceRecorder(options: VoiceRecorderOptions = {}) {
         error: '清除录制失败',
       }));
     }
-  }, [cleanup, recordingState.uri]);
+  }, []); // 移除所有依赖，使用 ref 来访问最新值
 
   // 获取录制时长（秒）
   const getDurationInSeconds = useCallback(() => {
@@ -300,9 +300,16 @@ export function useVoiceRecorder(options: VoiceRecorderOptions = {}) {
   // 清理资源
   useEffect(() => {
     return () => {
-      cleanup();
+      // 直接调用清理逻辑，避免依赖问题
+      if (recording) {
+        recording.stopAndUnloadAsync();
+      }
+      if (sound) {
+        sound.stopAsync();
+        sound.unloadAsync();
+      }
     };
-  }, [cleanup]);
+  }, []); // 空依赖数组，只在组件卸载时执行
 
   return {
     // 状态

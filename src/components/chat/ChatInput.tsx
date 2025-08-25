@@ -496,14 +496,14 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center', // 改为center对齐，确保按钮垂直居中
     paddingHorizontal: 4,
     paddingBottom: 4,
   },
   inputContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center', // 改为center对齐，确保输入框和按钮垂直居中
     marginRight: 12,
     justifyContent: 'flex-end',
   },
@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
   },
   sendButtonContainer: {
     marginLeft: 12,
-    marginBottom: -4,
+    marginBottom: 0, // 统一对齐，移除负边距
   },
   sendButton: {
     width: 48,
@@ -548,7 +548,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sendIcon: {
-    marginTop: -1, // Fine-tune icon alignment
+    marginTop: 0, // 移除图标偏移，保持居中对齐
   },
   voiceButton: {
     width: 48,

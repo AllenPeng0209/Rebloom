@@ -10,6 +10,7 @@ import {
   Dimensions,
   StatusBar,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons } from '@expo/vector-icons'
@@ -25,6 +26,9 @@ interface ChatScreenWithBackButtonProps {
   isTyping?: boolean
   currentSession?: string
   onBackPress?: () => void
+  onScroll?: (event: any) => void
+  loadingMore?: boolean
+  hasMore?: boolean
 }
 
 export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> = ({
@@ -32,7 +36,10 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
   onSendMessage,
   isTyping = false,
   currentSession,
-  onBackPress
+  onBackPress,
+  onScroll,
+  loadingMore = false,
+  hasMore = true
 }) => {
   const scrollViewRef = useRef<ScrollView>(null)
   const [inputHeight, setInputHeight] = useState(60)
@@ -120,7 +127,16 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
+            onScroll={onScroll}
+            scrollEventThrottle={400}
           >
+            {/* Loading more indicator at the top */}
+            {loadingMore && (
+              <View style={styles.loadingMoreContainer}>
+                <ActivityIndicator size="small" color="#FFFFFF" />
+                <Text style={styles.loadingMoreText}>加載更多消息...</Text>
+              </View>
+            )}
 
             {/* Welcome message if no messages yet */}
             {messages.length === 0 && (
@@ -262,5 +278,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: Platform.OS === 'ios' ? 20 : 16,
     paddingTop: 12,
+  },
+  loadingMoreContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 16,
+    marginBottom: 8,
+  },
+  loadingMoreText: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: '#FFFFFF',
+    opacity: 0.8,
   },
 })

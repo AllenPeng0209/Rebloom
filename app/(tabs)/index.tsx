@@ -7,7 +7,7 @@ import { useUnifiedSettings } from '@/contexts/UnifiedSettingsContext';
 import { Message } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router, useFocusEffect } from 'expo-router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import {
   StyleSheet,
   View
@@ -16,6 +16,7 @@ import { AuthScreen } from '../../src/components/auth/AuthScreen';
 import { useAuth } from '../../src/contexts/AuthContext';
 import { BailianMessage, sendBailianMessage } from '../../src/lib/bailian';
 import { ChatService } from '../../src/services/chatService';
+import LocalChatStorage from '../../src/services/localChatStorage';
 import {
   detectEmotion,
   extractKeyTopic,
@@ -39,7 +40,8 @@ const handleMultipleBubbleResponse = async (
   conversationId: string,
   userId: string,
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>,
-  ChatService: any
+  ChatService: any,
+  LocalChatStorage: any
 ) => {
   // 智能分割回复成多个气泡
   const bubbles = splitResponseIntoBubbles(fullResponse);
@@ -69,6 +71,9 @@ const handleMultipleBubbleResponse = async (
     };
 
     setMessages(prev => [...prev, aiMessage]);
+    
+    // 保存到本地存儲
+    await LocalChatStorage.saveMessage(aiMessage);
     
     // 保存到数据库
     try {
@@ -141,6 +146,9 @@ export default function HomeScreen() {
   const [isTyping, setIsTyping] = useState(false)
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null)
   const [sessionLength, setSessionLength] = useState(0)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
   const { hideTabBar, showTabBar } = useNavigation()
   const { t } = useLanguage()
   const { user, loading: authLoading } = useAuth()
@@ -199,6 +207,13 @@ export default function HomeScreen() {
     }
   }, [user, hasCompletedOnboarding, currentConversationId])
 
+  // Load previous conversation on app start
+  useEffect(() => {
+    if (user && hasCompletedOnboarding) {
+      loadPreviousConversation()
+    }
+  }, [user, hasCompletedOnboarding])
+
   const setupDailySummarySchedule = async () => {
     if (!user) return
     
@@ -210,6 +225,84 @@ export default function HomeScreen() {
     } catch (error) {
       console.error('設置每日總結失敗:', error)
     }
+  }
+
+  const loadPreviousConversation = async () => {
+    if (!user) return
+
+    try {
+      // 嘗試獲取之前的會話ID
+      const previousConversationId = await LocalChatStorage.getCurrentConversation()
+      
+      if (previousConversationId) {
+        setCurrentConversationId(previousConversationId)
+        
+        // 加載之前的消息（使用分頁接口）
+        const result = await LocalChatStorage.loadMessages(previousConversationId, 0)
+        if (result.messages.length > 0) {
+          setMessages(result.messages)
+          setHasMore(result.hasMore)
+          
+          // 更新對話上下文給AI
+          updateContext({
+            sessionId: previousConversationId,
+            recentTopics: extractTopicsFromMessages(result.messages.slice(-10))
+          })
+        }
+      } else {
+        // 沒有之前的會話，創建新的
+        initializeConversation()
+      }
+      setIsInitialLoad(false)
+    } catch (error) {
+      console.error('Error loading previous conversation:', error)
+      initializeConversation()
+      setIsInitialLoad(false)
+    }
+  }
+
+  const loadMoreMessages = async () => {
+    if (!currentConversationId || loadingMore || !hasMore || messages.length === 0) return
+    
+    setLoadingMore(true)
+    try {
+      const oldestMessage = messages[0]
+      const olderMessages = await LocalChatStorage.loadMoreMessages(
+        currentConversationId,
+        oldestMessage.id,
+        20
+      )
+      
+      if (olderMessages.length > 0) {
+        setMessages(prev => [...olderMessages, ...prev])
+      } else {
+        setHasMore(false)
+      }
+    } catch (error) {
+      console.error('Error loading more messages:', error)
+    } finally {
+      setLoadingMore(false)
+    }
+  }
+
+  const handleScroll = (event: any) => {
+    const { contentOffset } = event.nativeEvent
+    
+    // 當滾動到頂部附近時加載更多消息
+    if (contentOffset.y <= 50 && !loadingMore && hasMore && !isInitialLoad) {
+      loadMoreMessages()
+    }
+  }
+
+  const extractTopicsFromMessages = (messages: Message[]): string[] => {
+    const topics = new Set<string>()
+    messages.forEach(msg => {
+      if (msg.senderType === 'user') {
+        const topic = extractKeyTopic(msg.content)
+        if (topic) topics.add(topic)
+      }
+    })
+    return Array.from(topics)
   }
 
   const initializeConversation = async () => {
@@ -228,6 +321,10 @@ export default function HomeScreen() {
       }
 
       setCurrentConversationId(conversation.id)
+      
+      // 保存當前會話ID到本地
+      await LocalChatStorage.saveCurrentConversation(conversation.id)
+      await LocalChatStorage.createConversation(conversation.id, t('chat.greeting'))
 
       // 更新对话上下文
       updateContext({
@@ -313,16 +410,22 @@ export default function HomeScreen() {
     setMessages(prev => [...prev, userMessage])
     setIsTyping(true)
 
-    // Save user message to database
+    // Save user message to both database and local storage
     try {
+      // 保存到Supabase
       await ChatService.saveMessage(
         currentConversationId,
         user.id,
         content,
         'user'
       )
+      
+      // 保存到本地存儲
+      await LocalChatStorage.saveMessage(userMessage)
     } catch (error) {
       console.error('Error saving user message:', error)
+      // 即使Supabase失敗，也確保保存到本地
+      await LocalChatStorage.saveMessage(userMessage)
     }
 
     // 添加用户消息到记忆系统
@@ -390,17 +493,25 @@ export default function HomeScreen() {
       
       // print enhancedPrompt
       console.log('enhancedPrompt', enhancedPrompt)
+      // 從本地獲取更多歷史上下文（最多10條）
+      const contextMessages = await LocalChatStorage.getContextMessages(currentConversationId, 10);
+      
       // Prepare conversation history for Bailian API with memory-enhanced prompt
       const conversationHistory: BailianMessage[] = [
         {
           role: 'system',
           content: enhancedPrompt
         },
-        // Add recent conversation history (last 6 messages for context, further reduced)
-        ...messages.slice(-6).map(msg => ({
+        // Add context from local storage if available
+        ...(contextMessages.length > 0 ? contextMessages.slice(-6).map(msg => ({
           role: msg.senderType === 'user' ? 'user' as const : 'assistant' as const,
           content: msg.content
-        })),
+        })) : 
+        // Otherwise use current session messages
+        messages.slice(-6).map(msg => ({
+          role: msg.senderType === 'user' ? 'user' as const : 'assistant' as const,
+          content: msg.content
+        }))),
         // Add current user message
         {
           role: 'user',
@@ -419,7 +530,7 @@ export default function HomeScreen() {
       
       if (shouldUseMultipleBubbles && aiResponse.length > 10) {
         // 将回复分成多个气泡
-        await handleMultipleBubbleResponse(aiResponse, currentConversationId, user.id, setMessages, ChatService);
+        await handleMultipleBubbleResponse(aiResponse, currentConversationId, user.id, setMessages, ChatService, LocalChatStorage);
       } else {
         // 单个气泡回复
         const aiMessage: Message = {
@@ -438,12 +549,15 @@ export default function HomeScreen() {
         }
 
         setMessages(prev => [...prev, aiMessage])
+        
+        // 保存到本地存儲
+        await LocalChatStorage.saveMessage(aiMessage)
       }
       
       setIsTyping(false)
       setSessionLength(prev => prev + 1)
 
-      // Save AI message to database
+      // Save AI message to both database and local storage
       try {
         await ChatService.saveMessage(
           currentConversationId,
@@ -552,6 +666,9 @@ export default function HomeScreen() {
           isTyping={isTyping}
           currentSession={currentConversationId || 'loading'}
           onBackPress={handleBackToMood}
+          onScroll={handleScroll}
+          loadingMore={loadingMore}
+          hasMore={hasMore}
         />
       )}
     </ThemeProvider>

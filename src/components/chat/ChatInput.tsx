@@ -426,7 +426,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             >
               <Ionicons
                 name="arrow-up"
-                size={20}
+                size={24}
                 color={canSend ? '#FFFFFF' : 'rgba(255, 255, 255, 0.7)'}
                 style={styles.sendIcon}
               />
@@ -498,13 +498,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     paddingHorizontal: 4,
+    paddingBottom: 4,
   },
   inputContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
     marginRight: 12,
-    justifyContent: 'flex-end', // 确保内容对齐到底部
+    justifyContent: 'flex-end',
   },
   inputBackground: {
     flex: 1,
@@ -526,13 +527,13 @@ const styles = StyleSheet.create({
     lineHeight: 22, // 添加行高以改善多行文本的可读性
   },
   sendButtonContainer: {
-    marginLeft: 8,
-    marginBottom: 2,
+    marginLeft: 12,
+    marginBottom: -4,
   },
   sendButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     overflow: 'hidden',
     elevation: 2,
     shadowColor: '#000',
@@ -554,7 +555,7 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 24,
     overflow: 'hidden',
-    marginBottom: -4,
+    marginBottom: 0,
   },
   voiceButtonGradient: {
     width: '100%',

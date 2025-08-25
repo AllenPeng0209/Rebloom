@@ -9,10 +9,9 @@ import {
   PanResponder,
   Platform,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native'
 import { useVoiceRecorder } from '../../hooks/useVoiceRecorder'
 import { speechToText } from '../../lib/bailian_omni'
@@ -52,9 +51,6 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   const scaleAnim = useRef(new Animated.Value(1)).current
   const voiceButtonScale = useRef(new Animated.Value(1)).current
   const voiceButtonOpacity = useRef(new Animated.Value(1)).current
-  const dot1Anim = useRef(new Animated.Value(1)).current
-  const dot2Anim = useRef(new Animated.Value(1)).current
-  const dot3Anim = useRef(new Animated.Value(1)).current
   const inputRef = useRef<TextInput>(null)
   const voiceRecorderRef = useRef(voiceRecorder)
 
@@ -84,63 +80,6 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       voiceRecorderRef.current.clearRecording()
     }
   }, []) // 空依赖数组，只在组件卸载时执行
-
-  // 处理指示器动画
-  React.useEffect(() => {
-    if (isTranscribing) {
-      const startAnimation = () => {
-        Animated.sequence([
-          Animated.parallel([
-            Animated.timing(dot1Anim, {
-              toValue: 1.5,
-              duration: 600,
-              useNativeDriver: true,
-            }),
-            Animated.timing(dot2Anim, {
-              toValue: 1.5,
-              duration: 600,
-              delay: 200,
-              useNativeDriver: true,
-            }),
-            Animated.timing(dot3Anim, {
-              toValue: 1.5,
-              duration: 600,
-              delay: 400,
-              useNativeDriver: true,
-            }),
-          ]),
-          Animated.parallel([
-            Animated.timing(dot1Anim, {
-              toValue: 1,
-              duration: 600,
-              useNativeDriver: true,
-            }),
-            Animated.timing(dot2Anim, {
-              toValue: 1,
-              duration: 600,
-              useNativeDriver: true,
-            }),
-            Animated.timing(dot3Anim, {
-              toValue: 1,
-              duration: 600,
-              useNativeDriver: true,
-            }),
-          ]),
-        ]).start(() => {
-          if (isTranscribing) {
-            startAnimation()
-          }
-        })
-      }
-      
-      startAnimation()
-    } else {
-      // 重置动画
-      dot1Anim.setValue(1)
-      dot2Anim.setValue(1)
-      dot3Anim.setValue(1)
-    }
-  }, [isTranscribing]) // 只依赖 isTranscribing
 
   const handleSend = async () => {
     if (message.trim() && !disabled) {
@@ -548,65 +487,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           )}
         </LinearGradient>
         
-        {/* Recording duration indicator */}
-        {voiceRecorderRef.current.state.isRecording && (
-          <View style={styles.recordingIndicator}>
-            <View style={styles.recordingProgress}>
-              <View 
-                style={[
-                  styles.recordingProgressBar, 
-                  { 
-                    width: `${Math.min((voiceRecorderRef.current.state.duration / voiceRecorderRef.current.maxDuration) * 100, 100)}%` 
-                  }
-                ]} 
-              />
-            </View>
-            <Text style={styles.recordingText}>
-              {voiceRecorderRef.current.formatDuration()}
-            </Text>
-          </View>
-        )}
-        
-        {/* Transcribing indicator */}
-        {isTranscribing && (
-          <View style={styles.transcribingIndicator}>
-            <Text style={styles.transcribingText}>
-              转换并发送中...
-            </Text>
-            <View style={styles.processingDots}>
-              <Animated.View style={[styles.dot, styles.dot1, { transform: [{ scale: dot1Anim }] }]} />
-              <Animated.View style={[styles.dot, styles.dot2, { transform: [{ scale: dot2Anim }] }]} />
-              <Animated.View style={[styles.dot, styles.dot3, { transform: [{ scale: dot3Anim }] }]} />
-            </View>
-          </View>
-        )}
-        
-        {/* Loading indicator */}
-        {voiceRecorderRef.current.state.isLoading && !isTranscribing && (
-          <View style={styles.transcribingIndicator}>
-            <Text style={styles.transcribingText}>
-              准备中...
-            </Text>
-          </View>
-        )}
-        
-        {/* Long press hint */}
-        {!voiceRecorderRef.current.state.isRecording && !isTranscribing && !voiceRecorderRef.current.state.isLoading && !disabled && !recordingError && (
-          <View style={styles.hintIndicator}>
-            <Text style={styles.hintText}>
-              长按录音发送
-            </Text>
-          </View>
-        )}
-        
-        {/* Error indicator */}
-        {recordingError && !voiceRecorderRef.current.state.isRecording && !isTranscribing && !voiceRecorderRef.current.state.isLoading && (
-          <View style={styles.errorIndicator}>
-            <Text style={styles.errorText}>
-              录音不可用
-            </Text>
-          </View>
-        )}
+
       </Animated.View>
     </View>
   )
@@ -684,110 +565,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: 24,
   },
-  recordingIndicator: {
-    position: 'absolute',
-    top: -45,
-    left: '50%',
-    marginLeft: -40,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 15,
-    minWidth: 80,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-  },
-  recordingText: {
-    color: '#FFFFFF',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  recordingProgress: {
-    width: '100%',
-    height: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: 2,
-    marginBottom: 4,
-  },
-  recordingProgressBar: {
-    height: '100%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 2,
-  },
-  transcribingIndicator: {
-    position: 'absolute',
-    top: -45,
-    left: '50%',
-    marginLeft: -40,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 15,
-    minWidth: 80,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-  },
   transcribingText: {
-    color: '#FFFFFF',
-    fontSize: 11,
-    fontWeight: '500',
-  },
-  processingDots: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#FFFFFF',
-    marginHorizontal: 2,
-  },
-  dot1: {
-    backgroundColor: '#FFFFFF',
-  },
-  dot2: {
-    backgroundColor: '#FFFFFF',
-  },
-  dot3: {
-    backgroundColor: '#FFFFFF',
-  },
-  hintIndicator: {
-    position: 'absolute',
-    bottom: -25,
-    left: '50%',
-    marginLeft: -35,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 12,
-    minWidth: 70,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-  },
-  hintText: {
-    color: '#FFFFFF',
-    fontSize: 11,
-    fontWeight: '500',
-  },
-  errorIndicator: {
-    position: 'absolute',
-    bottom: -25,
-    left: '50%',
-    marginLeft: -35,
-    backgroundColor: 'rgba(255, 59, 48, 0.8)', // Red color for error
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 12,
-    minWidth: 70,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-  },
-  errorText: {
     color: '#FFFFFF',
     fontSize: 11,
     fontWeight: '500',

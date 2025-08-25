@@ -15,7 +15,7 @@ import {
   View,
 } from 'react-native'
 import { useVoiceRecorder } from '../../hooks/useVoiceRecorder'
-import { processVoiceToChat, VoiceChatResult } from '../../lib/bailian_omni'
+import { speechToText } from '../../lib/bailian_omni'
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
 
@@ -284,7 +284,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
       // 录音时长太短
       if (voiceRecorderRef.current.state.duration < 500) {
-        Alert.alert('录音时间太短', '请长按录音至少0.5秒', [
+        Alert.alert('录音时间太短', '请长按录音至少0.5秒进行语音转文字并发送', [
           { text: '知道了', style: 'default' }
         ])
         await voiceRecorderRef.current.clearRecording()
@@ -307,14 +307,13 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           setProcessingTimeout(timeout)
         });
 
-        // 使用新的语音转对话功能，直接获取AI回复
-        const chatResult = await Promise.race([
-          processVoiceToChat(base64Data, (progress) => {
+        // 只进行语音转文字，不调用AI对话
+        const transcribedText = await Promise.race([
+          speechToText(base64Data, (progress: string) => {
             console.log('处理进度:', progress)
-            // 可以在这里更新进度显示
           }),
           timeoutPromise
-        ]) as VoiceChatResult;
+        ]) as string;
 
         // 清除超时
         if (processingTimeout) {
@@ -322,7 +321,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           setProcessingTimeout(null)
         }
 
-        if (chatResult.transcribedText.trim()) {
+        if (transcribedText && transcribedText.trim()) {
           // 震动反馈表示成功
           if (Platform.OS === 'ios') {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
@@ -330,17 +329,9 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
           }
           
-          // 直接发送用户的语音识别结果，不等待AI回复
-          onSend(chatResult.transcribedText.trim())
+          // 自动发送转录音频的文字
+          onSend(transcribedText.trim())
           
-          // 如果有AI回复，也发送AI的回复
-          if (chatResult.aiResponse.trim()) {
-            // 延迟一下让用户消息先显示
-            setTimeout(() => {
-              // 这里需要修改onSend函数来支持AI消息类型
-              onSend(chatResult.aiResponse.trim())
-            }, 500)
-          }
         } else {
           Alert.alert('语音识别失败', '未能识别到语音内容，请重试', [
             { text: '重试', style: 'default' },
@@ -348,12 +339,12 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           ])
         }
       } catch (transcriptionError) {
-        console.error('语音转对话失败:', transcriptionError)
+        console.error('语音转文字失败:', transcriptionError)
         
-        let errorMessage = '语音处理失败，请重试'
+        let errorMessage = '语音转文字失败，请重试'
         if (transcriptionError instanceof Error) {
           if (transcriptionError.message.includes('超时')) {
-            errorMessage = '语音处理超时，请检查网络连接后重试'
+            errorMessage = '语音转文字超时，请检查网络连接后重试'
           } else if (transcriptionError.message.includes('网络')) {
             errorMessage = '网络连接失败，请检查网络后重试'
           } else if (transcriptionError.message.includes('API')) {
@@ -361,7 +352,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           }
         }
         
-        Alert.alert('语音处理失败', errorMessage, [
+        Alert.alert('语音转文字失败', errorMessage, [
           { 
             text: '重试', 
             style: 'default',
@@ -580,7 +571,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         {isTranscribing && (
           <View style={styles.transcribingIndicator}>
             <Text style={styles.transcribingText}>
-              转换中...
+              转换并发送中...
             </Text>
             <View style={styles.processingDots}>
               <Animated.View style={[styles.dot, styles.dot1, { transform: [{ scale: dot1Anim }] }]} />
@@ -603,7 +594,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         {!voiceRecorderRef.current.state.isRecording && !isTranscribing && !voiceRecorderRef.current.state.isLoading && !disabled && !recordingError && (
           <View style={styles.hintIndicator}>
             <Text style={styles.hintText}>
-              长按录音
+              长按录音发送
             </Text>
           </View>
         )}

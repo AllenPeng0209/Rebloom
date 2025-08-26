@@ -18,6 +18,7 @@ try {
 interface UnifiedSettingsContextType {
   generateUnifiedPrompt: () => string;
   generateMemoryEnhancedPrompt: (userInput: string, relevantMemories: any[]) => Promise<string>;
+  logout: () => Promise<{ error: any }>;
   isLoading: boolean;
 }
 
@@ -38,7 +39,7 @@ interface UnifiedSettingsProviderProps {
 export const UnifiedSettingsProvider: React.FC<UnifiedSettingsProviderProps> = ({ children }) => {
   const { generateSystemPrompt, isLoading: aiLoading } = useAISettings();
   const { generateTherapeuticPrompt, isLoading: therapeuticLoading } = useTherapeuticSettings();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   
   // 默认的记忆功能实现（不依赖MemoryProvider）
   const memoryFunctions = {
@@ -117,6 +118,7 @@ ${empathicElements ? `特别注意：${empathicElements}` : ''}
   const value: UnifiedSettingsContextType = {
     generateUnifiedPrompt,
     generateMemoryEnhancedPrompt,
+    logout,
     isLoading: aiLoading || therapeuticLoading || memoryLoading
   };
 

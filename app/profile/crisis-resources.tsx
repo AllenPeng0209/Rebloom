@@ -23,60 +23,60 @@ export default function CrisisResourcesScreen() {
   const crisisResources: CrisisResource[] = [
     {
       id: '1',
-      name: '生命線',
-      description: '24小時免費心理諮詢和自殺防治熱線',
-      phone: '1995',
+      name: t('crisisResources.hotlines.suicide.name'),
+      description: t('crisisResources.hotlines.suicide.description'),
+      phone: t('crisisResources.hotlines.suicide.number'),
       website: 'https://www.life1995.org.tw',
-      available: '24小時',
-      region: '台灣',
+      available: t('crisisResources.available24h'),
+      region: t('crisisResources.region'),
       type: 'hotline'
     },
     {
       id: '2',
-      name: '張老師',
-      description: '青少年輔導專線，提供情感支持和心理諮詢',
-      phone: '1980',
+      name: t('crisisResources.hotlines.crisis.name'),
+      description: t('crisisResources.hotlines.crisis.description'),
+      phone: t('crisisResources.hotlines.crisis.number'),
       website: 'https://www.1980.org.tw',
-      available: '24小時',
-      region: '台灣',
+      available: t('crisisResources.available24h'),
+      region: t('crisisResources.region'),
       type: 'hotline'
     },
     {
       id: '3',
-      name: '安心專線',
-      description: '衛生福利部心理及口腔健康司設立的心理諮詢專線',
-      phone: '1925',
-      available: '24小時',
-      region: '台灣',
+      name: t('crisisResources.hotlines.mental.name'),
+      description: t('crisisResources.hotlines.mental.description'),
+      phone: t('crisisResources.hotlines.mental.number'),
+      available: t('crisisResources.available24h'),
+      region: t('crisisResources.region'),
       type: 'hotline'
     },
     {
       id: '4',
-      name: '緊急醫療服務',
-      description: '緊急醫療救護服務',
-      phone: '119',
-      available: '24小時',
-      region: '台灣',
+      name: t('crisisResources.emergency.medical.name'),
+      description: t('crisisResources.emergency.medical.description'),
+      phone: t('crisisResources.emergency.medical.number'),
+      available: t('crisisResources.available24h'),
+      region: t('crisisResources.region'),
       type: 'emergency'
     },
     {
       id: '5',
-      name: '警察局',
-      description: '緊急報警服務',
-      phone: '110',
-      available: '24小時',
-      region: '台灣',
+      name: t('crisisResources.emergency.police.name'),
+      description: t('crisisResources.emergency.police.description'),
+      phone: t('crisisResources.emergency.police.number'),
+      available: t('crisisResources.available24h'),
+      region: t('crisisResources.region'),
       type: 'emergency'
     }
   ];
 
   const handleCall = (phone: string, name: string) => {
     Alert.alert(
-      `撥打 ${name}`,
-      `即將撥打 ${phone}`,
+      t('crisisResources.callConfirm'),
+      t('crisisResources.callMessage', { number: phone }),
       [
-        { text: '取消', style: 'cancel' },
-        { text: '撥打', onPress: () => {
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('crisisResources.call'), onPress: () => {
           Linking.openURL(`tel:${phone}`);
         }}
       ]
@@ -163,7 +163,7 @@ export default function CrisisResourcesScreen() {
                 style={styles.websiteGradient}
               >
                 <IconSymbol name="globe" size={16} color="#8B5A8C" />
-                <Text style={styles.websiteText}>網站</Text>
+                <Text style={styles.websiteText}>{t('crisisResources.website')}</Text>
               </LinearGradient>
             </TouchableOpacity>
           )}
@@ -189,7 +189,7 @@ export default function CrisisResourcesScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>危機資源</Text>
+        <Text style={styles.headerTitle}>{t('crisisResources.title')}</Text>
         <View style={styles.placeholder} />
       </View>
 
@@ -202,20 +202,20 @@ export default function CrisisResourcesScreen() {
               style={styles.emergencyGradient}
             >
               <IconSymbol name="exclamationmark.triangle.fill" size={32} color="white" />
-              <Text style={styles.emergencyTitle}>緊急情況</Text>
+              <Text style={styles.emergencyTitle}>{t('crisisResources.emergency.title')}</Text>
               <Text style={styles.emergencyDescription}>
-                如果您正在考慮傷害自己或他人，請立即撥打緊急服務電話或前往最近的急診室。
+                {t('crisisResources.emergency.description')}
               </Text>
               <TouchableOpacity 
                 style={styles.emergencyCallButton}
-                onPress={() => handleCall('119', '緊急醫療服務')}
+                onPress={() => handleCall('119', t('crisisResources.emergency.medical.name'))}
               >
                 <LinearGradient
                   colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}
                   style={styles.emergencyCallGradient}
                 >
                   <IconSymbol name="phone.fill" size={16} color="white" />
-                  <Text style={styles.emergencyCallText}>撥打 119</Text>
+                  <Text style={styles.emergencyCallText}>{t('crisisResources.emergency.call119')}</Text>
                 </LinearGradient>
               </TouchableOpacity>
             </LinearGradient>
@@ -224,9 +224,9 @@ export default function CrisisResourcesScreen() {
 
         {/* Resources */}
         <View style={styles.resourcesSection}>
-          <Text style={styles.resourcesTitle}>心理健康資源</Text>
+          <Text style={styles.resourcesTitle}>{t('crisisResources.resources.title')}</Text>
           <Text style={styles.resourcesSubtitle}>
-            以下是可信賴的心理健康支持資源，全部免費且保密
+            {t('crisisResources.resources.subtitle')}
           </Text>
           
           {crisisResources.map(renderResource)}
@@ -234,7 +234,7 @@ export default function CrisisResourcesScreen() {
 
         {/* Self-Care Tips */}
         <View style={styles.tipsSection}>
-          <Text style={styles.tipsTitle}>即時自我照護</Text>
+          <Text style={styles.tipsTitle}>{t('crisisResources.selfCare.title')}</Text>
           
           <View style={styles.tipsCard}>
             <LinearGradient

@@ -1,0 +1,977 @@
+{
+  "common": {
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "back": "戻る",
+    "next": "次へ",
+    "done": "完了",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "success": "成功",
+    "retry": "再試行",
+    "ok": "OK"
+  },
+  "personalInfo": {
+    "title": "個人情報",
+    "name": "名前",
+    "email": "メールアドレス",
+    "age": "年齢",
+    "location": "場所",
+    "timezone": "タイムゾーン",
+    "mentalHealthGoals": "メンタルヘルス目標",
+    "emergencyContact": "緊急連絡先",
+    "emergencyContactName": "連絡先名前",
+    "emergencyContactPhone": "連絡先電話番号",
+    "emergencyContactRelationship": "関係",
+    "save": "保存",
+    "saveSuccess": "保存完了",
+    "saveSuccessMessage": "個人情報が更新されました",
+    "placeholders": {
+      "name": "お名前を入力してください",
+      "email": "メールアドレスを入力してください",
+      "location": "お住まいの場所を入力してください",
+      "emergencyContactName": "緊急連絡先の名前",
+      "emergencyContactPhone": "連絡先電話番号",
+      "emergencyContactRelationship": "あなたとの関係（例：家族、友人）"
+    },
+    "ageRanges": {
+      "18-24": "18-24歳",
+      "25-34": "25-34歳",
+      "35-44": "35-44歳",
+      "45-54": "45-54歳",
+      "55-64": "55-64歳",
+      "65+": "65歳以上"
+    },
+    "goals": {
+      "anxiety": "不安の管理",
+      "depression": "うつ病への対処",
+      "sleep": "睡眠の改善",
+      "confidence": "自信の構築",
+      "relationships": "人間関係",
+      "workStress": "仕事のストレス",
+      "emotionRegulation": "感情調整",
+      "trauma": "トラウマからの回復",
+      "personalGrowth": "個人的成長",
+      "lifeBalance": "ライフバランス"
+    }
+  },
+  "aiSettings": {
+    "title": "AI個性設定",
+    "subtitle": "AIコンパニオンの個性をカスタマイズ",
+    "personalityTypes": {
+      "supportive": {
+        "name": "温かいサポート型",
+        "description": "友人のように温かく、感情的サポートを提供"
+      },
+      "wise": {
+        "name": "賢明な指導者型",
+        "description": "指導者のように賢く、深い洞察を提供"
+      },
+      "gentle": {
+        "name": "優しい同伴者型",
+        "description": "家族のように優しく、辛抱強く傾聴"
+      },
+      "energetic": {
+        "name": "活力ある激励型",
+        "description": "コーチのように積極的で、ポジティブなエネルギーを刺激"
+      }
+    },
+    "tones": {
+      "warm": {
+        "name": "温かく親しみやすい",
+        "description": "温かい口調で、親友のように親しみやすい"
+      },
+      "professional": {
+        "name": "プロフェッショナルで安定",
+        "description": "プロの口調で、カウンセラーのように安定"
+      },
+      "gentle": {
+        "name": "優しく繊細",
+        "description": "優しい口調で、家族のように繊細"
+      },
+      "encouraging": {
+        "name": "励ましポジティブ",
+        "description": "励ましの口調で、指導者のように積極的"
+      }
+    },
+    "capabilities": {
+      "standard": {
+        "name": "標準モード",
+        "description": "バランスの取れたAI能力、日常会話に適している"
+      },
+      "advanced": {
+        "name": "上級モード",
+        "description": "より強い理解力、深い心理分析"
+      },
+      "empathetic": {
+        "name": "共感モード",
+        "description": "感情理解に焦点、高度な共感力"
+      }
+    },
+    "resetSettings": "設定をリセット",
+    "resetConfirm": "リセット確認",
+    "resetMessage": "すべてのAI設定を推奨値にリセットしますか？この操作は元に戻せません。",
+    "resetSuccess": "設定がリセットされました",
+    "resetSuccessMessage": "すべてのAI設定が推奨値にリセットされました。",
+    "logoutFromAI": "AIからログアウト",
+    "logoutFromAIMessage": "AIサービスからログアウトしますか？再認証が必要になります。"
+  },
+  "therapeuticSettings": {
+    "title": "治療設定",
+    "subtitle": "あなたに合った治療法を選択",
+    "approaches": {
+      "cbt": {
+        "name": "認知行動療法（CBT）",
+        "description": "思考パターンと行動の関係に焦点を当て、ネガティブな思考を特定し変更するのを助ける"
+      },
+      "dbt": {
+        "name": "弁証法的行動療法（DBT）",
+        "description": "感情調整、対人関係スキル、苦痛耐性に焦点を当てる"
+      },
+      "act": {
+        "name": "受容とコミットメント療法（ACT）",
+        "description": "困難な感情を受け入れ、価値観に基づく行動に焦点を当てる"
+      },
+      "humanistic": {
+        "name": "人間中心療法",
+        "description": "人間中心で、自己実現と個人の成長を強調"
+      },
+      "psychodynamic": {
+        "name": "精神力動療法",
+        "description": "無意識のプロセスと初期体験が現在の行動に与える影響を探る"
+      },
+      "mindfulness": {
+        "name": "マインドフルネス療法",
+        "description": "現在の瞬間への気づきを育み、反すうと不安を減らす"
+      }
+    }
+  },
+  "subscription": {
+    "title": "マイサブスクリプション",
+    "currentPlan": "現在のプラン",
+    "freePlan": "無料プラン",
+    "premiumPlan": "プレミアムプラン",
+    "features": "機能",
+    "upgrade": "アップグレード",
+    "manage": "サブスクリプション管理",
+    "upgradeConfirm": "アップグレード確認",
+    "upgradeMessage": "月額$9.99のプレミアムプランにアップグレードしますか？",
+    "upgradeSuccess": "アップグレード成功",
+    "upgradeSuccessMessage": "プレミアムへようこそ！強化機能をお楽しみください。"
+  },
+  "billing": {
+    "title": "請求管理",
+    "paymentHistory": "支払い履歴",
+    "nextPayment": "次回支払い",
+    "paymentMethod": "支払い方法",
+    "downloadInvoice": "請求書をダウンロード",
+    "updatePayment": "支払い方法を更新",
+    "noPaymentHistory": "支払い履歴はありません"
+  },
+  "notifications": {
+    "title": "通知設定",
+    "general": {
+      "title": "一般",
+      "enableNotifications": {
+        "title": "通知を有効にする",
+        "description": "すべての通知のオンオフを切り替える"
+      }
+    },
+    "moodReminders": {
+      "title": "気分リマインダー",
+      "moodCheckIns": {
+        "title": "気分チェックイン",
+        "description": "気分を記録するリマインダー"
+      },
+      "reminderTimes": {
+        "title": "リマインダー時間"
+      },
+      "times": {
+        "morning": "午前9:00",
+        "noon": "正午12:00",
+        "evening": "午後6:00",
+        "night8": "午後8:00",
+        "night9": "午後9:00"
+      }
+    }
+  },
+  "help": {
+    "title": "ヘルプセンター",
+    "searchPlaceholder": "よくある質問を検索...",
+    "faq": "よくある質問",
+    "gettingStarted": "はじめに",
+    "troubleshooting": "トラブルシューティング",
+    "privacy": "プライバシーとセキュリティ",
+    "billing": "請求とサブスクリプション",
+    "contact": "サポートに連絡"
+  },
+  "contactSupport": {
+    "title": "サポートに連絡",
+    "subject": "件名",
+    "subjectPlaceholder": "問題を簡潔に説明してください...",
+    "description": "詳細",
+    "descriptionPlaceholder": "遭遇した問題を詳しく説明してください。以下を含めてください：\n• 具体的なエラーメッセージ\n• 問題が発生した手順\n• 期待していた結果\n• その他の関連情報",
+    "email": "メールアドレス",
+    "emailPlaceholder": "あなたのメールアドレス",
+    "priority": "優先度",
+    "priorities": {
+      "low": {
+        "name": "低",
+        "description": "一般的な問題、3-5営業日で返信"
+      },
+      "medium": {
+        "name": "中",
+        "description": "重要な問題、1-2営業日で返信"
+      },
+      "high": {
+        "name": "高",
+        "description": "緊急問題、24時間以内に返信"
+      }
+    },
+    "submit": "送信",
+    "submitSuccess": "サポートリクエストが送信されました",
+    "submitSuccessMessage": "サポートリクエストが送信されました。すぐに返信いたします！"
+  },
+  "feedback": {
+    "title": "フィードバック",
+    "subtitle": "Rebloomの改善にご協力ください",
+    "type": "フィードバックタイプ",
+    "types": {
+      "general": "一般的なフィードバック",
+      "bug": "バグレポート",
+      "feature": "機能リクエスト",
+      "improvement": "改善提案"
+    },
+    "subject": "件名",
+    "subjectPlaceholder": "フィードバックを簡潔に説明してください...",
+    "description": "詳細",
+    "descriptionPlaceholder": "ご意見、遭遇した問題、提案などをお聞かせください...",
+    "email": "メールアドレス（任意）",
+    "emailPlaceholder": "あなたのメールアドレス",
+    "submit": "フィードバックを送信",
+    "submitSuccess": "フィードバックが送信されました",
+    "submitSuccessMessage": "フィードバックをありがとうございます！ご意見を大切にしています。"
+  },
+  "crisisResources": {
+    "title": "危機リソース",
+    "subtitle": "緊急メンタルヘルスサポート",
+    "warning": "即座に危険な状況にある場合は、すぐに緊急サービスに連絡してください。",
+    "hotlines": {
+      "title": "危機ホットライン",
+      "suicide": {
+        "name": "いのちの電話",
+        "number": "0570-783-556",
+        "description": "24時間対応の自殺防止ホットライン"
+      },
+      "crisis": {
+        "name": "こころの健康相談統一ダイヤル",
+        "number": "0570-064-556",
+        "description": "24時間メンタルヘルス相談"
+      }
+    },
+    "emergency": {
+      "title": "緊急サービス",
+      "medical": {
+        "name": "救急医療サービス",
+        "number": "119",
+        "description": "緊急医療・消防サービス"
+      },
+      "police": {
+        "name": "警察",
+        "number": "110",
+        "description": "緊急警察サービス"
+      }
+    },
+    "callConfirm": "通話確認",
+    "callMessage": "{{number}}に発信しますか？",
+    "call": "発信"
+  },
+  "about": {
+    "title": "Rebloomについて",
+    "subtitle": "あなたのAIメンタルヘルスコンパニオン",
+    "version": "バージョン {{version}}",
+    "buildNumber": "ビルド {{build}}",
+    "lastUpdate": "最終更新：{{date}}",
+    "developer": "開発者：{{developer}}",
+    "contact": {
+      "title": "お問い合わせ",
+      "website": "公式ウェブサイト",
+      "email": "カスタマーサービスメール",
+      "support": "テクニカルサポート"
+    },
+    "legal": {
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約"
+    },
+    "team": {
+      "title": "コアチーム",
+      "members": {
+        "founder": {
+          "name": "サラ・チェン博士",
+          "role": "心理学コンサルタント",
+          "description": "臨床心理学博士、認知行動療法専門"
+        },
+        "cto": {
+          "name": "アレックス・キム",
+          "role": "プロダクトディレクター",
+          "description": "メンタルヘルステクノロジー製品10年の経験"
+        },
+        "ai": {
+          "name": "マヤ・パテル",
+          "role": "AI研究者",
+          "description": "自然言語処理と感情計算の専門家"
+        },
+        "security": {
+          "name": "デビッド・リウ",
+          "role": "プライバシーエンジニア",
+          "description": "データセキュリティとプライバシー保護の専門家"
+        }
+      }
+    },
+    "stats": {
+      "title": "私たちの成果",
+      "users": {
+        "title": "100万人以上のユーザーが信頼",
+        "description": "世界中の100万人以上のユーザーがRebloomを選択"
+      },
+      "availability": {
+        "title": "24/7 可用性",
+        "description": "99.9%のサービス稼働時間"
+      },
+      "privacy": {
+        "title": "プライバシー優先",
+        "description": "エンドツーエンド暗号化、データ漏洩ゼロ記録"
+      },
+      "certification": {
+        "title": "専門認証",
+        "description": "メンタルヘルス専門機関による認証"
+      }
+    },
+    "mission": {
+      "title": "私たちの使命",
+      "description": "Rebloomは、すべての人が高品質なメンタルヘルスサポートにアクセスできるようにすることに取り組んでいます。テクノロジーがメンタルヘルスサービスをよりアクセスしやすく、便利で効果的にできると信じています。AI技術と専門的な心理学知識の組み合わせにより、ユーザーに24/7の感情サポートとパーソナライズされたメンタルヘルスガイダンスを提供します。"
+    },
+    "copyright": "© 2024 Rebloom. 全著作権所有。",
+    "tagline": "愛とテクノロジーで、すべての心を守る"
+  },
+  "languageSettings": {
+    "title": "言語設定",
+    "subtitle": "希望する言語を選択",
+    "currentLanguage": "現在の言語",
+    "availableLanguages": "利用可能な言語",
+    "languages": {
+      "zh-TW": {
+        "name": "繁體中文",
+        "description": "台湾繁体中国語"
+      },
+      "zh-CN": {
+        "name": "简体中文",
+        "description": "中国簡体中国語"
+      },
+      "ja": {
+        "name": "日本語",
+        "description": "日本語"
+      },
+      "en": {
+        "name": "English",
+        "description": "英語（米国）"
+      }
+    },
+    "save": "保存",
+    "saveSuccess": "言語設定が正常に保存されました"
+  },
+  "mood": {
+    "title": "気分",
+    "subtitle": "感情を追跡し、内面の世界を理解する",
+    "todaysInsights": "今日のインサイト",
+    "insightsFor": "{{date}}のインサイト",
+    "mockInsightText": "これはデモ版です",
+    "mockInsightSubtext": "実際版では、あなたの会話に基づいたパーソナライズされたインサイトと分析が表示されます",
+    "noConversations": "今日はまだ会話がありません",
+    "noConversationsText": "会話を始めて毎日の気分インサイトを生成しましょう",
+    "startConversation": "チャットを開始",
+    "insightHistory": "インサイト履歴",
+    "dailyInsight": "毎日のインサイト",
+    "goodDay": "良い日",
+    "neutral": "普通",
+    "toughDay": "つらい日",
+    "moodThisWeek": "今週の気分",
+    "quickMoodCheck": "クイック気分チェック",
+    "howAreYouFeeling": "今どのように感じていますか？",
+    "checkIn": {
+      "title": "気分チェックイン",
+      "howFeeling": "今どのように感じていますか？",
+      "selectMood": "現在の気分を選択してください",
+      "whatEmotions": "どのような感情を感じていますか？",
+      "chooseEmotions": "共感できる感情を選択してください",
+      "additionalThoughts": "他に考えがありますか？",
+      "optionalNotes": "今日についてのオプションのメモ",
+      "moods": {
+        "terrible": {
+          "label": "ひどい",
+          "description": "とても落ち込んで、ストレスを感じている"
+        },
+        "poor": {
+          "label": "良くない",
+          "description": "辛い一日で、がっかりしている"
+        },
+        "fair": {
+          "label": "普通",
+          "description": "良くも悪くもなく、まあまあ"
+        },
+        "good": {
+          "label": "良い",
+          "description": "ポジティブで満足している"
+        },
+        "excellent": {
+          "label": "素晴らしい",
+          "description": "最高の気分で、エネルギーに満ちている"
+        }
+      },
+      "emotions": {
+        "anxious": "不安",
+        "calm": "穏やか",
+        "energetic": "エネルギッシュ",
+        "tired": "疲れた",
+        "stressed": "ストレス",
+        "hopeful": "希望に満ちた",
+        "sad": "悲しい",
+        "grateful": "感謝",
+        "overwhelmed": "圧倒された",
+        "peaceful": "平和",
+        "frustrated": "イライラ",
+        "motivated": "やる気がある"
+      },
+      "categories": {
+        "positive": "ポジティブ感情",
+        "negative": "ネガティブ感情",
+        "neutral": "中性感情"
+      },
+      "notesPlaceholder": "今日はどうでしたか？何を考えていますか？",
+      "summary": {
+        "title": "気分サマリー",
+        "emotions": "感情：",
+        "back": "戻る",
+        "next": "次へ",
+        "complete": "完了"
+      }
+    }
+  },
+  "memoryManagement": {
+    "title": "記憶管理",
+    "subtitle": "AI会話記憶を管理",
+    "totalMemories": "総記憶数：{{count}}",
+    "importanceFilter": "重要度でフィルター",
+    "all": "すべて",
+    "high": "高",
+    "medium": "中",
+    "low": "低",
+    "deleteConfirm": "削除確認",
+    "deleteMessage": "この記憶を削除してもよろしいですか？",
+    "updateImportance": "重要度を更新",
+    "importanceLevels": {
+      "low": "低 (3)",
+      "medium": "中 (5)",
+      "high": "高 (8)",
+      "veryHigh": "非常に高 (10)"
+    },
+    "empty": "記憶が見つかりません",
+    "emptyDescription": "AIの会話記憶はチャット中にここに表示されます。"
+  },
+  "chat": {
+    "greeting": "こんにちは！私はRebloomのAIアシスタントです。お会いできて嬉しいです。あなたの話を聞いてサポートするためにここにいます。",
+    "response1": "お気持ちをお察しします。",
+    "response2": "続けてください、聞いています。",
+    "response3": "とても困難な状況ですね。",
+    "response4": "もう少し詳しくお話しいただけますか？",
+    "response5": "これがあなたにとって重要なことだと感じます。"
+  },
+  "nav": {
+    "home": "チャット",
+    "chat": "チャット",
+    "mood": "気分",
+    "explore": "探索",
+    "profile": "マイページ"
+  },
+  "profile": {
+    "title": "マイページ",
+    "userJoinedDays": "Rebloomと一緒に{{days}}日間",
+    "logout": "ログアウト",
+    "logoutConfirm": "ログアウト確認",
+    "logoutMessage": "ログアウトしてもよろしいですか？",
+    "logoutFailed": "ログアウト失敗",
+    "logoutFailedMessage": "ログアウトに失敗しました。再試行してください。",
+    "logoutSuccess": "ログアウト成功",
+    "logoutSuccessMessage": "正常にログアウトしました。",
+    "cancel": "キャンセル",
+    "version": "Rebloom v{{version}}",
+    "section": {
+      "personal": "個人プロフィール",
+      "subscription": "サブスクリプションと支払い",
+      "ai": "AI設定",
+      "notifications": "通知とリマインダー",
+      "privacy": "プライバシーとセキュリティ",
+      "support": "サポートとヘルプ",
+      "about": "アプリについて"
+    },
+    "personalInfo": {
+      "title": "個人情報",
+      "subtitle": "プロフィールと設定を編集"
+    },
+    "subscription": {
+      "title": "マイサブスクリプション",
+      "subtitle": "サブスクリプションプランを管理"
+    },
+    "billing": {
+      "title": "請求管理",
+      "subtitle": "支払い履歴と請求書を表示"
+    },
+    "aiPersonality": {
+      "title": "AIパーソナリティ設定",
+      "subtitle": "AIコンパニオンの個性と技術特性を調整"
+    },
+    "therapeuticApproach": {
+      "title": "治療アプローチ",
+      "subtitle": "あなたに適した治療技術を選択"
+    },
+    "notifications": {
+      "title": "プッシュ通知",
+      "subtitle": "通知とリマインダー設定を管理"
+    },
+    "moodReminders": {
+      "title": "気分リマインダー",
+      "subtitle": "気分追跡リマインダーを設定"
+    },
+    "wellnessCheck": {
+      "title": "健康チェック",
+      "subtitle": "定期的な健康評価"
+    },
+    "premium": "プレミアム",
+    "privacySettings": "プライバシー設定",
+    "privacySettingsSubtitle": "データ共有と保存を制御",
+    "crisisResources": "危機リソース",
+    "crisisResourcesSubtitle": "緊急メンタルヘルスリソース",
+    "helpCenter": "ヘルプセンター",
+    "helpCenterSubtitle": "よくある質問と使用ガイド",
+    "contactSupport": "サポートに連絡",
+    "contactSupportSubtitle": "技術サポートとヘルプを取得",
+    "feedback": "フィードバック",
+    "feedbackSubtitle": "アプリの改善にご協力ください",
+    "about": "Rebloomについて",
+    "aboutSubtitle": "アプリバージョンと情報",
+    "terms": "利用規約",
+    "termsSubtitle": "利用規約とポリシー",
+    "privacyPolicy": "プライバシーポリシー",
+    "privacyPolicySubtitle": "プライバシー保護について",
+    "languageSettings": "言語設定",
+    "languageSettingsSubtitle": "アプリの表示言語を変更",
+    "billing": "請求管理",
+    "billingSubtitle": "支払い履歴と請求書を表示",
+    "therapeuticApproach": "治療アプローチ",
+    "therapeuticApproachSubtitle": "あなたに合った治療技術を選択",
+    "moodReminders": "気分リマインダー",
+    "moodRemindersSubtitle": "気分記録リマインダーを設定",
+    "wellnessCheck": "ウェルネスチェック",
+    "wellnessCheckSubtitle": "定期的な健康状態評価",
+    "dataExport": "データエクスポート",
+    "dataExportSubtitle": "個人データをエクスポート",
+    "emergencyContacts": "緊急連絡先",
+    "emergencyContactsSubtitle": "緊急時の連絡先を管理"
+  },
+  "terms": {
+    "title": "利用規約",
+    "lastUpdated": "最終更新：{{date}}",
+    "description": "Rebloomサービスの利用規約をご確認ください。",
+    "toc": "目次",
+    "agreement": "同意書",
+    "agreementText": "本利用規約を読み、理解し、同意したことを確認します。",
+    "contactLegal": "法的事項については、privacy@Rebloom.appまでお問い合わせください。",
+    "sections": {
+      "acceptance": {
+        "title": "1. 規約の承諾",
+        "content": {
+          "0": "Rebloom（以下「本サービス」または「アプリケーション」）をご利用いただき、ありがとうございます。本利用規約（以下「規約」）は、お客様とRebloomチーム（以下「当社」、「弊社」または「会社」）との間の法的契約です。",
+          "1": "本サービスにアクセスまたは使用することで、お客様は本規約に拘束されることに同意したものとみなされます。本規約に同意できない場合は、本サービスを使用しないでください。",
+          "2": "当社は随時本規約を更新する権利を留保します。変更があった場合は、アプリケーション内またはメールでお知らせします。"
+        }
+      },
+      "serviceDescription": {
+        "title": "2. サービスの説明",
+        "content": {
+          "0": "Rebloomは、メンタルヘルスサポートとウェルネス向上を目的としたデジタルプラットフォームです。",
+          "1": "主な機能：AIコンパニオンとの対話、気分追跡、パーソナライズされた洞察、危機介入リソース、ガイド付き瞑想とリラクゼーション、プログレス分析。",
+          "2": "本サービスは情報提供と一般的なウェルネスサポートを目的としており、専門的な医学的助言、診断、治療の代替品ではありません。"
+        }
+      },
+      "userEligibility": {
+        "title": "3. ユーザー資格",
+        "content": {
+          "0": "本サービスを使用するには、18歳以上である必要があります。",
+          "1": "18歳未満の場合は、保護者または法的保護者の同意が必要です。",
+          "2": "アカウントを作成する際は、正確で完全な情報を提供する必要があります。",
+          "3": "アカウントの機密性を維持し、すべてのアカウントアクティビティに責任を負います。"
+        }
+      },
+      "acceptableUse": {
+        "title": "4. 利用規定",
+        "content": {
+          "0": "本サービスを合法的で建設的な目的でのみ使用することに同意します。",
+          "1": "禁止行為：違法、有害、脅迫的、嫌がらせ、または不適切なコンテンツの投稿。他のユーザーのプライバシーや権利の侵害。サービスのセキュリティや機能の妨害。誤解を招く情報や虚偽情報の共有。",
+          "2": "当社は、これらの規則に違反するユーザーのアクセスを停止または終了する権利を留保します。"
+        }
+      },
+      "privacy": {
+        "title": "5. プライバシーとデータ保護",
+        "content": {
+          "0": "お客様のプライバシーは当社にとって最優先事項です。",
+          "1": "すべての個人データと対話は、業界標準の暗号化で保護されています。",
+          "2": "当社は明示的な同意なしに個人情報を第三者と共有することはありません。",
+          "3": "詳細については、プライバシーポリシーをご参照ください。"
+        }
+      },
+      "intellectualProperty": {
+        "title": "6. 知的財産権",
+        "content": {
+          "0": "本サービスとそのすべてのコンテンツ、機能、特徴は、Rebloomおよびそのライセンサーの専有財産です。",
+          "1": "お客様には本サービスを個人的、非商用目的で使用する限定的なライセンスが付与されます。",
+          "2": "当社の事前の書面による同意なしに、コンテンツを複製、配布、変更、または商用利用することはできません。"
+        }
+      },
+      "disclaimers": {
+        "title": "7. 免責事項",
+        "content": {
+          "0": "本サービスは「現状のまま」および「利用可能な状態で」提供されます。",
+          "1": "当社は本サービスが中断されない、エラーがない、または完全に安全であることを保証しません。",
+          "2": "本サービスは専門的な医学的助言の代替品ではありません。深刻なメンタルヘルスの懸念については、資格のある専門家にご相談ください。"
+        }
+      },
+      "limitationLiability": {
+        "title": "8. 責任の制限",
+        "content": {
+          "0": "適用法で許可される最大限の範囲で、当社は本サービスの使用から生じるいかなる間接的、偶発的、特別、結果的、または懲罰的損害についても責任を負いません。",
+          "1": "当社の総責任は、お客様が過去12か月間に本サービスに支払った金額を超えることはありません。"
+        }
+      },
+      "termination": {
+        "title": "9. サービス終了",
+        "content": {
+          "0": "お客様はいつでもアカウントを削除し、本サービスの使用を停止することができます。",
+          "1": "当社は、本規約の違反またはその他の正当な理由により、お客様のアクセスを停止または終了する権利を留保します。",
+          "2": "終了時に、本規約の下でのお客様の権利は直ちに終了します。"
+        }
+      },
+      "governingLaw": {
+        "title": "10. 準拠法",
+        "content": {
+          "0": "本規約は中華人民共和国の法律に準拠し、同法律に従って解釈されます。",
+          "1": "本規約から生じる紛争は、中国上海市浦東新区人民法院の専属管轄に服します。"
+        }
+      },
+      "changes": {
+        "title": "11. 規約の変更",
+        "content": {
+          "0": "当社は随時本規約を更新する権利を留保します。",
+          "1": "重要な変更については、アプリケーション内またはメールでお知らせします。",
+          "2": "変更後も本サービスを継続して使用することで、更新された規約に同意したものとみなされます。"
+        }
+      },
+      "severability": {
+        "title": "12. 可分性",
+        "content": {
+          "0": "本規約のいずれかの条項が無効または執行不能と判断された場合、残りの条項は引き続き有効です。"
+        }
+      },
+      "entireAgreement": {
+        "title": "13. 完全合意",
+        "content": {
+          "0": "本規約は、本サービスに関するお客様と当社の間の完全な合意を構成します。"
+        }
+      },
+      "contact": {
+        "title": "14. お問い合わせ",
+        "content": {
+          "0": "本規約に関するご質問がございましたら、以下までお問い合わせください：",
+          "1": "メール：legal@Rebloom.app",
+          "2": "住所：中国上海市"
+        }
+      },
+      "crisisSupport": {
+        "title": "15. 危機サポート",
+        "content": {
+          "0": "緊急時または自傷・他害の恐れがある場合は、直ちに地域の緊急サービス、メンタルヘルス危機ホットライン、または最寄りの救急室にご連絡ください。",
+          "1": "本サービスは緊急時の対応や危機介入の代替品ではありません。"
+        }
+      }
+    }
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "lastUpdated": "最終更新：{{date}}",
+    "description": "お客様のプライバシーと個人情報の保護に努めています。本ポリシーでは、データの取り扱いについて詳しく説明します。",
+    "shield": {
+      "title": "お客様のプライバシーは保護されています",
+      "description": "エンドツーエンド暗号化を含む業界最先端のセキュリティ対策により、お客様の情報の安全を確保しています。"
+    },
+    "toc": "目次",
+    "rightsSummary": {
+      "title": "お客様の権利の概要",
+      "dataControl": "データ制御",
+      "description": "お客様はご自身のデータを完全に制御できます。いつでも情報の閲覧、変更、削除、またはエクスポートが可能です。"
+    },
+    "contactPrivacyOfficer": "プライバシー保護責任者に連絡",
+    "sections": {
+      "overview": {
+        "title": "1. 概要",
+        "content": {
+          "0": "Rebloom（以下「当社」、「弊社」または「会社」）はお客様のプライバシー権を重視しています。本プライバシーポリシーでは、お客様の個人情報をどのように収集、使用、保護、処理するかについて説明します。",
+          "1": "本ポリシーは、Rebloomアプリケーション（以下「サービス」）をご利用の際に提供されるすべての個人情報に適用されます。",
+          "2": "当社のサービスをご利用いただくことで、本プライバシーポリシーに従って情報を処理することに同意いただいたものとみなされます。"
+        }
+      },
+      "informationCollected": {
+        "title": "2. 収集する情報",
+        "content": {
+          "0": "当社は以下の種類の個人情報を収集する場合があります：",
+          "1": "• アカウント情報：氏名、メールアドレス、電話番号",
+          "2": "• プロフィール情報：年齢、性別、所在地、設定",
+          "3": "• 健康関連情報：気分データ、対話記録、メンタルヘルス設定",
+          "4": "• 使用データ：アプリケーション使用統計、機能使用状況",
+          "5": "• デバイス情報：デバイスタイプ、オペレーティングシステム、一意識別子",
+          "6": "• 緊急連絡先情報：指定された緊急連絡先の詳細"
+        }
+      },
+      "collectionMethods": {
+        "title": "3. 情報収集方法",
+        "content": {
+          "0": "以下の方法で情報を収集します：",
+          "1": "• 直接提供：サービス使用時にお客様が能動的に提供する情報",
+          "2": "• 自動収集：アプリケーションを通じて自動的に収集される使用データ",
+          "3": "• 第三者サービス：統合された第三者サービスから取得する情報",
+          "4": "• 分析ツール：サービス使用状況を理解するための分析ツールの使用"
+        }
+      },
+      "informationUse": {
+        "title": "4. 情報使用目的",
+        "content": {
+          "0": "収集した情報は以下の目的で使用します：",
+          "1": "• サービスの提供と改善",
+          "2": "• お客様の体験のパーソナライゼーション",
+          "3": "• サービスのセキュリティと信頼性の確保",
+          "4": "• カスタマーサポートの提供",
+          "5": "• 使用傾向の分析と機能改善",
+          "6": "• 法的義務の遵守",
+          "7": "• ユーザーと公衆の安全保護"
+        }
+      },
+      "informationSharing": {
+        "title": "5. 情報共有",
+        "content": {
+          "0": "当社はお客様のプライバシー保護をお約束し、個人情報を販売することはありません。以下の場合に情報を共有することがあります：",
+          "1": "• お客様の明示的な同意を得た場合",
+          "2": "• 法的要求または権利保護のため",
+          "3": "• ユーザーの安全を守るための緊急事態",
+          "4": "• 認可されたサービス提供者との共有（必要な目的に限定）",
+          "5": "• 事業譲渡または合併",
+          "6": "• 分析用の匿名化または集約データ"
+        }
+      },
+      "dataSecurity": {
+        "title": "6. データセキュリティ",
+        "content": {
+          "0": "お客様の情報を保護するため、多層のセキュリティ対策を実施しています：",
+          "1": "• エンドツーエンド暗号化：すべての対話と機密データを暗号化",
+          "2": "• アクセス制御：厳格な従業員アクセス権限管理",
+          "3": "• セキュアストレージ：業界標準のセキュアストレージソリューションを使用",
+          "4": "• 定期監査：定期的なセキュリティ監査とアップデート",
+          "5": "• インシデント対応：24時間365日のセキュリティ監視とインシデント対応計画"
+        }
+      },
+      "dataRetention": {
+        "title": "7. データ保持",
+        "content": {
+          "0": "お客様の情報を以下の期間保持します：",
+          "1": "• アカウント活動期間：すべての使用データを保持",
+          "2": "• アカウント削除後：法的義務を遵守するために必要な情報を保持",
+          "3": "• 自動削除：設定に基づいて古いデータを自動削除",
+          "4": "• 最小限の保持：サービス提供に必要な情報のみを保持"
+        }
+      },
+      "yourRights": {
+        "title": "8. お客様の権利",
+        "content": {
+          "0": "お客様の個人情報について、以下の権利を有しています：",
+          "1": "• アクセス権：当社が保有するお客様の個人情報の閲覧",
+          "2": "• 修正権：不正確な情報の更新または修正",
+          "3": "• 削除権：お客様の個人情報の削除要求",
+          "4": "• ポータビリティ権：構造化された形式でのデータ取得",
+          "5": "• 処理制限権：情報処理の制限",
+          "6": "• 異議申立権：正当な利益に基づく情報処理への異議申立",
+          "7": "• 同意撤回権：データ処理への同意をいつでも撤回"
+        }
+      },
+      "cookiesTracking": {
+        "title": "9. Cookieとトラッキング",
+        "content": {
+          "0": "お客様の体験を向上させるため、以下の技術を使用しています：",
+          "1": "• 基本機能：アプリケーション機能に必要なCookie",
+          "2": "• 分析ツール：サービス改善のための匿名使用統計",
+          "3": "• パフォーマンス監視：アプリケーションのパフォーマンスとエラーの監視",
+          "4": "• アプリケーション設定からトラッキング設定を制御できます"
+        }
+      },
+      "childrenPrivacy": {
+        "title": "10. 児童のプライバシー",
+        "content": {
+          "0": "当社のサービスは主に18歳以上のユーザーを対象としています。",
+          "1": "13歳未満の児童の情報を収集したことが判明した場合、直ちに削除します。",
+          "2": "18歳未満のユーザーについては、保護者の監督をお勧めします。",
+          "3": "当社は意図的に児童の個人情報を収集することはありません。"
+        }
+      },
+      "internationalTransfer": {
+        "title": "11. 国際データ転送",
+        "content": {
+          "0": "お客様の情報は異なる国・地域で転送・処理される場合があります。",
+          "1": "すべての転送が適用されるデータ保護法に準拠することを確保します。",
+          "2": "標準契約条項やその他の保護措置を使用します。",
+          "3": "十分な保護レベルを持つ国にのみデータを転送します。"
+        }
+      },
+      "thirdPartyServices": {
+        "title": "12. 第三者サービス",
+        "content": {
+          "0": "当社のサービスには第三者サービスへのリンクが含まれる場合があります：",
+          "1": "• 当社は第三者のプライバシー慣行を制御しません",
+          "2": "• 第三者のプライバシーポリシーをご確認ください",
+          "3": "• 当社は第三者サービスのプライバシー慣行について責任を負いません",
+          "4": "• 第三者サービスの使用は、そのプライバシーポリシーへの同意を意味します"
+        }
+      },
+      "policyUpdates": {
+        "title": "13. プライバシーポリシーの更新",
+        "content": {
+          "0": "当社は随時本プライバシーポリシーを更新する場合があります。",
+          "1": "重要な変更については、アプリケーション通知またはメールでお知らせします。",
+          "2": "サービスの継続使用は、更新されたポリシーへの同意を意味します。",
+          "3": "本プライバシーポリシーを定期的にご確認いただくことをお勧めします。"
+        }
+      },
+      "contactUs": {
+        "title": "14. お問い合わせ",
+        "content": [
+          "本プライバシーポリシーに関するご質問やご要望がございましたら、プライバシー保護責任者までお問い合わせください：",
+          "",
+          "メール：privacy@Rebloom.app",
+          "住所：中国上海市",
+          "30日以内にお客様のご要求にお答えします。",
+          "",
+          "プライバシー保護責任者がお客様の権利行使をサポートします。"
+        ]
+      }
+    }
+  },
+  "auth": {
+    "welcomeBack": "おかえりなさい",
+    "signIn": "ログイン",
+    "signUp": "新規登録",
+    "signUpTagline": "Rebloomに参加して、メンタルウェルネスの旅を始めましょう",
+    "signInTagline": "あなたのメンタルウェルネスコンパニオンへお帰りなさい",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "dontHaveAccount": "アカウントをお持ちでないですか？",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
+    "or": "または",
+    "continueWithGoogle": "Googleで続行",
+    "continueWithApple": "Appleで続行",
+    "continueWithWeChat": "WeChatで続行",
+    "agreeToTerms": "私は",
+    "and": "および",
+    "termsAndPrivacy": "続行することで、利用規約とプライバシーポリシーに同意したことになります",
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "error": "エラー",
+    "fillAllFields": "すべてのフィールドを入力してください",
+    "passwordTooShort": "パスワードは6文字以上である必要があります",
+    "checkEmail": "登録を完了するためにメールを確認してください",
+    "unexpectedError": "予期しないエラーが発生しました。再試行してください",
+    "success": "成功",
+    "loading": "読み込み中...",
+    "showPassword": "パスワードを表示",
+    "hidePassword": "パスワードを隠す",
+    "displayName": "表示名",
+    "displayNamePlaceholder": "表示名を入力してください（任意）",
+    "emailPlaceholder": "メールアドレスを入力してください",
+    "passwordPlaceholder": "パスワードを入力してください",
+    "confirmPassword": "パスワード確認",
+    "confirmPasswordPlaceholder": "パスワードを再入力してください",
+    "passwordsDoNotMatch": "パスワードが一致しません",
+    "invalidEmail": "有効なメールアドレスを入力してください",
+    "weakPassword": "パスワードが弱すぎます。より強力なパスワードを使用してください",
+    "accountCreated": "アカウントが正常に作成されました！",
+    "loginSuccess": "ログインに成功しました！",
+    "logoutSuccess": "ログアウトに成功しました！",
+    "resetPassword": "パスワードをリセット",
+    "resetPasswordEmail": "パスワードリセットメールが送信されました",
+    "backToLogin": "ログインに戻る",
+    "backToSignUp": "新規登録に戻る"
+  },
+  "onboarding": {
+    "title": "Dolphin",
+    "skip": "スキップ",
+    "continue": "続行",
+    "getStarted": "始める",
+    "learnMore": "Dolphinについて詳しく",
+    "screens": {
+      "alwaysOn": {
+        "title": "常時利用可能",
+        "description": "テキスト、通話、ACT、ビデオ応答による24時間365日のメンタルヘルスサポート",
+        "features": [
+          "サポートが必要な時にいつでも利用可能",
+          "複数のコミュニケーション方法",
+          "ニーズへの即座の対応",
+          "待機リストや予約不要"
+        ]
+      },
+      "remembersYou": {
+        "title": "あなたを覚えている",
+        "description": "Dolphinは安全な記憶を持っているため、すべての会話が継続的な治療関係を構築します。",
+        "features": [
+          "安全な会話履歴",
+          "パーソナライズされた治療アプローチ",
+          "以前のセッションに基づく構築",
+          "あなたの進歩を理解"
+        ]
+      },
+      "progressSnapshot": {
+        "title": "進歩のスナップショット",
+        "description": "気分とパターン、成果と獲得、洞察と次のステップを分析します。",
+        "features": [
+          "時間の経過とともに気分パターンを追跡",
+          "あなたの成果を祝う",
+          "有用な戦略を特定",
+          "次のステップを計画"
+        ]
+      }
+    },
+    "chat": {
+      "userMessage1": "ねえ、チャットできる？",
+      "assistantMessage1": "もちろん！サポートが必要な時はいつでもここにいます。何か考えていることはありますか？",
+      "userMessage2": "明日について不安を感じています",
+      "assistantTyping": "...",
+      "remembersYou": {
+        "aiMessage1": "先週心配していた就職面接はどうでしたか？",
+        "userMessage1": "とても良くいきました！準備を手伝ってくれてありがとう",
+        "aiMessage2": "素晴らしいです！一緒に呼吸法を練習したことを覚えています。"
+      },
+      "progressSnapshot": {
+        "title": "あなたの進歩",
+        "chartLabel": "今週の気分",
+        "insight": "💪 今週はより回復力が強くなっています"
+      }
+    }
+  }
+}

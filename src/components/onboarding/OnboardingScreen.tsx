@@ -11,47 +11,33 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
+import { useLanguage } from '../../contexts/LanguageContext'
 import { OnboardingCard } from './OnboardingCard'
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window')
 
-const onboardingData = [
+const getOnboardingData = (t: any) => [
   {
     id: 'always-on',
-    title: 'Always on',
-    description: '24/7 access to mental health support via text, call, ACT, and video response',
-    features: [
-      'Available whenever you need support',
-      'Multiple communication methods',
-      'Instant response to your needs',
-      'No waiting lists or appointments'
-    ],
+    title: t('onboarding.screens.alwaysOn.title'),
+    description: t('onboarding.screens.alwaysOn.description'),
+    features: t('onboarding.screens.alwaysOn.features') || [],
     gradient: ['#FF9A56', '#FFAD7A'],
     icon: 'time-outline'
   },
   {
     id: 'remembers-you',
-    title: 'Remembers you',
-    description: 'Dolphin has a secure memory, so every conversation builds continuous therapeutic.',
-    features: [
-      'Secure conversation history',
-      'Personalized therapeutic approach',
-      'Builds on previous sessions',
-      'Understands your progress'
-    ],
+    title: t('onboarding.screens.remembersYou.title'),
+    description: t('onboarding.screens.remembersYou.description'),
+    features: t('onboarding.screens.remembersYou.features') || [],
     gradient: ['#A8E6CF', '#88D8A3'],
     icon: 'person-outline'
   },
   {
     id: 'progress-snapshot',
-    title: 'Progress snapshot',
-    description: 'Analyze your mood and patterns, wins and gains, insights and next steps.',
-    features: [
-      'Track mood patterns over time',
-      'Celebrate your achievements',
-      'Identify helpful strategies',
-      'Plan your next steps forward'
-    ],
+    title: t('onboarding.screens.progressSnapshot.title'),
+    description: t('onboarding.screens.progressSnapshot.description'),
+    features: t('onboarding.screens.progressSnapshot.features') || [],
     gradient: ['#FFD93D', '#6BCF7F'],
     icon: 'analytics-outline'
   }
@@ -66,6 +52,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const scrollViewRef = useRef<ScrollView>(null)
+  const { t } = useLanguage()
 
   const handleNext = () => {
     if (currentIndex < onboardingData.length - 1) {
@@ -97,6 +84,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
     setCurrentIndex(newIndex)
   }
 
+  const onboardingData = getOnboardingData(t)
   const currentCard = onboardingData[currentIndex]
 
   return (
@@ -123,14 +111,14 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
           />
         </TouchableOpacity>
 
-        <Text style={styles.headerTitle}>Dolphin</Text>
+        <Text style={styles.headerTitle}>{t('onboarding.title')}</Text>
 
         <TouchableOpacity
           style={styles.skipButton}
           onPress={onComplete}
           activeOpacity={0.7}
         >
-          <Text style={styles.skipText}>Skip</Text>
+          <Text style={styles.skipText}>{t('onboarding.skip')}</Text>
         </TouchableOpacity>
       </View>
 
@@ -184,7 +172,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
             style={styles.continueButtonGradient}
           >
             <Text style={styles.continueButtonText}>
-              {currentIndex === onboardingData.length - 1 ? 'Get Started' : 'Continue'}
+              {currentIndex === onboardingData.length - 1 ? t('onboarding.getStarted') : t('onboarding.continue')}
             </Text>
             <Ionicons
               name="arrow-forward"
@@ -202,7 +190,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
           }}
           activeOpacity={0.7}
         >
-          <Text style={styles.learnMoreText}>Learn more about Dolphin</Text>
+          <Text style={styles.learnMoreText}>{t('onboarding.learnMore')}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

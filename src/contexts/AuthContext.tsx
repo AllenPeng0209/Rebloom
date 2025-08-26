@@ -10,6 +10,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error: AuthError | null }>
   signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>
   signOut: () => Promise<{ error: AuthError | null }>
+  logout: () => Promise<{ error: AuthError | null }>
   updateProfile: (updates: Partial<UserProfile>) => Promise<{ error: any }>
 }
 
@@ -121,11 +122,33 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setLoading(true)
       const { error } = await supabase.auth.signOut()
+      if (!error) {
+        // 登出成功，清理本地状态
+        setSession(null)
+        setUser(null)
+        setProfile(null)
+      }
       return { error }
     } catch (error) {
       return { error: error as AuthError }
     } finally {
       setLoading(false)
+    }
+  }
+
+  // 简化的 logout 方法，包含导航逻辑
+  const logout = async () => {
+    try {
+      const { error } = await signOut()
+      if (!error) {
+        // 登出成功，导航到登录页
+        // 注意：在这个应用中，登出后应该重新加载应用或导航到认证页面
+        // 由于这个应用使用标签式导航，我们可以导航到首页
+        // router.replace('/') // 如果需要的话
+      }
+      return { error }
+    } catch (error) {
+      return { error: error as AuthError }
     }
   }
 
@@ -141,7 +164,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         .single()
 
       if (error) return { error }
-      
+
       setProfile(data)
       return { error: null }
     } catch (error) {
@@ -157,6 +180,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     signUp,
     signIn,
     signOut,
+    logout,
     updateProfile,
   }
 

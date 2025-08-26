@@ -214,7 +214,7 @@ export default function MemoryManagementScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>記憶管理</Text>
+        <Text style={styles.headerTitle}>{t('memoryManagement.title')}</Text>
         <TouchableOpacity onPress={handleRefresh} style={styles.refreshButton}>
           <IconSymbol name="arrow.clockwise" size={20} color="#FFFFFF" />
         </TouchableOpacity>

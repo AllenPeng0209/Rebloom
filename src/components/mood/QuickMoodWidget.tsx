@@ -1,15 +1,16 @@
+import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
+import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Animated,
-  Dimensions,
+    Animated,
+    Dimensions,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import * as Haptics from 'expo-haptics';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface MoodOption {
   id: number;
@@ -39,6 +40,7 @@ export const QuickMoodWidget: React.FC<QuickMoodWidgetProps> = ({
   style,
   compact = false,
 }) => {
+  const { t } = useLanguage();
   const [selectedMood, setSelectedMood] = useState<MoodOption | null>(null);
   const [scaleAnims] = useState(
     QUICK_MOOD_OPTIONS.map(() => new Animated.Value(1))
@@ -74,7 +76,7 @@ export const QuickMoodWidget: React.FC<QuickMoodWidgetProps> = ({
   if (compact) {
     return (
       <View style={[styles.compactContainer, style]}>
-        <Text style={styles.compactTitle}>Quick Mood Check</Text>
+        <Text style={styles.compactTitle}>{t('mood.quickMoodCheck')}</Text>
         <View style={styles.compactMoodRow}>
           {QUICK_MOOD_OPTIONS.map((mood, index) => {
             const isSelected = selectedMood?.id === mood.id;
@@ -126,7 +128,7 @@ export const QuickMoodWidget: React.FC<QuickMoodWidgetProps> = ({
         style={styles.header}
       >
         <Ionicons name="heart" size={24} color="#ffffff" />
-        <Text style={styles.headerText}>How are you feeling?</Text>
+        <Text style={styles.headerText}>{t('mood.howAreYouFeeling')}</Text>
       </LinearGradient>
       
       <View style={styles.moodOptions}>

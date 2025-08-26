@@ -21,50 +21,58 @@ export default function HelpScreen() {
   const faqData: FAQItem[] = [
     {
       id: '1',
-      question: '如何開始使用 Rebloom？',
-      answer: '下載應用後，您將經歷一個簡短的入門流程。我們會詢問一些基本問題來了解您的需求，然後您就可以開始與AI助手對話了。',
-      category: '入門'
+      question: t('help.faq.gettingStarted.question'),
+      answer: t('help.faq.gettingStarted.answer'),
+      category: t('help.categories.gettingStarted')
     },
     {
       id: '2',
-      question: 'AI 助手如何保護我的隱私？',
-      answer: '所有對話都經過端到端加密，只有您可以訪問。我們不會與第三方分享您的個人信息，除非您明確授權。您的數據安全是我們的首要任務。',
-      category: '隱私'
+      question: t('help.faq.privacy.question'),
+      answer: t('help.faq.privacy.answer'),
+      category: t('help.categories.privacy')
     },
     {
       id: '3',
-      question: '如果我遇到心理危機怎麼辦？',
-      answer: 'Rebloom 配備了危機檢測系統。如果AI檢測到危機信號，會立即提供專業資源和緊急聯絡方式。但請記住，在真正的緊急情況下，請直接撥打當地的緊急服務電話。',
-      category: '安全'
+      question: t('help.faq.crisis.question'),
+      answer: t('help.faq.crisis.answer'),
+      category: t('help.categories.safety')
     },
     {
       id: '4',
-      question: '免費版和付費版有什麼區別？',
-      answer: '免費版提供基本的對話功能和心情追蹤。Premium版包括無限對話、深度分析、專業諮詢、24/7支持等高級功能。',
-      category: '訂閱'
+      question: t('help.faq.subscription.question'),
+      answer: t('help.faq.subscription.answer'),
+      category: t('help.categories.subscription')
     },
     {
       id: '5',
-      question: '我可以更改AI的個性嗎？',
-      answer: '是的！您可以在AI設置中調整AI的個性、治療方法偏好、同理心程度等。我們提供多種個性選項，包括支持型、分析型、溫和型等。',
-      category: '個性化'
+      question: t('help.faq.personality.question'),
+      answer: t('help.faq.personality.answer'),
+      category: t('help.categories.personalization')
     },
     {
       id: '6',
-      question: '如何導出我的對話記錄？',
-      answer: '前往隱私設置 > 數據導出，點擊"導出我的數據"。我們會在24小時內將包含您所有數據的安全文件發送到您的註冊郵箱。',
-      category: '數據'
+      question: t('help.faq.dataExport.question'),
+      answer: t('help.faq.dataExport.answer'),
+      category: t('help.categories.data')
     }
   ];
 
-  const categories = ['全部', '入門', '隱私', '安全', '訂閱', '個性化', '數據'];
+  const categories = [
+    t('help.categories.all'),
+    t('help.categories.gettingStarted'),
+    t('help.categories.privacy'),
+    t('help.categories.safety'),
+    t('help.categories.subscription'),
+    t('help.categories.personalization'),
+    t('help.categories.data')
+  ];
 
-  const [selectedCategory, setSelectedCategory] = useState('全部');
+  const [selectedCategory, setSelectedCategory] = useState(t('help.categories.all'));
 
   const filteredFAQs = faqData.filter(faq => {
     const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === '全部' || faq.category === selectedCategory;
+    const matchesCategory = selectedCategory === t('help.categories.all') || faq.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -170,7 +178,7 @@ export default function HelpScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>幫助中心</Text>
+        <Text style={styles.headerTitle}>{t('help.title')}</Text>
         <View style={styles.placeholder} />
       </View>
 
@@ -206,7 +214,7 @@ export default function HelpScreen() {
 
         {/* Category Filter */}
         <View style={styles.categorySection}>
-          <Text style={styles.categoryTitle}>分類</Text>
+          <Text style={styles.categoryTitle}>{t('help.categories.title')}</Text>
           <ScrollView 
             horizontal 
             showsHorizontalScrollIndicator={false}
@@ -242,7 +250,7 @@ export default function HelpScreen() {
 
         {/* FAQ List */}
         <View style={styles.faqSection}>
-          <Text style={styles.faqTitle}>常見問題</Text>
+          <Text style={styles.faqTitle}>{t('help.faq.title')}</Text>
           {filteredFAQs.length > 0 ? (
             filteredFAQs.map(renderFAQItem)
           ) : (
@@ -252,9 +260,9 @@ export default function HelpScreen() {
                 style={styles.noResultsGradient}
               >
                 <IconSymbol name="magnifyingglass" size={48} color="rgba(139, 90, 140, 0.5)" />
-                <Text style={styles.noResultsTitle}>沒有找到相關問題</Text>
+                <Text style={styles.noResultsTitle}>{t('help.noResults.title')}</Text>
                 <Text style={styles.noResultsDescription}>
-                  嘗試使用不同的關鍵詞或選擇其他分類
+                  {t('help.noResults.description')}
                 </Text>
               </LinearGradient>
             </View>

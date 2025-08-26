@@ -232,7 +232,7 @@ export default function TherapeuticSettingsScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>治療設置</Text>
+        <Text style={styles.headerTitle}>{t('therapeuticSettings.title')}</Text>
         <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}

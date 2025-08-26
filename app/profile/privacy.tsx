@@ -38,21 +38,21 @@ export default function PrivacyScreen() {
   });
 
   const deleteOptions = [
-    { days: 30, label: '30天' },
-    { days: 90, label: '90天' },
-    { days: 180, label: '6個月' },
-    { days: 365, label: '1年' },
-    { days: 730, label: '2年' }
+    { days: 30, label: t('privacy.dataRetention.options.30days') },
+    { days: 90, label: t('privacy.dataRetention.options.90days') },
+    { days: 180, label: t('privacy.dataRetention.options.6months') },
+    { days: 365, label: t('privacy.dataRetention.options.1year') },
+    { days: 730, label: t('privacy.dataRetention.options.2years') }
   ];
 
   const handleExportData = () => {
     Alert.alert(
-      '導出數據',
-      '我們將為您準備所有個人數據的副本，包括對話記錄、心情數據和設置。這可能需要幾分鐘時間。',
+      t('privacy.dataExport.confirm'),
+      t('privacy.dataExport.confirmMessage'),
       [
-        { text: '取消', style: 'cancel' },
-        { text: '開始導出', onPress: () => {
-          Alert.alert('導出開始', '您將在24小時內收到下載鏈接的電子郵件');
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('privacy.dataExport.startExport'), onPress: () => {
+          Alert.alert(t('privacy.dataExport.success'), t('privacy.dataExport.successMessage'));
         }}
       ]
     );
@@ -60,17 +60,17 @@ export default function PrivacyScreen() {
 
   const handleDeleteAllData = () => {
     Alert.alert(
-      '刪除所有數據',
-      '⚠️ 這將永久刪除您的所有對話記錄、心情數據和個人設置。此操作無法撤銷。',
+      t('privacy.dataDelete.confirm'),
+      t('privacy.dataDelete.confirmMessage'),
       [
-        { text: '取消', style: 'cancel' },
-        { text: '確認刪除', style: 'destructive', onPress: () => {
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('privacy.dataDelete.confirmDelete'), style: 'destructive', onPress: () => {
           Alert.alert(
-            '最終確認',
-            '請再次確認您要刪除所有數據。這個操作是不可逆的。',
+            t('privacy.dataDelete.finalConfirm'),
+            t('privacy.dataDelete.finalConfirmMessage'),
             [
-              { text: '取消', style: 'cancel' },
-              { text: '永久刪除', style: 'destructive', onPress: () => {
+              { text: t('common.cancel'), style: 'cancel' },
+              { text: t('privacy.dataDelete.permanentDelete'), style: 'destructive', onPress: () => {
                 console.log('Deleting all user data');
               }}
             ]
@@ -144,7 +144,7 @@ export default function PrivacyScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>隱私設置</Text>
+        <Text style={styles.headerTitle}>{t('privacy.title')}</Text>
         <View style={styles.placeholder} />
       </View>
 

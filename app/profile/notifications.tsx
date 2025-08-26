@@ -160,7 +160,7 @@ export default function NotificationsScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>通知設置</Text>
+        <Text style={styles.headerTitle}>{t('notifications.title')}</Text>
         <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}

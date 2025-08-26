@@ -1,10 +1,11 @@
-import { IconSymbol } from '@/ui/IconSymbol';
+import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { IconSymbol } from '@/ui/IconSymbol';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface SettingItem {
   id: string;
@@ -21,17 +22,33 @@ export default function ProfileScreen() {
   const colorScheme = useColorScheme();
   const router = useRouter();
   const { t } = useLanguage();
-  
-  const handleLogout = () => {
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
     Alert.alert(
       t('profile.logoutConfirm'),
       t('profile.logoutMessage'),
       [
         { text: t('common.cancel'), style: 'cancel' },
-        { text: t('profile.logout'), style: 'destructive', onPress: () => {
-          // TODO: Implement logout logic
-          console.log('Logout');
-        }}
+        {
+          text: t('profile.logout'),
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              const { error } = await logout();
+              if (error) {
+                console.error('Logout failed:', error);
+                Alert.alert(t('profile.logoutFailed'), t('profile.logoutFailedMessage'));
+              } else {
+                // 登出成功，显示成功提示
+                Alert.alert(t('profile.logoutSuccess'), t('profile.logoutSuccessMessage'));
+              }
+            } catch (error) {
+              console.error('Logout failed:', error);
+              Alert.alert(t('profile.logoutFailed'), t('profile.logoutFailedMessage'));
+            }
+          }
+        }
       ]
     );
   };
@@ -45,7 +62,7 @@ export default function ProfileScreen() {
       items: [
         {
           id: 'personal-info',
-          title: t('profile.personalInfo'),
+          title: t('profile.personalInfo.title'),
           subtitle: t('profile.personalInfo.subtitle'),
           icon: 'person.circle',
           route: '/profile/personal-info',
@@ -58,16 +75,16 @@ export default function ProfileScreen() {
       items: [
         {
           id: 'subscription',
-          title: t('profile.subscription'),
+          title: t('profile.subscription.title'),
           subtitle: t('profile.subscription.subtitle'),
           icon: 'crown',
           route: '/profile/subscription',
           showArrow: true,
-          badge: 'Premium'
+          badge: t('profile.premium')
         },
         {
           id: 'billing',
-          title: t('profile.billing'),
+          title: t('profile.billing.title'),
           subtitle: t('profile.billing.subtitle'),
           icon: 'doc.text',
           route: '/profile/billing',
@@ -80,7 +97,7 @@ export default function ProfileScreen() {
       items: [
         {
           id: 'ai-personality',
-          title: t('profile.aiPersonality'),
+          title: t('profile.aiPersonality.title'),
           subtitle: t('profile.aiPersonality.subtitle'),
           icon: 'brain.head.profile',
           route: '/profile/ai-settings',
@@ -88,7 +105,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'therapeutic-approach',
-          title: t('profile.therapeuticApproach'),
+          title: t('profile.therapeuticApproach.title'),
           subtitle: t('profile.therapeuticApproach.subtitle'),
           icon: 'heart.text.square',
           route: '/profile/therapeutic-settings',
@@ -101,7 +118,7 @@ export default function ProfileScreen() {
       items: [
         {
           id: 'notifications',
-          title: t('profile.notifications'),
+          title: t('profile.notifications.title'),
           subtitle: t('profile.notifications.subtitle'),
           icon: 'bell',
           route: '/profile/notifications',
@@ -109,7 +126,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'mood-reminders',
-          title: t('profile.moodReminders'),
+          title: t('profile.moodReminders.title'),
           subtitle: t('profile.moodReminders.subtitle'),
           icon: 'clock.badge',
           route: '/profile/mood-reminders',
@@ -117,7 +134,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'wellness-check',
-          title: t('profile.wellnessCheck'),
+          title: t('profile.wellnessCheck.title'),
           subtitle: t('profile.wellnessCheck.subtitle'),
           icon: 'heart.circle',
           route: '/profile/wellness-reminders',
@@ -130,7 +147,7 @@ export default function ProfileScreen() {
       items: [
         {
           id: 'privacy-settings',
-          title: t('profile.privacySettings'),
+          title: t('profile.privacySettings.title'),
           subtitle: t('profile.privacySettings.subtitle'),
           icon: 'lock.shield',
           route: '/profile/privacy',
@@ -138,7 +155,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'data-export',
-          title: t('profile.dataExport'),
+          title: t('profile.dataExport.title'),
           subtitle: t('profile.dataExport.subtitle'),
           icon: 'square.and.arrow.down',
           route: '/profile/data-export',
@@ -146,7 +163,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'emergency-contacts',
-          title: t('profile.emergencyContacts'),
+          title: t('profile.emergencyContacts.title'),
           subtitle: t('profile.emergencyContacts.subtitle'),
           icon: 'phone.badge.plus',
           route: '/profile/emergency-contacts',
@@ -159,7 +176,7 @@ export default function ProfileScreen() {
       items: [
         {
           id: 'crisis-resources',
-          title: t('profile.crisisResources'),
+          title: t('profile.crisisResources.title'),
           subtitle: t('profile.crisisResources.subtitle'),
           icon: 'cross.case',
           route: '/profile/crisis-resources',
@@ -167,7 +184,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'help-center',
-          title: t('profile.helpCenter'),
+          title: t('profile.helpCenter.title'),
           subtitle: t('profile.helpCenter.subtitle'),
           icon: 'questionmark.circle',
           route: '/profile/help',
@@ -175,7 +192,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'contact-support',
-          title: t('profile.contactSupport'),
+          title: t('profile.contactSupport.title'),
           subtitle: t('profile.contactSupport.subtitle'),
           icon: 'envelope',
           route: '/profile/contact-support',
@@ -183,7 +200,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'feedback',
-          title: t('profile.feedback'),
+          title: t('profile.feedback.title'),
           subtitle: t('profile.feedback.subtitle'),
           icon: 'star',
           route: '/profile/feedback',
@@ -196,7 +213,7 @@ export default function ProfileScreen() {
       items: [
         {
           id: 'language-settings',
-          title: t('profile.languageSettings'),
+          title: t('profile.languageSettings.title'),
           subtitle: t('profile.languageSettings.subtitle'),
           icon: 'globe',
           route: '/profile/language-settings',
@@ -204,7 +221,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'about',
-          title: t('profile.about'),
+          title: t('profile.about.title'),
           subtitle: t('profile.about.subtitle'),
           icon: 'info.circle',
           route: '/profile/about',
@@ -212,7 +229,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'terms',
-          title: t('profile.terms'),
+          title: t('profile.terms.title'),
           subtitle: t('profile.terms.subtitle'),
           icon: 'doc.plaintext',
           route: '/profile/terms',
@@ -220,7 +237,7 @@ export default function ProfileScreen() {
         },
         {
           id: 'privacy-policy',
-          title: t('profile.privacyPolicy'),
+          title: t('profile.privacyPolicy.title'),
           subtitle: t('profile.privacyPolicy.subtitle'),
           icon: 'hand.raised',
           route: '/profile/privacy-policy',

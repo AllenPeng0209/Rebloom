@@ -13,6 +13,8 @@ export default function ProfileLayout() {
       <Stack.Screen name="ai-settings" />
       <Stack.Screen name="notifications" />
       <Stack.Screen name="privacy" />
+      <Stack.Screen name="terms" />
+      <Stack.Screen name="privacy-policy" />
       <Stack.Screen name="crisis-resources" />
       <Stack.Screen name="help" />
       <Stack.Screen name="contact-support" />

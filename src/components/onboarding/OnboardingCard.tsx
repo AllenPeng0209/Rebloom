@@ -6,6 +6,7 @@ import {
     Text,
     View
 } from 'react-native'
+import { useLanguage } from '../../contexts/LanguageContext'
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
 
@@ -24,6 +25,7 @@ export const OnboardingCard: React.FC<OnboardingCardProps> = ({
   icon,
   isActive,
 }) => {
+  const { t } = useLanguage()
   return (
     <View style={styles.container}>
       {/* Phone mockup container */}
@@ -36,11 +38,11 @@ export const OnboardingCard: React.FC<OnboardingCardProps> = ({
           <View style={styles.phoneContent}>
             {/* Header */}
             <View style={styles.phoneHeader}>
-              <Text style={styles.phoneHeaderText}>Dolphin</Text>
+              <Text style={styles.phoneHeaderText}>{t('onboarding.title')}</Text>
             </View>
 
             {/* Chat area based on feature */}
-            {renderPhoneContent(title, features)}
+            {renderPhoneContent(title, features, t)}
           </View>
 
           {/* Home indicator */}
@@ -59,7 +61,7 @@ export const OnboardingCard: React.FC<OnboardingCardProps> = ({
 
         {/* Features list */}
         <View style={styles.featuresContainer}>
-          {features.map((feature, index) => (
+          {Array.isArray(features) && features.map((feature, index) => (
             <View key={index} style={styles.featureItem}>
               <View style={styles.featureBullet} />
               <Text style={styles.featureText}>{feature}</Text>
@@ -71,19 +73,19 @@ export const OnboardingCard: React.FC<OnboardingCardProps> = ({
   )
 }
 
-const renderPhoneContent = (title: string, features: string[]) => {
+const renderPhoneContent = (title: string, features: string[], t: any) => {
   switch (title) {
-    case 'Always on':
+    case t('onboarding.screens.alwaysOn.title'):
       return (
         <View style={styles.chatContent}>
           <View style={styles.messageUser}>
-            <Text style={styles.messageUserText}>Hey, are you available to chat?</Text>
+            <Text style={styles.messageUserText}>{t('onboarding.chat.userMessage1')}</Text>
           </View>
           <View style={styles.messageAI}>
-            <Text style={styles.messageAIText}>Of course! I'm always here when you need support. What's on your mind?</Text>
+            <Text style={styles.messageAIText}>{t('onboarding.chat.assistantMessage1')}</Text>
           </View>
           <View style={styles.messageUser}>
-            <Text style={styles.messageUserText}>I'm feeling anxious about tomorrow</Text>
+            <Text style={styles.messageUserText}>{t('onboarding.chat.userMessage2')}</Text>
           </View>
           <View style={styles.typingIndicator}>
             <View style={styles.typingDot} />
@@ -92,26 +94,26 @@ const renderPhoneContent = (title: string, features: string[]) => {
           </View>
         </View>
       )
-    case 'Remembers you':
+    case t('onboarding.screens.remembersYou.title'):
       return (
         <View style={styles.chatContent}>
           <View style={styles.messageAI}>
-            <Text style={styles.messageAIText}>How did that job interview go that you were worried about last week?</Text>
+            <Text style={styles.messageAIText}>{t('onboarding.chat.remembersYou.aiMessage1')}</Text>
           </View>
           <View style={styles.messageUser}>
-            <Text style={styles.messageUserText}>It went really well! Thanks for helping me prepare</Text>
+            <Text style={styles.messageUserText}>{t('onboarding.chat.remembersYou.userMessage1')}</Text>
           </View>
           <View style={styles.messageAI}>
-            <Text style={styles.messageAIText}>That's wonderful! I remember we practiced those breathing techniques together.</Text>
+            <Text style={styles.messageAIText}>{t('onboarding.chat.remembersYou.aiMessage2')}</Text>
           </View>
         </View>
       )
-    case 'Progress snapshot':
+    case t('onboarding.screens.progressSnapshot.title'):
       return (
         <View style={styles.progressContent}>
-          <Text style={styles.progressTitle}>Your Progress</Text>
+          <Text style={styles.progressTitle}>{t('onboarding.chat.progressSnapshot.title')}</Text>
           <View style={styles.moodChart}>
-            <Text style={styles.chartLabel}>Mood this week</Text>
+            <Text style={styles.chartLabel}>{t('onboarding.chat.progressSnapshot.chartLabel')}</Text>
             <View style={styles.chartBars}>
               <View style={[styles.bar, { height: 20 }]} />
               <View style={[styles.bar, { height: 35 }]} />
@@ -121,7 +123,7 @@ const renderPhoneContent = (title: string, features: string[]) => {
             </View>
           </View>
           <View style={styles.insight}>
-            <Text style={styles.insightText}>💪 You've been more resilient this week</Text>
+            <Text style={styles.insightText}>{t('onboarding.chat.progressSnapshot.insight')}</Text>
           </View>
         </View>
       )
@@ -311,18 +313,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
+    alignSelf: 'center',
   },
   title: {
     fontSize: 28,
     fontWeight: '700',
     color: '#FFFFFF',
     marginBottom: 12,
+    textAlign: 'center',
   },
   description: {
     fontSize: 16,
     color: 'rgba(255, 255, 255, 0.9)',
     lineHeight: 24,
     marginBottom: 24,
+    textAlign: 'center',
   },
   featuresContainer: {
     marginTop: 8,

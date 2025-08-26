@@ -1,9 +1,9 @@
+import { useLanguage } from '@/contexts/LanguageContext';
 import { IconSymbol } from '@/ui/IconSymbol';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Linking, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AboutScreen() {
   const router = useRouter();
@@ -22,53 +22,53 @@ export default function AboutScreen() {
 
   const teamMembers = [
     {
-      name: 'Dr. Sarah Chen',
-      role: '心理學顧問',
-      description: '臨床心理學博士，專精認知行為療法',
+      name: t('about.team.members.founder.name'),
+      role: t('about.team.members.founder.role'),
+      description: t('about.team.members.founder.description'),
       icon: 'brain.head.profile'
     },
     {
-      name: 'Alex Kim',
-      role: '產品總監',
-      description: '10年心理健康科技產品經驗',
+      name: t('about.team.members.cto.name'),
+      role: t('about.team.members.cto.role'),
+      description: t('about.team.members.cto.description'),
       icon: 'lightbulb'
     },
     {
-      name: 'Maya Patel',
-      role: 'AI 研究員',
-      description: '自然語言處理和情感計算專家',
+      name: t('about.team.members.ai.name'),
+      role: t('about.team.members.ai.role'),
+      description: t('about.team.members.ai.description'),
       icon: 'cpu'
     },
     {
-      name: 'David Liu',
-      role: '隱私工程師',
-      description: '數據安全和隱私保護專家',
+      name: t('about.team.members.security.name'),
+      role: t('about.team.members.security.role'),
+      description: t('about.team.members.security.description'),
       icon: 'lock.shield'
     }
   ];
 
   const achievements = [
     {
-      title: '100萬+ 用戶信任',
-      description: '全球超過一百萬用戶選擇 Rebloom',
+      title: t('about.stats.users.title'),
+      description: t('about.stats.users.description'),
       icon: 'person.3.fill',
       color: '#4CAF50'
     },
     {
-      title: '24/7 可用性',
-      description: '99.9% 的服務可用時間',
+      title: t('about.stats.availability.title'),
+      description: t('about.stats.availability.description'),
       icon: 'clock.badge.checkmark',
       color: '#2196F3'
     },
     {
-      title: '隱私優先',
-      description: '端到端加密，零數據洩露記錄',
+      title: t('about.stats.privacy.title'),
+      description: t('about.stats.privacy.description'),
       icon: 'shield.checkered',
       color: '#8B5A8C'
     },
     {
-      title: '專業認證',
-      description: '獲得心理健康專業機構認證',
+      title: t('about.stats.certification.title'),
+      description: t('about.stats.certification.description'),
       icon: 'rosette',
       color: '#FF9500'
     }
@@ -128,7 +128,7 @@ export default function AboutScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>關於 Rebloom</Text>
+        <Text style={styles.headerTitle}>{t('about.title')}</Text>
         <View style={styles.placeholder} />
       </View>
 
@@ -149,25 +149,22 @@ export default function AboutScreen() {
                 </LinearGradient>
               </View>
               <Text style={styles.appName}>Rebloom</Text>
-              <Text style={styles.appTagline}>您的AI心理健康伴侶</Text>
-              <Text style={styles.appVersion}>版本 {appInfo.version} ({appInfo.buildNumber})</Text>
+              <Text style={styles.appTagline}>{t('about.subtitle')}</Text>
+              <Text style={styles.appVersion}>{t('about.version', { version: appInfo.version })} ({appInfo.buildNumber})</Text>
             </LinearGradient>
           </View>
         </View>
 
         {/* Mission */}
         <View style={styles.missionSection}>
-          <Text style={styles.sectionTitle}>我們的使命</Text>
+          <Text style={styles.sectionTitle}>{t('about.mission.title')}</Text>
           <View style={styles.missionCard}>
             <LinearGradient
               colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
               style={styles.missionGradient}
             >
               <Text style={styles.missionText}>
-                Rebloom 致力於讓每個人都能獲得高質量的心理健康支持。我們相信技術可以讓心理健康服務更加普及、便捷和有效。
-              </Text>
-              <Text style={styles.missionText}>
-                通過AI技術和專業心理學知識的結合，我們為用戶提供24/7的情感支持和個性化的心理健康指導。
+                {t('about.mission.description')}
               </Text>
             </LinearGradient>
           </View>
@@ -175,7 +172,7 @@ export default function AboutScreen() {
 
         {/* Achievements */}
         <View style={styles.achievementsSection}>
-          <Text style={styles.sectionTitle}>我們的成就</Text>
+          <Text style={styles.sectionTitle}>{t('about.stats.title')}</Text>
           <View style={styles.achievementsGrid}>
             {achievements.map(renderAchievement)}
           </View>
@@ -183,13 +180,13 @@ export default function AboutScreen() {
 
         {/* Team */}
         <View style={styles.teamSection}>
-          <Text style={styles.sectionTitle}>核心團隊</Text>
+          <Text style={styles.sectionTitle}>{t('about.team.title')}</Text>
           {teamMembers.map(renderTeamMember)}
         </View>
 
         {/* Contact & Links */}
         <View style={styles.linksSection}>
-          <Text style={styles.sectionTitle}>聯絡我們</Text>
+          <Text style={styles.sectionTitle}>{t('about.contact.title')}</Text>
           
           <View style={styles.linksCard}>
             <LinearGradient
@@ -203,7 +200,7 @@ export default function AboutScreen() {
                 <View style={styles.linkIcon}>
                   <IconSymbol name="globe" size={20} color="#8B5A8C" />
                 </View>
-                <Text style={styles.linkText}>官方網站</Text>
+                <Text style={styles.linkText}>{t('about.contact.website')}</Text>
                 <IconSymbol name="chevron.right" size={16} color="rgba(139, 90, 140, 0.6)" />
               </TouchableOpacity>
 
@@ -216,7 +213,7 @@ export default function AboutScreen() {
                 <View style={styles.linkIcon}>
                   <IconSymbol name="envelope" size={20} color="#8B5A8C" />
                 </View>
-                <Text style={styles.linkText}>客服郵箱</Text>
+                <Text style={styles.linkText}>{t('about.contact.email')}</Text>
                 <IconSymbol name="chevron.right" size={16} color="rgba(139, 90, 140, 0.6)" />
               </TouchableOpacity>
 
@@ -229,7 +226,7 @@ export default function AboutScreen() {
                 <View style={styles.linkIcon}>
                   <IconSymbol name="hand.raised" size={20} color="#8B5A8C" />
                 </View>
-                <Text style={styles.linkText}>隱私政策</Text>
+                <Text style={styles.linkText}>{t('about.legal.privacy')}</Text>
                 <IconSymbol name="chevron.right" size={16} color="rgba(139, 90, 140, 0.6)" />
               </TouchableOpacity>
 
@@ -242,7 +239,7 @@ export default function AboutScreen() {
                 <View style={styles.linkIcon}>
                   <IconSymbol name="doc.plaintext" size={20} color="#8B5A8C" />
                 </View>
-                <Text style={styles.linkText}>服務條款</Text>
+                <Text style={styles.linkText}>{t('about.legal.terms')}</Text>
                 <IconSymbol name="chevron.right" size={16} color="rgba(139, 90, 140, 0.6)" />
               </TouchableOpacity>
             </LinearGradient>
@@ -252,10 +249,10 @@ export default function AboutScreen() {
         {/* Copyright */}
         <View style={styles.copyrightSection}>
           <Text style={styles.copyrightText}>
-            © 2024 Rebloom. 保留所有權利。
+            {t('about.copyright')}
           </Text>
           <Text style={styles.copyrightSubtext}>
-            用愛和技術，守護每一顆心靈
+            {t('about.tagline')}
           </Text>
         </View>
 
@@ -382,10 +379,10 @@ const styles = StyleSheet.create({
   achievementsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    justifyContent: 'space-between',
   },
   achievementCard: {
-    width: '48%',
+    width: '48.5%',
     borderRadius: 16,
     overflow: 'hidden',
     shadowColor: '#000',
@@ -393,6 +390,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
+    marginBottom: 12,
   },
   achievementGradient: {
     padding: 16,
@@ -434,6 +432,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
+    width: '100%',
   },
   teamMemberGradient: {
     flexDirection: 'row',

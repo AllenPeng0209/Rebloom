@@ -28,24 +28,24 @@ export default function FeedbackScreen() {
   });
 
   const feedbackTypes = [
-    { id: 'bug', name: '錯誤報告', icon: 'exclamationmark.triangle', color: '#FF3B30' },
-    { id: 'feature', name: '功能建議', icon: 'lightbulb', color: '#FFD700' },
-    { id: 'improvement', name: '改進建議', icon: 'arrow.up.circle', color: '#4CAF50' },
-    { id: 'general', name: '一般反饋', icon: 'message', color: '#8B5A8C' },
-    { id: 'praise', name: '表揚', icon: 'heart.fill', color: '#FF69B4' }
+    { id: 'bug', name: t('feedback.types.bug'), icon: 'exclamationmark.triangle', color: '#FF3B30' },
+    { id: 'feature', name: t('feedback.types.feature'), icon: 'lightbulb', color: '#FFD700' },
+    { id: 'improvement', name: t('feedback.types.improvement'), icon: 'arrow.up.circle', color: '#4CAF50' },
+    { id: 'general', name: t('feedback.types.general'), icon: 'message', color: '#8B5A8C' },
+    { id: 'praise', name: t('feedback.types.praise'), icon: 'heart.fill', color: '#FF69B4' }
   ];
 
   const handleSubmit = () => {
     if (!feedback.title.trim() || !feedback.description.trim()) {
-      Alert.alert('請填寫完整', '請提供反饋標題和詳細描述');
+      Alert.alert(t('feedback.validation.title'), t('feedback.validation.message'));
       return;
     }
 
     Alert.alert(
-      '提交反饋',
-      '感謝您的寶貴意見！我們會仔細審閱您的反饋並盡快回復。',
+      t('feedback.success.title'),
+      t('feedback.success.message'),
       [
-        { text: '確定', onPress: () => {
+        { text: t('common.ok'), onPress: () => {
           console.log('Submitting feedback:', feedback);
           router.back();
         }}
@@ -136,7 +136,7 @@ export default function FeedbackScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>意見反饋</Text>
+        <Text style={styles.headerTitle}>{t('feedback.title')}</Text>
         <TouchableOpacity onPress={handleSubmit} style={styles.submitHeaderButton}>
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}

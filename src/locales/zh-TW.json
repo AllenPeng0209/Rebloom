@@ -1,0 +1,1272 @@
+{
+  "nav": {
+    "home": "聊聊",
+    "chat": "聊聊",
+    "mood": "心情",
+    "explore": "探索",
+    "profile": "我的"
+  },
+  "common": {
+    "cancel": "取消",
+    "confirm": "確認",
+    "save": "保存",
+    "delete": "刪除",
+    "edit": "編輯",
+    "back": "返回",
+    "next": "下一步",
+    "done": "完成",
+    "loading": "加載中...",
+    "error": "出錯了",
+    "success": "成功",
+    "retry": "重試",
+    "ok": "好的",
+    "yes": "是",
+    "no": "否"
+  },
+  "profile": {
+    "title": "我的",
+    "userJoinedDays": "與 Rebloom 相伴 {{days}} 天",
+    "logout": "登出",
+    "logoutConfirm": "登出確認",
+    "logoutMessage": "您確定要登出嗎？",
+    "logoutFailed": "登出失敗",
+    "logoutFailedMessage": "登出時發生錯誤，請重試。",
+    "logoutSuccess": "登出成功",
+    "logoutSuccessMessage": "您已成功登出。",
+    "cancel": "取消",
+    "version": "Rebloom v{{version}}",
+    "section": {
+      "personal": "個人資料",
+      "subscription": "訂閱與付費",
+      "ai": "AI 設定",
+      "notifications": "通知與提醒",
+      "privacy": "隱私與安全",
+      "support": "支持與幫助",
+      "about": "關於"
+    },
+    "personalInfo": {
+      "title": "個人信息",
+      "subtitle": "編輯您的個人資料和偏好"
+    },
+    "subscription": {
+      "title": "我的訂閱",
+      "subtitle": "管理您的訂閱計劃"
+    },
+    "billing": {
+      "title": "帳單管理",
+      "subtitle": "查看付費記錄和發票"
+    },
+    "aiPersonality": {
+      "title": "AI 個性設置",
+      "subtitle": "調整AI伴侶的個性特質和技術特性"
+    },
+    "therapeuticApproach": {
+      "title": "治療方法",
+      "subtitle": "選擇適合您的治療技術"
+    },
+    "notifications": {
+      "title": "推送通知",
+      "subtitle": "管理通知和提醒設置"
+    },
+    "moodReminders": {
+      "title": "心情提醒",
+      "subtitle": "設置心情記錄提醒"
+    },
+    "wellnessCheck": {
+      "title": "健康檢查",
+      "subtitle": "定期健康狀況評估"
+    },
+    "premium": "高級版",
+    "privacySettings": "隱私設置",
+    "privacySettingsSubtitle": "控制數據分享和存儲",
+    "dataExport": "數據導出",
+    "dataExportSubtitle": "導出您的個人數據",
+    "emergencyContacts": "緊急聯繫人",
+    "emergencyContactsSubtitle": "管理緊急情況聯繫人",
+    "crisisResources": "危機資源",
+    "crisisResourcesSubtitle": "緊急心理健康資源",
+    "helpCenter": "幫助中心",
+    "helpCenterSubtitle": "常見問題和使用指南",
+    "contactSupport": "聯絡客服",
+    "contactSupportSubtitle": "獲得技術支持和幫助",
+    "feedback": "意見反饋",
+    "feedbackSubtitle": "幫助我們改進應用",
+    "about": "關於 Rebloom",
+    "aboutSubtitle": "應用版本和信息",
+    "terms": "服務條款",
+    "termsSubtitle": "使用條款和政策",
+    "privacyPolicy": "隱私政策",
+    "privacyPolicySubtitle": "了解我們如何保護您的隱私",
+    "languageSettings": "語言設置",
+    "languageSettingsSubtitle": "選擇應用顯示語言",
+    "conversationSettings": "對話設定",
+    "conversationStyle": "對話風格",
+    "conversationStyle.description": "選擇AI如何回應您",
+    "conversationDepth": "對話深度",
+    "responseLength": "回應長度"
+  },
+  "personalInfo": {
+    "title": "個人信息",
+    "name": "姓名",
+    "email": "郵箱",
+    "age": "年齡",
+    "location": "位置",
+    "timezone": "時區",
+    "mentalHealthGoals": "心理健康目標",
+    "emergencyContact": "緊急聯繫人",
+    "emergencyContactName": "聯繫人姓名",
+    "emergencyContactPhone": "聯繫人電話",
+    "emergencyContactRelationship": "關係",
+    "save": "保存",
+    "saveSuccess": "保存成功",
+    "saveSuccessMessage": "您的個人信息已更新",
+    "placeholders": {
+      "name": "輸入您的姓名",
+      "email": "輸入您的電子郵件",
+      "location": "輸入您的位置",
+      "emergencyContactName": "緊急聯繫人姓名",
+      "emergencyContactPhone": "聯繫電話",
+      "emergencyContactRelationship": "與您的關係（如：家人、朋友）"
+    },
+    "ageRanges": {
+      "18-24": "18-24",
+      "25-34": "25-34",
+      "35-44": "35-44",
+      "45-54": "45-54",
+      "55-64": "55-64",
+      "65+": "65+"
+    },
+    "goals": {
+      "anxiety": "管理焦慮",
+      "depression": "處理抑鬱",
+      "sleep": "改善睡眠",
+      "confidence": "建立自信",
+      "relationships": "人際關係",
+      "workStress": "工作壓力",
+      "emotionRegulation": "情緒調節",
+      "trauma": "創傷復原",
+      "personalGrowth": "個人成長",
+      "lifeBalance": "生活平衡"
+    }
+  },
+  "aiSettings": {
+    "title": "AI 個性設置",
+    "subtitle": "自定義您的AI伴侶個性",
+    "personalityTypes": {
+      "supportive": {
+        "name": "溫暖支持型",
+        "description": "像朋友般溫暖，提供情感支持"
+      },
+      "wise": {
+        "name": "智慧導師型",
+        "description": "像導師般睿智，給予深刻見解"
+      },
+      "gentle": {
+        "name": "溫和陪伴型",
+        "description": "像家人般溫柔，耐心傾聽"
+      },
+      "energetic": {
+        "name": "活力激勵型",
+        "description": "像教練般積極，激發正能量"
+      }
+    },
+    "tones": {
+      "warm": {
+        "name": "溫暖親切",
+        "description": "溫暖的語調，如摯友般親切"
+      },
+      "professional": {
+        "name": "專業穩重",
+        "description": "專業的語調，如諮詢師般穩重"
+      },
+      "gentle": {
+        "name": "溫柔細膩",
+        "description": "溫柔的語調，如家人般細膩"
+      },
+      "encouraging": {
+        "name": "鼓勵積極",
+        "description": "鼓勵的語調，如導師般積極"
+      }
+    },
+    "capabilities": {
+      "standard": {
+        "name": "標準模式",
+        "description": "平衡的AI能力，適合日常對話"
+      },
+      "advanced": {
+        "name": "進階模式",
+        "description": "更強的理解力，深度心理分析"
+      },
+      "empathetic": {
+        "name": "同理模式",
+        "description": "專注情感理解，高度同理心"
+      }
+    },
+    "resetSettings": "重置設定",
+    "resetConfirm": "重置確認",
+    "resetMessage": "確定要將所有AI設定重置為推薦值嗎？這將無法復原。",
+    "resetSuccess": "設定已重置",
+    "resetSuccessMessage": "所有AI設定已重置為推薦值。",
+    "logoutFromAI": "從AI登出",
+    "logoutFromAIMessage": "確定要從AI服務登出嗎？您需要重新認證。"
+  },
+  "therapeuticSettings": {
+    "title": "治療設定",
+    "subtitle": "選擇適合您的治療方法",
+    "approaches": {
+      "cbt": {
+        "name": "認知行為療法 (CBT)",
+        "description": "關注思維模式與行為之間的關係，幫助識別和改變負面思維"
+      },
+      "dbt": {
+        "name": "辯證行為療法 (DBT)",
+        "description": "專注於情緒調節、人際關係技能和痛苦耐受"
+      },
+      "act": {
+        "name": "接受承諾療法 (ACT)",
+        "description": "強調接受困難情緒，專注於價值觀導向的行動"
+      },
+      "humanistic": {
+        "name": "人本主義療法",
+        "description": "以人為中心，強調自我實現和個人成長"
+      },
+      "psychodynamic": {
+        "name": "心理動力療法",
+        "description": "探索無意識過程和早期經歷對當前行為的影響"
+      },
+      "mindfulness": {
+        "name": "正念療法",
+        "description": "培養當下覺察，減少反芻思維和焦慮"
+      }
+    },
+    "styles": {
+      "directive": {
+        "name": "指導式",
+        "description": "治療師主導，提供明確指導和建議"
+      },
+      "collaborative": {
+        "name": "合作式",
+        "description": "治療師與來訪者共同探索和解決問題"
+      },
+      "non-directive": {
+        "name": "非指導式",
+        "description": "來訪者主導，治療師提供支持和反思"
+      }
+    },
+    "culturalContext": {
+      "asian": {
+        "name": "亞洲文化",
+        "description": "理解集體主義價值觀和家庭關係"
+      },
+      "western": {
+        "name": "西方文化",
+        "description": "強調個人主義和自我表達"
+      },
+      "indigenous": {
+        "name": "原住民文化",
+        "description": "尊重傳統智慧和社群連結"
+      },
+      "multicultural": {
+        "name": "多元文化",
+        "description": "融合多種文化背景的理解"
+      }
+    },
+    "conversationStyles": {
+      "supportive": {
+        "name": "支持式",
+        "description": "溫暖鼓勵，提供情感支持"
+      },
+      "analytical": {
+        "name": "分析式",
+        "description": "深入分析問題根源和模式"
+      },
+      "solution-focused": {
+        "name": "解決導向",
+        "description": "專注於尋找實際解決方案"
+      },
+      "exploratory": {
+        "name": "探索式",
+        "description": "開放式對話，自由探索想法"
+      }
+    },
+    "depths": {
+      "surface": {
+        "name": "淺層",
+        "description": "輕鬆對話，避免深入敏感話題"
+      },
+      "moderate": {
+        "name": "中等",
+        "description": "平衡的深度，適度探索內心"
+      },
+      "deep": {
+        "name": "深層",
+        "description": "深入探討核心問題和情感"
+      }
+    },
+    "responseLengths": {
+      "brief": {
+        "name": "簡潔",
+        "description": "簡短回應，重點明確"
+      },
+      "medium": {
+        "name": "適中",
+        "description": "平衡的回應長度"
+      },
+      "detailed": {
+        "name": "詳細",
+        "description": "深入詳細的回應和解釋"
+      }
+    },
+    "saveSuccess": "設定已保存",
+    "saveSuccessMessage": "您的治療偏好設置已成功更新，AI將根據這些設置調整治療方法。",
+    "saveError": "保存失敗",
+    "saveErrorMessage": "設置保存時發生錯誤，請重試。",
+    "resetConfirm": "重置確認",
+    "resetMessage": "確定要將所有治療設置重置為推薦值嗎？這將無法復原。",
+    "resetSuccess": "設置已重置",
+    "resetSuccessMessage": "所有治療設置已重置為推薦值。",
+    "resetError": "重置失敗",
+    "resetErrorMessage": "設置重置時發生錯誤，請重試。"
+  },
+  "subscription": {
+    "title": "我的訂閱",
+    "currentPlan": "當前計劃",
+    "freePlan": "免費計劃",
+    "premiumPlan": "高級計劃",
+    "features": "功能",
+    "upgrade": "升級",
+    "manage": "管理訂閱",
+    "upgradeConfirm": "升級確認",
+    "upgradeMessage": "升級到高級計劃，每月$9.99？",
+    "upgradeSuccess": "升級成功",
+    "upgradeSuccessMessage": "歡迎使用高級版！享受增強功能。",
+    "freeFeatures": {
+      "basicChat": "基本AI對話",
+      "moodTracking": "心情追蹤",
+      "limitedHistory": "有限的聊天歷史"
+    },
+    "premiumFeatures": {
+      "unlimitedChat": "無限AI對話",
+      "advancedAnalysis": "高級分析",
+      "unlimitedHistory": "無限聊天歷史",
+      "prioritySupport": "優先支援",
+      "customPersonality": "自定義AI個性"
+    }
+  },
+  "billing": {
+    "title": "帳單管理",
+    "paymentHistory": "付款歷史",
+    "nextPayment": "下次付款",
+    "paymentMethod": "付款方式",
+    "downloadInvoice": "下載發票",
+    "updatePayment": "更新付款方式",
+    "noPaymentHistory": "沒有付款歷史",
+    "invoices": {
+      "subscription": "Rebloom Premium - 月度訂閱"
+    }
+  },
+  "notifications": {
+    "title": "通知設置",
+    "general": {
+      "title": "一般",
+      "enableNotifications": {
+        "title": "啟用通知",
+        "description": "開啟或關閉所有通知"
+      }
+    },
+    "moodReminders": {
+      "title": "心情提醒",
+      "moodCheckIns": {
+        "title": "心情記錄",
+        "description": "提醒您記錄心情"
+      },
+      "reminderTimes": {
+        "title": "提醒時間"
+      },
+      "times": {
+        "morning": "上午 9:00",
+        "noon": "中午 12:00",
+        "evening": "下午 6:00",
+        "night8": "晚上 8:00",
+        "night9": "晚上 9:00"
+      }
+    },
+    "checkInReminders": {
+      "title": "簽到提醒",
+      "inactivityReminders": {
+        "title": "不活躍提醒"
+      }
+    },
+    "crisisSupport": {
+      "title": "危機支援",
+      "crisisAlerts": {
+        "title": "危機警報",
+        "description": "重要安全通知"
+      },
+      "immediateAlerts": {
+        "title": "即時警報",
+        "description": "即使在靜音時間也顯示危機警報"
+      }
+    },
+    "insights": {
+      "title": "洞察與進度",
+      "weeklyInsights": {
+        "title": "每週洞察",
+        "description": "獲得每週心情和進度洞察"
+      },
+      "progressUpdates": {
+        "title": "進度更新",
+        "description": "慶祝里程碑和成就"
+      }
+    },
+    "quietHours": {
+      "title": "靜音時間",
+      "enableQuietHours": {
+        "title": "啟用靜音時間",
+        "description": "在指定時間暫停通知"
+      },
+      "quietTime": {
+        "title": "靜音時間"
+      }
+    },
+    "testNotifications": {
+      "title": "測試通知",
+      "description": "這是一個測試通知，用於驗證您的設置是否正常工作。"
+    },
+    "systemNotifications": {
+      "moodCheckIn": {
+        "title": "您現在感覺如何？",
+        "body": "花一點時間記錄您的心情"
+      },
+      "inactivity": {
+        "title": "我們想念您！",
+        "body": "您的心理健康之旅還在繼續 - 讓我們聊聊吧！"
+      },
+      "weeklyInsights": {
+        "title": "每週洞察已準備",
+        "body": "您的個人化每週洞察已可用"
+      }
+    }
+  },
+  "privacy": {
+    "title": "隱私設置",
+    "dataRetention": {
+      "title": "數據保留",
+      "description": "選擇保留數據的時間",
+      "options": {
+        "30days": "30天",
+        "90days": "90天",
+        "6months": "6個月",
+        "1year": "1年",
+        "2years": "2年"
+      }
+    },
+    "dataExport": {
+      "title": "導出數據",
+      "description": "下載您的所有數據",
+      "button": "導出數據",
+      "confirm": "導出確認",
+      "confirmMessage": "導出您的所有個人數據？這可能需要幾分鐘。",
+      "startExport": "開始導出",
+      "success": "導出已開始",
+      "successMessage": "數據導出已啟動。您將收到包含下載連結的電子郵件。"
+    },
+    "dataDelete": {
+      "title": "刪除所有數據",
+      "description": "永久刪除您的所有數據",
+      "button": "刪除所有數據",
+      "confirm": "刪除確認",
+      "confirmMessage": "您確定要永久刪除所有數據嗎？此操作無法撤銷。",
+      "confirmDelete": "確認刪除",
+      "finalConfirm": "最終確認",
+      "finalConfirmMessage": "這將永久刪除您的所有對話、心情數據和個人信息。輸入'DELETE'確認。",
+      "permanentDelete": "永久刪除",
+      "success": "數據已刪除",
+      "successMessage": "您的所有數據已永久刪除。"
+    },
+    "biometricAuth": {
+      "title": "生物識別認證",
+      "description": "使用指紋或面部識別",
+      "enable": "啟用生物識別認證"
+    },
+    "shield": {
+      "title": "您的隱私受到保護",
+      "description": "我們使用業界領先的安全措施，包括端到端加密，確保您的信息安全。"
+    },
+    "rightsSummary": {
+      "title": "您的權利摘要",
+      "dataControl": "數據控制權",
+      "description": "您完全控制自己的數據。可以隨時查看、修改、刪除或導出您的信息。"
+    },
+    "contactPrivacyOfficer": "聯繫隱私保護官",
+    "sections": {
+      "overview": {
+        "title": "1. 概述",
+        "content": [
+          "Rebloom（「我們」、「我們的」或「公司」）重視您的隱私權。本隱私政策說明了我們如何收集、使用、保護和處理您的個人信息。",
+          "本政策適用於您使用 Rebloom 應用程式（「服務」）時提供的所有個人信息。",
+          "通過使用我們的服務，您同意我們按照本隱私政策處理您的信息。"
+        ]
+      },
+      "informationCollected": {
+        "title": "2. 我們收集的信息",
+        "content": [
+          "我們可能收集以下類型的個人信息：",
+          "",
+          "• 帳戶信息：姓名、電子郵件地址、電話號碼",
+          "• 個人資料：年齡、性別、位置、偏好設置",
+          "• 健康相關信息：心情數據、對話記錄、心理健康偏好",
+          "• 使用數據：應用程式使用統計、功能使用情況",
+          "• 設備信息：設備類型、操作系統、唯一標識碼",
+          "• 緊急聯繫人信息：您指定的緊急聯繫人詳細信息"
+        ]
+      },
+      "collectionMethods": {
+        "title": "3. 信息收集方式",
+        "content": [
+          "我們通過以下方式收集信息：",
+          "",
+          "• 直接提供：您在使用服務時主動提供的信息",
+          "• 自動收集：通過應用程式自動收集的使用數據",
+          "• 第三方服務：通過整合的第三方服務獲得的信息",
+          "• 分析工具：使用分析工具了解服務使用情況"
+        ]
+      },
+      "informationUse": {
+        "title": "4. 信息使用目的",
+        "content": [
+          "我們使用收集的信息來：",
+          "",
+          "• 提供和改進我們的服務",
+          "• 個性化您的體驗",
+          "• 確保服務的安全性和可靠性",
+          "• 提供客戶支持",
+          "• 分析使用趨勢和改進功能",
+          "• 遵守法律義務",
+          "• 保護用戶和公眾的安全"
+        ]
+      },
+      "informationSharing": {
+        "title": "5. 信息共享",
+        "content": [
+          "我們承諾保護您的隱私，不會出售您的個人信息。我們可能在以下情況下共享信息：",
+          "",
+          "• 獲得您的明確同意",
+          "• 法律要求或保護權利",
+          "• 緊急情況下保護用戶安全",
+          "• 與授權的服務提供商共享（僅限必要目的）",
+          "• 業務轉讓或合併",
+          "• 匿名化或聚合數據用於分析"
+        ]
+      },
+      "dataSecurity": {
+        "title": "6. 數據安全",
+        "content": [
+          "我們實施多層安全措施保護您的信息：",
+          "",
+          "• 端到端加密：所有對話和敏感數據均加密",
+          "• 訪問控制：嚴格的員工訪問權限管理",
+          "• 安全存儲：使用業界標準的安全存儲解決方案",
+          "• 定期審計：定期進行安全審計和更新",
+          "• 事件響應：24/7 安全監控和事件響應計劃"
+        ]
+      },
+      "dataRetention": {
+        "title": "7. 數據保留",
+        "content": [
+          "我們保留您的信息：",
+          "",
+          "• 帳戶活躍期間：保留所有使用數據",
+          "• 帳戶刪除後：保留必要信息以遵守法律義務",
+          "• 自動刪除：根據您的設置自動刪除舊數據",
+          "• 最小化保留：僅保留提供服務所需的必要信息"
+        ]
+      },
+      "yourRights": {
+        "title": "8. 您的權利",
+        "content": [
+          "您對您的個人信息擁有以下權利：",
+          "",
+          "• 訪問權：查看我們持有的您的個人信息",
+          "• 修正權：更新或修正不準確的信息",
+          "• 刪除權：要求刪除您的個人信息",
+          "• 攜帶權：以結構化格式獲取您的數據",
+          "• 限制處理權：限制我們處理您的信息",
+          "• 反對權：反對基於合法利益處理您的信息",
+          "• 撤回同意：隨時撤回您對數據處理的同意"
+        ]
+      },
+      "cookiesTracking": {
+        "title": "9. Cookie 和追蹤",
+        "content": [
+          "我們使用以下技術來增強您的體驗：",
+          "",
+          "• 基本功能：必要的 cookie 用於應用程式功能",
+          "• 分析工具：匿名使用統計以改進服務",
+          "• 性能監控：監控應用程式性能和錯誤",
+          "• 您可以通過應用程式設置控制追蹤偏好"
+        ]
+      },
+      "childrensPrivacy": {
+        "title": "10. 兒童隱私",
+        "content": [
+          "我們的服務主要面向18歲以上用戶。",
+          "如果我們發現收集了13歲以下兒童的信息，我們將立即刪除。",
+          "對於18歲以下用戶，我們鼓勵家長監督使用。",
+          "我們不故意收集兒童的個人信息。"
+        ]
+      },
+      "dataTransfer": {
+        "title": "11. 跨境數據傳輸",
+        "content": [
+          "您的信息可能在不同國家/地區傳輸和處理。",
+          "我們確保所有傳輸符合適用的數據保護法。",
+          "我們使用標準合同條款和其他保護措施。",
+          "我們只將數據傳輸到有足夠保護水平的國家。"
+        ]
+      },
+      "thirdPartyServices": {
+        "title": "12. 第三方服務",
+        "content": [
+          "我們的服務可能包含第三方服務的連結：",
+          "",
+          "• 我們不控制第三方的隱私實踐",
+          "• 請查看第三方的隱私政策",
+          "• 我們對第三方服務的隱私實踐不承擔責任",
+          "• 使用第三方服務即表示您同意其隱私政策"
+        ]
+      },
+      "policyUpdates": {
+        "title": "13. 隱私政策更新",
+        "content": [
+          "我們可能不時更新本隱私政策。",
+          "重大變更將通過應用程式通知或電子郵件通知。",
+          "繼續使用服務即表示您接受更新後的政策。",
+          "我們建議您定期查看本隱私政策。"
+        ]
+      },
+      "contact": {
+        "title": "14. 聯繫我們",
+        "content": [
+          "如果您對本隱私政策有任何疑問或請求，請聯繫我們的隱私保護官：",
+          "",
+          "電子郵件：privacy@Rebloom.app",
+          "地址：台灣台北市",
+          "我們將在30天內回覆您的請求。",
+          "",
+          "隱私保護官將協助您行使您的權利。"
+        ]
+      }
+    }
+  },
+  "help": {
+    "title": "幫助中心",
+    "searchPlaceholder": "搜索常見問題...",
+    "faq": "常見問題",
+    "gettingStarted": "入門指南",
+    "troubleshooting": "故障排除",
+    "privacy": "隱私與安全",
+    "billing": "帳單與訂閱",
+    "contact": "聯繫支援"
+  },
+  "contactSupport": {
+    "title": "聯絡客服",
+    "subject": "主題",
+    "subjectPlaceholder": "簡要描述您的問題...",
+    "description": "描述",
+    "descriptionPlaceholder": "請詳細描述您遇到的問題，包括：\n• 具體的錯誤信息\n• 發生問題的步驟\n• 您期望的結果\n• 其他相關信息",
+    "email": "電子郵件",
+    "emailPlaceholder": "您的郵箱地址",
+    "priority": "優先級",
+    "priorities": {
+      "low": {
+        "name": "低",
+        "description": "一般問題，3-5個工作日回復"
+      },
+      "medium": {
+        "name": "中",
+        "description": "重要問題，1-2個工作日回復"
+      },
+      "high": {
+        "name": "高",
+        "description": "緊急問題，24小時內回復"
+      }
+    },
+    "submit": "提交",
+    "submitSuccess": "支援請求已提交",
+    "submitSuccessMessage": "您的支援請求已提交。我們很快會回復您！"
+  },
+  "feedback": {
+    "title": "意見反饋",
+    "subtitle": "幫助我們改進 Rebloom",
+    "type": "反饋類型",
+    "types": {
+      "general": "一般反饋",
+      "bug": "錯誤報告",
+      "feature": "功能請求",
+      "improvement": "改進建議"
+    },
+    "subject": "主題",
+    "subjectPlaceholder": "簡要描述您的反饋...",
+    "description": "描述",
+    "descriptionPlaceholder": "請分享您的想法、遇到的問題或建議...",
+    "email": "電子郵件（可選）",
+    "emailPlaceholder": "您的郵箱地址",
+    "submit": "提交反饋",
+    "submitSuccess": "反饋已提交",
+    "submitSuccessMessage": "感謝您的反饋！我們重視您的意見。"
+  },
+  "crisisResources": {
+    "title": "危機資源",
+    "subtitle": "緊急心理健康支援",
+    "warning": "如果您處於即時危險中，請立即撥打緊急服務。",
+    "hotlines": {
+      "title": "危機熱線",
+      "suicide": {
+        "name": "生命線",
+        "number": "1995",
+        "description": "24小時免費心理諮詢和自殺防治熱線"
+      },
+      "crisis": {
+        "name": "危機文字熱線",
+        "number": "傳送簡訊至1995",
+        "description": "24小時透過文字提供危機諮詢"
+      },
+      "youth": {
+        "name": "青少年輔導專線",
+        "number": "0800-25-1880",
+        "description": "青少年輔導專線，提供情感支持和心理諮詢"
+      },
+      "mentalHealth": {
+        "name": "心理健康專線",
+        "number": "1925",
+        "description": "衛生福利部心理及口腔健康司設立的心理諮詢專線"
+      }
+    },
+    "emergency": {
+      "title": "緊急服務",
+      "medical": {
+        "name": "緊急醫療服務",
+        "number": "119",
+        "description": "緊急醫療救護服務"
+      },
+      "police": {
+        "name": "警察",
+        "number": "110",
+        "description": "緊急報警服務"
+      }
+    },
+    "callConfirm": "撥打確認",
+    "callMessage": "撥打 {{number}}？",
+    "call": "撥打"
+  },
+  "about": {
+    "title": "關於 Rebloom",
+    "subtitle": "您的AI心理健康伴侶",
+    "version": "版本 {{version}}",
+    "buildNumber": "建置 {{build}}",
+    "lastUpdate": "最後更新：{{date}}",
+    "developer": "開發者：{{developer}}",
+    "contact": {
+      "title": "聯絡我們",
+      "website": "官方網站",
+      "email": "客服郵箱",
+      "support": "技術支援"
+    },
+    "legal": {
+      "privacy": "隱私政策",
+      "terms": "服務條款"
+    },
+    "team": {
+      "title": "核心團隊",
+      "members": {
+        "founder": {
+          "name": "陳莎拉博士",
+          "role": "心理學顧問",
+          "description": "臨床心理學博士，專精認知行為療法"
+        },
+        "cto": {
+          "name": "Alex Kim",
+          "role": "產品總監",
+          "description": "10年心理健康科技產品經驗"
+        },
+        "ai": {
+          "name": "Maya Patel",
+          "role": "AI研究員",
+          "description": "自然語言處理和情感計算專家"
+        },
+        "security": {
+          "name": "David Liu",
+          "role": "隱私工程師",
+          "description": "數據安全和隱私保護專家"
+        }
+      }
+    },
+    "stats": {
+      "title": "我們的成就",
+      "users": {
+        "title": "100萬+ 用戶信任",
+        "description": "全球超過一百萬用戶選擇 Rebloom"
+      },
+      "availability": {
+        "title": "24/7 可用性",
+        "description": "99.9% 的服務可用時間"
+      },
+      "privacy": {
+        "title": "隱私優先",
+        "description": "端到端加密，零數據洩露記錄"
+      },
+      "certification": {
+        "title": "專業認證",
+        "description": "獲得心理健康專業機構認證"
+      }
+    },
+    "mission": {
+      "title": "我們的使命",
+      "description": "Rebloom 致力於讓每個人都能獲得高質量的心理健康支持。我們相信技術可以讓心理健康服務更加普及、便捷和有效。通過AI技術和專業心理學知識的結合，我們為用戶提供24/7的情感支持和個性化的心理健康指導。"
+        },
+    "copyright": "© 2024 Rebloom. 保留所有權利。",
+    "tagline": "用愛和技術，守護每一顆心靈"
+  },
+  "languageSettings": {
+    "title": "語言設置",
+    "subtitle": "選擇您的偏好語言",
+    "currentLanguage": "當前語言",
+    "availableLanguages": "可用語言",
+    "languages": {
+      "zh-TW": {
+        "name": "繁體中文",
+        "description": "台灣繁體中文"
+      },
+      "zh-CN": {
+        "name": "简体中文",
+        "description": "中國簡體中文"
+      },
+      "ja": {
+        "name": "日本語",
+        "description": "日本語"
+      },
+      "en": {
+        "name": "English",
+        "description": "英文（美國）"
+      }
+    },
+    "save": "保存",
+    "saveSuccess": "語言設置已成功保存"
+  },
+  "memoryManagement": {
+    "title": "記憶管理",
+    "subtitle": "管理AI對話記憶",
+    "totalMemories": "總記憶數：{{count}}",
+    "importanceFilter": "按重要性篩選",
+    "all": "全部",
+    "high": "高",
+    "medium": "中等",
+    "low": "低",
+    "deleteConfirm": "刪除確認",
+    "deleteMessage": "您確定要刪除這個記憶嗎？",
+    "updateImportance": "更新重要性",
+    "importanceLevels": {
+      "low": "低 (3)",
+      "medium": "中 (5)",
+      "high": "高 (8)",
+      "veryHigh": "極高 (10)"
+    },
+    "empty": "未找到記憶",
+    "emptyDescription": "您的AI對話記憶將在聊天時出現在這裡。"
+  },
+  "mood": {
+    "title": "心情",
+    "subtitle": "追蹤您的情緒，了解內心世界",
+    "todaysInsights": "今日洞察",
+    "insightsFor": "{{date}} 的洞察",
+    "mockInsightText": "這是一個演示版本",
+    "mockInsightSubtext": "實際版本將顯示基於您對話的個性化洞察和分析",
+    "noConversations": "今天還沒有對話",
+    "noConversationsText": "開始一次對話來生成您的每日心情洞察",
+    "startConversation": "開始聊天",
+    "insightHistory": "洞察歷史",
+    "dailyInsight": "每日洞察",
+    "goodDay": "好日子",
+    "neutral": "一般",
+    "toughDay": "困難日",
+    "moodThisWeek": "本週心情",
+    "quickMoodCheck": "快速心情檢查",
+    "howAreYouFeeling": "您現在感覺如何？",
+    "checkIn": {
+      "title": "心情記錄",
+      "howFeeling": "您現在感覺如何？",
+      "selectMood": "選擇您當前的心情",
+      "whatEmotions": "您感受到什麼情緒？",
+      "chooseEmotions": "選擇與您產生共鳴的情緒",
+      "additionalThoughts": "還有其他想法嗎？",
+      "optionalNotes": "關於您今天的可選備註",
+      "moods": {
+        "terrible": {
+          "label": "糟糕",
+          "description": "感覺很低落，壓力很大"
+        },
+        "poor": {
+          "label": "不好",
+          "description": "度過艱難的一天，感到沮喪"
+        },
+        "fair": {
+          "label": "一般",
+          "description": "不好不壞，還可以"
+        },
+        "good": {
+          "label": "不錯",
+          "description": "感覺積極和滿足"
+        },
+        "excellent": {
+          "label": "很棒",
+          "description": "感覺棒極了，充滿活力"
+        }
+      },
+      "emotions": {
+        "anxious": "焦慮",
+        "calm": "平靜",
+        "energetic": "有活力",
+        "tired": "疲憊",
+        "stressed": "壓力大",
+        "hopeful": "充滿希望",
+        "sad": "難過",
+        "grateful": "感恩",
+        "overwhelmed": "不知所措",
+        "peaceful": "平和",
+        "frustrated": "沮喪",
+        "motivated": "有動力"
+      },
+      "categories": {
+        "positive": "積極情緒",
+        "negative": "消極情緒",
+        "neutral": "中性情緒"
+      },
+      "notesPlaceholder": "今天過得怎麼樣？您在想什麼？",
+      "summary": {
+        "title": "您的心情總結",
+        "emotions": "情緒：",
+        "back": "返回",
+        "next": "下一步",
+        "complete": "完成"
+      }
+    }
+  },
+  "chat": {
+    "greeting": "你好！我是 Rebloom 的 AI 助手，很高興見到你。我在這裡傾聽和支持你。",
+    "response1": "我理解你的感受。",
+    "response2": "請繼續，我在聽。",
+    "response3": "這聽起來很有挑戰性。",
+    "response4": "你想多分享一些嗎？",
+    "response5": "我能感受到這對你很重要。"
+  },
+  "accessibility": {
+    "title": "無障礙設置",
+    "screenReader": {
+      "title": "螢幕閱讀器",
+      "enabled": {
+        "title": "螢幕閱讀器已啟用",
+        "description": "從系統設置自動檢測"
+      },
+      "voiceAnnouncements": {
+        "title": "語音公告",
+        "description": "宣布重要更新和變更"
+      },
+      "voiceNavigation": {
+        "title": "語音導航",
+        "description": "使用語音命令導航"
+      }
+    },
+    "visual": {
+      "title": "視覺",
+      "highContrast": {
+        "title": "高對比度模式",
+        "description": "增加對比度以提高可見性"
+      },
+      "reduceMotion": {
+        "title": "減少動畫",
+        "description": "最小化動畫和轉場效果"
+      },
+      "textSize": {
+        "title": "文字大小",
+        "description": "調整文字大小以提高可讀性"
+      },
+      "colorBlind": {
+        "title": "色盲支援",
+        "description": "為色覺差異調整顏色"
+      }
+    },
+    "motor": {
+      "title": "動作",
+      "buttonSize": {
+        "title": "按鈕大小",
+        "description": "增加按鈕大小以便於點擊"
+      },
+      "gestureAlternatives": {
+        "title": "手勢替代",
+        "description": "為複雜手勢提供替代方案"
+      }
+    }
+  },
+  "terms": {
+    "title": "服務條款",
+    "lastUpdated": "最後更新：{{date}}",
+    "description": "這些條款規範了您使用 Rebloom 服務的權利和責任。請仔細閱讀。",
+    "toc": "目錄",
+    "agreement": "同意條款",
+    "agreementText": "通過繼續使用 Rebloom，您確認您已閱讀、理解並同意受這些服務條款的約束。",
+    "contactLegal": "聯絡法律團隊",
+    "sections": {
+      "acceptance": {
+        "title": "1. 接受條款",
+        "content": [
+          "歡迎使用 Rebloom（以下簡稱\"本服務\"或\"應用程式\"）。本服務條款（以下簡稱\"條款\"）是您與 Rebloom 團隊（以下簡稱\"我們\"、\"我們的\"或\"公司\"）之間的法律協議。",
+          "通過下載、安裝或使用本服務，您同意受這些條款的約束。如果您不同意這些條款，請勿使用本服務。",
+          "這些條款適用於應用程式本身及其所有功能、服務和內容。"
+        ]
+      },
+      "services": {
+        "title": "2. 服務說明",
+        "content": [
+          "Rebloom 是一款AI驅動的心理健康支持應用程式，提供以下服務：",
+          "• 24/7 情感支持和心理健康指導",
+          "• 個性化的AI對話體驗",
+          "• 心情追蹤和健康見解",
+          "• 危機資源和緊急聯絡人功能",
+          "• 個性化AI設定和治療偏好",
+          "• 會話記錄和進度追蹤"
+        ]
+      },
+      "eligibility": {
+        "title": "3. 使用資格",
+        "content": [
+          "您必須年滿18歲或在監護人監督下使用本服務。",
+          "您承諾提供真實、準確、完整的信息。",
+          "您同意不以任何非法或未經授權的方式使用本服務。",
+          "您理解本服務不是緊急心理健康服務的替代品。"
+        ]
+      },
+      "responsibilities": {
+        "title": "4. 用戶責任",
+        "content": [
+          "您同意：",
+          "• 提供準確的個人信息",
+          "• 保護您的帳戶安全",
+          "• 不分享您的登入憑證",
+          "• 不以有害方式使用服務",
+          "• 尊重其他用戶的隱私",
+          "• 在緊急情況下尋求專業幫助"
+        ]
+      },
+      "availability": {
+        "title": "5. 服務可用性",
+        "content": [
+          "我們致力於提供高品質的服務，但無法保證：",
+          "• 服務的持續可用性",
+          "• 服務的中斷或錯誤",
+          "• 特定功能的可用性",
+          "我們保留隨時修改、暫停或終止服務的權利。"
+        ]
+      },
+      "dataPrivacy": {
+        "title": "6. 數據和隱私",
+        "content": [
+          "您的隱私對我們至關重要。我們的隱私政策詳細說明了我們如何收集、使用和保護您的信息。",
+          "通過使用本服務，您同意我們根據隱私政策處理您的數據。",
+          "我們使用端到端加密來保護您的對話和個人信息。",
+          "您對您的數據負責，包括備份重要信息。"
+        ]
+      },
+      "ownership": {
+        "title": "7. 內容所有權",
+        "content": [
+          "應用程式和其所有內容，包括但不限於：",
+          "• 軟體程式碼和演算法",
+          "• 設計和用戶界面",
+          "• 商標和品牌元素",
+          "• 知識產權",
+          "均屬於 Rebloom 所有。"
+        ]
+      },
+      "userContent": {
+        "title": "8. 用戶內容",
+        "content": [
+          "您對您在本服務中創建的內容保留所有權。",
+          "通過使用服務，您授予我們有限的許可來提供服務。",
+          "您承諾不會上傳有害、非法或侵犯他人權利的內容。",
+          "我們有權在適當情況下移除違反政策的內容。"
+        ]
+      },
+      "disclaimer": {
+        "title": "9. 免責聲明",
+        "content": [
+          "本服務按\"現狀\"提供，無任何形式的擔保。",
+          "我們不保證服務的準確性、可靠性或適用性。",
+          "本服務不是專業心理健康服務的替代品。",
+          "在緊急情況下，請立即聯絡專業醫療人員。"
+        ]
+      },
+      "limitation": {
+        "title": "10. 責任限制",
+        "content": [
+          "在法律允許的最大範圍內，我們不對任何間接、偶然、特殊或後果性損害負責。",
+          "我們的總責任不超過您在過去12個月支付的服務費用。",
+          "某些司法管轄區不允許責任限制，這些限制可能不適用於您。"
+        ]
+      },
+      "indemnification": {
+        "title": "11. 補償",
+        "content": [
+          "您同意補償並保護我們免受任何因您違反這些條款而引起的索賠、損失或損害。",
+          "這包括合理的律師費用和法院費用。"
+        ]
+      },
+      "termination": {
+        "title": "12. 終止服務",
+        "content": [
+          "我們可以隨時終止或暫停您的帳戶，如果：",
+          "• 您違反這些條款",
+          "• 您的行為有害於其他用戶",
+          "• 法律要求我們這樣做",
+          "您可以隨時刪除帳戶來停止使用服務。"
+        ]
+      },
+      "governingLaw": {
+        "title": "13. 適用法律",
+        "content": [
+          "這些條款受中華民國法律管轄。",
+          "任何爭議應在台灣台北地方法院解決。",
+          "如果任何條款被認定無效，其他條款仍然有效。"
+        ]
+      },
+      "modifications": {
+        "title": "14. 條款修改",
+        "content": [
+          "我們保留隨時修改這些條款的權利。",
+          "重大變更將通過應用程式通知或電子郵件通知。",
+          "繼續使用服務即表示您接受修改後的條款。"
+        ]
+      },
+      "contact": {
+        "title": "15. 聯絡我們",
+        "content": [
+          "如果您對這些條款有任何疑問，請聯絡我們：",
+          "電子郵件：legal@Rebloom.app",
+          "地址：台灣台北市",
+          "我們將在合理時間內回覆您的查詢。"
+        ]
+      }
+    }
+  },
+  "language": {
+    "title": "語言設置",
+    "select": "選擇語言",
+    "zh-TW": "繁體中文",
+    "zh-CN": "簡體中文",
+    "ja": "日本語",
+    "en": "English",
+    "save": "保存",
+    "saveSuccess": "語言設置已保存"
+  },
+  "auth": {
+    "welcomeBack": "歡迎回來",
+    "signIn": "登入",
+    "signUp": "註冊",
+    "signUpTagline": "加入 Rebloom，開始您的心理健康旅程",
+    "signInTagline": "歡迎回到您的心理健康伙伴",
+    "email": "電子郵件",
+    "password": "密碼",
+    "forgotPassword": "忘記密碼？",
+    "dontHaveAccount": "還沒有帳號？",
+    "alreadyHaveAccount": "已經有帳號了？",
+    "or": "或",
+    "continueWithGoogle": "使用 Google 繼續",
+    "continueWithApple": "使用 Apple 繼續",
+    "continueWithWeChat": "使用微信繼續",
+    "agreeToTerms": "我同意",
+    "and": "和",
+    "termsAndPrivacy": "繼續即表示您同意我們的 服務條款 和 隱私政策",
+    "termsOfService": "服務條款",
+    "privacyPolicy": "隱私政策",
+    "error": "錯誤",
+    "fillAllFields": "請填寫所有欄位",
+    "passwordTooShort": "密碼至少需要6個字符",
+    "checkEmail": "請檢查您的電子郵件以完成註冊",
+    "unexpectedError": "發生意外錯誤，請重試",
+    "success": "成功",
+    "loading": "載入中...",
+    "showPassword": "顯示密碼",
+    "hidePassword": "隱藏密碼",
+    "displayName": "顯示名稱",
+    "displayNamePlaceholder": "輸入您的顯示名稱（可選）",
+    "emailPlaceholder": "輸入您的電子郵件地址",
+    "passwordPlaceholder": "輸入您的密碼",
+    "confirmPassword": "確認密碼",
+    "confirmPasswordPlaceholder": "再次輸入您的密碼",
+    "passwordsDoNotMatch": "密碼不匹配",
+    "invalidEmail": "請輸入有效的電子郵件地址",
+    "weakPassword": "密碼太弱，請使用更強的密碼",
+    "accountCreated": "帳戶創建成功！",
+    "loginSuccess": "登入成功！",
+    "logoutSuccess": "登出成功！",
+    "resetPassword": "重設密碼",
+    "resetPasswordEmail": "重設密碼的電子郵件已發送",
+    "backToLogin": "返回登入",
+    "backToSignUp": "返回註冊"
+  },
+  "onboarding": {
+    "title": "Dolphin",
+    "skip": "跳過",
+    "continue": "繼續",
+    "getStarted": "開始使用",
+    "learnMore": "了解更多關於 Dolphin",
+    "screens": {
+      "alwaysOn": {
+        "title": "隨時在線",
+        "description": "24/7 全天候心理健康支援，透過文字、通話、ACT 和影片回應",
+        "features": [
+          "在您需要支援時隨時可用",
+          "多種溝通方式",
+          "即時回應您的需求",
+          "無需等待名單或預約"
+        ]
+      },
+      "remembersYou": {
+        "title": "記住您",
+        "description": "Dolphin 擁有安全的記憶，因此每次對話都能建立持續的治療關係。",
+        "features": [
+          "安全的對話歷史",
+          "個人化治療方法",
+          "基於之前會話的積累",
+          "了解您的進展"
+        ]
+      },
+      "progressSnapshot": {
+        "title": "進展快照",
+        "description": "分析您的心情和模式、成就和收穫、洞察和下一步計劃。",
+        "features": [
+          "追蹤一段時間的心情模式",
+          "慶祝您的成就",
+          "識別有用的策略",
+          "規劃您的下一步"
+        ]
+      }
+    },
+    "chat": {
+      "userMessage1": "嘿，你現在有空聊天嗎？",
+      "assistantMessage1": "當然！當你需要支援時，我隨時都在這裡。你在想什麼？",
+      "userMessage2": "我對明天感到焦慮",
+      "assistantTyping": "...",
+      "remembersYou": {
+        "aiMessage1": "上週你擔心的那個工作面試怎麼樣？",
+        "userMessage1": "進行得很順利！謝謝你幫我準備",
+        "aiMessage2": "太棒了！我記得我們一起練習了那些呼吸技巧。"
+      },
+      "progressSnapshot": {
+        "title": "你的進展",
+        "chartLabel": "本週心情",
+        "insight": "💪 你這週變得更加堅韌了"
+      }
+    }
+  }
+}

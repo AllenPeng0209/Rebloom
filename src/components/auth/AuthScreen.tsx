@@ -212,7 +212,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthComplete }) => {
               </View>
               <Text style={styles.appName}>Rebloom</Text>
               <Text style={styles.tagline}>
-                {isSignUp ? '開始您的心靈之旅' : '歡迎回來'}
+                {isSignUp ? t('auth.signUpTagline') : t('auth.signInTagline')}
               </Text>
             </View>
 
@@ -284,7 +284,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthComplete }) => {
                 {/* Forgot Password Link (for Sign In) */}
                 {!isSignUp && (
                   <TouchableOpacity style={styles.forgotPassword}>
-                    <Text style={styles.forgotPasswordText}>忘記密碼？</Text>
+                    <Text style={styles.forgotPasswordText}>{t('auth.forgotPassword')}</Text>
                   </TouchableOpacity>
                 )}
                 
@@ -313,7 +313,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthComplete }) => {
                 {/* Social Login Options */}
                 <View style={styles.dividerContainer}>
                   <View style={styles.divider} />
-                  <Text style={styles.dividerText}>或</Text>
+                  <Text style={styles.dividerText}>{t('auth.or')}</Text>
                   <View style={styles.divider} />
                 </View>
 
@@ -349,15 +349,15 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onAuthComplete }) => {
           {/* Terms and Privacy */}
           <View style={styles.termsContainer}>
             <Text style={styles.termsText}>
-              繼續即表示您同意我們的
+              {t('auth.agreeToTerms')}
             </Text>
             <View style={styles.termsLinks}>
               <TouchableOpacity>
-                <Text style={styles.termsLink}>服務條款</Text>
+                <Text style={styles.termsLink}>{t('auth.termsOfService')}</Text>
               </TouchableOpacity>
-              <Text style={styles.termsText}> 和 </Text>
+              <Text style={styles.termsText}>{t('auth.and')}</Text>
               <TouchableOpacity>
-                <Text style={styles.termsLink}>隱私政策</Text>
+                <Text style={styles.termsLink}>{t('auth.privacyPolicy')}</Text>
               </TouchableOpacity>
             </View>
           </View>

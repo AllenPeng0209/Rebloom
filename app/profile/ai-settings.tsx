@@ -1,5 +1,6 @@
 import { AISettings, useAISettings } from '@/contexts/AISettingsContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useUnifiedSettings } from '@/contexts/UnifiedSettingsContext';
 import { IconSymbol } from '@/ui/IconSymbol';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
@@ -10,7 +11,8 @@ export default function AISettingsScreen() {
   const router = useRouter();
   const { t } = useLanguage();
   const { settings: contextSettings, saveSettings, resetSettings, isLoading } = useAISettings();
-  
+  const { logout } = useUnifiedSettings();
+
   const [settings, setSettings] = useState<AISettings>(contextSettings);
 
   const personalityOptions = [
@@ -67,6 +69,35 @@ export default function AISettingsScreen() {
             } catch (error) {
               console.error('Error resetting settings:', error);
               Alert.alert('重置失败', '设定重置时发生错误，请重试。');
+            }
+          }
+        }
+      ]
+    );
+  };
+
+  const handleLogout = () => {
+    Alert.alert(
+      '确认登出',
+      '您确定要退出当前账号吗？',
+      [
+        { text: '取消', style: 'cancel' },
+        {
+          text: '登出',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              const { error } = await logout();
+              if (error) {
+                console.error('Logout failed:', error);
+                Alert.alert('登出失败', '退出账号时发生错误，请重试。');
+              } else {
+                // Will automatically navigate to login page after successful logout
+                Alert.alert('登出成功', '您已成功退出账号。');
+              }
+            } catch (error) {
+              console.error('Logout failed:', error);
+              Alert.alert('登出失败', '退出账号时发生错误，请重试。');
             }
           }
         }
@@ -190,13 +221,13 @@ export default function AISettingsScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>AI 设定</Text>
+        <Text style={styles.headerTitle}>{t('aiSettings.title')}</Text>
         <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}
             style={styles.saveButtonGradient}
           >
-            <Text style={styles.saveText}>保存</Text>
+            <Text style={styles.saveText}>{t('common.save')}</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>
@@ -210,9 +241,9 @@ export default function AISettingsScreen() {
               style={styles.introGradient}
             >
               <IconSymbol name="brain.head.profile" size={32} color="#4A90E2" />
-              <Text style={styles.introTitle}>个性化您的AI伴侣</Text>
+              <Text style={styles.introTitle}>{t('aiSettings.subtitle')}</Text>
               <Text style={styles.introDescription}>
-                根据您的偏好调整AI的个性、语调和能力，让AI更好地理解和支持您。
+                {t('aiSettings.introDescription')}
               </Text>
             </LinearGradient>
           </View>
@@ -220,7 +251,7 @@ export default function AISettingsScreen() {
 
         {/* AI Personality */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>AI 个性</Text>
+          <Text style={styles.sectionTitle}>{t('aiSettings.personality')}</Text>
           <View style={styles.personalityGrid}>
             {personalityOptions.map((personality) => (
               <TouchableOpacity
@@ -273,14 +304,14 @@ export default function AISettingsScreen() {
 
         {/* Voice Settings */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>语调设定</Text>
+          <Text style={styles.sectionTitle}>{t('aiSettings.voiceSettings')}</Text>
           
           <View style={styles.voiceCard}>
             <LinearGradient
               colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
               style={styles.voiceGradient}
             >
-              <Text style={styles.voiceTitle}>语调类型</Text>
+              <Text style={styles.voiceTitle}>{t('aiSettings.voiceType')}</Text>
               <View style={styles.voiceOptions}>
                 {voiceTypes.map((voice) => (
                   <TouchableOpacity
@@ -320,7 +351,7 @@ export default function AISettingsScreen() {
 
         {/* Personality Sliders */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>个性特质</Text>
+          <Text style={styles.sectionTitle}>{t('aiSettings.personalityTraits')}</Text>
           
           <View style={styles.slidersCard}>
             <LinearGradient
@@ -328,25 +359,25 @@ export default function AISettingsScreen() {
               style={styles.slidersGradient}
             >
               {renderSlider(
-                '同理心程度',
+                t('aiSettings.empathyLevel'),
                 settings.empathyLevel,
                 (value) => setSettings(prev => ({ ...prev, empathyLevel: value }))
               )}
 
               {renderSlider(
-                '直接程度',
+                t('aiSettings.directnessLevel'),
                 settings.directnessLevel,
                 (value) => setSettings(prev => ({ ...prev, directnessLevel: value }))
               )}
 
               {renderSlider(
-                '幽默感',
+                t('aiSettings.humorLevel'),
                 settings.humorLevel,
                 (value) => setSettings(prev => ({ ...prev, humorLevel: value }))
               )}
 
               {renderSlider(
-                '正式程度',
+                t('aiSettings.formalityLevel'),
                 settings.formalityLevel,
                 (value) => setSettings(prev => ({ ...prev, formalityLevel: value }))
               )}
@@ -356,7 +387,7 @@ export default function AISettingsScreen() {
 
         {/* AI Model Selection */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>AI 模型设定</Text>
+          <Text style={styles.sectionTitle}>{t('aiSettings.modelSettings')}</Text>
           
           <View style={styles.modelCard}>
             <LinearGradient
@@ -403,7 +434,7 @@ export default function AISettingsScreen() {
 
         {/* Advanced Features */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>高级功能</Text>
+          <Text style={styles.sectionTitle}>{t('aiSettings.advancedFeatures')}</Text>
           
           <View style={styles.toggleCard}>
             <LinearGradient
@@ -505,6 +536,19 @@ export default function AISettingsScreen() {
             >
               <IconSymbol name="arrow.clockwise" size={20} color="#FFFFFF" />
               <Text style={styles.resetText}>重置为默认设定</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+
+        {/* Logout Section */}
+        <View style={styles.logoutSection}>
+          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+            <LinearGradient
+              colors={['rgba(255, 59, 48, 0.9)', 'rgba(255, 59, 48, 0.7)']}
+              style={styles.logoutGradient}
+            >
+              <IconSymbol name="arrow.right.square" size={20} color="#FFFFFF" />
+              <Text style={styles.logoutText}>登出账号</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -728,7 +772,7 @@ const styles = StyleSheet.create({
   },
   resetSection: {
     marginHorizontal: 20,
-    marginBottom: 32,
+    marginBottom: 24,
   },
   resetButton: {
     borderRadius: 16,
@@ -741,6 +785,26 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   resetText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    marginLeft: 8,
+  },
+  logoutSection: {
+    marginHorizontal: 20,
+    marginBottom: 32,
+  },
+  logoutButton: {
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  logoutGradient: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+  },
+  logoutText: {
     fontSize: 16,
     fontWeight: '600',
     color: '#FFFFFF',

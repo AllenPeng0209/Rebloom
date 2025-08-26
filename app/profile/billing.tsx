@@ -256,7 +256,7 @@ export default function BillingScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>帳單記錄</Text>
+        <Text style={styles.headerTitle}>{t('billing.title')}</Text>
         <TouchableOpacity style={styles.downloadButton}>
           <IconSymbol name="square.and.arrow.down" size={20} color="#FFFFFF" />
         </TouchableOpacity>

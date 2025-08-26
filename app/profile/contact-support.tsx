@@ -28,31 +28,31 @@ export default function ContactSupportScreen() {
   });
 
   const supportTypes = [
-    { id: 'technical', name: '技術問題', icon: 'gear', color: '#4A90E2' },
-    { id: 'billing', name: '帳單問題', icon: 'creditcard', color: '#FF9500' },
-    { id: 'account', name: '帳戶問題', icon: 'person.circle', color: '#8B5A8C' },
-    { id: 'feature', name: '功能諮詢', icon: 'questionmark.circle', color: '#4CAF50' },
-    { id: 'privacy', name: '隱私問題', icon: 'lock.shield', color: '#FF3B30' },
-    { id: 'other', name: '其他', icon: 'ellipsis.circle', color: '#6B6B6B' }
+    { id: 'technical', name: t('contactSupport.types.technical'), icon: 'gear', color: '#4A90E2' },
+    { id: 'billing', name: t('contactSupport.types.billing'), icon: 'creditcard', color: '#FF9500' },
+    { id: 'account', name: t('contactSupport.types.account'), icon: 'person.circle', color: '#8B5A8C' },
+    { id: 'feature', name: t('contactSupport.types.feature'), icon: 'questionmark.circle', color: '#4CAF50' },
+    { id: 'privacy', name: t('contactSupport.types.privacy'), icon: 'lock.shield', color: '#FF3B30' },
+    { id: 'other', name: t('contactSupport.types.other'), icon: 'ellipsis.circle', color: '#6B6B6B' }
   ];
 
   const priorityLevels = [
-    { id: 'low', name: '低', color: '#4CAF50', description: '一般問題，3-5個工作日回復' },
-    { id: 'medium', name: '中', color: '#FF9500', description: '重要問題，1-2個工作日回復' },
-    { id: 'high', name: '高', color: '#FF3B30', description: '緊急問題，24小時內回復' }
+    { id: 'low', name: t('contactSupport.priority.low'), color: '#4CAF50', description: t('contactSupport.priority.lowDescription') },
+    { id: 'medium', name: t('contactSupport.priority.medium'), color: '#FF9500', description: t('contactSupport.priority.mediumDescription') },
+    { id: 'high', name: t('contactSupport.priority.high'), color: '#FF3B30', description: t('contactSupport.priority.highDescription') }
   ];
 
   const handleSubmit = () => {
     if (!ticket.subject.trim() || !ticket.description.trim()) {
-      Alert.alert('請填寫完整', '請提供問題標題和詳細描述');
+      Alert.alert(t('contactSupport.validation.title'), t('contactSupport.validation.message'));
       return;
     }
 
     Alert.alert(
-      '提交成功',
-      '您的支持請求已提交。我們會根據優先級盡快回復您。',
+      t('contactSupport.success.title'),
+      t('contactSupport.success.message'),
       [
-        { text: '確定', onPress: () => router.back() }
+        { text: t('common.ok'), onPress: () => router.back() }
       ]
     );
   };
@@ -97,7 +97,7 @@ export default function ContactSupportScreen() {
 
   const renderPrioritySelector = () => (
     <View style={styles.prioritySection}>
-      <Text style={styles.priorityLabel}>優先級</Text>
+      <Text style={styles.priorityLabel}>{t('contactSupport.priority.title')}</Text>
       <View style={styles.priorityOptions}>
         {priorityLevels.map((priority) => (
           <TouchableOpacity
@@ -151,13 +151,13 @@ export default function ContactSupportScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>聯絡客服</Text>
+        <Text style={styles.headerTitle}>{t('contactSupport.title')}</Text>
         <TouchableOpacity onPress={handleSubmit} style={styles.submitHeaderButton}>
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}
             style={styles.submitHeaderGradient}
           >
-            <Text style={styles.submitHeaderText}>提交</Text>
+            <Text style={styles.submitHeaderText}>{t('contactSupport.submit')}</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>
@@ -171,9 +171,9 @@ export default function ContactSupportScreen() {
               style={styles.infoGradient}
             >
               <IconSymbol name="headphones" size={32} color="#8B5A8C" />
-              <Text style={styles.infoTitle}>我們隨時為您服務</Text>
+              <Text style={styles.infoTitle}>{t('contactSupport.info.title')}</Text>
               <Text style={styles.infoDescription}>
-                遇到任何問題或需要幫助？我們的支持團隊會盡快回復您。通常在24小時內回應。
+                {t('contactSupport.info.description')}
               </Text>
             </LinearGradient>
           </View>
@@ -195,7 +195,7 @@ export default function ContactSupportScreen() {
               <View style={styles.formSeparator} />
 
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>問題標題</Text>
+                <Text style={styles.inputLabel}>{t('contactSupport.form.subject')}</Text>
                 <TextInput
                   style={styles.subjectInput}
                   value={ticket.subject}

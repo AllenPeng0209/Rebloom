@@ -138,11 +138,11 @@ export default function ChatFullScreen() {
     }
     
     const responses = [
-      '我聽到了。',
-      '嗯。',
-      '很累...',
-      '我在聽。',
-      '還有嗎？'
+      t('chat.response1'),
+      t('chat.response2'), 
+      t('chat.response3'),
+      t('chat.response4'),
+      t('chat.response5')
     ]
     return responses[Math.floor(Math.random() * responses.length)]
   }

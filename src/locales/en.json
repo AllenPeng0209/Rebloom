@@ -1,0 +1,1344 @@
+{
+  "nav": {
+    "home": "Chat",
+    "chat": "Chat",
+    "mood": "Mood",
+    "explore": "Explore",
+    "profile": "Profile"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "done": "Done",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "retry": "Retry",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "profile": {
+    "title": "Profile",
+    "userJoinedDays": "{{days}} days with Rebloom",
+    "logout": "Logout",
+    "logoutConfirm": "Confirm Logout",
+    "logoutMessage": "Are you sure you want to logout?",
+    "logoutFailed": "Logout Failed",
+    "logoutFailedMessage": "Failed to logout. Please try again.",
+    "logoutSuccess": "Logout Successful",
+    "logoutSuccessMessage": "You have successfully logged out.",
+    "cancel": "Cancel",
+    "version": "Rebloom v{{version}}",
+    "section": {
+      "personal": "Personal",
+      "subscription": "Subscription",
+      "ai": "AI Settings",
+      "notifications": "Notifications",
+      "privacy": "Privacy & Security",
+      "support": "Support & Help",
+      "about": "About"
+    },
+    "personalInfo": {
+      "title": "Personal Information",
+      "subtitle": "Edit your profile and preferences"
+    },
+    "subscription": {
+      "title": "My Subscription",
+      "subtitle": "Manage your subscription plan"
+    },
+    "billing": {
+      "title": "Billing Management",
+      "subtitle": "View payment history and invoices"
+    },
+    "aiPersonality": {
+      "title": "AI Personality",
+      "subtitle": "Adjust AI personality traits and technical features"
+    },
+    "therapeuticApproach": {
+      "title": "Therapeutic Approach",
+      "subtitle": "Choose therapeutic techniques that suit you"
+    },
+    "notifications": {
+      "title": "Push Notifications",
+      "subtitle": "Manage notification and reminder settings"
+    },
+    "moodReminders": {
+      "title": "Mood Reminders",
+      "subtitle": "Set mood tracking reminders"
+    },
+    "wellnessCheck": {
+      "title": "Wellness Check",
+      "subtitle": "Regular wellness assessments"
+    },
+    "premium": "Premium",
+    "privacySettings": "Privacy Settings",
+    "privacySettingsSubtitle": "Control data sharing and storage",
+    "dataExport": "Data Export",
+    "dataExportSubtitle": "Export your personal data",
+    "emergencyContacts": {
+      "title": "Emergency Contacts",
+      "subtitle": "Manage emergency contacts"
+    },
+    "crisisResources": {
+      "title": "Crisis Resources",
+      "subtitle": "Emergency mental health resources"
+    },
+    "helpCenter": {
+      "title": "Help Center",
+      "subtitle": "FAQ and usage guides"
+    },
+    "contactSupport": {
+      "title": "Contact Support",
+      "subtitle": "Get technical support and help"
+    },
+    "feedback": {
+      "title": "Feedback",
+      "subtitle": "Help us improve the app"
+    },
+    "about": {
+      "title": "About Rebloom",
+      "subtitle": "App version and information"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "subtitle": "Usage terms and policies"
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy",
+      "subtitle": "Learn how we protect your privacy"
+    },
+    "languageSettings": {
+      "title": "Language Settings",
+      "subtitle": "Choose app display language"
+    },
+    "conversationSettings": "Conversation Settings",
+    "conversationStyle": "Conversation Style",
+    "conversationStyle.description": "Choose how AI responds to you",
+    "conversationDepth": "Conversation Depth",
+    "responseLength": "Response Length"
+  },
+  "personalInfo": {
+    "title": "Personal Information",
+    "name": "Name",
+    "email": "Email",
+    "age": "Age",
+    "location": "Location", 
+    "timezone": "Timezone",
+    "mentalHealthGoals": "Mental Health Goals",
+    "emergencyContact": "Emergency Contact",
+    "emergencyContactName": "Contact Name",
+    "emergencyContactPhone": "Contact Phone",
+    "emergencyContactRelationship": "Relationship",
+    "save": "Save",
+    "saveSuccess": "Save Successful",
+    "saveSuccessMessage": "Your personal information has been updated",
+    "basicInfo": "Basic Information",
+    "ageRange": "Age Range",
+    "goalsDescription": "Choose areas you hope to improve, this will help AI better support you",
+    "emergencyDescription": "Contact information for someone who can be reached in emergency situations",
+    "accountActions": "Account Actions",
+    "deleteAccount": "Delete Account",
+    "avatar": {
+      "title": "Avatar",
+      "takePhoto": "Take Photo",
+      "choosePhoto": "Choose Photo"
+    },
+    "placeholders": {
+      "name": "Enter your name",
+      "email": "Enter your email address",
+      "location": "Enter your location",
+      "emergencyContactName": "Emergency contact name",
+      "emergencyContactPhone": "Contact phone number",
+      "emergencyContactRelationship": "Relationship to you (e.g., family, friend)"
+    },
+    "ageRanges": {
+      "18-24": "18-24",
+      "25-34": "25-34",
+      "35-44": "35-44", 
+      "45-54": "45-54",
+      "55-64": "55-64",
+      "65+": "65+"
+    },
+    "goals": {
+      "anxiety": "Manage Anxiety",
+      "depression": "Address Depression",
+      "sleep": "Improve Sleep",
+      "confidence": "Build Confidence",
+      "relationships": "Relationships",
+      "workStress": "Work Stress",
+      "emotionRegulation": "Emotion Regulation",
+      "trauma": "Trauma Recovery",
+      "personalGrowth": "Personal Growth",
+      "lifeBalance": "Life Balance"
+    }
+  },
+  "aiSettings": {
+    "title": "AI Settings",
+    "subtitle": "Personalize Your AI Companion",
+    "introDescription": "Adjust AI's personality, tone and abilities based on your preferences, so AI can better understand and support you.",
+    "personalityTypes": {
+      "supportive": {
+        "name": "Warm & Supportive",
+        "description": "Like a friend, warm and providing emotional support"
+      },
+      "wise": {
+        "name": "Wise Mentor", 
+        "description": "Like a mentor, wise and providing deep insights"
+      },
+      "gentle": {
+        "name": "Gentle Companion",
+        "description": "Like family, gentle and patient listener"
+      },
+      "energetic": {
+        "name": "Energetic Motivator",
+        "description": "Like a coach, positive and inspiring energy"
+      }
+    },
+    "tones": {
+      "warm": {
+        "name": "Warm & Kind",
+        "description": "Warm tone, like a close friend"
+      },
+      "professional": {
+        "name": "Professional & Stable", 
+        "description": "Professional tone, like a counselor"
+      },
+      "gentle": {
+        "name": "Gentle & Caring",
+        "description": "Gentle tone, like family"
+      },
+      "encouraging": {
+        "name": "Encouraging & Positive",
+        "description": "Encouraging tone, like a mentor"
+      }
+    },
+    "capabilities": {
+      "standard": {
+        "name": "Standard Mode",
+        "description": "Balanced AI capabilities, suitable for daily conversations"
+      },
+      "advanced": {
+        "name": "Advanced Mode",
+        "description": "Enhanced understanding, deep psychological analysis"
+      },
+      "empathetic": {
+        "name": "Empathetic Mode",
+        "description": "Focused on emotional understanding, high empathy"
+      }
+    },
+    "resetSettings": "Reset to Default Settings",
+    "resetConfirm": "Reset Confirmation",
+    "resetMessage": "Are you sure you want to reset all AI settings to recommended values? This cannot be undone.",
+    "resetSuccess": "Settings Reset",
+    "resetSuccessMessage": "All AI settings have been reset to recommended values.",
+    "logoutFromAI": "Logout from AI",
+    "logoutFromAIMessage": "Are you sure you want to logout from AI services? You will need to re-authenticate.",
+    "personality": "AI Personality",
+    "voiceSettings": "Voice Settings",
+    "voiceType": "Voice Type",
+    "personalityTraits": "Personality Traits",
+    "empathyLevel": "Empathy Level",
+    "directnessLevel": "Directness Level",
+    "humorLevel": "Humor Level",
+    "formalityLevel": "Formality Level",
+    "modelSettings": "AI Model Settings",
+    "languageModel": "Language Model",
+    "advancedFeatures": "Advanced Features",
+    "proactiveSupport": {
+      "title": "Proactive Support",
+      "description": "Allow AI to proactively provide care and advice, giving emotional support at the right time."
+    },
+    "smartSuggestions": {
+      "title": "Smart Suggestions",
+      "description": "Enable AI's smart suggestion feature, guiding users to self-explore through questions and reflections."
+    },
+    "learningMode": {
+      "title": "Learning Mode",
+      "description": "Enable AI's learning mode, remember user patterns and preferences, providing more personalized support."
+    },
+    "voiceEnabled": {
+      "title": "Voice Function",
+      "description": "Enable voice interaction features, allowing AI to communicate through voice."
+    },
+    "crisisDetection": {
+      "title": "Crisis Detection",
+      "description": "Enable psychological crisis detection function, timely identify risk signals and provide appropriate support."
+    }
+  },
+  "therapeuticSettings": {
+    "title": "Therapeutic Settings",
+    "subtitle": "Choose therapeutic approaches that suit you",
+    "approaches": {
+      "cbt": {
+        "name": "Cognitive Behavioral Therapy (CBT)",
+        "description": "Focus on relationships between thought patterns and behaviors, helping identify and change negative thinking"
+      },
+      "dbt": {
+        "name": "Dialectical Behavior Therapy (DBT)", 
+        "description": "Focus on emotion regulation, interpersonal skills, and distress tolerance"
+      },
+      "act": {
+        "name": "Acceptance Commitment Therapy (ACT)",
+        "description": "Emphasize accepting difficult emotions while focusing on value-driven action"
+      },
+      "humanistic": {
+        "name": "Humanistic Therapy",
+        "description": "Person-centered approach emphasizing self-actualization and personal growth"
+      },
+      "psychodynamic": {
+        "name": "Psychodynamic Therapy", 
+        "description": "Explore unconscious processes and how early experiences affect current behavior"
+      },
+      "mindfulness": {
+        "name": "Mindfulness-Based Therapy",
+        "description": "Cultivate present-moment awareness, reduce rumination and anxiety"
+      }
+    },
+    "styles": {
+      "directive": {
+        "name": "Directive",
+        "description": "Therapist-led, providing clear guidance and advice"
+      },
+      "collaborative": {
+        "name": "Collaborative", 
+        "description": "Therapist and client explore and solve problems together"
+      },
+      "non-directive": {
+        "name": "Non-directive",
+        "description": "Client-led, therapist provides support and reflection"
+      }
+    },
+    "culturalContext": {
+      "asian": {
+        "name": "Asian Culture",
+        "description": "Understanding collectivist values and family relationships"
+      },
+      "western": {
+        "name": "Western Culture",
+        "description": "Emphasizing individualism and self-expression"
+      },
+      "indigenous": {
+        "name": "Indigenous Culture", 
+        "description": "Respecting traditional wisdom and community connections"
+      },
+      "multicultural": {
+        "name": "Multicultural",
+        "description": "Integrating understanding from multiple cultural backgrounds"
+      }
+    },
+    "conversationStyles": {
+      "supportive": {
+        "name": "Supportive",
+        "description": "Warm encouragement, providing emotional support"
+      },
+      "analytical": {
+        "name": "Analytical",
+        "description": "Deep analysis of problem roots and patterns"
+      },
+      "solution-focused": {
+        "name": "Solution-Focused",
+        "description": "Focus on finding practical solutions"
+      },
+      "exploratory": {
+        "name": "Exploratory",
+        "description": "Open dialogue, freely exploring ideas"
+      }
+    },
+    "depths": {
+      "surface": {
+        "name": "Surface",
+        "description": "Light conversation, avoiding deep sensitive topics"
+      },
+      "moderate": {
+        "name": "Moderate",
+        "description": "Balanced depth, moderate inner exploration"
+      },
+      "deep": {
+        "name": "Deep",
+        "description": "Deep exploration of core issues and emotions"
+      }
+    },
+    "responseLengths": {
+      "brief": {
+        "name": "Brief",
+        "description": "Short responses, clear and focused"
+      },
+      "medium": {
+        "name": "Medium",
+        "description": "Balanced response length"
+      },
+      "detailed": {
+        "name": "Detailed", 
+        "description": "In-depth detailed responses and explanations"
+      }
+    },
+    "saveSuccess": "Settings Saved",
+    "saveSuccessMessage": "Your therapeutic preference settings have been successfully updated. AI will adjust therapeutic approaches based on these settings.",
+    "saveError": "Save Failed", 
+    "saveErrorMessage": "An error occurred while saving settings. Please try again.",
+    "resetConfirm": "Reset Confirmation",
+    "resetMessage": "Are you sure you want to reset all therapeutic settings to recommended values? This cannot be undone.",
+    "resetSuccess": "Settings Reset",
+    "resetSuccessMessage": "All therapeutic settings have been reset to recommended values.",
+    "resetError": "Reset Failed",
+    "resetErrorMessage": "An error occurred while resetting settings. Please try again."
+  },
+  "subscription": {
+    "title": "Subscription Management",
+    "currentPlan": "Current Plan",
+    "freePlan": "Free Plan",
+    "premiumPlan": "Premium Plan",
+    "features": "Features",
+    "upgrade": "Upgrade",
+    "manage": "Manage Subscription",
+    "upgradeConfirm": "Upgrade Subscription",
+    "upgradeMessage": "Are you sure you want to upgrade to {{plan}}?",
+    "confirmUpgrade": "Confirm Upgrade",
+    "upgradeSuccess": "Upgrade Successful",
+    "upgradeSuccessMessage": "Your subscription has been upgraded!",
+    "free": "Free",
+    "forever": "Forever",
+    "monthly": "Monthly",
+    "premiumMember": "Premium Member",
+    "nextRenewal": "Next Renewal Date",
+    "thankYou": "Thank you for choosing Rebloom Premium!",
+    "freeFeatures": {
+      "basicChat": "Daily Basic Conversations",
+      "moodTracking": "Mood Tracking",
+      "basicInsights": "Basic Insights",
+      "communitySupport": "Community Support"
+    },
+    "premiumFeatures": {
+      "unlimitedChat": "Unlimited Conversations",
+      "deepAnalysis": "Deep Psychological Analysis",
+      "personalizedTherapy": "Personalized Therapy Suggestions",
+      "crisisSupport": "24/7 Crisis Support",
+      "professionalConsult": "Professional Therapist Consultation",
+      "advancedInsights": "Advanced Insight Reports",
+      "voiceChat": "Voice Conversation Features",
+      "prioritySupport": "Priority Customer Support"
+    }
+  },
+  "billing": {
+    "title": "Billing Management", 
+    "paymentHistory": "Payment History",
+    "nextPayment": "Next Payment",
+    "paymentMethod": "Payment Method",
+    "downloadInvoice": "Download Invoice",
+    "updatePayment": "Update Payment Method",
+    "noPaymentHistory": "No payment history available",
+    "invoices": {
+      "subscription": "Rebloom Premium - Monthly Subscription"
+    }
+  },
+  "notifications": {
+    "title": "Notification Settings",
+    "general": {
+      "title": "General",
+      "enableNotifications": {
+        "title": "Enable Notifications",
+        "description": "Turn all notifications on or off"
+      }
+    },
+    "moodReminders": {
+      "title": "Mood Reminders",
+      "moodCheckIns": {
+        "title": "Mood Check-ins", 
+        "description": "Get reminded to track your mood"
+      },
+      "reminderTimes": {
+        "title": "Reminder Times"
+      },
+      "times": {
+        "morning": "Morning 9:00",
+        "noon": "Noon 12:00", 
+        "evening": "Evening 6:00",
+        "night8": "Evening 8:00",
+        "night9": "Evening 9:00"
+      }
+    },
+    "checkInReminders": {
+      "title": "Check-in Reminders",
+      "inactivityReminders": {
+        "title": "Inactivity Reminders"
+      }
+    },
+    "crisisSupport": {
+      "title": "Crisis Support",
+      "crisisAlerts": {
+        "title": "Crisis Alerts",
+        "description": "Important safety notifications"
+      },
+      "immediateAlerts": {
+        "title": "Immediate Alerts",
+        "description": "Show crisis alerts even during quiet hours"
+      }
+    },
+    "insights": {
+      "title": "Insights & Progress",
+      "weeklyInsights": {
+        "title": "Weekly Insights",
+        "description": "Get weekly mood and progress insights"
+      },
+      "progressUpdates": {
+        "title": "Progress Updates",
+        "description": "Celebrate milestones and achievements"
+      }
+    },
+    "quietHours": {
+      "title": "Quiet Hours",
+      "enableQuietHours": {
+        "title": "Enable Quiet Hours",
+        "description": "Pause notifications during specified hours"
+      },
+      "quietTime": {
+        "title": "Quiet Time"
+      }
+    },
+    "testNotifications": {
+      "title": "Test Notification",
+      "description": "This is a test notification to verify your settings are working correctly."
+    },
+    "systemNotifications": {
+      "moodCheckIn": {
+        "title": "How are you feeling?", 
+        "body": "Take a moment to check in with your mood"
+      },
+      "inactivity": {
+        "title": "We miss you!",
+        "body": "Your mental wellness journey continues - let's chat!"
+      },
+      "weeklyInsights": {
+        "title": "Weekly Insights Ready",
+        "body": "Your personalized weekly insights are available"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Settings",
+    "dataRetention": {
+      "title": "Data Retention",
+      "description": "Choose how long to keep your data",
+      "options": {
+        "30days": "30 days",
+        "90days": "90 days",
+        "6months": "6 months", 
+        "1year": "1 year",
+        "2years": "2 years"
+      }
+    },
+    "dataExport": {
+      "title": "Export Data",
+      "description": "Download all your data",
+      "button": "Export Data",
+      "confirm": "Export Confirmation",
+      "confirmMessage": "Export all your personal data? This may take a few minutes.",
+      "startExport": "Start Export",
+      "success": "Export Started",
+      "successMessage": "Data export has been initiated. You'll receive an email with download link."
+    },
+    "dataDelete": {
+      "title": "Delete All Data", 
+      "description": "Permanently delete all your data",
+      "button": "Delete All Data",
+      "confirm": "Delete Confirmation",
+      "confirmMessage": "Are you sure you want to permanently delete all your data? This action cannot be undone.",
+      "confirmDelete": "Confirm Delete",
+      "finalConfirm": "Final Confirmation",
+      "finalConfirmMessage": "This will permanently delete all your conversations, mood data, and personal information. Type 'DELETE' to confirm.",
+      "permanentDelete": "Permanent Delete",
+      "success": "Data Deleted",
+      "successMessage": "All your data has been permanently deleted."
+    },
+    "biometricAuth": {
+      "title": "Biometric Authentication",
+      "description": "Use fingerprint or face recognition",
+      "enable": "Enable Biometric Auth"
+    },
+    "shield": {
+      "title": "Your Privacy is Protected",
+      "description": "We use industry-leading security measures, including end-to-end encryption, to ensure your information is secure."
+    },
+    "rightsSummary": {
+      "title": "Your Rights Summary",
+      "dataControl": "Data Control",
+      "description": "You have complete control over your data. You can view, modify, delete, or export your information at any time."
+    },
+    "contactPrivacyOfficer": "Contact Privacy Officer",
+    "sections": {
+      "overview": {
+        "title": "1. Overview",
+        "content": [
+          "Rebloom (\"we\", \"our\", or \"Company\") values your privacy rights. This Privacy Policy explains how we collect, use, protect, and process your personal information.",
+          "This Policy applies to all personal information you provide when using the Rebloom application (\"Service\").",
+          "By using our service, you agree that we may process your information according to this Privacy Policy."
+        ]
+      },
+      "informationCollected": {
+        "title": "2. Information We Collect",
+        "content": [
+          "We may collect the following types of personal information:",
+          "",
+          "• Account Information: Name, email address, phone number",
+          "• Profile Information: Age, gender, location, preferences",
+          "• Health-related Information: Mood data, conversation records, mental health preferences",
+          "• Usage Data: Application usage statistics, feature usage",
+          "• Device Information: Device type, operating system, unique identifiers",
+          "• Emergency Contact Information: Details of emergency contacts you designate"
+        ]
+      },
+      "collectionMethods": {
+        "title": "3. How We Collect Information",
+        "content": [
+          "We collect information through the following methods:",
+          "",
+          "• Direct Provision: Information you actively provide when using the service",
+          "• Automatic Collection: Usage data automatically collected through the application",
+          "• Third-party Services: Information obtained through integrated third-party services",
+          "• Analytics Tools: Using analytics tools to understand service usage"
+        ]
+      },
+      "informationUse": {
+        "title": "4. How We Use Information",
+        "content": [
+          "We use the collected information to:",
+          "",
+          "• Provide and improve our services",
+          "• Personalize your experience",
+          "• Ensure service security and reliability",
+          "• Provide customer support",
+          "• Analyze usage trends and improve features",
+          "• Comply with legal obligations",
+          "• Protect user and public safety"
+        ]
+      },
+      "informationSharing": {
+        "title": "5. Information Sharing",
+        "content": [
+          "We are committed to protecting your privacy and do not sell your personal information. We may share information in the following circumstances:",
+          "",
+          "• With your explicit consent",
+          "• Legal requirements or rights protection",
+          "• Emergency situations to protect user safety",
+          "• Sharing with authorized service providers (limited to necessary purposes)",
+          "• Business transfers or mergers",
+          "• Anonymized or aggregated data for analysis"
+        ]
+      },
+      "dataSecurity": {
+        "title": "6. Data Security",
+        "content": [
+          "We implement multi-layered security measures to protect your information:",
+          "",
+          "• End-to-end Encryption: All conversations and sensitive data are encrypted",
+          "• Access Control: Strict employee access permission management",
+          "• Secure Storage: Using industry-standard secure storage solutions",
+          "• Regular Audits: Regular security audits and updates",
+          "• Incident Response: 24/7 security monitoring and incident response plan"
+        ]
+      },
+      "dataRetention": {
+        "title": "7. Data Retention",
+        "content": [
+          "We retain your information:",
+          "",
+          "• During Account Activity: Retain all usage data",
+          "• After Account Deletion: Retain necessary information to comply with legal obligations",
+          "• Automatic Deletion: Automatically delete old data based on your settings",
+          "• Minimal Retention: Only retain information necessary to provide services"
+        ]
+      },
+      "yourRights": {
+        "title": "8. Your Rights",
+        "content": [
+          "You have the following rights regarding your personal information:",
+          "",
+          "• Right to Access: View your personal information we hold",
+          "• Right to Rectification: Update or correct inaccurate information",
+          "• Right to Erasure: Request deletion of your personal information",
+          "• Right to Data Portability: Obtain your data in a structured format",
+          "• Right to Restrict Processing: Limit our processing of your information",
+          "• Right to Object: Object to processing of your information based on legitimate interests",
+          "• Right to Withdraw Consent: Withdraw consent to data processing at any time"
+        ]
+      },
+      "cookiesTracking": {
+        "title": "9. Cookies and Tracking",
+        "content": [
+          "We use the following technologies to enhance your experience:",
+          "",
+          "• Essential Functions: Necessary cookies for application functionality",
+          "• Analytics Tools: Anonymous usage statistics to improve services",
+          "• Performance Monitoring: Monitor application performance and errors",
+          "• You can control tracking preferences through application settings"
+        ]
+      },
+      "childrensPrivacy": {
+        "title": "10. Children's Privacy",
+        "content": [
+          "Our service is primarily intended for users 18 and older.",
+          "If we discover we have collected information from children under 13, we will delete it immediately.",
+          "For users under 18, we encourage parental supervision.",
+          "We do not knowingly collect personal information from children."
+        ]
+      },
+      "dataTransfer": {
+        "title": "11. Cross-border Data Transfer",
+        "content": [
+          "Your information may be transferred and processed in different countries/regions.",
+          "We ensure all transfers comply with applicable data protection laws.",
+          "We use standard contractual clauses and other protective measures.",
+          "We only transfer data to countries with adequate protection levels."
+        ]
+      },
+      "thirdPartyServices": {
+        "title": "12. Third-party Services",
+        "content": [
+          "Our service may contain links to third-party services:",
+          "",
+          "• We do not control third-party privacy practices",
+          "• Please review third-party privacy policies",
+          "• We are not responsible for third-party service privacy practices",
+          "• Using third-party services indicates agreement to their privacy policies"
+        ]
+      },
+      "policyUpdates": {
+        "title": "13. Privacy Policy Updates",
+        "content": [
+          "We may update this Privacy Policy from time to time.",
+          "Material changes will be notified through app notifications or email.",
+          "Continued use of the service indicates acceptance of the updated policy.",
+          "We recommend reviewing this Privacy Policy regularly."
+        ]
+      },
+      "contact": {
+        "title": "14. Contact Us",
+        "content": [
+          "If you have any questions or requests regarding this Privacy Policy, please contact our Privacy Officer:",
+          "",
+          "Email: privacy@Rebloom.app",
+          "Address: Shanghai, China",
+          "We will respond to your requests within 30 days.",
+          "",
+          "The Privacy Officer will assist you in exercising your rights."
+        ]
+      }
+    }
+  },
+  "help": {
+    "title": "Help Center",
+    "searchPlaceholder": "Search frequently asked questions...",
+    "faq": "Frequently Asked Questions",
+    "gettingStarted": "Getting Started",
+    "troubleshooting": "Troubleshooting",
+    "privacy": "Privacy & Security",
+    "billing": "Billing & Subscription",
+    "contact": "Contact Support"
+  },
+  "contactSupport": {
+    "title": "Contact Support",
+    "subject": "Subject",
+    "subjectPlaceholder": "Briefly describe your issue...",
+    "description": "Description", 
+    "descriptionPlaceholder": "Please describe your issue in detail, including:\n• Specific error messages\n• Steps that led to the problem\n• What you expected to happen\n• Any other relevant information",
+    "email": "Email",
+    "emailPlaceholder": "Your email address",
+    "priority": "Priority",
+    "priorities": {
+      "low": {
+        "name": "Low",
+        "description": "General inquiries, 3-5 business days response"
+      },
+      "medium": {
+        "name": "Medium", 
+        "description": "Important issues, 1-2 business days response"
+      },
+      "high": {
+        "name": "High",
+        "description": "Urgent issues, 24 hours response"
+      }
+    },
+    "submit": "Submit",
+    "submitSuccess": "Support Request Submitted",
+    "submitSuccessMessage": "Your support request has been submitted. We'll get back to you soon!"
+  },
+  "feedback": {
+    "title": "Feedback",
+    "subtitle": "Help us improve Rebloom",
+    "type": "Feedback Type",
+    "types": {
+      "general": "General Feedback",
+      "bug": "Bug Report",
+      "feature": "Feature Request", 
+      "improvement": "Improvement Suggestion"
+    },
+    "subject": "Subject",
+    "subjectPlaceholder": "Briefly describe your feedback...",
+    "description": "Description",
+    "descriptionPlaceholder": "Please share your thoughts, issues you've encountered, or suggestions...",
+    "email": "Email (Optional)",
+    "emailPlaceholder": "Your email address",
+    "submit": "Submit Feedback",
+    "submitSuccess": "Feedback Submitted", 
+    "submitSuccessMessage": "Thank you for your feedback! We value your input."
+  },
+  "crisisResources": {
+    "title": "Crisis Resources",
+    "subtitle": "Emergency mental health support",
+    "warning": "If you're in immediate danger, call emergency services immediately.",
+    "hotlines": {
+      "title": "Crisis Hotlines",
+      "suicide": {
+        "name": "National Suicide Prevention Lifeline",
+        "number": "988",
+        "description": "24/7 free mental health counseling and suicide prevention hotline"
+      },
+      "crisis": {
+        "name": "Crisis Text Line", 
+        "number": "Text HOME to 741741",
+        "description": "24/7 crisis counseling via text message"
+      },
+      "youth": {
+        "name": "Teen Helpline",
+        "number": "1-800-273-8255",
+        "description": "Youth counseling helpline providing emotional support and mental health counseling"
+      },
+      "mentalHealth": {
+        "name": "Mental Health Helpline", 
+        "number": "1-800-662-4357",
+        "description": "Mental health counseling helpline established by the Department of Health and Human Services"
+      }
+    },
+    "emergency": {
+      "title": "Emergency Services",
+      "medical": {
+        "name": "Emergency Medical Services",
+        "number": "911", 
+        "description": "Emergency medical rescue services"
+      },
+      "police": {
+        "name": "Police",
+        "number": "911",
+        "description": "Emergency police services"
+      }
+    },
+    "callConfirm": "Call Confirmation",
+    "callMessage": "Call {{number}}?",
+    "call": "Call"
+  },
+  "about": {
+    "title": "About Rebloom",
+    "subtitle": "Your AI Mental Health Companion",
+    "version": "Version {{version}}",
+    "buildNumber": "Build {{build}}",
+    "lastUpdate": "Last Updated: {{date}}",
+    "developer": "Developer: {{developer}}",
+    "contact": {
+      "title": "Contact Us",
+      "website": "Official Website",
+      "email": "Customer Service Email",
+      "support": "Technical Support"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "team": {
+      "title": "Core Team",
+      "members": {
+        "founder": {
+          "name": "Dr. Sarah Chen",
+          "role": "Psychology Consultant",
+          "description": "Clinical Psychology Ph.D., specializing in cognitive behavioral therapy"
+        },
+        "cto": {
+          "name": "Alex Kim", 
+          "role": "Product Director",
+          "description": "10 years experience in mental health technology products"
+        },
+        "ai": {
+          "name": "Maya Patel",
+          "role": "AI Researcher",
+          "description": "Natural language processing and affective computing expert"
+        },
+        "security": {
+          "name": "David Liu",
+          "role": "Privacy Engineer", 
+          "description": "Data security and privacy protection expert"
+        }
+      }
+    },
+    "stats": {
+      "title": "Our Achievements",
+      "users": {
+        "title": "1M+ Users Trust Us",
+        "description": "Over one million users worldwide choose Rebloom"
+      },
+      "availability": {
+        "title": "24/7 Availability",
+        "description": "99.9% service uptime"
+      },
+      "privacy": {
+        "title": "Privacy First",
+        "description": "End-to-end encryption, zero data breach record"
+      },
+      "certification": {
+        "title": "Professional Certification", 
+        "description": "Certified by mental health professional organizations"
+      }
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "Rebloom is committed to enabling everyone to access high-quality mental health support. We believe technology can make mental health services more accessible, convenient, and effective. Through the combination of AI technology and professional psychological knowledge, we provide users with 24/7 emotional support and personalized mental health guidance."
+    },
+    "copyright": "© 2024 Rebloom. All rights reserved.",
+    "tagline": "With love and technology, we protect every heart"
+  },
+  "languageSettings": {
+    "title": "Language Settings",
+    "subtitle": "Choose your preferred language",
+    "currentLanguage": "Current Language",
+    "availableLanguages": "Available Languages",
+    "languages": {
+      "zh-TW": {
+        "name": "繁體中文",
+        "description": "Traditional Chinese (Taiwan)"
+      },
+      "zh-CN": {
+        "name": "简体中文",
+        "description": "Simplified Chinese (China)"
+      },
+      "ja": {
+        "name": "日本語",
+        "description": "Japanese"
+      },
+      "en": {
+        "name": "English", 
+        "description": "English (United States)"
+      }
+    },
+    "save": "Save",
+    "saveSuccess": "Language settings saved successfully"
+  },
+  "memoryManagement": {
+    "title": "Memory Management",
+    "subtitle": "Manage AI conversation memory",
+    "totalMemories": "Total Memories: {{count}}",
+    "importanceFilter": "Filter by Importance",
+    "all": "All",
+    "high": "High",
+    "medium": "Medium", 
+    "low": "Low",
+    "deleteConfirm": "Delete Confirmation",
+    "deleteMessage": "Are you sure you want to delete this memory?",
+    "updateImportance": "Update Importance",
+    "importanceLevels": {
+      "low": "Low (3)",
+      "medium": "Medium (5)",
+      "high": "High (8)",
+      "veryHigh": "Very High (10)"
+    },
+    "empty": "No memories found",
+    "emptyDescription": "Your AI conversation memories will appear here as you chat."
+  },
+  "mood": {
+    "title": "Mood",
+    "subtitle": "Track your emotions and understand your inner world",
+    "todaysInsights": "Today's Insights",
+    "insightsFor": "Insights for {{date}}",
+    "mockInsightText": "This is a demo version",
+    "mockInsightSubtext": "The actual version will show personalized insights and analysis based on your conversations",
+    "noConversations": "No conversations today",
+    "noConversationsText": "Start a conversation to generate your daily mood insights",
+    "startConversation": "Start Chatting",
+    "insightHistory": "Insight History",
+    "dailyInsight": "Daily Insight",
+    "goodDay": "Good Day",
+    "neutral": "Neutral",
+    "toughDay": "Tough Day",
+    "moodThisWeek": "Mood This Week",
+    "quickMoodCheck": "Quick Mood Check",
+    "howAreYouFeeling": "How are you feeling?",
+    "checkIn": {
+      "title": "Mood Check-in",
+      "howFeeling": "How are you feeling right now?",
+      "selectMood": "Select your current mood",
+      "whatEmotions": "What emotions are you experiencing?",
+      "chooseEmotions": "Choose emotions that resonate with you",
+      "additionalThoughts": "Any additional thoughts?",
+      "optionalNotes": "Optional notes about your day",
+      "moods": {
+        "terrible": {
+          "label": "Terrible",
+          "description": "Feeling very down and stressed"
+        },
+        "poor": {
+          "label": "Poor",
+          "description": "Having a tough day, feeling frustrated"
+        },
+        "fair": {
+          "label": "Fair",
+          "description": "Not great, not bad, just okay"
+        },
+        "good": {
+          "label": "Good",
+          "description": "Feeling positive and content"
+        },
+        "excellent": {
+          "label": "Excellent",
+          "description": "Feeling amazing and energetic"
+        }
+      },
+      "emotions": {
+        "anxious": "Anxious",
+        "calm": "Calm",
+        "energetic": "Energetic",
+        "tired": "Tired",
+        "stressed": "Stressed",
+        "hopeful": "Hopeful",
+        "sad": "Sad",
+        "grateful": "Grateful",
+        "overwhelmed": "Overwhelmed",
+        "peaceful": "Peaceful",
+        "frustrated": "Frustrated",
+        "motivated": "Motivated"
+      },
+      "categories": {
+        "positive": "Positive Emotions",
+        "negative": "Negative Emotions",
+        "neutral": "Neutral Emotions"
+      },
+      "notesPlaceholder": "How was your day? What's on your mind?",
+      "summary": {
+        "title": "Your Mood Summary",
+        "emotions": "Emotions:",
+        "back": "Back",
+        "next": "Next",
+        "complete": "Complete"
+      }
+    }
+  },
+  "chat": {
+    "greeting": "Hello! I'm Rebloom's AI assistant, nice to meet you. I'm here to listen and support you.",
+    "response1": "I understand how you feel.",
+    "response2": "Please continue, I'm listening.",
+    "response3": "That sounds challenging.",
+    "response4": "Would you like to share more?",
+    "response5": "I can sense this is important to you."
+  },
+  "accessibility": {
+    "title": "Accessibility Settings",
+    "screenReader": {
+      "title": "Screen Reader",
+      "enabled": {
+        "title": "Screen Reader Enabled",
+        "description": "Detected automatically from system settings"
+      },
+      "voiceAnnouncements": {
+        "title": "Voice Announcements",
+        "description": "Announce important updates and changes"
+      },
+      "voiceNavigation": {
+        "title": "Voice Navigation",
+        "description": "Navigate using voice commands"
+      }
+    },
+    "visual": {
+      "title": "Visual",
+      "highContrast": {
+        "title": "High Contrast Mode",
+        "description": "Increase contrast for better visibility"
+      },
+      "reduceMotion": {
+        "title": "Reduce Motion",
+        "description": "Minimize animations and transitions"
+      },
+      "textSize": {
+        "title": "Text Size",
+        "description": "Adjust text size for better readability"
+      },
+      "colorBlind": {
+        "title": "Color Blind Support",
+        "description": "Adjust colors for color vision differences"
+      }
+    },
+    "motor": {
+      "title": "Motor",
+      "buttonSize": {
+        "title": "Button Size",
+        "description": "Increase button size for easier tapping"
+      },
+      "gestureAlternatives": {
+        "title": "Gesture Alternatives",
+        "description": "Provide alternatives to complex gestures"
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: {{date}}",
+    "description": "These terms govern your rights and responsibilities when using Rebloom services. Please read carefully.",
+    "toc": "Table of Contents",
+    "agreement": "Agreement",
+    "agreementText": "By continuing to use Rebloom, you confirm that you have read, understood, and agree to be bound by these terms of service.",
+    "contactLegal": "Contact Legal Team",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "content": [
+          "Welcome to Rebloom (\"the Service\" or \"the Application\"). These Terms of Service (\"Terms\") constitute a legal agreement between you and the Rebloom team (\"we,\" \"our,\" or \"the Company\").",
+          "By downloading, installing, or using the Service, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Service.",
+          "These Terms apply to the Application itself and all its features, services, and content."
+        ]
+      },
+      "services": {
+        "title": "2. Service Description",
+        "content": [
+          "Rebloom is an AI-powered mental health support application that provides the following services:",
+          "• 24/7 emotional support and mental health guidance",
+          "• Personalized AI conversation experiences",
+          "• Mood tracking and health insights",
+          "• Crisis resources and emergency contact features",
+          "• Personalized AI settings and therapy preferences",
+          "• Conversation records and progress tracking"
+        ]
+      },
+      "eligibility": {
+        "title": "3. Eligibility",
+        "content": [
+          "You must be 18 years or older, or use this service under parental supervision.",
+          "You commit to providing true, accurate, and complete information.",
+          "You agree not to use the service in any illegal or unauthorized manner.",
+          "You understand that this service is not a substitute for emergency mental health services."
+        ]
+      },
+      "responsibilities": {
+        "title": "4. User Responsibilities",
+        "content": [
+          "You agree to:",
+          "• Provide accurate personal information",
+          "• Protect your account security",
+          "• Not share your login credentials",
+          "• Not use the service in harmful ways",
+          "• Respect other users' privacy",
+          "• Seek professional help in emergency situations"
+        ]
+      },
+      "availability": {
+        "title": "5. Service Availability",
+        "content": [
+          "We strive to provide high-quality services, but cannot guarantee:",
+          "• Continuous service availability",
+          "• Service interruptions or errors",
+          "• Availability of specific features",
+          "We reserve the right to modify, suspend, or terminate services at any time."
+        ]
+      },
+      "dataPrivacy": {
+        "title": "6. Data and Privacy",
+        "content": [
+          "Your privacy is of utmost importance to us. Our Privacy Policy details how we collect, use, and protect your information.",
+          "By using this service, you agree that we may process your data according to our Privacy Policy.",
+          "We use end-to-end encryption to protect your conversations and personal information.",
+          "You are responsible for your data, including backing up important information."
+        ]
+      },
+      "ownership": {
+        "title": "7. Content Ownership",
+        "content": [
+          "The Application and all its content, including but not limited to:",
+          "• Software code and algorithms",
+          "• Design and user interface",
+          "• Trademarks and brand elements",
+          "• Intellectual property",
+          "are owned by Rebloom."
+        ]
+      },
+      "userContent": {
+        "title": "8. User Content",
+        "content": [
+          "You retain ownership of content you create in this service.",
+          "By using the service, you grant us a limited license to provide the service.",
+          "You promise not to upload harmful, illegal, or content that infringes others' rights.",
+          "We reserve the right to remove content that violates our policies when appropriate."
+        ]
+      },
+      "disclaimer": {
+        "title": "9. Disclaimer",
+        "content": [
+          "The service is provided \"as is\" without any warranties of any kind.",
+          "We do not guarantee the accuracy, reliability, or suitability of the service.",
+          "This service is not a substitute for professional mental health services.",
+          "In emergency situations, please contact professional medical personnel immediately."
+        ]
+      },
+      "limitation": {
+        "title": "10. Limitation of Liability",
+        "content": [
+          "To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, or consequential damages.",
+          "Our total liability shall not exceed the service fees you paid in the past 12 months.",
+          "Some jurisdictions do not allow liability limitations, which may not apply to you."
+        ]
+      },
+      "indemnification": {
+        "title": "11. Indemnification",
+        "content": [
+          "You agree to indemnify and hold us harmless from any claims, losses, or damages arising from your violation of these Terms.",
+          "This includes reasonable attorneys' fees and court costs."
+        ]
+      },
+      "termination": {
+        "title": "12. Termination",
+        "content": [
+          "We may terminate or suspend your account at any time if:",
+          "• You violate these Terms",
+          "• Your behavior is harmful to other users",
+          "• Required by law",
+          "You may stop using the service by deleting your account at any time."
+        ]
+      },
+      "governingLaw": {
+        "title": "13. Governing Law",
+        "content": [
+          "These Terms are governed by the laws of the People's Republic of China.",
+          "Any disputes shall be resolved in the Pudong New Area People's Court of Shanghai.",
+          "If any provision is found invalid, the remaining provisions shall remain in effect."
+        ]
+      },
+      "modifications": {
+        "title": "14. Modifications",
+        "content": [
+          "We reserve the right to modify these Terms at any time.",
+          "Material changes will be notified through the app or email.",
+          "Continued use of the service constitutes acceptance of the modified Terms."
+        ]
+      },
+      "contact": {
+        "title": "15. Contact Us",
+        "content": [
+          "If you have any questions about these Terms, please contact us:",
+          "Email: legal@Rebloom.app",
+          "Address: Shanghai, China",
+          "We will respond to your inquiries within a reasonable time."
+        ]
+      }
+    }
+  },
+  "language": {
+    "title": "Language Settings",
+    "select": "Select Language",
+    "zh-TW": "Traditional Chinese",
+    "zh-CN": "Simplified Chinese",
+    "ja": "日本語",
+    "en": "English",
+    "save": "Save",
+    "saveSuccess": "Language settings saved"
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signUpTagline": "Join Rebloom and start your mental wellness journey",
+    "signInTagline": "Welcome back to your mental wellness companion",
+    "email": "Email Address",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "or": "or",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithApple": "Continue with Apple",
+    "continueWithWeChat": "Continue with WeChat",
+    "agreeToTerms": "I agree to the",
+    "and": "and",
+    "termsAndPrivacy": "By continuing, you agree to our Terms of Service and Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "error": "Error",
+    "fillAllFields": "Please fill in all fields",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "checkEmail": "Please check your email to complete registration",
+    "unexpectedError": "An unexpected error occurred, please try again",
+    "success": "Success",
+    "loading": "Loading...",
+    "showPassword": "Show Password",
+    "hidePassword": "Hide Password",
+    "displayName": "Display Name",
+    "displayNamePlaceholder": "Enter your display name (optional)",
+    "emailPlaceholder": "Enter your email address",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Enter your password again",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "invalidEmail": "Please enter a valid email address",
+    "weakPassword": "Password is too weak, please use a stronger password",
+    "accountCreated": "Account created successfully!",
+    "loginSuccess": "Login successful!",
+    "logoutSuccess": "Logout successful!",
+    "resetPassword": "Reset Password",
+    "resetPasswordEmail": "Password reset email sent",
+    "backToLogin": "Back to Login",
+    "backToSignUp": "Back to Sign Up"
+  },
+  "onboarding": {
+    "title": "Dolphin",
+    "skip": "Skip",
+    "continue": "Continue",
+    "getStarted": "Get Started",
+    "learnMore": "Learn more about Dolphin",
+    "screens": {
+      "alwaysOn": {
+        "title": "Always on",
+        "description": "24/7 access to mental health support via text, call, ACT, and video response",
+        "features": [
+          "Available whenever you need support",
+          "Multiple communication methods",
+          "Instant response to your needs",
+          "No waiting lists or appointments"
+        ]
+      },
+      "remembersYou": {
+        "title": "Remembers you",
+        "description": "Dolphin has a secure memory, so every conversation builds continuous therapeutic.",
+        "features": [
+          "Secure conversation history",
+          "Personalized therapeutic approach",
+          "Builds on previous sessions",
+          "Understands your progress"
+        ]
+      },
+      "progressSnapshot": {
+        "title": "Progress snapshot",
+        "description": "Analyze your mood and patterns, wins and gains, insights and next steps.",
+        "features": [
+          "Track mood patterns over time",
+          "Celebrate your achievements",
+          "Identify helpful strategies",
+          "Plan your next steps forward"
+        ]
+      }
+    },
+    "chat": {
+      "userMessage1": "Hey, are you available to chat?",
+      "assistantMessage1": "Of course! I'm always here when you need support. What's on your mind?",
+      "userMessage2": "I'm feeling anxious about tomorrow",
+      "assistantTyping": "...",
+      "remembersYou": {
+        "aiMessage1": "How did that job interview go that you were worried about last week?",
+        "userMessage1": "It went really well! Thanks for helping me prepare",
+        "aiMessage2": "That's wonderful! I remember we practiced those breathing techniques together."
+      },
+      "progressSnapshot": {
+        "title": "Your Progress",
+        "chartLabel": "Mood this week",
+        "insight": "💪 You've been more resilient this week"
+      }
+    }
+  }
+}

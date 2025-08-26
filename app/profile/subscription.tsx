@@ -24,9 +24,9 @@ export default function SubscriptionScreen() {
   const plans: SubscriptionPlan[] = [
     {
       id: 'free',
-      name: '免費版',
-      price: '免費',
-      period: '永久',
+      name: t('subscription.freePlan'),
+      price: t('subscription.free'),
+      period: t('subscription.forever'),
       features: [
         '每日基本對話',
         '心情追蹤',
@@ -37,9 +37,9 @@ export default function SubscriptionScreen() {
     },
     {
       id: 'premium',
-      name: '高級版',
+      name: t('subscription.premiumPlan'),
       price: '¥68',
-      period: '每月',
+      period: t('subscription.monthly'),
       features: [
         '無限制對話',
         '深度心理分析',
@@ -74,13 +74,13 @@ export default function SubscriptionScreen() {
     if (planId === currentPlan) return;
     
     Alert.alert(
-      '升級訂閱',
-      `您確定要升級到${plans.find(p => p.id === planId)?.name}嗎？`,
+      t('subscription.upgradeConfirm'),
+      t('subscription.upgradeMessage', { plan: plans.find(p => p.id === planId)?.name }),
       [
-        { text: '取消', style: 'cancel' },
-        { text: '確認升級', onPress: () => {
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('subscription.confirmUpgrade'), onPress: () => {
           setCurrentPlan(planId);
-          Alert.alert('升級成功', '您的訂閱已升級！');
+          Alert.alert(t('subscription.upgradeSuccess'), t('subscription.upgradeSuccessMessage'));
         }}
       ]
     );
@@ -206,7 +206,7 @@ export default function SubscriptionScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>訂閱管理</Text>
+        <Text style={styles.headerTitle}>{t('subscription.title')}</Text>
         <TouchableOpacity onPress={handleManageBilling} style={styles.billingButton}>
           <IconSymbol name="creditcard" size={20} color="#FFFFFF" />
         </TouchableOpacity>
@@ -221,12 +221,12 @@ export default function SubscriptionScreen() {
               style={styles.statusGradient}
             >
               <IconSymbol name="crown.fill" size={32} color="white" />
-              <Text style={styles.statusTitle}>高級會員</Text>
+              <Text style={styles.statusTitle}>{t('subscription.premiumMember')}</Text>
               <Text style={styles.statusDescription}>
-                下次續費日期：2024年9月18日
+                {t('subscription.nextRenewal')}: 2024年9月18日
               </Text>
               <Text style={styles.statusSubDescription}>
-                感謝您選擇 Rebloom Premium！
+                {t('subscription.thankYou')}
               </Text>
             </LinearGradient>
           </View>

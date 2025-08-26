@@ -1,9 +1,9 @@
+import { useLanguage } from '@/contexts/LanguageContext';
 import { IconSymbol } from '@/ui/IconSymbol';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface UserProfile {
   name: string;
@@ -45,7 +45,7 @@ export default function PersonalInfoScreen() {
   ];
 
   const handleSave = () => {
-    Alert.alert('保存成功', '您的個人信息已更新');
+    Alert.alert(t('personalInfo.saveSuccess'), t('personalInfo.saveSuccessMessage'));
     router.back();
   };
 
@@ -75,7 +75,7 @@ export default function PersonalInfoScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <IconSymbol name="chevron.left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>個人信息</Text>
+        <Text style={styles.headerTitle}>{t('personalInfo.title')}</Text>
         <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}
@@ -141,23 +141,23 @@ export default function PersonalInfoScreen() {
               style={styles.inputCardGradient}
             >
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>姓名</Text>
+                <Text style={styles.inputLabel}>{t('personalInfo.name')}</Text>
                 <TextInput
                   style={styles.textInput}
                   value={profile.name}
                   onChangeText={(text) => setProfile(prev => ({ ...prev, name: text }))}
-                  placeholder="輸入您的姓名"
+                  placeholder={t('personalInfo.placeholders.name')}
                   placeholderTextColor="rgba(44, 44, 46, 0.5)"
                 />
               </View>
 
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>電子郵件</Text>
+                <Text style={styles.inputLabel}>{t('personalInfo.email')}</Text>
                 <TextInput
                   style={styles.textInput}
                   value={profile.email}
                   onChangeText={(text) => setProfile(prev => ({ ...prev, email: text }))}
-                  placeholder="輸入您的電子郵件"
+                  placeholder={t('personalInfo.placeholders.email')}
                   keyboardType="email-address"
                   autoCapitalize="none"
                   placeholderTextColor="rgba(44, 44, 46, 0.5)"
@@ -165,12 +165,12 @@ export default function PersonalInfoScreen() {
               </View>
 
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>位置</Text>
+                <Text style={styles.inputLabel}>{t('personalInfo.location')}</Text>
                 <TextInput
                   style={styles.textInput}
                   value={profile.location}
                   onChangeText={(text) => setProfile(prev => ({ ...prev, location: text }))}
-                  placeholder="輸入您的位置"
+                  placeholder={t('personalInfo.placeholders.location')}
                   placeholderTextColor="rgba(44, 44, 46, 0.5)"
                 />
               </View>
@@ -183,7 +183,7 @@ export default function PersonalInfoScreen() {
               colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
               style={styles.ageCardGradient}
             >
-              <Text style={styles.ageLabel}>年齡範圍</Text>
+              <Text style={styles.ageLabel}>{t('personalInfo.ageRange')}</Text>
               <View style={styles.ageSelector}>
                 {ageRanges.map((range) => (
                   <TouchableOpacity
@@ -217,7 +217,7 @@ export default function PersonalInfoScreen() {
 
         {/* Mental Health Goals */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>心理健康目標</Text>
+          <Text style={styles.sectionTitle}>{t('personalInfo.mentalHealthGoals')}</Text>
           
           <View style={styles.goalsCard}>
             <LinearGradient
@@ -225,7 +225,7 @@ export default function PersonalInfoScreen() {
               style={styles.goalsCardGradient}
             >
               <Text style={styles.goalsDescription}>
-                選擇您希望改善的領域，這將幫助AI更好地支持您
+                {t('personalInfo.goalsDescription')}
               </Text>
               
               <View style={styles.goalsContainer}>
@@ -264,7 +264,7 @@ export default function PersonalInfoScreen() {
 
         {/* Emergency Contact */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>緊急聯絡人</Text>
+          <Text style={styles.sectionTitle}>{t('personalInfo.emergencyContact')}</Text>
           
           <View style={styles.emergencyCard}>
             <LinearGradient
@@ -272,11 +272,11 @@ export default function PersonalInfoScreen() {
               style={styles.emergencyCardGradient}
             >
               <Text style={styles.emergencyDescription}>
-                在緊急情況下可以聯繫的人員信息
+                {t('personalInfo.emergencyDescription')}
               </Text>
               
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>姓名</Text>
+                <Text style={styles.inputLabel}>{t('personalInfo.emergencyContactName')}</Text>
                 <TextInput
                   style={styles.textInput}
                   value={profile.emergencyContact.name}
@@ -284,13 +284,13 @@ export default function PersonalInfoScreen() {
                     ...prev, 
                     emergencyContact: { ...prev.emergencyContact, name: text }
                   }))}
-                  placeholder="緊急聯絡人姓名"
+                  placeholder={t('personalInfo.placeholders.emergencyContactName')}
                   placeholderTextColor="rgba(44, 44, 46, 0.5)"
                 />
               </View>
 
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>電話號碼</Text>
+                <Text style={styles.inputLabel}>{t('personalInfo.emergencyContactPhone')}</Text>
                 <TextInput
                   style={styles.textInput}
                   value={profile.emergencyContact.phone}
@@ -298,14 +298,14 @@ export default function PersonalInfoScreen() {
                     ...prev, 
                     emergencyContact: { ...prev.emergencyContact, phone: text }
                   }))}
-                  placeholder="聯絡電話"
+                  placeholder={t('personalInfo.placeholders.emergencyContactPhone')}
                   keyboardType="phone-pad"
                   placeholderTextColor="rgba(44, 44, 46, 0.5)"
                 />
               </View>
 
               <View style={styles.inputGroup}>
-                <Text style={styles.inputLabel}>關係</Text>
+                <Text style={styles.inputLabel}>{t('personalInfo.emergencyContactRelationship')}</Text>
                 <TextInput
                   style={styles.textInput}
                   value={profile.emergencyContact.relationship}
@@ -313,7 +313,7 @@ export default function PersonalInfoScreen() {
                     ...prev, 
                     emergencyContact: { ...prev.emergencyContact, relationship: text }
                   }))}
-                  placeholder="與您的關係（如：家人、朋友）"
+                  placeholder={t('personalInfo.placeholders.emergencyContactRelationship')}
                   placeholderTextColor="rgba(44, 44, 46, 0.5)"
                 />
               </View>
@@ -323,7 +323,7 @@ export default function PersonalInfoScreen() {
 
         {/* Account Actions */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>帳戶操作</Text>
+          <Text style={styles.sectionTitle}>{t('personalInfo.accountActions')}</Text>
           
           <TouchableOpacity style={styles.dangerButton}>
             <LinearGradient
@@ -331,7 +331,7 @@ export default function PersonalInfoScreen() {
               style={styles.dangerGradient}
             >
               <IconSymbol name="trash" size={20} color="white" />
-              <Text style={styles.dangerText}>刪除帳戶</Text>
+              <Text style={styles.dangerText}>{t('personalInfo.deleteAccount')}</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>

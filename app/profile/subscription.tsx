@@ -1,9 +1,9 @@
+import { useLanguage } from '@/contexts/LanguageContext';
 import { IconSymbol } from '@/ui/IconSymbol';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface SubscriptionPlan {
   id: string;
@@ -28,10 +28,10 @@ export default function SubscriptionScreen() {
       price: t('subscription.free'),
       period: t('subscription.forever'),
       features: [
-        '每日基本對話',
-        '心情追蹤',
-        '基礎洞察',
-        '社區支持'
+        t('subscription.freeFeatures.basicChat'),
+        t('subscription.freeFeatures.moodTracking'),
+        t('subscription.freeFeatures.basicInsights'),
+        t('subscription.freeFeatures.communitySupport')
       ],
       current: currentPlan === 'free'
     },
@@ -41,30 +41,30 @@ export default function SubscriptionScreen() {
       price: '¥68',
       period: t('subscription.monthly'),
       features: [
-        '無限制對話',
-        '深度心理分析',
-        '個性化治療建議',
-        '24/7 危機支持',
-        '專業心理師諮詢',
-        '高級洞察報告',
-        '語音對話功能',
-        '優先客戶支持'
+        t('subscription.premiumFeatures.unlimitedChat'),
+        t('subscription.premiumFeatures.deepAnalysis'),
+        t('subscription.premiumFeatures.personalizedTherapy'),
+        t('subscription.premiumFeatures.crisisSupport'),
+        t('subscription.premiumFeatures.professionalConsult'),
+        t('subscription.premiumFeatures.advancedInsights'),
+        t('subscription.premiumFeatures.voiceChat'),
+        t('subscription.premiumFeatures.prioritySupport')
       ],
       popular: true,
       current: currentPlan === 'premium'
     },
     {
       id: 'family',
-      name: '家庭版',
+      name: t('subscription.familyPlan'),
       price: '¥168',
-      period: '每月',
+      period: t('subscription.monthly'),
       features: [
-        '支持最多6個家庭成員',
-        '所有高級版功能',
-        '家庭心理健康儀表板',
-        '家庭治療師諮詢',
-        '緊急聯絡網絡',
-        '家庭心理健康計劃'
+        t('subscription.familyFeatures.supportMembers'),
+        t('subscription.familyFeatures.allPremiumFeatures'),
+        t('subscription.familyFeatures.familyDashboard'),
+        t('subscription.familyFeatures.familyTherapist'),
+        t('subscription.familyFeatures.emergencyNetwork'),
+        t('subscription.familyFeatures.familyHealthPlan')
       ],
       current: currentPlan === 'family'
     }
@@ -106,7 +106,7 @@ export default function SubscriptionScreen() {
             style={styles.popularBadgeGradient}
           >
             <IconSymbol name="star.fill" size={12} color="white" />
-            <Text style={styles.popularText}>最受歡迎</Text>
+            <Text style={styles.popularText}>{t('subscription.mostPopular')}</Text>
           </LinearGradient>
         </View>
       )}
@@ -179,8 +179,8 @@ export default function SubscriptionScreen() {
               plan.current && styles.currentPlanButtonText
             ]}>
               {plan.current ? 
-                (plan.id === 'free' ? '當前方案' : '管理訂閱') : 
-                '選擇此方案'
+                (plan.id === 'free' ? t('subscription.currentPlanText') : t('subscription.manageSubscription')) : 
+                t('subscription.selectThisPlan')
               }
             </Text>
           </LinearGradient>
@@ -234,13 +234,13 @@ export default function SubscriptionScreen() {
 
         {/* Plans */}
         <View style={styles.plansSection}>
-          <Text style={styles.plansTitle}>選擇訂閱方案</Text>
+          <Text style={styles.plansTitle}>{t('subscription.selectPlan')}</Text>
           {plans.map(renderPlan)}
         </View>
 
         {/* Benefits */}
         <View style={styles.benefitsSection}>
-          <Text style={styles.benefitsTitle}>Premium 會員專享</Text>
+          <Text style={styles.benefitsTitle}>{t('subscription.premiumExclusive')}</Text>
           
           <View style={styles.benefitsCard}>
             <LinearGradient
@@ -252,9 +252,9 @@ export default function SubscriptionScreen() {
                   <IconSymbol name="brain.head.profile" size={24} color="#8B5A8C" />
                 </View>
                 <View style={styles.benefitContent}>
-                  <Text style={styles.benefitTitle}>AI 深度分析</Text>
+                  <Text style={styles.benefitTitle}>{t('subscription.benefits.aiAnalysis.title')}</Text>
                   <Text style={styles.benefitDescription}>
-                    獲得更深入的心理狀態分析和個性化建議
+                    {t('subscription.benefits.aiAnalysis.description')}
                   </Text>
                 </View>
               </View>
@@ -266,9 +266,9 @@ export default function SubscriptionScreen() {
                   <IconSymbol name="person.2.badge.plus" size={24} color="#8B5A8C" />
                 </View>
                 <View style={styles.benefitContent}>
-                  <Text style={styles.benefitTitle}>專業諮詢</Text>
+                  <Text style={styles.benefitTitle}>{t('subscription.benefits.professionalConsultation.title')}</Text>
                   <Text style={styles.benefitDescription}>
-                    每月與真人心理師進行一對一諮詢
+                    {t('subscription.benefits.professionalConsultation.description')}
                   </Text>
                 </View>
               </View>
@@ -280,9 +280,9 @@ export default function SubscriptionScreen() {
                   <IconSymbol name="clock.badge.checkmark" size={24} color="#8B5A8C" />
                 </View>
                 <View style={styles.benefitContent}>
-                  <Text style={styles.benefitTitle}>24/7 支持</Text>
+                  <Text style={styles.benefitTitle}>{t('subscription.benefits.support247.title')}</Text>
                   <Text style={styles.benefitDescription}>
-                    全天候危機干預和緊急心理支持
+                    {t('subscription.benefits.support247.description')}
                   </Text>
                 </View>
               </View>
@@ -301,7 +301,7 @@ export default function SubscriptionScreen() {
               style={styles.manageGradient}
             >
               <IconSymbol name="gearshape" size={20} color="#FFFFFF" />
-              <Text style={styles.manageText}>管理訂閱設置</Text>
+              <Text style={styles.manageText}>{t('subscription.manageSubscriptionSettings')}</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>

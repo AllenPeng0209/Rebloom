@@ -6,6 +6,30 @@
     "explore": "探索",
     "profile": "我的"
   },
+  "explore": {
+    "pageTitle": "探索",
+    "pageSubtitle": "發現適合您的心理健康資源",
+    "todayRecommended": "今日推薦",
+    "recommendedTopics": "推薦主題",
+    "topics": "主題",
+    "episodes": "單集內容",
+    "packDetails": "課程詳情",
+    "play": "播放",
+    "searchPlaceholder": "搜索內容...",
+    "noResults": "沒有找到相關內容",
+    "loading": "加載中...",
+    "error": "加載失敗，請重試"
+  },
+  "player": {
+    "title": "播放器",
+    "loading": "加載中...",
+    "error": "無法加載音軌",
+    "play": "播放",
+    "pause": "暫停",
+    "backward": "15秒",
+    "forward": "15秒",
+    "speed": "倍速"
+  },
   "common": {
     "cancel": "取消",
     "confirm": "確認",
@@ -329,28 +353,69 @@
     "resetErrorMessage": "設置重置時發生錯誤，請重試。"
   },
   "subscription": {
-    "title": "我的訂閱",
+    "title": "訂閱管理",
     "currentPlan": "當前計劃",
-    "freePlan": "免費計劃",
-    "premiumPlan": "高級計劃",
+    "freePlan": "免費版",
+    "premiumPlan": "高級版",
+    "familyPlan": "家庭版",
     "features": "功能",
     "upgrade": "升級",
     "manage": "管理訂閱",
-    "upgradeConfirm": "升級確認",
-    "upgradeMessage": "升級到高級計劃，每月$9.99？",
+    "upgradeConfirm": "升級訂閱",
+    "upgradeMessage": "您確定要升級到{{plan}}嗎？",
+    "confirmUpgrade": "確認升級",
     "upgradeSuccess": "升級成功",
-    "upgradeSuccessMessage": "歡迎使用高級版！享受增強功能。",
+    "upgradeSuccessMessage": "您的訂閱已升級！",
+    "free": "免費",
+    "forever": "永久",
+    "monthly": "每月",
+    "premiumMember": "高級會員",
+    "nextRenewal": "下次續費日期",
+    "thankYou": "感謝您選擇 Rebloom Premium！",
+    "selectPlan": "選擇訂閱方案",
+    "mostPopular": "最受歡迎",
+    "currentPlanText": "當前方案",
+    "manageSubscription": "管理訂閱",
+    "selectThisPlan": "選擇此方案",
+    "premiumExclusive": "Premium 會員專享",
+    "manageSubscriptionSettings": "管理訂閱設置",
     "freeFeatures": {
-      "basicChat": "基本AI對話",
+      "basicChat": "每日基本對話",
       "moodTracking": "心情追蹤",
-      "limitedHistory": "有限的聊天歷史"
+      "basicInsights": "基礎洞察",
+      "communitySupport": "社區支持"
     },
     "premiumFeatures": {
-      "unlimitedChat": "無限AI對話",
-      "advancedAnalysis": "高級分析",
-      "unlimitedHistory": "無限聊天歷史",
-      "prioritySupport": "優先支援",
-      "customPersonality": "自定義AI個性"
+      "unlimitedChat": "無限制對話",
+      "deepAnalysis": "深度心理分析",
+      "personalizedTherapy": "個性化治療建議",
+      "crisisSupport": "24/7 危機支持",
+      "professionalConsult": "專業心理師諮詢",
+      "advancedInsights": "高級洞察報告",
+      "voiceChat": "語音對話功能",
+      "prioritySupport": "優先客戶支持"
+    },
+    "familyFeatures": {
+      "supportMembers": "支持最多6個家庭成員",
+      "allPremiumFeatures": "所有高級版功能",
+      "familyDashboard": "家庭心理健康儀表板",
+      "familyTherapist": "家庭治療師諮詢",
+      "emergencyNetwork": "緊急聯絡網絡",
+      "familyHealthPlan": "家庭心理健康計劃"
+    },
+    "benefits": {
+      "aiAnalysis": {
+        "title": "AI 深度分析",
+        "description": "獲得更深層的心理狀態分析和個性化建議"
+      },
+      "professionalConsultation": {
+        "title": "專業諮詢",
+        "description": "每月與真人心理師進行一對一諮詢"
+      },
+      "support247": {
+        "title": "24/7 支持",
+        "description": "全天候危機干預和緊急心理支持"
+      }
     }
   },
   "billing": {
@@ -361,9 +426,31 @@
     "downloadInvoice": "下載發票",
     "updatePayment": "更新付款方式",
     "noPaymentHistory": "沒有付款歷史",
+    "transactions": "交易記錄",
+    "methods": "付款方式",
+    "invoices": "發票",
+    "premiumMember": "Premium 會員",
+    "nextCharge": "下次扣款",
+    "manageSubscription": "管理訂閱",
+    "transactionRecords": "交易記錄",
+    "paymentMethods": "付款方式",
+    "invoiceRecords": "發票記錄",
+    "addPaymentMethod": "添加付款方式",
+    "downloadInvoiceText": "下載發票",
+    "invoiceDescription": "您的所有發票都可以在交易記錄中下載",
+    "default": "預設",
+    "expires": "到期",
+    "status": {
+      "completed": "已完成",
+      "pending": "處理中",
+      "failed": "失敗",
+      "refunded": "已退款",
+      "unknown": "未知"
+    },
     "invoices": {
       "subscription": "Rebloom Premium - 月度訂閱"
-    }
+    },
+    "invoices": "發票"
   },
   "notifications": {
     "title": "通知設置",

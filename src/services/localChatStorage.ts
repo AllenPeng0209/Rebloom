@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Message } from '@/types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STORAGE_KEYS = {
   CONVERSATIONS: 'chat_conversations',
@@ -367,6 +367,45 @@ class LocalChatStorage {
     } catch (error) {
       console.error('Error getting context messages:', error);
       return [];
+    }
+  }
+
+  /**
+   * 調試方法：檢查存儲狀態
+   */
+  async debugStorageStatus(): Promise<void> {
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+      const chatKeys = keys.filter(key => 
+        key.startsWith(STORAGE_KEYS.MESSAGES) || 
+        key === STORAGE_KEYS.CONVERSATIONS ||
+        key === STORAGE_KEYS.CURRENT_CONVERSATION
+      );
+      
+      console.log('=== LocalChatStorage Debug Info ===');
+      console.log('All AsyncStorage keys:', keys);
+      console.log('Chat-related keys:', chatKeys);
+      
+      for (const key of chatKeys) {
+        try {
+          const value = await AsyncStorage.getItem(key);
+          if (value) {
+            const parsedValue = JSON.parse(value);
+            console.log(`Key: ${key}, Value:`, parsedValue);
+          } else {
+            console.log(`Key: ${key}, Value: null`);
+          }
+        } catch (parseError) {
+          console.log(`Key: ${key}, Parse Error:`, parseError);
+          const rawValue = await AsyncStorage.getItem(key);
+          console.log(`Key: ${key}, Raw Value:`, rawValue);
+        }
+      }
+      
+      console.log('Message cache keys:', Array.from(this.messageCache.keys()));
+      console.log('=== End Debug Info ===');
+    } catch (error) {
+      console.error('Error in debugStorageStatus:', error);
     }
   }
 }

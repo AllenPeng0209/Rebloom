@@ -1,9 +1,9 @@
+import { useLanguage } from '@/contexts/LanguageContext';
 import { IconSymbol } from '@/ui/IconSymbol';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface PaymentMethod {
   id: string;
@@ -59,7 +59,7 @@ export default function BillingScreen() {
       date: new Date('2024-08-01'),
       amount: 68,
       currency: 'TWD',
-      description: 'Rebloom Premium - 月度訂閱',
+      description: t('billing.invoices.subscription'),
       status: 'completed',
       paymentMethod: 'Visa •••• 4242',
       invoice: 'INV-2024-08-001'
@@ -69,7 +69,7 @@ export default function BillingScreen() {
       date: new Date('2024-07-01'),
       amount: 68,
       currency: 'TWD',
-      description: 'Rebloom Premium - 月度訂閱',
+      description: t('billing.invoices.subscription'),
       status: 'completed',
       paymentMethod: 'Visa •••• 4242',
       invoice: 'INV-2024-07-001'
@@ -79,7 +79,7 @@ export default function BillingScreen() {
       date: new Date('2024-06-01'),
       amount: 68,
       currency: 'TWD',
-      description: 'Rebloom Premium - 月度訂閱',
+      description: t('billing.invoices.subscription'),
       status: 'completed',
       paymentMethod: 'Apple Pay',
       invoice: 'INV-2024-06-001'
@@ -98,11 +98,11 @@ export default function BillingScreen() {
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'completed': return '已完成';
-      case 'pending': return '處理中';
-      case 'failed': return '失敗';
-      case 'refunded': return '已退款';
-      default: return '未知';
+      case 'completed': return t('billing.status.completed');
+      case 'pending': return t('billing.status.pending');
+      case 'failed': return t('billing.status.failed');
+      case 'refunded': return t('billing.status.refunded');
+      default: return t('billing.status.unknown');
     }
   };
 
@@ -134,7 +134,7 @@ export default function BillingScreen() {
             <View style={styles.transactionInfo}>
               <Text style={styles.transactionDescription}>{transaction.description}</Text>
               <Text style={styles.transactionDate}>
-                {transaction.date.toLocaleDateString('zh-TW')} • {transaction.paymentMethod}
+                {transaction.date.toLocaleDateString()} • {transaction.paymentMethod}
               </Text>
             </View>
           </View>
@@ -163,7 +163,7 @@ export default function BillingScreen() {
               style={styles.invoiceGradient}
             >
               <IconSymbol name="doc.text" size={16} color="#8B5A8C" />
-              <Text style={styles.invoiceText}>下載發票</Text>
+              <Text style={styles.invoiceText}>{t('billing.downloadInvoiceText')}</Text>
             </LinearGradient>
           </TouchableOpacity>
         )}
@@ -188,7 +188,7 @@ export default function BillingScreen() {
               </Text>
               {method.type !== 'apple-pay' && (
                 <Text style={styles.methodExpiry}>
-                  到期：{method.expiryMonth.toString().padStart(2, '0')}/{method.expiryYear}
+                  {t('billing.expires')}：{method.expiryMonth.toString().padStart(2, '0')}/{method.expiryYear}
                 </Text>
               )}
             </View>
@@ -197,7 +197,7 @@ export default function BillingScreen() {
           <View style={styles.methodActions}>
             {method.isDefault && (
               <View style={styles.defaultBadge}>
-                <Text style={styles.defaultText}>預設</Text>
+                <Text style={styles.defaultText}>{t('billing.default')}</Text>
               </View>
             )}
             <TouchableOpacity style={styles.methodActionButton}>
@@ -264,9 +264,9 @@ export default function BillingScreen() {
 
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>
-        {renderTabButton('transactions', '交易記錄', 'list.bullet')}
-        {renderTabButton('methods', '付款方式', 'creditcard')}
-        {renderTabButton('invoices', '發票', 'doc.text')}
+        {renderTabButton('transactions', t('billing.transactions'), 'list.bullet')}
+        {renderTabButton('methods', t('billing.methods'), 'creditcard')}
+        {renderTabButton('invoices', t('billing.invoices'), 'doc.text')}
       </View>
 
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -278,16 +278,16 @@ export default function BillingScreen() {
               style={styles.statusGradient}
             >
               <IconSymbol name="crown.fill" size={28} color="white" />
-              <Text style={styles.statusTitle}>Premium 會員</Text>
+              <Text style={styles.statusTitle}>{t('billing.premiumMember')}</Text>
               <Text style={styles.statusDescription}>
-                下次扣款：2024年9月1日 • $68 TWD
+                {t('billing.nextCharge')}：2024年9月1日 • $68 TWD
               </Text>
               <TouchableOpacity style={styles.manageButton}>
                 <LinearGradient
                   colors={['rgba(255, 255, 255, 0.3)', 'rgba(255, 255, 255, 0.2)']}
                   style={styles.manageGradient}
                 >
-                  <Text style={styles.manageText}>管理訂閱</Text>
+                  <Text style={styles.manageText}>{t('billing.manageSubscription')}</Text>
                 </LinearGradient>
               </TouchableOpacity>
             </LinearGradient>
@@ -297,14 +297,14 @@ export default function BillingScreen() {
         {/* Content based on active tab */}
         {activeTab === 'transactions' && (
           <View style={styles.contentSection}>
-            <Text style={styles.contentTitle}>交易記錄</Text>
+            <Text style={styles.contentTitle}>{t('billing.transactionRecords')}</Text>
             {transactions.map(renderTransaction)}
           </View>
         )}
 
         {activeTab === 'methods' && (
           <View style={styles.contentSection}>
-            <Text style={styles.contentTitle}>付款方式</Text>
+            <Text style={styles.contentTitle}>{t('billing.paymentMethods')}</Text>
             {paymentMethods.map(renderPaymentMethod)}
             
             <TouchableOpacity style={styles.addMethodButton}>
@@ -313,7 +313,7 @@ export default function BillingScreen() {
                 style={styles.addMethodGradient}
               >
                 <IconSymbol name="plus.circle" size={20} color="#FFFFFF" />
-                <Text style={styles.addMethodText}>添加付款方式</Text>
+                <Text style={styles.addMethodText}>{t('billing.addPaymentMethod')}</Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -321,16 +321,16 @@ export default function BillingScreen() {
 
         {activeTab === 'invoices' && (
           <View style={styles.contentSection}>
-            <Text style={styles.contentTitle}>發票記錄</Text>
+            <Text style={styles.contentTitle}>{t('billing.invoiceRecords')}</Text>
             <View style={styles.invoicesCard}>
               <LinearGradient
                 colors={['rgba(255, 255, 255, 0.95)', 'rgba(255, 255, 255, 0.85)']}
                 style={styles.invoicesGradient}
               >
                 <IconSymbol name="doc.text" size={48} color="rgba(139, 90, 140, 0.5)" />
-                <Text style={styles.invoicesTitle}>發票記錄</Text>
+                <Text style={styles.invoicesTitle}>{t('billing.invoiceRecords')}</Text>
                 <Text style={styles.invoicesDescription}>
-                  您的所有發票都可以在交易記錄中下載
+                  {t('billing.invoiceDescription')}
                 </Text>
               </LinearGradient>
             </View>

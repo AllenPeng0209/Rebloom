@@ -125,7 +125,7 @@ export const ChatScreenWithBackButton: React.FC<ChatScreenWithBackButtonProps> =
           </View>
           
           <View style={styles.headerRight}>
-            {/* Placeholder for potential future actions */}
+            {/* Debug button removed */}
           </View>
         </View>
       </View>
@@ -250,6 +250,8 @@ const styles = StyleSheet.create({
   headerRight: {
     width: 44,
     height: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   appTitle: {
     fontSize: 32,

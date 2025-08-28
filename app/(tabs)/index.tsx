@@ -199,20 +199,31 @@ export default function HomeScreen() {
     hideTabBar()
   }, [hasCompletedOnboarding])
 
-  // Initialize chat messages when user is authenticated and onboarding is complete
+  // Load previous conversation or initialize new one when user is authenticated and onboarding is complete
   useEffect(() => {
-    if (user && hasCompletedOnboarding && !currentConversationId) {
-      initializeConversation()
-      setupDailySummarySchedule()
-    }
-  }, [user, hasCompletedOnboarding, currentConversationId])
-
-  // Load previous conversation on app start
-  useEffect(() => {
+    console.log('=== App State Debug ===')
+    console.log('User:', user?.id)
+    console.log('HasCompletedOnboarding:', hasCompletedOnboarding)
+    console.log('CurrentConversationId:', currentConversationId)
+    console.log('Messages count:', messages.length)
+    
     if (user && hasCompletedOnboarding) {
       loadPreviousConversation()
+      setupDailySummarySchedule()
     }
   }, [user, hasCompletedOnboarding])
+
+  // 监听用户状态变化，防止在用户登录状态变化时丢失对话
+  useEffect(() => {
+    console.log('User state changed:', user?.id)
+    // 不要在这里清除对话状态，让 loadPreviousConversation 处理
+  }, [user])
+
+  // 监听对话ID变化，防止意外清除消息
+  useEffect(() => {
+    console.log('CurrentConversationId changed:', currentConversationId)
+    // 不要在这里清除消息，让 loadPreviousConversation 处理
+  }, [currentConversationId])
 
   const setupDailySummarySchedule = async () => {
     if (!user) return
@@ -231,14 +242,21 @@ export default function HomeScreen() {
     if (!user) return
 
     try {
+      // 调试：检查存储状态
+      await LocalChatStorage.debugStorageStatus()
+      
       // 尝试获取之前的会话ID
       const previousConversationId = await LocalChatStorage.getCurrentConversation()
+      console.log('Previous conversation ID:', previousConversationId)
 
       if (previousConversationId) {
         setCurrentConversationId(previousConversationId)
 
         // 加载之前的消息（使用分页接口）
         const result = await LocalChatStorage.loadMessages(previousConversationId, 0)
+        console.log('Loaded messages count:', result.messages.length)
+        console.log('Messages:', result.messages.map(m => ({ id: m.id, content: m.content.substring(0, 50) })))
+        
         if (result.messages.length > 0) {
           setMessages(result.messages)
           setHasMore(result.hasMore)
@@ -248,8 +266,13 @@ export default function HomeScreen() {
             sessionId: previousConversationId,
             recentTopics: extractTopicsFromMessages(result.messages.slice(-10))
           })
+        } else {
+          console.log('No messages found for conversation:', previousConversationId)
+          // 如果没有消息，创建新的对话
+          initializeConversation()
         }
       } else {
+        console.log('No previous conversation found, creating new one')
         // 没有之前的会话，创建新的
         initializeConversation()
       }
@@ -351,13 +374,16 @@ export default function HomeScreen() {
       
       setMessages([initialMessage])
 
-      // Save the greeting message to database
+      // Save the greeting message to both database and local storage
       await ChatService.saveMessage(
         conversation.id,
         user.id,
         personalizedGreeting,
         'assistant'
       )
+      
+      // 保存到本地存储
+      await LocalChatStorage.saveMessage(initialMessage)
 
       // 分析情绪模式并记录
       try {
@@ -389,6 +415,34 @@ export default function HomeScreen() {
     } catch (error) {
       console.error('Error saving onboarding status:', error)
     }
+  }
+
+  const testLocalStorage = async () => {
+    console.log('=== Testing Local Storage ===')
+    
+    // 测试保存消息
+    const testMessage: Message = {
+      id: `test_${Date.now()}`,
+      sessionId: currentConversationId || 'test_session',
+      userId: user?.id || 'test_user',
+      senderType: 'user',
+      content: '测试消息',
+      messageType: 'text',
+      sentimentScore: 0.5,
+      emotionalTags: [],
+      riskLevel: 'low',
+      createdAt: new Date(),
+    }
+    
+    await LocalChatStorage.saveMessage(testMessage)
+    console.log('Test message saved')
+    
+    // 测试加载消息
+    const result = await LocalChatStorage.loadMessages(testMessage.sessionId, 0)
+    console.log('Test messages loaded:', result.messages.length)
+    
+    // 显示调试信息
+    await LocalChatStorage.debugStorageStatus()
   }
 
   const handleSendMessage = async (content: string) => {
@@ -669,6 +723,7 @@ export default function HomeScreen() {
           onScroll={handleScroll}
           loadingMore={loadingMore}
           hasMore={hasMore}
+          onTestStorage={testLocalStorage}
         />
       )}
     </ThemeProvider>

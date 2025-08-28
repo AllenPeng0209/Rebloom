@@ -6,6 +6,30 @@
     "explore": "探索",
     "profile": "我的"
   },
+  "explore": {
+    "pageTitle": "探索",
+    "pageSubtitle": "发现适合您的心理健康资源",
+    "todayRecommended": "今日推荐",
+    "recommendedTopics": "推荐主题",
+    "topics": "主题",
+    "episodes": "单集内容",
+    "packDetails": "课程详情",
+    "play": "播放",
+    "searchPlaceholder": "搜索内容...",
+    "noResults": "没有找到相关内容",
+    "loading": "加载中...",
+    "error": "加载失败，请重试"
+  },
+  "player": {
+    "title": "播放器",
+    "loading": "加载中...",
+    "error": "无法加载音轨",
+    "play": "播放",
+    "pause": "暂停",
+    "backward": "15秒",
+    "forward": "15秒",
+    "speed": "倍速"
+  },
   "common": {
     "cancel": "取消",
     "confirm": "确认",
@@ -753,6 +777,7 @@
     "currentPlan": "当前计划",
     "freePlan": "免费版",
     "premiumPlan": "高级版",
+    "familyPlan": "家庭版",
     "features": "功能",
     "upgrade": "升级",
     "manage": "管理订阅",
@@ -767,21 +792,50 @@
     "premiumMember": "高级会员",
     "nextRenewal": "下次续费日期",
     "thankYou": "感谢您选择 Rebloom Premium！",
+    "selectPlan": "选择订阅方案",
+    "mostPopular": "最受欢迎",
+    "currentPlanText": "当前方案",
+    "manageSubscription": "管理订阅",
+    "selectThisPlan": "选择此方案",
+    "premiumExclusive": "Premium 会员专享",
+    "manageSubscriptionSettings": "管理订阅设置",
     "freeFeatures": {
-      "basicChat": "每日基本对話",
-      "moodTracking": "心情追蹤",
+      "basicChat": "每日基本对话",
+      "moodTracking": "心情追踪",
       "basicInsights": "基础洞察",
       "communitySupport": "社区支持"
     },
     "premiumFeatures": {
-      "unlimitedChat": "无限制对話",
+      "unlimitedChat": "无限制对话",
       "deepAnalysis": "深度心理分析",
       "personalizedTherapy": "个性化治疗建议",
       "crisisSupport": "24/7 危机支持",
       "professionalConsult": "专业心理师咨询",
       "advancedInsights": "高级洞察报告",
-      "voiceChat": "语音对話功能",
+      "voiceChat": "语音对话功能",
       "prioritySupport": "优先客户支持"
+    },
+    "familyFeatures": {
+      "supportMembers": "支持最多6个家庭成员",
+      "allPremiumFeatures": "所有高级版功能",
+      "familyDashboard": "家庭心理健康仪表板",
+      "familyTherapist": "家庭治疗师咨询",
+      "emergencyNetwork": "紧急联络网络",
+      "familyHealthPlan": "家庭心理健康计划"
+    },
+    "benefits": {
+      "aiAnalysis": {
+        "title": "AI 深度分析",
+        "description": "获得更深入的心理状态分析和个性化建议"
+      },
+      "professionalConsultation": {
+        "title": "专业咨询",
+        "description": "每月与真人心理师进行一对一咨询"
+      },
+      "support247": {
+        "title": "24/7 支持",
+        "description": "全天候危机干预和紧急心理支持"
+      }
     }
   },
   "billing": {
@@ -791,7 +845,28 @@
     "paymentMethod": "付款方式",
     "downloadInvoice": "下载发票",
     "updatePayment": "更新付款方式",
-    "noPaymentHistory": "没有付款历史"
+    "noPaymentHistory": "没有付款历史",
+    "transactions": "交易记录",
+    "methods": "付款方式",
+    "invoices": "发票",
+    "premiumMember": "Premium 会员",
+    "nextCharge": "下次扣款",
+    "manageSubscription": "管理订阅",
+    "transactionRecords": "交易记录",
+    "paymentMethods": "付款方式",
+    "invoiceRecords": "发票记录",
+    "addPaymentMethod": "添加付款方式",
+    "downloadInvoiceText": "下载发票",
+    "invoiceDescription": "您的所有发票都可以在交易记录中下载",
+    "default": "默认",
+    "expires": "到期",
+    "status": {
+      "completed": "已完成",
+      "pending": "处理中",
+      "failed": "失败",
+      "refunded": "已退款",
+      "unknown": "未知"
+    }
   },
   "notifications": {
     "title": "通知设置",

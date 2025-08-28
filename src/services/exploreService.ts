@@ -33,6 +33,92 @@ export type PackDetail = {
 
 import { getRealPackDetail, getRealPacks, searchRealTracks } from './realMeditoApi'
 
+// 多语言数据映射
+const TRANSLATIONS = {
+  'introduction': {
+    zh: {
+      title: '冥想入门',
+      subtitle: '7 个练习 · 约 35 分钟',
+      description: '通过这个适合初学者的系列，学习正念冥想的基础知识。',
+      tracks: {
+        'intro_1': { title: '什么是冥想？', subtitle: '5 分钟' },
+        'intro_2': { title: '呼吸冥想', subtitle: '10 分钟' },
+        'intro_3': { title: '身体觉察', subtitle: '8 分钟' },
+        'intro_4': { title: '专注力练习', subtitle: '12 分钟' },
+        'intro_5': { title: '慈心冥想', subtitle: '15 分钟' },
+        'intro_6': { title: '行走冥想', subtitle: '10 分钟' },
+        'intro_7': { title: '整合练习', subtitle: '20 分钟' }
+      }
+    },
+    en: {
+      title: 'Introduction to Meditation',
+      subtitle: '7 sessions · ~35 minutes',
+      description: 'Learn the fundamentals of mindfulness meditation with this beginner-friendly series.',
+      tracks: {
+        'intro_1': { title: 'What is Meditation?', subtitle: '5 minutes' },
+        'intro_2': { title: 'Breathing Meditation', subtitle: '10 minutes' },
+        'intro_3': { title: 'Body Awareness', subtitle: '8 minutes' },
+        'intro_4': { title: 'Focus Practice', subtitle: '12 minutes' },
+        'intro_5': { title: 'Loving-Kindness', subtitle: '15 minutes' },
+        'intro_6': { title: 'Walking Meditation', subtitle: '10 minutes' },
+        'intro_7': { title: 'Integration Practice', subtitle: '20 minutes' }
+      }
+    },
+    ja: {
+      title: '瞑想入門',
+      subtitle: '7 セッション · 約 35 分',
+      description: '初心者向けのシリーズでマインドフルネス瞑想の基礎を学びます。',
+      tracks: {
+        'intro_1': { title: '瞑想とは？', subtitle: '5 分' },
+        'intro_2': { title: '呼吸瞑想', subtitle: '10 分' },
+        'intro_3': { title: '身体の気づき', subtitle: '8 分' },
+        'intro_4': { title: '集中力の練習', subtitle: '12 分' },
+        'intro_5': { title: '慈しみの瞑想', subtitle: '15 分' },
+        'intro_6': { title: '歩行瞑想', subtitle: '10 分' },
+        'intro_7': { title: '統合練習', subtitle: '20 分' }
+      }
+    }
+  },
+  'sleep': {
+    zh: {
+      title: '睡眠冥想',
+      subtitle: '5 个练习 · 约 50 分钟',
+      description: '通过这些平静的冥想来放松身心，为安稳的睡眠做准备。',
+      tracks: {
+        'sleep_1': { title: '睡眠身体扫描', subtitle: '15 分钟' },
+        'sleep_2': { title: '深度睡眠故事', subtitle: '20 分钟' },
+        'sleep_3': { title: '睡前呼吸', subtitle: '10 分钟' },
+        'sleep_4': { title: '雨夜环境声', subtitle: '15 分钟' },
+        'sleep_5': { title: '温和入睡', subtitle: '12 分钟' }
+      }
+    },
+    en: {
+      title: 'Sleep Meditations',
+      subtitle: '5 sessions ~50 minutes',
+      description: 'Wind down and prepare for restful sleep with these calming meditations.',
+      tracks: {
+        'sleep_1': { title: 'Body Scan for Sleep', subtitle: '15 minutes' },
+        'sleep_2': { title: 'Deep Sleep Story', subtitle: '20 minutes' },
+        'sleep_3': { title: 'Sleep Breathing', subtitle: '10 minutes' },
+        'sleep_4': { title: 'Rain Night Sounds', subtitle: '15 minutes' },
+        'sleep_5': { title: 'Gentle Sleep', subtitle: '12 minutes' }
+      }
+    },
+    ja: {
+      title: '睡眠瞑想',
+      subtitle: '5 セッション · 約 50 分',
+      description: 'これらの穏やかな瞑想で心身をリラックスさせ、安らかな睡眠の準備をします。',
+      tracks: {
+        'sleep_1': { title: '睡眠のためのボディスキャン', subtitle: '15 分' },
+        'sleep_2': { title: '深い睡眠の物語', subtitle: '20 分' },
+        'sleep_3': { title: '睡眠呼吸', subtitle: '10 分' },
+        'sleep_4': { title: '雨の夜の音', subtitle: '15 分' },
+        'sleep_5': { title: '優しい睡眠', subtitle: '12 分' }
+      }
+    }
+  }
+}
+
 class ExploreServiceImpl {
   private packs: ExplorePack[] = [
     { id: 'pack_relax_start', title: '放鬆入門', subtitle: '3 個練習 · 約 15 分鐘', coverUrl: 'https://via.placeholder.com/300x180/4CAF50/white?text=放鬆入門', path: 'packs/relax-start' },
@@ -80,39 +166,126 @@ class ExploreServiceImpl {
   async getPacks(): Promise<ExplorePack[]> { return this.packs }
   async getTracks(): Promise<ExploreTrack[]> { return this.tracks }
 
-  async getPacksFromApi(): Promise<ExplorePack[]> {
+  async getPacksFromApi(language: string = 'zh-CN'): Promise<ExplorePack[]> {
     try {
       const data = await getRealPacks()
-      return data.map((p: any) => ({
-        id: p.id,
-        title: p.title,
-        subtitle: p.subtitle || '',
-        coverUrl: p.coverUrl || '',
-        path: p.path || ''
-      }))
+      return data.map((p: any) => {
+        let title = p.title
+        let subtitle = p.subtitle || ''
+        
+        // 简单的翻译映射
+        if (p.id === 'introduction') {
+          if (language === 'zh-CN' || language === 'zh-TW') {
+            title = '冥想入门'
+            subtitle = '7 个练习 · 约 35 分钟'
+          } else if (language === 'ja') {
+            title = '瞑想入門'
+            subtitle = '7 セッション · 約 35 分'
+          }
+        } else if (p.id === 'sleep') {
+          if (language === 'zh-CN' || language === 'zh-TW') {
+            title = '睡眠冥想'
+            subtitle = '5 个练习 · 约 50 分钟'
+          } else if (language === 'ja') {
+            title = '睡眠瞑想'
+            subtitle = '5 セッション · 約 50 分'
+          }
+        }
+        
+        return {
+          id: p.id,
+          title,
+          subtitle,
+          coverUrl: p.coverUrl || '',
+          path: p.path || ''
+        }
+      })
     } catch (error) {
       console.warn('Failed to fetch packs from real API:', error)
       return []
     }
   }
 
-  async getPackDetailFromApi(packId: string): Promise<PackDetail | null> {
+  async getPackDetailFromApi(packId: string, language: string = 'zh-CN'): Promise<PackDetail | null> {
     try {
+      console.log('getPackDetailFromApi called with packId:', packId, 'language:', language)
       const d = await getRealPackDetail(packId)
       if (!d) return null
+      
+      // 简单的翻译映射
+      let title = d.title
+      let subtitle = d.subtitle || ''
+      let description = d.description || ''
+      
+      if (packId === 'introduction') {
+        if (language === 'zh-CN' || language === 'zh-TW') {
+          title = '冥想入门'
+          subtitle = '7 个练习 · 约 35 分钟'
+          description = '通过这个适合初学者的系列，学习正念冥想的基础知识。'
+          console.log('Applied Chinese translation for introduction pack')
+        } else if (language === 'ja') {
+          title = '瞑想入門'
+          subtitle = '7 セッション · 約 35 分'
+          description = '初心者向けのシリーズでマインドフルネス瞑想の基礎を学びます。'
+        }
+      } else if (packId === 'sleep') {
+        if (language === 'zh-CN' || language === 'zh-TW') {
+          title = '睡眠冥想'
+          subtitle = '5 个练习 · 约 50 分钟'
+          description = '通过这些平静的冥想来放松身心，为安稳的睡眠做准备。'
+          console.log('Applied Chinese translation for sleep pack')
+        } else if (language === 'ja') {
+          title = '睡眠瞑想'
+          subtitle = '5 セッション · 約 50 分'
+          description = 'これらの穏やかな瞑想で心身をリラックスさせ、安らかな睡眠の準備をします。'
+        }
+      }
+      
       return {
         id: d.id,
-        title: d.title,
-        subtitle: d.subtitle || '',
+        title,
+        subtitle,
         coverUrl: d.coverUrl || '',
-        description: d.description || '',
-        tracks: (d.items || []).map((it: any) => ({
-          id: it.id,
-          title: it.title,
-          subtitle: it.subtitle || '',
-          lengthSec: it.duration || 0,
-          audioUrl: it.audio?.[0]?.files?.[0]?.path || undefined,
-        }))
+        description,
+        tracks: (d.items || []).map((it: any) => {
+          let trackTitle = it.title
+          let trackSubtitle = it.subtitle || ''
+          
+          // 简单的轨道翻译
+          if (packId === 'introduction') {
+            if (language === 'zh-CN' || language === 'zh-TW') {
+              if (it.id === 'intro_1') { trackTitle = '什么是冥想？'; trackSubtitle = '5 分钟' }
+              else if (it.id === 'intro_2') { trackTitle = '呼吸冥想'; trackSubtitle = '10 分钟' }
+              else if (it.id === 'intro_3') { trackTitle = '身体觉察'; trackSubtitle = '8 分钟' }
+            } else if (language === 'ja') {
+              if (it.id === 'intro_1') { trackTitle = '瞑想とは？'; trackSubtitle = '5 分' }
+              else if (it.id === 'intro_2') { trackTitle = '呼吸瞑想'; trackSubtitle = '10 分' }
+              else if (it.id === 'intro_3') { trackTitle = '身体の気づき'; trackSubtitle = '8 分' }
+            }
+          } else if (packId === 'sleep') {
+            if (language === 'zh-CN' || language === 'zh-TW') {
+              if (it.id === 'sleep_1') { trackTitle = '睡眠身体扫描'; trackSubtitle = '15 分钟' }
+              else if (it.id === 'sleep_2') { trackTitle = '深度睡眠故事'; trackSubtitle = '20 分钟' }
+              else if (it.id === 'sleep_3') { trackTitle = '睡前呼吸'; trackSubtitle = '10 分钟' }
+              else if (it.id === 'sleep_4') { trackTitle = '雨夜环境声'; trackSubtitle = '15 分钟' }
+              else if (it.id === 'sleep_5') { trackTitle = '温和入睡'; trackSubtitle = '12 分钟' }
+            } else if (language === 'ja') {
+              if (it.id === 'sleep_1') { trackTitle = '睡眠のためのボディスキャン'; trackSubtitle = '15 分' }
+              else if (it.id === 'sleep_2') { trackTitle = '深い睡眠の物語'; trackSubtitle = '20 分' }
+              else if (it.id === 'sleep_3') { trackTitle = '睡眠呼吸'; trackSubtitle = '10 分' }
+              else if (it.id === 'sleep_4') { trackTitle = '雨の夜の音'; trackSubtitle = '15 分' }
+              else if (it.id === 'sleep_5') { trackTitle = '優しい睡眠'; trackSubtitle = '12 分' }
+            }
+          }
+          
+          return {
+            id: it.id,
+            title: trackTitle,
+            subtitle: trackSubtitle,
+            lengthSec: it.duration || 0,
+            audioUrl: it.audio?.[0]?.files?.[0]?.path || undefined,
+          }
+        })
       }
     } catch (error) {
       console.warn('Failed to fetch pack detail from real API:', error)

@@ -150,17 +150,70 @@
     }
   },
   "subscription": {
-    "title": "マイサブスクリプション",
+    "title": "サブスクリプション管理",
     "currentPlan": "現在のプラン",
     "freePlan": "無料プラン",
     "premiumPlan": "プレミアムプラン",
+    "familyPlan": "ファミリープラン",
     "features": "機能",
     "upgrade": "アップグレード",
     "manage": "サブスクリプション管理",
-    "upgradeConfirm": "アップグレード確認",
-    "upgradeMessage": "月額$9.99のプレミアムプランにアップグレードしますか？",
+    "upgradeConfirm": "サブスクリプションアップグレード",
+    "upgradeMessage": "{{plan}}にアップグレードしますか？",
+    "confirmUpgrade": "アップグレード確認",
     "upgradeSuccess": "アップグレード成功",
-    "upgradeSuccessMessage": "プレミアムへようこそ！強化機能をお楽しみください。"
+    "upgradeSuccessMessage": "サブスクリプションがアップグレードされました！",
+    "free": "無料",
+    "forever": "永久",
+    "monthly": "月額",
+    "premiumMember": "プレミアムメンバー",
+    "nextRenewal": "次回更新日",
+    "thankYou": "Rebloom Premiumをお選びいただき、ありがとうございます！",
+    "selectPlan": "サブスクリプションプランを選択",
+    "mostPopular": "人気",
+    "currentPlanText": "現在のプラン",
+    "manageSubscription": "サブスクリプション管理",
+    "selectThisPlan": "このプランを選択",
+    "premiumExclusive": "プレミアムメンバー限定",
+    "manageSubscriptionSettings": "サブスクリプション設定管理",
+    "freeFeatures": {
+      "basicChat": "毎日の基本会話",
+      "moodTracking": "気分追跡",
+      "basicInsights": "基本インサイト",
+      "communitySupport": "コミュニティサポート"
+    },
+    "premiumFeatures": {
+      "unlimitedChat": "無制限会話",
+      "deepAnalysis": "深層心理分析",
+      "personalizedTherapy": "パーソナライズされた治療提案",
+      "crisisSupport": "24/7危機サポート",
+      "professionalConsult": "専門心理士相談",
+      "advancedInsights": "高度なインサイトレポート",
+      "voiceChat": "音声会話機能",
+      "prioritySupport": "優先カスタマーサポート"
+    },
+    "familyFeatures": {
+      "supportMembers": "最大6名の家族メンバーをサポート",
+      "allPremiumFeatures": "すべてのプレミアム機能",
+      "familyDashboard": "家族メンタルヘルスダッシュボード",
+      "familyTherapist": "家族心理士相談",
+      "emergencyNetwork": "緊急連絡ネットワーク",
+      "familyHealthPlan": "家族メンタルヘルスプラン"
+    },
+    "benefits": {
+      "aiAnalysis": {
+        "title": "AI深層分析",
+        "description": "より深い心理状態分析とパーソナライズされた推奨事項を取得"
+      },
+      "professionalConsultation": {
+        "title": "専門相談",
+        "description": "毎月リアル心理士との1対1相談"
+      },
+      "support247": {
+        "title": "24/7サポート",
+        "description": "24時間体制の危機介入と緊急心理サポート"
+      }
+    }
   },
   "billing": {
     "title": "請求管理",
@@ -169,7 +222,28 @@
     "paymentMethod": "支払い方法",
     "downloadInvoice": "請求書をダウンロード",
     "updatePayment": "支払い方法を更新",
-    "noPaymentHistory": "支払い履歴はありません"
+    "noPaymentHistory": "支払い履歴はありません",
+    "transactions": "取引記録",
+    "methods": "支払い方法",
+    "invoices": "請求書",
+    "premiumMember": "プレミアムメンバー",
+    "nextCharge": "次回課金",
+    "manageSubscription": "サブスクリプション管理",
+    "transactionRecords": "取引記録",
+    "paymentMethods": "支払い方法",
+    "invoiceRecords": "請求書記録",
+    "addPaymentMethod": "支払い方法を追加",
+    "downloadInvoiceText": "請求書をダウンロード",
+    "invoiceDescription": "すべての請求書は取引記録からダウンロードできます",
+    "default": "デフォルト",
+    "expires": "有効期限",
+    "status": {
+      "completed": "完了",
+      "pending": "処理中",
+      "failed": "失敗",
+      "refunded": "返金済み",
+      "unknown": "不明"
+    }
   },
   "notifications": {
     "title": "通知設定",
@@ -495,6 +569,30 @@
     "mood": "気分",
     "explore": "探索",
     "profile": "マイページ"
+  },
+  "explore": {
+    "pageTitle": "探索",
+    "pageSubtitle": "あなたに合ったメンタルヘルスリソースを発見",
+    "todayRecommended": "今日のおすすめ",
+    "recommendedTopics": "おすすめトピック",
+    "topics": "トピック",
+    "episodes": "エピソード",
+    "packDetails": "コース詳細",
+    "play": "再生",
+    "searchPlaceholder": "コンテンツを検索...",
+    "noResults": "結果が見つかりません",
+    "loading": "読み込み中...",
+    "error": "読み込みに失敗しました。再試行してください"
+  },
+  "player": {
+    "title": "プレイヤー",
+    "loading": "読み込み中...",
+    "error": "トラックの読み込みに失敗しました",
+    "play": "再生",
+    "pause": "一時停止",
+    "backward": "15秒",
+    "forward": "15秒",
+    "speed": "速度"
   },
   "profile": {
     "title": "マイページ",

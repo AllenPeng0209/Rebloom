@@ -2,14 +2,14 @@ import { Ionicons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useRef, useState } from 'react'
 import {
-    Dimensions,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Dimensions,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { OnboardingCard } from './OnboardingCard'
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   bottomContainer: {
     paddingHorizontal: 20,
     paddingBottom: 34, // Account for home indicator
-    paddingTop: 20,
+    paddingTop: 0, // 进一步增加顶部间距，将按钮整体向下移动
   },
   continueButton: {
     width: '100%',

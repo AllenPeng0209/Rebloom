@@ -155,7 +155,7 @@ export default function PlayerScreen() {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <View style={styles.loadingContainer}>
-          <Text style={styles.loadingText}>載入中...</Text>
+          <Text style={styles.loadingText}>{t('player.loading')}</Text>
         </View>
       </SafeAreaView>
     )
@@ -166,7 +166,7 @@ export default function PlayerScreen() {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <View style={styles.loadingContainer}>
-          <Text style={styles.errorText}>無法載入音軌</Text>
+          <Text style={styles.errorText}>{t('player.error')}</Text>
         </View>
       </SafeAreaView>
     )
@@ -181,7 +181,7 @@ export default function PlayerScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Ionicons name="chevron-back" size={28} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>播放器</Text>
+        <Text style={styles.headerTitle}>{t('player.title')}</Text>
         <View style={styles.placeholder} />
       </View>
 
@@ -216,7 +216,7 @@ export default function PlayerScreen() {
       <View style={styles.controls}>
         <TouchableOpacity onPress={() => seek(-15)} style={styles.controlButton}>
           <Ionicons name="play-back" size={24} color="#fff" />
-          <Text style={styles.seekText}>15s</Text>
+          <Text style={styles.seekText}>{t('player.backward')}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={togglePlayPause} style={styles.playButton}>
@@ -229,14 +229,14 @@ export default function PlayerScreen() {
 
         <TouchableOpacity onPress={() => seek(15)} style={styles.controlButton}>
           <Ionicons name="play-forward" size={24} color="#fff" />
-          <Text style={styles.seekText}>15s</Text>
+          <Text style={styles.seekText}>{t('player.forward')}</Text>
         </TouchableOpacity>
       </View>
 
       {/* Secondary Controls */}
       <View style={styles.secondaryControls}>
         <TouchableOpacity onPress={changePlaybackRate} style={styles.rateButton}>
-          <Text style={styles.rateText}>{playbackRate}x</Text>
+          <Text style={styles.rateText}>{playbackRate}x {t('player.speed')}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

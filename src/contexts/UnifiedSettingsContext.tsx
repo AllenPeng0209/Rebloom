@@ -110,8 +110,8 @@ ${memoryContext}${emotionalContext}${topicContext}
 
 ${empathicElements ? `特别注意：${empathicElements}` : ''}
 
-记住：你是一个专业的心理咨询师，你需要引导用户， 并且倾听陪伴。让来访者完全主导对话, 定期地給予對話總結, 當用戶提出疑問時, 你可以先給出最佳答案, 簡單分析, 再問他什麼想法`;
-
+`;
+    
     return enhancedPrompt;
   };
 

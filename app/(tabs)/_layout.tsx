@@ -44,13 +44,13 @@ function TabLayoutContent() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="heart.fill" color={color} />,
         }}
       />
-      {/* <Tabs.Screen
+      <Tabs.Screen
         name="explore"
         options={{
           title: t('nav.explore'),
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
-      /> */}
+      />
       <Tabs.Screen
         name="profile"
         options={{

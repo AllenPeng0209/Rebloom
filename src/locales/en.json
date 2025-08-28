@@ -6,6 +6,30 @@
     "explore": "Explore",
     "profile": "Profile"
   },
+  "explore": {
+    "pageTitle": "Explore",
+    "pageSubtitle": "Discover mental health resources for you",
+    "todayRecommended": "Today's Recommended",
+    "recommendedTopics": "Recommended Topics",
+    "topics": "Topics",
+    "episodes": "Episodes",
+    "packDetails": "Course Details",
+    "play": "Play",
+    "searchPlaceholder": "Search content...",
+    "noResults": "No results found",
+    "loading": "Loading...",
+    "error": "Failed to load, please try again"
+  },
+  "player": {
+    "title": "Player",
+    "loading": "Loading...",
+    "error": "Failed to load track",
+    "play": "Play",
+    "pause": "Pause",
+    "backward": "15s",
+    "forward": "15s",
+    "speed": "Speed"
+  },
   "common": {
     "cancel": "Cancel",
     "confirm": "Confirm",
@@ -394,6 +418,7 @@
     "currentPlan": "Current Plan",
     "freePlan": "Free Plan",
     "premiumPlan": "Premium Plan",
+    "familyPlan": "Family Plan",
     "features": "Features",
     "upgrade": "Upgrade",
     "manage": "Manage Subscription",
@@ -408,6 +433,13 @@
     "premiumMember": "Premium Member",
     "nextRenewal": "Next Renewal Date",
     "thankYou": "Thank you for choosing Rebloom Premium!",
+    "selectPlan": "Choose Subscription Plan",
+    "mostPopular": "Most Popular",
+    "currentPlanText": "Current Plan",
+    "manageSubscription": "Manage Subscription",
+    "selectThisPlan": "Select This Plan",
+    "premiumExclusive": "Premium Member Exclusive",
+    "manageSubscriptionSettings": "Manage Subscription Settings",
     "freeFeatures": {
       "basicChat": "Daily Basic Conversations",
       "moodTracking": "Mood Tracking",
@@ -423,6 +455,28 @@
       "advancedInsights": "Advanced Insight Reports",
       "voiceChat": "Voice Conversation Features",
       "prioritySupport": "Priority Customer Support"
+    },
+    "familyFeatures": {
+      "supportMembers": "Support up to 6 family members",
+      "allPremiumFeatures": "All premium features",
+      "familyDashboard": "Family mental health dashboard",
+      "familyTherapist": "Family therapist consultation",
+      "emergencyNetwork": "Emergency contact network",
+      "familyHealthPlan": "Family mental health plan"
+    },
+    "benefits": {
+      "aiAnalysis": {
+        "title": "AI Deep Analysis",
+        "description": "Get deeper psychological state analysis and personalized recommendations"
+      },
+      "professionalConsultation": {
+        "title": "Professional Consultation",
+        "description": "One-on-one consultation with a real psychologist every month"
+      },
+      "support247": {
+        "title": "24/7 Support",
+        "description": "24/7 crisis intervention and emergency psychological support"
+      }
     }
   },
   "billing": {
@@ -433,9 +487,31 @@
     "downloadInvoice": "Download Invoice",
     "updatePayment": "Update Payment Method",
     "noPaymentHistory": "No payment history available",
+    "transactions": "Transactions",
+    "methods": "Payment Methods",
+    "invoices": "Invoices",
+    "premiumMember": "Premium Member",
+    "nextCharge": "Next Charge",
+    "manageSubscription": "Manage Subscription",
+    "transactionRecords": "Transaction Records",
+    "paymentMethods": "Payment Methods",
+    "invoiceRecords": "Invoice Records",
+    "addPaymentMethod": "Add Payment Method",
+    "downloadInvoiceText": "Download Invoice",
+    "invoiceDescription": "All your invoices can be downloaded from transaction records",
+    "default": "Default",
+    "expires": "Expires",
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "failed": "Failed",
+      "refunded": "Refunded",
+      "unknown": "Unknown"
+    },
     "invoices": {
       "subscription": "Rebloom Premium - Monthly Subscription"
-    }
+    },
+    "invoices": "Invoices"
   },
   "notifications": {
     "title": "Notification Settings",

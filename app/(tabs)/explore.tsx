@@ -71,7 +71,7 @@ const mockInsights: InsightData[] = [
 
 export default function ExploreScreen() {
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | '3months'>('week')
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const router = useRouter()
 
   const [searchQuery, setSearchQuery] = useState('')
@@ -84,7 +84,7 @@ export default function ExploreScreen() {
     try {
       setLoading(true)
       // 先嘗試從 API 獲取，失敗則使用本地數據
-      const apiPacks = await exploreService.getPacksFromApi()
+      const apiPacks = await exploreService.getPacksFromApi(language)
       if (apiPacks.length > 0) {
         setPacks(apiPacks)
       } else {
@@ -116,6 +116,11 @@ export default function ExploreScreen() {
       interventionService.stop()
     }
   }, [])
+
+  // 当语言改变时重新加载数据
+  useEffect(() => {
+    loadData()
+  }, [language])
 
   const averageMood = mockMoodData.reduce((sum, day) => sum + day.mood, 0) / mockMoodData.length
 
